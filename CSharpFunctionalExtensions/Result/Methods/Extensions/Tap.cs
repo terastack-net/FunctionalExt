@@ -7,7 +7,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static Result Tap(this Result result, Action action)
+        public static Return Tap(this Return result, Action action)
         {
             if (result.IsSuccess)
                 action();
@@ -18,7 +18,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static Result<T> Tap<T>(this Result<T> result, Action action)
+        public static Return<T> Tap<T>(this Return<T> result, Action action)
         {
             if (result.IsSuccess)
                 action();
@@ -29,7 +29,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static Result<T> Tap<T>(this Result<T> result, Action<T> action)
+        public static Return<T> Tap<T>(this Return<T> result, Action<T> action)
         {
             if (result.IsSuccess)
                 action(result.Value);
@@ -51,7 +51,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static Result<T, E> Tap<T, E>(this Result<T, E> result, Action action)
+        public static Return<T, E> Tap<T, E>(this Return<T, E> result, Action action)
         {
             if (result.IsSuccess)
                 action();
@@ -62,7 +62,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static Result<T, E> Tap<T, E>(this Result<T, E> result, Action<T> action)
+        public static Return<T, E> Tap<T, E>(this Return<T, E> result, Action<T> action)
         {
             if (result.IsSuccess)
                 action(result.Value);

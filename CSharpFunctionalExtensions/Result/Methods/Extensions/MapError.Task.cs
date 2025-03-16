@@ -8,18 +8,18 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static async Task<Result> MapError(
-            this Task<Result> resultTask,
-            Func<string, Task<string>> errorFactory
+        public static async Task<Return> MapError(
+            this Task<Return> resultTask,
+            Func<Exception, Task<string>> errorFactory
         )
         {
             var result = await resultTask.DefaultAwait();
             return await result.MapError(errorFactory).DefaultAwait();
         }
 
-        public static async Task<Result> MapError<TContext>(
-            this Task<Result> resultTask,
-            Func<string, TContext, Task<string>> errorFactory,
+        public static async Task<Return> MapError<TContext>(
+            this Task<Return> resultTask,
+            Func<Exception, TContext, Task<string>> errorFactory,
             TContext context
         )
         {
@@ -31,8 +31,8 @@ namespace CSharpFunctionalExtensions
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
         public static async Task<UnitResult<E>> MapError<E>(
-            this Task<Result> resultTask,
-            Func<string, Task<E>> errorFactory
+            this Task<Return> resultTask,
+            Func<Exception, Task<E>> errorFactory
         )
         {
             var result = await resultTask.DefaultAwait();
@@ -40,8 +40,8 @@ namespace CSharpFunctionalExtensions
         }
 
         public static async Task<UnitResult<E>> MapError<E, TContext>(
-            this Task<Result> resultTask,
-            Func<string, TContext, Task<E>> errorFactory,
+            this Task<Return> resultTask,
+            Func<Exception, TContext, Task<E>> errorFactory,
             TContext context
         )
         {
@@ -52,18 +52,18 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static async Task<Result<T>> MapError<T>(
-            this Task<Result<T>> resultTask,
-            Func<string, Task<string>> errorFactory
+        public static async Task<Return<T>> MapError<T>(
+            this Task<Return<T>> resultTask,
+            Func<Exception, Task<string>> errorFactory
         )
         {
             var result = await resultTask.DefaultAwait();
             return await result.MapError(errorFactory).DefaultAwait();
         }
 
-        public static async Task<Result<T>> MapError<T, TContext>(
-            this Task<Result<T>> resultTask,
-            Func<string, TContext, Task<string>> errorFactory,
+        public static async Task<Return<T>> MapError<T, TContext>(
+            this Task<Return<T>> resultTask,
+            Func<Exception, TContext, Task<string>> errorFactory,
             TContext context
         )
         {
@@ -74,18 +74,18 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static async Task<Result<T, E>> MapError<T, E>(
-            this Task<Result<T>> resultTask,
-            Func<string, Task<E>> errorFactory
+        public static async Task<Return<T, E>> MapError<T, E>(
+            this Task<Return<T>> resultTask,
+            Func<Exception, Task<E>> errorFactory
         )
         {
             var result = await resultTask.DefaultAwait();
             return await result.MapError(errorFactory).DefaultAwait();
         }
 
-        public static async Task<Result<T, E>> MapError<T, E, TContext>(
-            this Task<Result<T>> resultTask,
-            Func<string, TContext, Task<E>> errorFactory,
+        public static async Task<Return<T, E>> MapError<T, E, TContext>(
+            this Task<Return<T>> resultTask,
+            Func<Exception, TContext, Task<E>> errorFactory,
             TContext context
         )
         {
@@ -96,7 +96,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static async Task<Result> MapError<E>(
+        public static async Task<Return> MapError<E>(
             this Task<UnitResult<E>> resultTask,
             Func<E, Task<string>> errorFactory
         )
@@ -105,7 +105,7 @@ namespace CSharpFunctionalExtensions
             return await result.MapError(errorFactory).DefaultAwait();
         }
 
-        public static async Task<Result> MapError<E, TContext>(
+        public static async Task<Return> MapError<E, TContext>(
             this Task<UnitResult<E>> resultTask,
             Func<E, TContext, Task<string>> errorFactory,
             TContext context
@@ -140,8 +140,8 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static async Task<Result<T>> MapError<T, E>(
-            this Task<Result<T, E>> resultTask,
+        public static async Task<Return<T>> MapError<T, E>(
+            this Task<Return<T, E>> resultTask,
             Func<E, Task<string>> errorFactory
         )
         {
@@ -149,8 +149,8 @@ namespace CSharpFunctionalExtensions
             return await result.MapError(errorFactory).DefaultAwait();
         }
 
-        public static async Task<Result<T>> MapError<T, E, TContext>(
-            this Task<Result<T, E>> resultTask,
+        public static async Task<Return<T>> MapError<T, E, TContext>(
+            this Task<Return<T, E>> resultTask,
             Func<E, TContext, Task<string>> errorFactory,
             TContext context
         )
@@ -162,8 +162,8 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static async Task<Result<T, E2>> MapError<T, E, E2>(
-            this Task<Result<T, E>> resultTask,
+        public static async Task<Return<T, E2>> MapError<T, E, E2>(
+            this Task<Return<T, E>> resultTask,
             Func<E, Task<E2>> errorFactory
         )
         {
@@ -171,8 +171,8 @@ namespace CSharpFunctionalExtensions
             return await result.MapError(errorFactory).DefaultAwait();
         }
 
-        public static async Task<Result<T, E2>> MapError<T, E, E2, TContext>(
-            this Task<Result<T, E>> resultTask,
+        public static async Task<Return<T, E2>> MapError<T, E, E2, TContext>(
+            this Task<Return<T, E>> resultTask,
             Func<E, TContext, Task<E2>> errorFactory,
             TContext context
         )

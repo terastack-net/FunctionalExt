@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 
 namespace CSharpFunctionalExtensions
 {
-    public partial struct Result
+    public partial struct Return
     {
         /// <summary>
         ///     Attempts to execute the supplied action. Returns a Result indicating whether the action executed successfully.
         /// </summary>
-        public static async Task<Result> Try(Func<Task> action, Func<Exception, string> errorHandler = null)
+        public static async Task<Return> Try(Func<Task> action, Func<Exception, Exception> errorHandler = null)
         {
             errorHandler ??= Configuration.DefaultTryErrorHandler;
 
@@ -19,7 +19,7 @@ namespace CSharpFunctionalExtensions
             }
             catch (Exception exc)
             {
-                string message = errorHandler(exc);
+                var message = errorHandler(exc);
                 return Failure(message);
             }
         }
@@ -28,7 +28,7 @@ namespace CSharpFunctionalExtensions
         ///     Attempts to execute the supplied function. Returns a Result indicating whether the function executed successfully.
         ///     If the function executed successfully, the result contains its return value.
         /// </summary>
-        public static async Task<Result<T>> Try<T>(Func<Task<T>> func, Func<Exception, string> errorHandler = null)
+        public static async Task<Return<T>> Try<T>(Func<Task<T>> func, Func<Exception, Exception> errorHandler = null)
         {
             errorHandler ??= Configuration.DefaultTryErrorHandler;
 
@@ -39,7 +39,7 @@ namespace CSharpFunctionalExtensions
             }
             catch (Exception exc)
             {
-                string message = errorHandler(exc);
+                var message = errorHandler(exc);
                 return Failure<T>(message);
             }
         }
@@ -48,7 +48,7 @@ namespace CSharpFunctionalExtensions
         ///     Attempts to execute the supplied function. Returns a Result indicating whether the function executed successfully.
         ///     If the function executed successfully, the result contains its return value.
         /// </summary>
-        public static async Task<Result<T, E>> Try<T, E>(Func<Task<T>> func, Func<Exception, E> errorHandler)
+        public static async Task<Return<T, E>> Try<T, E>(Func<Task<T>> func, Func<Exception, E> errorHandler)
         {
             try
             {

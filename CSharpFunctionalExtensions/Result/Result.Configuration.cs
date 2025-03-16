@@ -2,7 +2,7 @@
 
 namespace CSharpFunctionalExtensions
 {
-    public partial struct Result
+    public partial struct Return
     {
         public static class Configuration
         {
@@ -10,7 +10,7 @@ namespace CSharpFunctionalExtensions
 
             public static bool DefaultConfigureAwait = false;
 
-            public static Func<Exception, string> DefaultTryErrorHandler = exc => exc.Message;    
+            public static Func<Exception, Exception> DefaultTryErrorHandler = exc => exc;    
         }
     }
 }

@@ -8,14 +8,14 @@ public class AsMaybeTests : TestBase
     [Fact]
     public void Error_returns_None()
     {
-        var result = Result.Failure<T>(ErrorMessage);
+        var result = Return.Failure<T>(ErrorMessage);
         result.AsMaybe().HasValue.Should().BeFalse();
     }
     
     [Fact]
     public void Success_returns_Some()
     {
-        var result = Result.Success(T.Value);
+        var result = Return.Success(T.Value);
         var asMaybe = result.AsMaybe();
         
         asMaybe.HasValue.Should().BeTrue();
@@ -25,7 +25,7 @@ public class AsMaybeTests : TestBase
     [Fact]
     public void Null_value_returns_None()
     {
-        var result = Result.Success<T>(null);
+        var result = Return.Success<T>(null);
         var asMaybe = result.AsMaybe();
         
         asMaybe.HasValue.Should().BeFalse();

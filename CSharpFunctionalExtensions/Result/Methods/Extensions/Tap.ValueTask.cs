@@ -9,9 +9,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result> Tap(this ValueTask<Result> resultTask, Func<ValueTask> valueTask)
+        public static async ValueTask<Return> Tap(this ValueTask<Return> resultTask, Func<ValueTask> valueTask)
         {
-            Result result = await resultTask;
+            Return result = await resultTask;
 
             if (result.IsSuccess)
                 await valueTask();
@@ -22,9 +22,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T>> Tap<T>(this ValueTask<Result<T>> resultTask, Func<ValueTask> valueTask)
+        public static async ValueTask<Return<T>> Tap<T>(this ValueTask<Return<T>> resultTask, Func<ValueTask> valueTask)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
 
             if (result.IsSuccess)
                 await valueTask();
@@ -35,9 +35,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T>> Tap<T>(this ValueTask<Result<T>> resultTask, Func<T, ValueTask> valueTask)
+        public static async ValueTask<Return<T>> Tap<T>(this ValueTask<Return<T>> resultTask, Func<T, ValueTask> valueTask)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
 
             if (result.IsSuccess)
                 await valueTask(result.Value);
@@ -61,9 +61,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T, E>> Tap<T, E>(this ValueTask<Result<T, E>> resultTask, Func<ValueTask> valueTask)
+        public static async ValueTask<Return<T, E>> Tap<T, E>(this ValueTask<Return<T, E>> resultTask, Func<ValueTask> valueTask)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
 
             if (result.IsSuccess)
                 await valueTask();
@@ -74,9 +74,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T, E>> Tap<T, E>(this ValueTask<Result<T, E>> resultTask, Func<T, ValueTask> valueTask)
+        public static async ValueTask<Return<T, E>> Tap<T, E>(this ValueTask<Return<T, E>> resultTask, Func<T, ValueTask> valueTask)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
 
             if (result.IsSuccess)
                 await valueTask(result.Value);

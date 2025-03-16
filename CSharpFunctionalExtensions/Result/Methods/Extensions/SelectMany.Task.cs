@@ -8,24 +8,24 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     This method should be used in linq queries. We recommend using Bind method.
         /// </summary>
-        public static async Task<Result<TR>> SelectMany<T, TK, TR>(
-            this Task<Result<T>> resultTask,
-            Func<T, Task<Result<TK>>> func,
+        public static async Task<Return<TR>> SelectMany<T, TK, TR>(
+            this Task<Return<T>> resultTask,
+            Func<T, Task<Return<TK>>> func,
             Func<T, TK, TR> project)
         {
-            Result<T> result = await resultTask.DefaultAwait();
+            Return<T> result = await resultTask.DefaultAwait();
             return await result.SelectMany(func, project).DefaultAwait();
         }
 
         /// <summary>
         ///     This method should be used in linq queries. We recommend using Bind method.
         /// </summary>
-        public static async Task<Result<TR, TE>> SelectMany<T, TK, TE, TR>(
-            this Task<Result<T, TE>> resultTask,
-            Func<T, Task<Result<TK, TE>>> func,
+        public static async Task<Return<TR, TE>> SelectMany<T, TK, TE, TR>(
+            this Task<Return<T, TE>> resultTask,
+            Func<T, Task<Return<TK, TE>>> func,
             Func<T, TK, TR> project)
         {
-            Result<T, TE> result = await resultTask.DefaultAwait();
+            Return<T, TE> result = await resultTask.DefaultAwait();
             return await result.SelectMany(func, project).DefaultAwait();
         }
     }

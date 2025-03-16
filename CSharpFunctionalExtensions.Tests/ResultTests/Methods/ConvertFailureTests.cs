@@ -9,7 +9,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Can_not_convert_okResult_without_value_to_okResult_with_value()
         {
-            var okResultWithoutValue = Result.Success();
+            var okResultWithoutValue = Return.Success();
 
             Action action = () => okResultWithoutValue.ConvertFailure<T>();
 
@@ -19,9 +19,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Can_convert_failedResult_without_value_to_failedResult_with_value()
         {
-            var failedResultWithoutValue = Result.Failure("Failed");
+            var failedResultWithoutValue = Return.Failure("Failed");
 
-            Result<T> failedResultWithValue = failedResultWithoutValue.ConvertFailure<T>();
+            Return<T> failedResultWithValue = failedResultWithoutValue.ConvertFailure<T>();
 
             failedResultWithValue.IsFailure.Should().BeTrue();
             failedResultWithValue.Error.Should().Be("Failed");
@@ -30,7 +30,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Can_not_convert_okResult_with_value_to_okResult_without_value()
         {
-            var okResultWithValue = Result.Success(T.Value);
+            var okResultWithValue = Return.Success(T.Value);
 
             Action action = () => okResultWithValue.ConvertFailure();
 
@@ -40,9 +40,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Can_convert_failedResult_with_value_to_failedResult_without_value()
         {
-            var failedResultWithValue = Result.Failure<T>(ErrorMessage);
+            var failedResultWithValue = Return.Failure<T>(ErrorMessage);
 
-            Result failedResultWithoutValue = failedResultWithValue;
+            Return failedResultWithoutValue = failedResultWithValue;
 
             failedResultWithoutValue.IsFailure.Should().BeTrue();
             failedResultWithoutValue.Error.Should().Be(ErrorMessage);
@@ -51,7 +51,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Can_not_convert_okResult_with_value_to_okResult_with_otherValue()
         {
-            var okResultWithValue = Result.Success(T.Value);
+            var okResultWithValue = Return.Success(T.Value);
 
             Action action = () => okResultWithValue.ConvertFailure<K>();
 
@@ -61,9 +61,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Can_convert_failedResult_with_value_to_failedResult_with_other_value()
         {
-            var failedResultWithValue = Result.Failure<T>(ErrorMessage);
+            var failedResultWithValue = Return.Failure<T>(ErrorMessage);
 
-            Result<K> failedResultWithOtherValue = failedResultWithValue.ConvertFailure<K>();
+            Return<K> failedResultWithOtherValue = failedResultWithValue.ConvertFailure<K>();
 
             failedResultWithOtherValue.IsFailure.Should().BeTrue();
             failedResultWithOtherValue.Error.Should().Be(ErrorMessage);
@@ -72,7 +72,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void ErrorClass_Can_not_convert_okResult_with_value_to_okResult_with_value()
         {
-            var okResultWithValue = Result.Success<T, E>(T.Value);
+            var okResultWithValue = Return.Success<T, E>(T.Value);
 
             Action action = () => okResultWithValue.ConvertFailure<K>();
 
@@ -82,9 +82,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void ErrorClass_Can_convert_failedResult_with_value_to_failedResult_without_value()
         {
-            var failedResultWithValue = Result.Failure<T, E>(E.Value);
+            var failedResultWithValue = Return.Failure<T, E>(E.Value);
 
-            Result<K, E> failedResultWithoutValue = failedResultWithValue.ConvertFailure<K>();
+            Return<K, E> failedResultWithoutValue = failedResultWithValue.ConvertFailure<K>();
 
             failedResultWithoutValue.IsFailure.Should().BeTrue();
             failedResultWithoutValue.Error.Should().BeEquivalentTo(E.Value);
@@ -105,7 +105,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         {
             var failedResultWithValue = UnitResult.Failure(E.Value);
 
-            Result<K, E> failedResultWithoutValue = failedResultWithValue.ConvertFailure<K>();
+            Return<K, E> failedResultWithoutValue = failedResultWithValue.ConvertFailure<K>();
 
             failedResultWithoutValue.IsFailure.Should().BeTrue();
             failedResultWithoutValue.Error.Should().BeEquivalentTo(E.Value);

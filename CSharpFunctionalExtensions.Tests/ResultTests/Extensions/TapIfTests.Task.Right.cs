@@ -12,7 +12,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_executes_action_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
             var returned = result.TapIf(condition, Task_Action).Result;
 
@@ -27,7 +27,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_executes_action_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
             var returned = result.TapIf(condition, Task_Action).Result;
 
@@ -42,7 +42,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_executes_action_T_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
             var returned = result.TapIf(condition, Task_Action_T).Result;
 
@@ -57,7 +57,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_E_executes_action_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
             var returned = result.TapIf(condition, Task_Action).Result;
 
@@ -72,7 +72,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_E_executes_action_T_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
             var returned = result.TapIf(condition, Task_Action_T).Result;
 
@@ -87,7 +87,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_executes_func_result_T_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<bool> result = Result.SuccessIf(isSuccess, condition, ErrorMessage);
+            Return<bool> result = Return.SuccessIf(isSuccess, condition, ErrorMessage);
 
             var returned = result.TapIf(condition, Task_Func_Result).Result;
 
@@ -102,7 +102,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_executes_func_result_K_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<bool> result = Result.SuccessIf(isSuccess, condition, ErrorMessage);
+            Return<bool> result = Return.SuccessIf(isSuccess, condition, ErrorMessage);
 
             var returned = result.TapIf(condition, Task_Func_Result_K).Result;
 
@@ -117,7 +117,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_executes_func_result_K_E_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<bool, E> result = Result.SuccessIf(isSuccess, condition, E.Value);
+            Return<bool, E> result = Return.SuccessIf(isSuccess, condition, E.Value);
 
             var returned = result.TapIf(condition, Task_Func_Result_K_E).Result;
 
@@ -132,7 +132,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_executes_action_per_func_condition_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<bool> result = Result.SuccessIf(isSuccess, condition, ErrorMessage);
+            Return<bool> result = Return.SuccessIf(isSuccess, condition, ErrorMessage);
 
             var returned = result.TapIf(Predicate, Task_Action).Result;
 
@@ -148,7 +148,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_executes_action_T_per_func_condition_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<bool> result = Result.SuccessIf(isSuccess, condition, ErrorMessage);
+            Return<bool> result = Return.SuccessIf(isSuccess, condition, ErrorMessage);
 
             var returned = result.TapIf(Predicate, Task_Action_T).Result;
 
@@ -164,7 +164,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_E_executes_action_per_func_condition_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<bool, E> result = Result.SuccessIf(isSuccess, condition, E.Value);
+            Return<bool, E> result = Return.SuccessIf(isSuccess, condition, E.Value);
 
             var returned = result.TapIf(Predicate, Task_Action).Result;
 
@@ -180,7 +180,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_E_executes_action_T_per_func_condition_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<bool, E> result = Result.SuccessIf(isSuccess, condition, E.Value);
+            Return<bool, E> result = Return.SuccessIf(isSuccess, condition, E.Value);
 
             var returned = result.TapIf(Predicate, Task_Action_T).Result;
 
@@ -196,7 +196,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_executes_func_result_T_per_func_condition_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<bool> result = Result.SuccessIf(isSuccess, condition, ErrorMessage);
+            Return<bool> result = Return.SuccessIf(isSuccess, condition, ErrorMessage);
 
             var returned = result.TapIf(Predicate, Task_Func_Result).Result;
 
@@ -211,7 +211,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_executes_func_result_K_per_func_condition_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<bool> result = Result.SuccessIf(isSuccess, condition, ErrorMessage);
+            Return<bool> result = Return.SuccessIf(isSuccess, condition, ErrorMessage);
 
             var returned = result.TapIf(Predicate, Task_Func_Result_K).Result;
 
@@ -226,7 +226,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapIf_Task_Right_T_executes_func_result_K_E_per_func_condition_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<bool, E> result = Result.SuccessIf(isSuccess, condition, E.Value);
+            Return<bool, E> result = Return.SuccessIf(isSuccess, condition, E.Value);
 
             var returned = result.TapIf(Predicate, Task_Func_Result_K_E).Result;
 

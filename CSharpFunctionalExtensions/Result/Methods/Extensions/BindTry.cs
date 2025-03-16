@@ -12,12 +12,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static Result BindTry(this Result result, Func<Result> func,
-            Func<Exception, string> errorHandler = null)
+        public static Return BindTry(this Return result, Func<Return> func,
+            Func<Exception, Exception> errorHandler = null)
         {
             return result.IsFailure
-                ? Result.Failure(result.Error)
-                : Result.Try(() => func(), errorHandler).Bind(r => r);
+                ? Return.Failure(result.Error)
+                : Return.Try(() => func(), errorHandler).Bind(r => r);
         }
 
         /// <summary>
@@ -29,12 +29,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static Result<K> BindTry<K>(this Result result, Func<Result<K>> func,
-            Func<Exception, string> errorHandler = null)
+        public static Return<K> BindTry<K>(this Return result, Func<Return<K>> func,
+            Func<Exception, Exception> errorHandler = null)
         {
             return result.IsFailure
-                ? Result.Failure<K>(result.Error)
-                : Result.Try(() => func(), errorHandler).Bind(r => r);
+                ? Return.Failure<K>(result.Error)
+                : Return.Try(() => func(), errorHandler).Bind(r => r);
         }
 
 
@@ -47,12 +47,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static Result BindTry<T>(this Result<T> result, Func<T, Result> func,
-            Func<Exception, string> errorHandler = null)
+        public static Return BindTry<T>(this Return<T> result, Func<T, Return> func,
+            Func<Exception, Exception> errorHandler = null)
         {
             return result.IsFailure
-                ? Result.Failure(result.Error)
-                : Result.Try(() => func(result.Value), errorHandler).Bind(r => r);
+                ? Return.Failure(result.Error)
+                : Return.Try(() => func(result.Value), errorHandler).Bind(r => r);
         }
 
         /// <summary>
@@ -65,12 +65,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static Result<K> BindTry<T, K>(this Result<T> result, Func<T, Result<K>> func,
-            Func<Exception, string> errorHandler = null)
+        public static Return<K> BindTry<T, K>(this Return<T> result, Func<T, Return<K>> func,
+            Func<Exception, Exception> errorHandler = null)
         {
             return result.IsFailure
-                ? Result.Failure<K>(result.Error)
-                : Result.Try(() => func(result.Value), errorHandler).Bind(r => r);
+                ? Return.Failure<K>(result.Error)
+                : Return.Try(() => func(result.Value), errorHandler).Bind(r => r);
         }
 
         /// <summary>
@@ -84,12 +84,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static Result<K, E> BindTry<T, K, E>(this Result<T, E> result, Func<T, Result<K, E>> func,
+        public static Return<K, E> BindTry<T, K, E>(this Return<T, E> result, Func<T, Return<K, E>> func,
             Func<Exception, E> errorHandler)
         {            
             return result.IsFailure
-                ? Result.Failure<K,E>(result.Error)
-                : Result.Try(() => func(result.Value), errorHandler).Bind(r => r);           
+                ? Return.Failure<K,E>(result.Error)
+                : Return.Try(() => func(result.Value), errorHandler).Bind(r => r);           
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace CSharpFunctionalExtensions
         {
             return result.IsFailure
                 ? UnitResult.Failure(result.Error)
-                : Result.Try(() => func(), errorHandler).Bind(r => r);
+                : Return.Try(() => func(), errorHandler).Bind(r => r);
         }
 
         /// <summary>
@@ -119,12 +119,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static Result<T, E> BindTry<T, E>(this UnitResult<E> result, Func<Result<T, E>> func,
+        public static Return<T, E> BindTry<T, E>(this UnitResult<E> result, Func<Return<T, E>> func,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
-                ? Result.Failure<T, E>(result.Error)
-                : Result.Try(() => func(), errorHandler).Bind(r => r);
+                ? Return.Failure<T, E>(result.Error)
+                : Return.Try(() => func(), errorHandler).Bind(r => r);
         }
 
         /// <summary>
@@ -137,12 +137,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static UnitResult<E> BindTry<T, E>(this Result<T, E> result, Func<T, UnitResult<E>> func,
+        public static UnitResult<E> BindTry<T, E>(this Return<T, E> result, Func<T, UnitResult<E>> func,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
-                ? Result.Failure<T, E>(result.Error)
-                : Result.Try(() => func(result.Value), errorHandler).Bind(r => r);
+                ? Return.Failure<T, E>(result.Error)
+                : Return.Try(() => func(result.Value), errorHandler).Bind(r => r);
         }
     }
 }

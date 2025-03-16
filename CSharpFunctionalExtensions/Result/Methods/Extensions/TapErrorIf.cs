@@ -7,7 +7,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Result TapErrorIf(this Result result, bool condition, Action action)
+        public static Return TapErrorIf(this Return result, bool condition, Action action)
         {
             if (condition)
             {
@@ -20,7 +20,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Result TapErrorIf(this Result result, bool condition, Action<string> action)
+        public static Return TapErrorIf(this Return result, bool condition, Action<Exception> action)
         {
             if (condition)
             {
@@ -33,7 +33,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Result<T> TapErrorIf<T>(this Result<T> result, bool condition, Action action)
+        public static Return<T> TapErrorIf<T>(this Return<T> result, bool condition, Action action)
         {
             if (condition)
             {
@@ -46,7 +46,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Result<T> TapErrorIf<T>(this Result<T> result, bool condition, Action<string> action)
+        public static Return<T> TapErrorIf<T>(this Return<T> result, bool condition, Action<Exception> action)
         {
             if (condition)
             {
@@ -85,7 +85,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Result<T, E> TapErrorIf<T, E>(this Result<T, E> result, bool condition, Action action)
+        public static Return<T, E> TapErrorIf<T, E>(this Return<T, E> result, bool condition, Action action)
         {
             if (condition)
             {
@@ -98,7 +98,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Result<T, E> TapErrorIf<T, E>(this Result<T, E> result, bool condition, Action<E> action)
+        public static Return<T, E> TapErrorIf<T, E>(this Return<T, E> result, bool condition, Action<E> action)
         {
             if (condition)
             {
@@ -111,7 +111,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Result TapErrorIf(this Result result, Func<string, bool> predicate, Action action)
+        public static Return TapErrorIf(this Return result, Func<Exception, bool> predicate, Action action)
         {
             if (result.IsFailure && predicate(result.Error))
             {
@@ -124,7 +124,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Result TapErrorIf(this Result result, Func<string, bool> predicate, Action<string> action)
+        public static Return TapErrorIf(this Return result, Func<Exception, bool> predicate, Action<Exception> action)
         {
             if (result.IsFailure && predicate(result.Error))
             {
@@ -137,7 +137,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Result<T> TapErrorIf<T>(this Result<T> result, Func<string, bool> predicate, Action action)
+        public static Return<T> TapErrorIf<T>(this Return<T> result, Func<Exception, bool> predicate, Action action)
         {
             if (result.IsFailure && predicate(result.Error))
             {
@@ -150,7 +150,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Result<T> TapErrorIf<T>(this Result<T> result, Func<string, bool> predicate, Action<string> action)
+        public static Return<T> TapErrorIf<T>(this Return<T> result, Func<Exception, bool> predicate, Action<Exception> action)
         {
             if (result.IsFailure && predicate(result.Error))
             {
@@ -163,7 +163,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Result<T, E> TapErrorIf<T, E>(this Result<T, E> result, Func<E, bool> predicate, Action action)
+        public static Return<T, E> TapErrorIf<T, E>(this Return<T, E> result, Func<E, bool> predicate, Action action)
         {
             if (result.IsFailure && predicate(result.Error))
             {
@@ -176,7 +176,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Result<T, E> TapErrorIf<T, E>(this Result<T, E> result, Func<E, bool> predicate, Action<E> action)
+        public static Return<T, E> TapErrorIf<T, E>(this Return<T, E> result, Func<E, bool> predicate, Action<E> action)
         {
             if (result.IsFailure && predicate(result.Error))
             {

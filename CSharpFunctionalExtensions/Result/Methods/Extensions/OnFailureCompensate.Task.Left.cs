@@ -5,41 +5,41 @@ namespace CSharpFunctionalExtensions
 {
     public static partial class AsyncResultExtensionsLeftOperand
     {
-        public static async Task<Result<T, E>> OnFailureCompensate<T, E>(this Task<Result<T, E>> resultTask,
-            Func<Result<T, E>> func)
+        public static async Task<Return<T, E>> OnFailureCompensate<T, E>(this Task<Return<T, E>> resultTask,
+            Func<Return<T, E>> func)
         {
-            Result<T, E> result = await resultTask.DefaultAwait();
+            Return<T, E> result = await resultTask.DefaultAwait();
             return result.OnFailureCompensate(func);
         }
         
-        public static async Task<Result<T>> OnFailureCompensate<T>(this Task<Result<T>> resultTask, Func<Result<T>> func)
+        public static async Task<Return<T>> OnFailureCompensate<T>(this Task<Return<T>> resultTask, Func<Return<T>> func)
         {
-            Result<T> result = await resultTask.DefaultAwait();
+            Return<T> result = await resultTask.DefaultAwait();
             return result.OnFailureCompensate(func);
         }
 
-        public static async Task<Result> OnFailureCompensate(this Task<Result> resultTask, Func<Result> func)
+        public static async Task<Return> OnFailureCompensate(this Task<Return> resultTask, Func<Return> func)
         {
-            Result result = await resultTask.DefaultAwait();
+            Return result = await resultTask.DefaultAwait();
             return result.OnFailureCompensate(func);
         }
 
-        public static async Task<Result<T>> OnFailureCompensate<T>(this Task<Result<T>> resultTask, Func<string, Result<T>> func)
+        public static async Task<Return<T>> OnFailureCompensate<T>(this Task<Return<T>> resultTask, Func<Exception, Return<T>> func)
         {
-            Result<T> result = await resultTask.DefaultAwait();
+            Return<T> result = await resultTask.DefaultAwait();
             return result.OnFailureCompensate(func);
         }
 
-        public static async Task<Result<T, E>> OnFailureCompensate<T, E>(this Task<Result<T, E>> resultTask,
-            Func<E, Result<T, E>> func)
+        public static async Task<Return<T, E>> OnFailureCompensate<T, E>(this Task<Return<T, E>> resultTask,
+            Func<E, Return<T, E>> func)
         {
-            Result<T, E> result = await resultTask.DefaultAwait();
+            Return<T, E> result = await resultTask.DefaultAwait();
             return result.OnFailureCompensate(func);
         }
 
-        public static async Task<Result> OnFailureCompensate(this Task<Result> resultTask, Func<string, Result> func)
+        public static async Task<Return> OnFailureCompensate(this Task<Return> resultTask, Func<Exception, Return> func)
         {
-            Result result = await resultTask.DefaultAwait();
+            Return result = await resultTask.DefaultAwait();
             return result.OnFailureCompensate(func);
         }
     }

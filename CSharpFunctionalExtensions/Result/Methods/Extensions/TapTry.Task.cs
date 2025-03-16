@@ -9,11 +9,11 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result> TapTry(this Task<Result> resultTask, Func<Task> func, Func<Exception, string> errorHandler = null)
+        public static async Task<Return> TapTry(this Task<Return> resultTask, Func<Task> func, Func<Exception, Exception> errorHandler = null)
         {
             var result = await resultTask.DefaultAwait();
 
-            errorHandler ??= Result.Configuration.DefaultTryErrorHandler;
+            errorHandler ??= Return.Configuration.DefaultTryErrorHandler;
             
             try
             {
@@ -24,8 +24,8 @@ namespace CSharpFunctionalExtensions
             }
             catch (Exception exc)
             {
-                string message = errorHandler(exc);
-                return Result.Failure(message);
+                var message = errorHandler(exc);
+                return Return.Failure(message);
             }
         }
 
@@ -33,11 +33,11 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result<T>> TapTry<T>(this Task<Result<T>> resultTask, Func<Task> func, Func<Exception, string> errorHandler = null)
+        public static async Task<Return<T>> TapTry<T>(this Task<Return<T>> resultTask, Func<Task> func, Func<Exception, Exception> errorHandler = null)
         {
             var result = await resultTask.DefaultAwait();
             
-            errorHandler ??= Result.Configuration.DefaultTryErrorHandler;
+            errorHandler ??= Return.Configuration.DefaultTryErrorHandler;
             
             try
             {
@@ -48,8 +48,8 @@ namespace CSharpFunctionalExtensions
             }
             catch (Exception exc)
             {
-                string message = errorHandler(exc);
-                return new Result<T>(true, message, default);
+                var message = errorHandler(exc);
+                return new Return<T>(true, message, default);
             }
         }
 
@@ -57,11 +57,11 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result<T>> TapTry<T>(this Task<Result<T>> resultTask, Func<T, Task> func, Func<Exception, string> errorHandler = null)
+        public static async Task<Return<T>> TapTry<T>(this Task<Return<T>> resultTask, Func<T, Task> func, Func<Exception, Exception> errorHandler = null)
         {
             var result = await resultTask.DefaultAwait();
 
-            errorHandler ??= Result.Configuration.DefaultTryErrorHandler;
+            errorHandler ??= Return.Configuration.DefaultTryErrorHandler;
             
             try
             {
@@ -72,8 +72,8 @@ namespace CSharpFunctionalExtensions
             }
             catch (Exception exc)
             {
-                string message = errorHandler(exc);
-                return new Result<T>(true, message, default);
+                var message = errorHandler(exc);
+                return new Return<T>(true, message, default);
             }
         }
 
@@ -103,7 +103,7 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result<T, E>> TapTry<T, E>(this Task<Result<T, E>> resultTask, Func<Task> func, Func<Exception, E> errorHandler)
+        public static async Task<Return<T, E>> TapTry<T, E>(this Task<Return<T, E>> resultTask, Func<Task> func, Func<Exception, E> errorHandler)
         {
             var result = await resultTask.DefaultAwait();
 
@@ -117,7 +117,7 @@ namespace CSharpFunctionalExtensions
             catch (Exception exc)
             {
                 var error = errorHandler(exc);
-                return new Result<T, E>(true, error, default);
+                return new Return<T, E>(true, error, default);
             }
         }
 
@@ -125,7 +125,7 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result<T, E>> TapTry<T, E>(this Task<Result<T, E>> resultTask, Func<T, Task> func, Func<Exception, E> errorHandler)
+        public static async Task<Return<T, E>> TapTry<T, E>(this Task<Return<T, E>> resultTask, Func<T, Task> func, Func<Exception, E> errorHandler)
         {
             var result = await resultTask.DefaultAwait();
 
@@ -139,7 +139,7 @@ namespace CSharpFunctionalExtensions
             catch (Exception exc)
             {
                 var error = errorHandler(exc);
-                return new Result<T, E>(true, error, default);
+                return new Return<T, E>(true, error, default);
             }
         }
     }

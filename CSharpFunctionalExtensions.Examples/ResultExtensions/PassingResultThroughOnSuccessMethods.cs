@@ -7,36 +7,36 @@ namespace CSharpFunctionalExtensions.Examples.ResultExtensions
     {
         public void Example1()
         {
-            Result<DateTime> result = FunctionInt()
+            Return<DateTime> result = FunctionInt()
                 .Bind(x => FunctionString(x))
                 .Bind(x => FunctionDateTime(x));
         }
 
         public void Example2()
         {
-            Result<DateTime> result = FunctionInt()
+            Return<DateTime> result = FunctionInt()
                 .Bind(_ => FunctionString())
                 .Bind(x => FunctionDateTime(x));
         }
 
-        private Result<int> FunctionInt()
+        private Return<int> FunctionInt()
         {
-            return Result.Success(1);
+            return Return.Success(1);
         }
 
-        private Result<string> FunctionString(int intValue)
+        private Return<string> FunctionString(int intValue)
         {
-            return Result.Success("Ok");
+            return Return.Success("Ok");
         }
 
-        private Result<string> FunctionString()
+        private Return<string> FunctionString()
         {
-            return Result.Success("Ok");
+            return Return.Success("Ok");
         }
 
-        private Result<DateTime> FunctionDateTime(string stringValue)
+        private Return<DateTime> FunctionDateTime(string stringValue)
         {
-            return Result.Success(DateTime.Now);
+            return Return.Success(DateTime.Now);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CSharpFunctionalExtensions
 {
-    public partial struct Result
+    public partial struct Return
     {
         /// <summary>
         ///     Combines several results (and any error messages) into a single result.
@@ -12,18 +12,17 @@ namespace CSharpFunctionalExtensions
         /// <param name="results">
         ///     The Results to be combined.</param>
         /// <param name="errorMessagesSeparator">
-        ///     A string that is used to separate any concatenated error messages. If omitted, the default <see cref="Result.Configuration.ErrorMessagesSeparator" /> is used.</param>
+        ///     A string that is used to separate any concatenated error messages. If omitted, the default <see cref="Return.Configuration.ErrorMessagesSeparator" /> is used.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static Result Combine(IEnumerable<Result> results, string errorMessagesSeparator = null)
+        public static Return Combine(IEnumerable<Return> results, string errorMessagesSeparator = null)
         {
-            List<Result> failedResults = results.Where(x => x.IsFailure).ToList();
+            List<Return> failedResults = results.Where(x => x.IsFailure).ToList();
 
             if (failedResults.Count == 0)
                 return Success();
 
-            string errorMessage = string.Join(errorMessagesSeparator ?? Configuration.ErrorMessagesSeparator, AggregateMessages(failedResults.Select(x => x.Error)));
-            return Failure(errorMessage);
+            return Failure(new AggregateException(failedResults.Select(x => x.Error).ToList()));
         }
 
         /// <summary>
@@ -32,12 +31,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="results">
         ///     The Results to be combined.</param>
         /// <param name="errorMessagesSeparator">
-        ///     A string that is used to separate any concatenated error messages. If omitted, the default <see cref="Result.Configuration.ErrorMessagesSeparator" /> is used.</param>
+        ///     A string that is used to separate any concatenated error messages. If omitted, the default <see cref="Return.Configuration.ErrorMessagesSeparator" /> is used.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static Result Combine<T>(IEnumerable<Result<T>> results, string errorMessagesSeparator = null)
+        public static Return Combine<T>(IEnumerable<Return<T>> results, string errorMessagesSeparator = null)
         {
-            IEnumerable<Result> untyped = results.Select(result => (Result)result);
+            IEnumerable<Return> untyped = results.Select(result => (Return)result);
             return Combine(untyped, errorMessagesSeparator);
         }
 
@@ -110,7 +109,7 @@ namespace CSharpFunctionalExtensions
         ///     A function that combines any errors.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static Result<bool, E> Combine<T, E>(IEnumerable<Result<T, E>> results, Func<IEnumerable<E>, E> composerError)
+        public static Return<bool, E> Combine<T, E>(IEnumerable<Return<T, E>> results, Func<IEnumerable<E>, E> composerError)
         {
             var combinedResult = Combine(results.Select(r => (UnitResult<E>)r), composerError);
             return combinedResult.IsSuccess
@@ -128,30 +127,30 @@ namespace CSharpFunctionalExtensions
         ///     The Results to be combined.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static Result<bool, E> Combine<T, E>(IEnumerable<Result<T, E>> results)
+        public static Return<bool, E> Combine<T, E>(IEnumerable<Return<T, E>> results)
             where E : ICombine
             => Combine(results, CombineErrors);
 
         /// <summary>
         ///     Combines several results (and any error messages) into a single result.
         ///     The returned result will be a failure if any of the input <paramref name="results"/> are failures.
-        ///     Error messages are concatenated with the default <see cref="Result.Configuration.ErrorMessagesSeparator" /> between each message.</summary>
+        ///     Error messages are concatenated with the default <see cref="Return.Configuration.ErrorMessagesSeparator" /> between each message.</summary>
         /// <param name="results">
         ///     The Results to be combined.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static Result Combine(params Result[] results)
+        public static Return Combine(params Return[] results)
             => Combine(results, Configuration.ErrorMessagesSeparator);
 
         /// <summary>
         ///     Combines several results (and any error messages) into a single result.
         ///     The returned result will be a failure if any of the input <paramref name="results"/> are failures.
-        ///     Error messages are concatenated with the default <see cref="Result.Configuration.ErrorMessagesSeparator" /> between each message.</summary>
+        ///     Error messages are concatenated with the default <see cref="Return.Configuration.ErrorMessagesSeparator" /> between each message.</summary>
         /// <param name="results">
         ///     The Results to be combined.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static Result Combine<T>(params Result<T>[] results)
+        public static Return Combine<T>(params Return<T>[] results)
             => Combine(results, Configuration.ErrorMessagesSeparator);
 
         // TODO: Ideally, we would be using BaseResult<E> or equivalent instead of Result<bool, E>.
@@ -164,7 +163,7 @@ namespace CSharpFunctionalExtensions
         ///     The Results to be combined.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static Result<bool, E> Combine<T, E>(params Result<T, E>[] results)
+        public static Return<bool, E> Combine<T, E>(params Return<T, E>[] results)
             where E : ICombine
             => Combine(results, CombineErrors);
 
@@ -172,24 +171,24 @@ namespace CSharpFunctionalExtensions
         ///     Combines several results (and any error messages) into a single result.
         ///     The returned result will be a failure if any of the input <paramref name="results"/> are failures.</summary>
         /// <param name="errorMessagesSeparator">
-        ///     A string that is used to separate any concatenated error messages. If omitted, the default <see cref="Result.Configuration.ErrorMessagesSeparator" /> is used.</param>
+        ///     A string that is used to separate any concatenated error messages. If omitted, the default <see cref="Return.Configuration.ErrorMessagesSeparator" /> is used.</param>
         /// <param name="results">
         ///     The Results to be combined.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static Result Combine(string errorMessagesSeparator, params Result[] results)
+        public static Return Combine(string errorMessagesSeparator, params Return[] results)
             => Combine(results, errorMessagesSeparator);
 
         /// <summary>
         ///     Combines several results (and any error messages) into a single result.
         ///     The returned result will be a failure if any of the input <paramref name="results"/> are failures.</summary>
         /// <param name="errorMessagesSeparator">
-        ///     A string that is used to separate any concatenated error messages. If omitted, the default <see cref="Result.Configuration.ErrorMessagesSeparator" /> is used.</param>
+        ///     A string that is used to separate any concatenated error messages. If omitted, the default <see cref="Return.Configuration.ErrorMessagesSeparator" /> is used.</param>
         /// <param name="results">
         ///     The Results to be combined.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static Result Combine<T>(string errorMessagesSeparator, params Result<T>[] results)
+        public static Return Combine<T>(string errorMessagesSeparator, params Return<T>[] results)
             => Combine(results, errorMessagesSeparator);
 
         // TODO: Ideally, we would be using BaseResult<E> or equivalent instead of Result<bool, E>.
@@ -203,7 +202,7 @@ namespace CSharpFunctionalExtensions
         ///     The Results to be combined.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static Result<bool, E> Combine<T, E>(Func<IEnumerable<E>, E> composerError, params Result<T, E>[] results)
+        public static Return<bool, E> Combine<T, E>(Func<IEnumerable<E>, E> composerError, params Return<T, E>[] results)
             => Combine(results, composerError);
 
         private static E CombineErrors<E>(IEnumerable<E> errors)

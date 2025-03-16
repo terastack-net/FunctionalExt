@@ -13,7 +13,7 @@ namespace C2i.Common.C2iCSharpFunctionalExtensions.FunctionalApiResult
         {
             if (!typeToConvert.IsGenericType) return false;
 
-            return typeToConvert.GetGenericTypeDefinition() == typeof(Result<,>);
+            return typeToConvert.GetGenericTypeDefinition() == typeof(Return<,>);
         }
 
         public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
@@ -28,9 +28,9 @@ namespace C2i.Common.C2iCSharpFunctionalExtensions.FunctionalApiResult
         }
     }
 
-    internal class ResultOfTEJsonConverterConverterOfT<TValue, TError> : JsonConverter<Result<TValue, TError>>
+    internal class ResultOfTEJsonConverterConverterOfT<TValue, TError> : JsonConverter<Return<TValue, TError>>
     {
-        public override Result<TValue, TError> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Return<TValue, TError> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             try
             {
@@ -38,21 +38,21 @@ namespace C2i.Common.C2iCSharpFunctionalExtensions.FunctionalApiResult
             }
             catch (JsonException)
             {
-                return Result.Failure<TValue, TError>(default!);
+                return Return.Failure<TValue, TError>(default!);
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, Result<TValue, TError> value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Return<TValue, TError> value, JsonSerializerOptions options)
         => JsonSerializer.Serialize(writer, ToResultTEDto(value), options);
 
-        private static Result<TValue, TError> ToResultTE(ResultDto<TValue, TError>? resultDto)
+        private static Return<TValue, TError> ToResultTE(ResultDto<TValue, TError>? resultDto)
             => resultDto is not null
                ? resultDto.IsSuccess
-                 ? Result.Success<TValue, TError>(resultDto.Value)
-                 : Result.Failure<TValue, TError>(resultDto.Error)
-               : Result.Failure<TValue, TError>(default!);
+                 ? Return.Success<TValue, TError>(resultDto.Value)
+                 : Return.Failure<TValue, TError>(resultDto.Error)
+               : Return.Failure<TValue, TError>(default!);
 
-        private static ResultDto<TValue, TError> ToResultTEDto(Result<TValue, TError> result)
+        private static ResultDto<TValue, TError> ToResultTEDto(Return<TValue, TError> result)
         => result.IsSuccess
            ? ResultDto.Success<TValue, TError>(result.Value)
            : ResultDto.Failure<TValue, TError>(result.Error);

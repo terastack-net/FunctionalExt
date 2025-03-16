@@ -6,37 +6,37 @@ namespace CSharpFunctionalExtensions.ValueTasks
 {
     public static partial class ResultExtensions
     {
-        public static async ValueTask<Result> Compensate(this ValueTask<Result> resultTask, Func<string, Result> valueTask)
+        public static async ValueTask<Return> Compensate(this ValueTask<Return> resultTask, Func<Exception, Return> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);
         }
 
-        public static async ValueTask<UnitResult<E>> Compensate<E>(this ValueTask<Result> resultTask, Func<string, UnitResult<E>> valueTask)
+        public static async ValueTask<UnitResult<E>> Compensate<E>(this ValueTask<Return> resultTask, Func<Exception, UnitResult<E>> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);
         }
 
-        public static async ValueTask<Result> Compensate<T>(this ValueTask<Result<T>> resultTask, Func<string, Result> valueTask)
+        public static async ValueTask<Return> Compensate<T>(this ValueTask<Return<T>> resultTask, Func<Exception, Return> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);
         }
 
-        public static async ValueTask<Result<T>> Compensate<T>(this ValueTask<Result<T>> resultTask, Func<string, Result<T>> valueTask)
+        public static async ValueTask<Return<T>> Compensate<T>(this ValueTask<Return<T>> resultTask, Func<Exception, Return<T>> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);
         }
 
-        public static async ValueTask<Result<T, E>> Compensate<T, E>(this ValueTask<Result<T>> resultTask, Func<string, Result<T, E>> valueTask)
+        public static async ValueTask<Return<T, E>> Compensate<T, E>(this ValueTask<Return<T>> resultTask, Func<Exception, Return<T, E>> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);
         }
 
-        public static async ValueTask<Result> Compensate<E>(this ValueTask<UnitResult<E>> resultTask, Func<E, Result> valueTask)
+        public static async ValueTask<Return> Compensate<E>(this ValueTask<UnitResult<E>> resultTask, Func<E, Return> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);
@@ -48,19 +48,19 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Compensate(valueTask);
         }
 
-        public static async ValueTask<Result> Compensate<T, E>(this ValueTask<Result<T, E>> resultTask, Func<E, Result> valueTask)
+        public static async ValueTask<Return> Compensate<T, E>(this ValueTask<Return<T, E>> resultTask, Func<E, Return> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);
         }
 
-        public static async ValueTask<UnitResult<E2>> Compensate<T, E, E2>(this ValueTask<Result<T, E>> resultTask, Func<E, UnitResult<E2>> valueTask)
+        public static async ValueTask<UnitResult<E2>> Compensate<T, E, E2>(this ValueTask<Return<T, E>> resultTask, Func<E, UnitResult<E2>> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);
         }
 
-        public static async ValueTask<Result<T, E2>> Compensate<T, E, E2>(this ValueTask<Result<T, E>> resultTask, Func<E, Result<T, E2>> valueTask)
+        public static async ValueTask<Return<T, E2>> Compensate<T, E, E2>(this ValueTask<Return<T, E>> resultTask, Func<E, Return<T, E2>> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);

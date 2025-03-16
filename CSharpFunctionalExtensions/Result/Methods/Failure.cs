@@ -1,29 +1,47 @@
-﻿namespace CSharpFunctionalExtensions
+﻿using System;
+
+namespace CSharpFunctionalExtensions
 {
-    public partial struct Result
+    public partial struct Return
     {
         /// <summary>
         ///     Creates a failure result with the given error message.
         /// </summary>
-        public static Result Failure(string error)
+        public static Return Failure(Exception error)
         {
-            return new Result(true, error);
+            return new Return(true, error);
+        }
+
+
+        public static Return Failure(string  error)
+        {
+            return new Return(true, new Exception(error));
         }
 
         /// <summary>
         ///     Creates a failure result with the given error message.
         /// </summary>
-        public static Result<T> Failure<T>(string error)
+        public static Return<T> Failure<T>(Exception error)
         {
-            return new Result<T>(true, error, default);
+            return new Return<T>(true, error, default);
         }
+        
+        /// <summary>
+        ///     Creates a failure result with the given error message.
+        /// </summary>
+        public static Return<T> Failure<T>(string error)
+        {
+            return new Return<T>(true, new Exception(error), default);
+        }
+
 
         /// <summary>
         ///     Creates a failure result with the given error.
         /// </summary>
-        public static Result<T, E> Failure<T, E>(E error)
+        public static Return<T, E> Failure<T, E>(E error)
         {
-            return new Result<T, E>(true, error, default);
+            return new Return<T, E>(true, error, default);
         }
+
     }
 }

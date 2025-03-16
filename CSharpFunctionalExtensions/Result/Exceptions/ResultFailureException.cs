@@ -4,10 +4,10 @@ namespace CSharpFunctionalExtensions
 {
     public class ResultFailureException : Exception
     {
-        public string Error { get; }
+        public Exception Error { get; }
 
-        internal ResultFailureException(string error)
-            : base(Result.Messages.ValueIsInaccessibleForFailure(error))
+        internal ResultFailureException(Exception error)
+            : base(Return.Messages.ValueIsInaccessibleForFailure(error))
         {
             Error = error;
         }
@@ -18,7 +18,7 @@ namespace CSharpFunctionalExtensions
         public new E Error { get; }
 
         internal ResultFailureException(E error)
-            : base(Result.Messages.ValueIsInaccessibleForFailure(error.ToString()))
+            : base( new Exception(error.ToString() ))
         {
             Error = error;
         }

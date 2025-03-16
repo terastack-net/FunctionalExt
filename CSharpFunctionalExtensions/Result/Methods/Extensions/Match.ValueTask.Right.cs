@@ -9,7 +9,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns the result of the given <paramref name="onSuccessValueTask"/> valueTask action if the calling Result is a success. Otherwise, it returns the result of the given <paramref name="onFailureValueTask"/> valueTask action.
         /// </summary>
-        public static ValueTask<K> Match<T, K, E>(this Result<T, E> result, Func<T, ValueTask<K>> onSuccessValueTask, Func<E, ValueTask<K>> onFailureValueTask)
+        public static ValueTask<K> Match<T, K, E>(this Return<T, E> result, Func<T, ValueTask<K>> onSuccessValueTask, Func<E, ValueTask<K>> onFailureValueTask)
         {
             return result.IsSuccess
                 ? onSuccessValueTask(result.Value)
@@ -19,7 +19,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns the result of the given <paramref name="onSuccessValueTask"/> valueTask action if the calling Result is a success. Otherwise, it returns the result of the given <paramref name="onFailureValueTask"/> valueTask action.
         /// </summary>
-        public static ValueTask<K> Match<K, T>(this Result<T> result, Func<T, ValueTask<K>> onSuccessValueTask, Func<string, ValueTask<K>> onFailureValueTask)
+        public static ValueTask<K> Match<K, T>(this Return<T> result, Func<T, ValueTask<K>> onSuccessValueTask, Func<Exception, ValueTask<K>> onFailureValueTask)
         {
             return result.IsSuccess
                 ? onSuccessValueTask(result.Value)
@@ -29,7 +29,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns the result of the given <paramref name="onSuccessValueTask"/> valueTask action if the calling Result is a success. Otherwise, it returns the result of the given <paramref name="onFailureValueTask"/> valueTask action.
         /// </summary>
-        public static ValueTask<T> Match<T>(this Result result, Func<ValueTask<T>> onSuccessValueTask, Func<string, ValueTask<T>> onFailureValueTask)
+        public static ValueTask<T> Match<T>(this Return result, Func<ValueTask<T>> onSuccessValueTask, Func<Exception, ValueTask<T>> onFailureValueTask)
         {
             return result.IsSuccess
                 ? onSuccessValueTask()
@@ -49,7 +49,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Invokes the given <paramref name="onSuccessValueTask"/> action if the calling Result is a success. Otherwise, it invokes the given <paramref name="onFailureValueTask"/> action.
         /// </summary>
-        public static ValueTask Match<T, E>(this Result<T, E> result, Func<T, ValueTask> onSuccessValueTask, Func<E, ValueTask> onFailureValueTask)
+        public static ValueTask Match<T, E>(this Return<T, E> result, Func<T, ValueTask> onSuccessValueTask, Func<E, ValueTask> onFailureValueTask)
         {
             return result.IsSuccess
                 ? onSuccessValueTask(result.Value)
@@ -69,7 +69,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Invokes the given <paramref name="onSuccessValueTask"/> action if the calling Result is a success. Otherwise, it invokes the given <paramref name="onFailureValueTask"/> action.
         /// </summary>
-        public static ValueTask Match<T>(this Result<T> result, Func<T, ValueTask> onSuccessValueTask, Func<string, ValueTask> onFailureValueTask)
+        public static ValueTask Match<T>(this Return<T> result, Func<T, ValueTask> onSuccessValueTask, Func<Exception, ValueTask> onFailureValueTask)
         {
             return result.IsSuccess
                 ? onSuccessValueTask(result.Value)
@@ -79,7 +79,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Invokes the given <paramref name="onSuccessValueTask"/> action if the calling Result is a success. Otherwise, it invokes the given <paramref name="onFailureValueTask"/> action.
         /// </summary>
-        public static ValueTask Match(this Result result, Func<ValueTask> onSuccessValueTask, Func<string, ValueTask> onFailureValueTask)
+        public static ValueTask Match(this Return result, Func<ValueTask> onSuccessValueTask, Func<Exception, ValueTask> onFailureValueTask)
         {
             return result.IsSuccess
                 ? onSuccessValueTask()

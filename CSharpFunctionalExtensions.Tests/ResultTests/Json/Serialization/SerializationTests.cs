@@ -20,7 +20,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Json.Serialization
         public void Result_Success()
         {
             // Assign
-            var originalResult = Result.Success();
+            var originalResult = Return.Success();
 
             // Act
             var result = SerializeAndDesrialize(originalResult);
@@ -33,7 +33,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Json.Serialization
         public void Result_Failure()
         {
             // Assign
-            var originalResult = Result.Failure("Error");
+            var originalResult = Return.Failure("Error");
 
             // Act
             var result = SerializeAndDesrialize(originalResult);
@@ -47,7 +47,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Json.Serialization
         public void ResultOfT_Success()
         {
             // Assign
-            var originalResult = Result.Success(8);
+            var originalResult = Return.Success(8);
 
             // Act
             var result = SerializeAndDesrialize(originalResult);
@@ -61,7 +61,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Json.Serialization
         public void ResultOfT_Failure()
         {
             // Assign
-            var originalResult = Result.Failure<int>("Error");
+            var originalResult = Return.Failure<int>("Error");
 
             // Act
             var result = SerializeAndDesrialize(originalResult);
@@ -75,7 +75,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Json.Serialization
         public void ResultOfTE_Success()
         {
             // Assign
-            var originalResult = Result.Success<int, bool>(8);
+            var originalResult = Return.Success<int, bool>(8);
 
             // Act
             var result = SerializeAndDesrialize(originalResult);
@@ -89,7 +89,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Json.Serialization
         public void ResultOfTE_Failure()
         {
             // Assign
-            var originalResult = Result.Failure<int, bool>(true);
+            var originalResult = Return.Failure<int, bool>(true);
 
             // Act
             var result = SerializeAndDesrialize(originalResult);

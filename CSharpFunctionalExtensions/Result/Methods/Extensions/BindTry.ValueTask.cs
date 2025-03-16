@@ -14,8 +14,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<Result> BindTry(this ValueTask<Result> resultTask, Func<ValueTask<Result>> valueTask,
-			Func<Exception, string> errorHandler = null)
+        public static async ValueTask<Return> BindTry(this ValueTask<Return> resultTask, Func<ValueTask<Return>> valueTask,
+			Func<Exception, Exception> errorHandler = null)
 		{            
 			var result = await resultTask;
 			return await result.BindTry(valueTask, errorHandler);
@@ -30,8 +30,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<Result<K>> BindTry<K>(this ValueTask<Result> resultTask, Func<ValueTask<Result<K>>> valueTask,
-            Func<Exception, string> errorHandler = null)
+        public static async ValueTask<Return<K>> BindTry<K>(this ValueTask<Return> resultTask, Func<ValueTask<Return<K>>> valueTask,
+            Func<Exception, Exception> errorHandler = null)
         {
             var result = await resultTask;
             return await result.BindTry(valueTask, errorHandler);
@@ -46,8 +46,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<Result> BindTry<T>(this ValueTask<Result<T>> resultTask, Func<T, ValueTask<Result>> valueTask,
-			Func<Exception, string> errorHandler = null)
+        public static async ValueTask<Return> BindTry<T>(this ValueTask<Return<T>> resultTask, Func<T, ValueTask<Return>> valueTask,
+			Func<Exception, Exception> errorHandler = null)
 		{
 			var result = await resultTask;
 			return await result.BindTry(valueTask, errorHandler);
@@ -63,8 +63,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<Result<K>> BindTry<T, K>(this ValueTask<Result<T>> resultTask, Func<T, ValueTask<Result<K>>> valueTask,
-            Func<Exception, string> errorHandler = null)
+        public static async ValueTask<Return<K>> BindTry<T, K>(this ValueTask<Return<T>> resultTask, Func<T, ValueTask<Return<K>>> valueTask,
+            Func<Exception, Exception> errorHandler = null)
         {
             var result = await resultTask;
             return await result.BindTry(valueTask, errorHandler);
@@ -80,7 +80,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<UnitResult<E>> BindTry<T, E>(this ValueTask<Result<T, E>> resultTask, Func<T, ValueTask<UnitResult<E>>> valueTask,
+        public static async ValueTask<UnitResult<E>> BindTry<T, E>(this ValueTask<Return<T, E>> resultTask, Func<T, ValueTask<UnitResult<E>>> valueTask,
             Func<Exception, E> errorHandler)
         {
             var result = await resultTask;
@@ -98,7 +98,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<Result<K, E>> BindTry<T, K, E>(this ValueTask<Result<T, E>> resultTask, Func<T, ValueTask<Result<K, E>>> valueTask,
+        public static async ValueTask<Return<K, E>> BindTry<T, K, E>(this ValueTask<Return<T, E>> resultTask, Func<T, ValueTask<Return<K, E>>> valueTask,
 			Func<Exception, E> errorHandler)
 		{
 			var result = await resultTask;
@@ -115,7 +115,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-		public static async ValueTask<Result<T, E>> BindTry<T, E>(this ValueTask<UnitResult<E>> resultTask, Func<ValueTask<Result<T, E>>> valueTask,
+		public static async ValueTask<Return<T, E>> BindTry<T, E>(this ValueTask<UnitResult<E>> resultTask, Func<ValueTask<Return<T, E>>> valueTask,
             Func<Exception, E> errorHandler)
         {
             var result = await resultTask;

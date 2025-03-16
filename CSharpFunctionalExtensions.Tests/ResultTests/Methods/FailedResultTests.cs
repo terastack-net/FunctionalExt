@@ -10,7 +10,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Can_create_a_non_generic_version()
         {
-            Result result = Result.Failure("Error message");
+            Return result = Return.Failure("Error message");
 
             result.Error.Should().Be("Error message");
             result.IsFailure.Should().Be(true);
@@ -20,7 +20,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Can_create_a_generic_version()
         {
-            Result<MyClass> result = Result.Failure<MyClass>("Error message");
+            Return<MyClass> result = Return.Failure<MyClass>("Error message");
 
             result.Error.Should().Be("Error message");
             result.IsFailure.Should().Be(true);
@@ -42,7 +42,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Cannot_access_Value_property()
         {
-            Result<MyClass> result = Result.Failure<MyClass>("Error message");
+            Return<MyClass> result = Return.Failure<MyClass>("Error message");
 
             Action action = () => { MyClass myClass = result.Value; };
 
@@ -54,7 +54,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Cannot_access_Value_property_with_a_generic_error()
         {
-            Result<MyClass, MyErrorClass> result = Result.Failure<MyClass, MyErrorClass>(new MyErrorClass());
+            Return<MyClass, MyErrorClass> result = Return.Failure<MyClass, MyErrorClass>(new MyErrorClass());
 
             Action action = () => { MyClass myClass = result.Value; };
 
@@ -64,10 +64,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Cannot_create_without_error_message()
         {
-            Action action1 = () => { Result.Failure(null); };
-            Action action2 = () => { Result.Failure(string.Empty); };
-            Action action3 = () => { Result.Failure<MyClass>(null); };
-            Action action4 = () => { Result.Failure<MyClass>(string.Empty); };
+            Action action1 = () => { Return.Failure(null); };
+            Action action2 = () => { Return.Failure(string.Empty); };
+            Action action3 = () => { Return.Failure<MyClass>(null); };
+            Action action4 = () => { Return.Failure<MyClass>(string.Empty); };
             Action action5 = () => { UnitResult.Failure<MyClass>(null); };
 
             action1.Should().Throw<ArgumentNullException>();

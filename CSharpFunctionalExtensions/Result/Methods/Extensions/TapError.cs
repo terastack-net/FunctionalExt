@@ -7,7 +7,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static Result<T, E> TapError<T, E>(this Result<T, E> result, Action action)
+        public static Return<T, E> TapError<T, E>(this Return<T, E> result, Action action)
         {
             if (result.IsFailure)
             {
@@ -20,7 +20,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static Result<T> TapError<T>(this Result<T> result, Action action)
+        public static Return<T> TapError<T>(this Return<T> result, Action action)
         {
             if (result.IsFailure)
             {
@@ -33,7 +33,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static Result TapError(this Result result, Action action)
+        public static Return TapError(this Return result, Action action)
         {
             if (result.IsFailure)
             {
@@ -72,7 +72,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static Result<T, E> TapError<T, E>(this Result<T, E> result, Action<E> action)
+        public static Return<T, E> TapError<T, E>(this Return<T, E> result, Action<E> action)
         {
             if (result.IsFailure)
             {
@@ -85,7 +85,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static Result<T> TapError<T>(this Result<T> result, Action<string> action)
+        public static Return<T> TapError<T>(this Return<T> result, Action<Exception> action)
         {
             if (result.IsFailure)
             {
@@ -98,7 +98,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static Result TapError(this Result result, Action<string> action)
+        public static Return TapError(this Return result, Action<Exception> action)
         {
             if (result.IsFailure)
             {

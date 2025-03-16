@@ -1,3 +1,5 @@
+using System;
+
 namespace CSharpFunctionalExtensions
 {
     public static partial class ResultExtensions
@@ -5,7 +7,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Deconstructs the given result into success and failure out parameters
         /// </summary>
-        public static void Deconstruct(this Result result, out bool isSuccess, out bool isFailure)
+        public static void Deconstruct(this Return result, out bool isSuccess, out bool isFailure)
         {
             isSuccess = result.IsSuccess;
             isFailure = result.IsFailure;
@@ -14,7 +16,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Deconstructs the given result into success, failure and error out parameters
         /// </summary>
-        public static void Deconstruct(this Result result, out bool isSuccess, out bool isFailure, out string error)
+        public static void Deconstruct(this Return result, out bool isSuccess, out bool isFailure, out Exception error)
         {
             isSuccess = result.IsSuccess;
             isFailure = result.IsFailure;
@@ -24,7 +26,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Deconstructs the given result into success and failure out parameters
         /// </summary>
-        public static void Deconstruct<T>(this Result<T> result, out bool isSuccess, out bool isFailure)
+        public static void Deconstruct<T>(this Return<T> result, out bool isSuccess, out bool isFailure)
         {
             isSuccess = result.IsSuccess;
             isFailure = result.IsFailure;
@@ -33,7 +35,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Deconstructs the given result into success, failure and value out parameters
         /// </summary>
-        public static void Deconstruct<T>(this Result<T> result, out bool isSuccess, out bool isFailure, out T value)
+        public static void Deconstruct<T>(this Return<T> result, out bool isSuccess, out bool isFailure, out T value)
         {
             isSuccess = result.IsSuccess;
             isFailure = result.IsFailure;
@@ -43,7 +45,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Deconstructs the given result into success, failure, value and error out parameters
         /// </summary>
-        public static void Deconstruct<T>(this Result<T> result, out bool isSuccess, out bool isFailure, out T value, out string error)
+        public static void Deconstruct<T>(this Return<T> result, out bool isSuccess, out bool isFailure, out T value, out Exception error)
         {
             isSuccess = result.IsSuccess;
             isFailure = result.IsFailure;
@@ -54,7 +56,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Deconstructs the given result into success and failure out parameters
         /// </summary>
-        public static void Deconstruct<T, E>(this Result<T, E> result, out bool isSuccess, out bool isFailure)
+        public static void Deconstruct<T, E>(this Return<T, E> result, out bool isSuccess, out bool isFailure)
         {
             isSuccess = result.IsSuccess;
             isFailure = result.IsFailure;
@@ -63,7 +65,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Deconstructs the given result into success, failure and value out parameters
         /// </summary>
-        public static void Deconstruct<T, E>(this Result<T, E> result, out bool isSuccess, out bool isFailure, out T value)
+        public static void Deconstruct<T, E>(this Return<T, E> result, out bool isSuccess, out bool isFailure, out T value)
         {
             isSuccess = result.IsSuccess;
             isFailure = result.IsFailure;
@@ -73,7 +75,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Deconstructs the given result into success, failure, value and error out parameters
         /// </summary>
-        public static void Deconstruct<T, E>(this Result<T, E> result, out bool isSuccess, out bool isFailure, out T value, out E error)
+        public static void Deconstruct<T, E>(this Return<T, E> result, out bool isSuccess, out bool isFailure, out T value, out E error)
         {
             isSuccess = result.IsSuccess;
             isFailure = result.IsFailure;

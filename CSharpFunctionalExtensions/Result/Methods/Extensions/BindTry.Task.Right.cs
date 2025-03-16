@@ -16,12 +16,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static async Task<Result<K, E>> BindTry<T, K, E>(this Result<T, E> result, Func<T, Task<Result<K, E>>> func,
+        public static async Task<Return<K, E>> BindTry<T, K, E>(this Return<T, E> result, Func<T, Task<Return<K, E>>> func,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
-                ? Result.Failure<K, E>(result.Error)
-                : await Result.Try(() => func(result.Value),errorHandler).Bind(r => r).DefaultAwait();
+                ? Return.Failure<K, E>(result.Error)
+                : await Return.Try(() => func(result.Value),errorHandler).Bind(r => r).DefaultAwait();
         }
 
         /// <summary>
@@ -34,12 +34,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static async Task<Result<K>> BindTry<T, K>(this Result<T> result, Func<T, Task<Result<K>>> func,
-            Func<Exception, string> errorHandler = null)
+        public static async Task<Return<K>> BindTry<T, K>(this Return<T> result, Func<T, Task<Return<K>>> func,
+            Func<Exception, Exception> errorHandler = null)
         {
             return result.IsFailure
-                ? Result.Failure<K>(result.Error)
-                : await Result.Try(() => func(result.Value), errorHandler).Bind(r => r).DefaultAwait();
+                ? Return.Failure<K>(result.Error)
+                : await Return.Try(() => func(result.Value), errorHandler).Bind(r => r).DefaultAwait();
         }
 
         /// <summary>
@@ -51,12 +51,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static async Task<Result<K>> BindTry<K>(this Result result, Func<Task<Result<K>>> func,
-            Func<Exception, string> errorHandler = null)
+        public static async Task<Return<K>> BindTry<K>(this Return result, Func<Task<Return<K>>> func,
+            Func<Exception, Exception> errorHandler = null)
         {
             return result.IsFailure
-                ? Result.Failure<K>(result.Error)
-                : await Result.Try(() => func(), errorHandler).Bind(r => r).DefaultAwait();
+                ? Return.Failure<K>(result.Error)
+                : await Return.Try(() => func(), errorHandler).Bind(r => r).DefaultAwait();
         }
 
         /// <summary>
@@ -68,12 +68,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static async Task<Result> BindTry<T>(this Result<T> result, Func<T, Task<Result>> func,
-            Func<Exception, string> errorHandler = null)
+        public static async Task<Return> BindTry<T>(this Return<T> result, Func<T, Task<Return>> func,
+            Func<Exception, Exception> errorHandler = null)
         {
             return result.IsFailure
-                ? Result.Failure(result.Error)
-                : await Result.Try(() => func(result.Value), errorHandler).Bind(r => r).DefaultAwait();
+                ? Return.Failure(result.Error)
+                : await Return.Try(() => func(result.Value), errorHandler).Bind(r => r).DefaultAwait();
         }
 
         /// <summary>
@@ -84,12 +84,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static async Task<Result> BindTry(this Result result, Func<Task<Result>> func,
-            Func<Exception, string> errorHandler = null)
+        public static async Task<Return> BindTry(this Return result, Func<Task<Return>> func,
+            Func<Exception, Exception> errorHandler = null)
         {
             return result.IsFailure
-                ? Result.Failure(result.Error)
-                : await Result.Try(() => func(), errorHandler).Bind(r => r).DefaultAwait();
+                ? Return.Failure(result.Error)
+                : await Return.Try(() => func(), errorHandler).Bind(r => r).DefaultAwait();
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace CSharpFunctionalExtensions
         {            
             return result.IsFailure
                 ? UnitResult.Failure(result.Error)
-                : await Result.Try(() => func(), errorHandler).Bind(r => r).DefaultAwait();
+                : await Return.Try(() => func(), errorHandler).Bind(r => r).DefaultAwait();
         }
 
         /// <summary>
@@ -119,12 +119,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static async Task<Result<T, E>> BindTry<T, E>(this UnitResult<E> result, Func<Task<Result<T, E>>> func,
+        public static async Task<Return<T, E>> BindTry<T, E>(this UnitResult<E> result, Func<Task<Return<T, E>>> func,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
-                ? Result.Failure<T,E>(result.Error)
-                : await Result.Try(() => func(), errorHandler).Bind(r => r).DefaultAwait();
+                ? Return.Failure<T,E>(result.Error)
+                : await Return.Try(() => func(), errorHandler).Bind(r => r).DefaultAwait();
         }
 
         /// <summary>
@@ -137,12 +137,12 @@ namespace CSharpFunctionalExtensions
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static async Task<UnitResult<E>> BindTry<T, E>(this Result<T, E> result, Func<T, Task<UnitResult<E>>> func,
+        public static async Task<UnitResult<E>> BindTry<T, E>(this Return<T, E> result, Func<T, Task<UnitResult<E>>> func,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
                 ? UnitResult.Failure(result.Error)
-                : await Result.Try(() => func(result.Value), errorHandler).Bind(r => r).DefaultAwait();           
+                : await Return.Try(() => func(result.Value), errorHandler).Bind(r => r).DefaultAwait();           
         }
     }
 }

@@ -6,19 +6,19 @@ namespace CSharpFunctionalExtensions.ValueTasks
 {
     public static partial class ResultExtensions
     {
-        public static ValueTask<Result<K, E>> BindWithTransactionScope<T, K, E>(this ValueTask<Result<T, E>> self, Func<T, ValueTask<Result<K, E>>> f)
+        public static ValueTask<Return<K, E>> BindWithTransactionScope<T, K, E>(this ValueTask<Return<T, E>> self, Func<T, ValueTask<Return<K, E>>> f)
             => WithTransactionScope(() => self.Bind(f));
 
-        public static ValueTask<Result<K>> BindWithTransactionScope<T, K>(this ValueTask<Result<T>> self, Func<T, ValueTask<Result<K>>> f)
+        public static ValueTask<Return<K>> BindWithTransactionScope<T, K>(this ValueTask<Return<T>> self, Func<T, ValueTask<Return<K>>> f)
             => WithTransactionScope(() => self.Bind(f));
 
-        public static ValueTask<Result<K>> BindWithTransactionScope<K>(this ValueTask<Result> self, Func<ValueTask<Result<K>>> f)
+        public static ValueTask<Return<K>> BindWithTransactionScope<K>(this ValueTask<Return> self, Func<ValueTask<Return<K>>> f)
             => WithTransactionScope(() => self.Bind(f));
 
-        public static ValueTask<Result> BindWithTransactionScope<T>(this ValueTask<Result<T>> self, Func<T, ValueTask<Result>> f)
+        public static ValueTask<Return> BindWithTransactionScope<T>(this ValueTask<Return<T>> self, Func<T, ValueTask<Return>> f)
             => WithTransactionScope(() => self.Bind(f));
 
-        public static ValueTask<Result> BindWithTransactionScope(this ValueTask<Result> self, Func<ValueTask<Result>> f)
+        public static ValueTask<Return> BindWithTransactionScope(this ValueTask<Return> self, Func<ValueTask<Return>> f)
             => WithTransactionScope(() => self.Bind(f));
     }
 }

@@ -17,12 +17,12 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<Result<K, E>> BindTry<T, K, E>(this Result<T, E> result, Func<T, ValueTask<Result<K, E>>> valueTask,
+        public static async ValueTask<Return<K, E>> BindTry<T, K, E>(this Return<T, E> result, Func<T, ValueTask<Return<K, E>>> valueTask,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
-                ? Result.Failure<K, E>(result.Error)
-                : await Result.Try(async () => await valueTask(result.Value),errorHandler).Bind(r => r);
+                ? Return.Failure<K, E>(result.Error)
+                : await Return.Try(async () => await valueTask(result.Value),errorHandler).Bind(r => r);
         }
 
         /// <summary>
@@ -35,12 +35,12 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<Result<K>> BindTry<T, K>(this Result<T> result, Func<T, ValueTask<Result<K>>> valueTask,
-            Func<Exception, string> errorHandler = null)
+        public static async ValueTask<Return<K>> BindTry<T, K>(this Return<T> result, Func<T, ValueTask<Return<K>>> valueTask,
+            Func<Exception, Exception> errorHandler = null)
         {
             return result.IsFailure
-                ? Result.Failure<K>(result.Error)
-                : await Result.Try(async () => await valueTask(result.Value), errorHandler).Bind(r => r);
+                ? Return.Failure<K>(result.Error)
+                : await Return.Try(async () => await valueTask(result.Value), errorHandler).Bind(r => r);
         }
 
         /// <summary>
@@ -52,12 +52,12 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<Result<K>> BindTry<K>(this Result result, Func<ValueTask<Result<K>>> valueTask,
-            Func<Exception, string> errorHandler = null)
+        public static async ValueTask<Return<K>> BindTry<K>(this Return result, Func<ValueTask<Return<K>>> valueTask,
+            Func<Exception, Exception> errorHandler = null)
         {
             return result.IsFailure
-                ? Result.Failure<K>(result.Error)
-                : await Result.Try(async () => await valueTask(), errorHandler).Bind(r => r);
+                ? Return.Failure<K>(result.Error)
+                : await Return.Try(async () => await valueTask(), errorHandler).Bind(r => r);
         }
 
         /// <summary>
@@ -69,12 +69,12 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<Result> BindTry<T>(this Result<T> result, Func<T, ValueTask<Result>> valueTask,
-            Func<Exception, string> errorHandler = null)
+        public static async ValueTask<Return> BindTry<T>(this Return<T> result, Func<T, ValueTask<Return>> valueTask,
+            Func<Exception, Exception> errorHandler = null)
         {
             return result.IsFailure
-                ? Result.Failure(result.Error)
-                : await Result.Try(async () => await valueTask(result.Value), errorHandler).Bind(r => r);
+                ? Return.Failure(result.Error)
+                : await Return.Try(async () => await valueTask(result.Value), errorHandler).Bind(r => r);
         }
 
         /// <summary>
@@ -85,12 +85,12 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<Result> BindTry(this Result result, Func<ValueTask<Result>> valueTask,
-            Func<Exception, string> errorHandler = null)
+        public static async ValueTask<Return> BindTry(this Return result, Func<ValueTask<Return>> valueTask,
+            Func<Exception, Exception> errorHandler = null)
         {
             return result.IsFailure
-                ? Result.Failure(result.Error)
-                : await Result.Try(async () => await valueTask(), errorHandler).Bind(r => r);
+                ? Return.Failure(result.Error)
+                : await Return.Try(async () => await valueTask(), errorHandler).Bind(r => r);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         {            
             return result.IsFailure
                 ? UnitResult.Failure(result.Error)
-                : await Result.Try(async () => await valueTask(), errorHandler).Bind(r => r);
+                : await Return.Try(async () => await valueTask(), errorHandler).Bind(r => r);
         }
 
         /// <summary>
@@ -120,12 +120,12 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<Result<T, E>> BindTry<T, E>(this UnitResult<E> result, Func<ValueTask<Result<T, E>>> valueTask,
+        public static async ValueTask<Return<T, E>> BindTry<T, E>(this UnitResult<E> result, Func<ValueTask<Return<T, E>>> valueTask,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
-                ? Result.Failure<T,E>(result.Error)
-                : await Result.Try(async () => await valueTask(), errorHandler).Bind(r => r);
+                ? Return.Failure<T,E>(result.Error)
+                : await Return.Try(async () => await valueTask(), errorHandler).Bind(r => r);
         }
 
         /// <summary>
@@ -138,12 +138,12 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<UnitResult<E>> BindTry<T, E>(this Result<T, E> result, Func<T, ValueTask<UnitResult<E>>> valueTask,
+        public static async ValueTask<UnitResult<E>> BindTry<T, E>(this Return<T, E> result, Func<T, ValueTask<UnitResult<E>>> valueTask,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
                 ? UnitResult.Failure(result.Error)
-                : await Result.Try(async () => await valueTask(result.Value), errorHandler).Bind(r => r);           
+                : await Return.Try(async () => await valueTask(result.Value), errorHandler).Bind(r => r);           
         }
     }
 }

@@ -1,14 +1,14 @@
 ﻿namespace CSharpFunctionalExtensions
 {
-    public partial struct Result
+    public partial struct Return
     {
         /// <summary>
         ///     Returns the first failure from the supplied <paramref name="results"/>.
         ///     If there is no failure, a success result is returned.
         /// </summary>
-        public static Result FirstFailureOrSuccess(params Result[] results)
+        public static Return FirstFailureOrSuccess(params Return[] results)
         {
-            foreach (Result result in results)
+            foreach (Return result in results)
             {
                 if (result.IsFailure)
                     return result;

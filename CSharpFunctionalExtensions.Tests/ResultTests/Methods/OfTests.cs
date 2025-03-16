@@ -12,7 +12,7 @@ public class OfTests
     {
         string value = "value";
 
-        Result<string> result = Result.Of(value);
+        Return<string> result = Return.Of(value);
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().Be(value);
@@ -24,7 +24,7 @@ public class OfTests
         string value = "value";
         Func<string> func = () => value;
 
-        Result<string> result = Result.Of(func);
+        Return<string> result = Return.Of(func);
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().Be(value);
@@ -36,7 +36,7 @@ public class OfTests
         string value = "value";
         Task<string> valueTask = Task.FromResult(value);
 
-        Result<string> result = await Result.Of(valueTask);
+        Return<string> result = await Return.Of(valueTask);
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().Be(value);
@@ -49,7 +49,7 @@ public class OfTests
         Task<string> valueTask = Task.FromResult(value);
         Func<Task<string>> valueTaskFunc = () => valueTask;
 
-        Result<string> result = await Result.Of(valueTaskFunc);
+        Return<string> result = await Return.Of(valueTaskFunc);
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().Be(value);
@@ -60,7 +60,7 @@ public class OfTests
     {
         string value = "value";
 
-        Result<string, object> result = Result.Of<string, object>(value);
+        Return<string, object> result = Return.Of<string, object>(value);
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().Be(value);
@@ -72,7 +72,7 @@ public class OfTests
         string value = "value";
         Func<string> func = () => value;
 
-        Result<string, object> result = Result.Of<string, object>(func);
+        Return<string, object> result = Return.Of<string, object>(func);
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().Be(value);
@@ -84,7 +84,7 @@ public class OfTests
         string value = "value";
         Task<string> valueTask = Task.FromResult(value);
 
-        Result<string, object> result = await Result.Of<string, object>(valueTask);
+        Return<string, object> result = await Return.Of<string, object>(valueTask);
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().Be(value);
@@ -97,7 +97,7 @@ public class OfTests
         Task<string> valueTask = Task.FromResult(value);
         Func<Task<string>> valueTaskFunc = () => valueTask;
 
-        Result<string, object> result = await Result.Of<string, object>(valueTaskFunc);
+        Return<string, object> result = await Return.Of<string, object>(valueTaskFunc);
 
         result.IsSuccess.Should().BeTrue();
         result.Value.Should().Be(value);

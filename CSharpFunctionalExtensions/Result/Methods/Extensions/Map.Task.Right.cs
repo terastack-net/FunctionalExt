@@ -8,158 +8,158 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<Result<K, E>> Map<T, K, E>(
-            this Result<T, E> result,
+        public static async Task<Return<K, E>> Map<T, K, E>(
+            this Return<T, E> result,
             Func<T, Task<K>> func
         )
         {
             if (result.IsFailure)
-                return Result.Failure<K, E>(result.Error);
+                return Return.Failure<K, E>(result.Error);
 
             K value = await func(result.Value).DefaultAwait();
 
-            return Result.Success<K, E>(value);
+            return Return.Success<K, E>(value);
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<Result<K, E>> Map<T, K, E, TContext>(
-            this Result<T, E> result,
+        public static async Task<Return<K, E>> Map<T, K, E, TContext>(
+            this Return<T, E> result,
             Func<T, TContext, Task<K>> func,
             TContext context
         )
         {
             if (result.IsFailure)
-                return Result.Failure<K, E>(result.Error);
+                return Return.Failure<K, E>(result.Error);
 
             K value = await func(result.Value, context).DefaultAwait();
 
-            return Result.Success<K, E>(value);
+            return Return.Success<K, E>(value);
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<Result<K, E>> Map<K, E>(
+        public static async Task<Return<K, E>> Map<K, E>(
             this UnitResult<E> result,
             Func<Task<K>> func
         )
         {
             if (result.IsFailure)
-                return Result.Failure<K, E>(result.Error);
+                return Return.Failure<K, E>(result.Error);
 
             K value = await func().DefaultAwait();
 
-            return Result.Success<K, E>(value);
+            return Return.Success<K, E>(value);
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<Result<K, E>> Map<K, E, TContext>(
+        public static async Task<Return<K, E>> Map<K, E, TContext>(
             this UnitResult<E> result,
             Func<TContext, Task<K>> func,
             TContext context
         )
         {
             if (result.IsFailure)
-                return Result.Failure<K, E>(result.Error);
+                return Return.Failure<K, E>(result.Error);
 
             K value = await func(context).DefaultAwait();
 
-            return Result.Success<K, E>(value);
+            return Return.Success<K, E>(value);
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<Result<K>> Map<T, K>(this Result<T> result, Func<T, Task<K>> func)
+        public static async Task<Return<K>> Map<T, K>(this Return<T> result, Func<T, Task<K>> func)
         {
             if (result.IsFailure)
-                return Result.Failure<K>(result.Error);
+                return Return.Failure<K>(result.Error);
 
             K value = await func(result.Value).DefaultAwait();
 
-            return Result.Success(value);
+            return Return.Success(value);
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<Result<K>> Map<T, K, TContext>(
-            this Result<T> result,
+        public static async Task<Return<K>> Map<T, K, TContext>(
+            this Return<T> result,
             Func<T, TContext, Task<K>> func,
             TContext context
         )
         {
             if (result.IsFailure)
-                return Result.Failure<K>(result.Error);
+                return Return.Failure<K>(result.Error);
 
             K value = await func(result.Value, context).DefaultAwait();
 
-            return Result.Success(value);
+            return Return.Success(value);
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<Result<K>> Map<T, K>(
-            this Result<T> result,
-            Func<T, Task<Result<K>>> func
+        public static async Task<Return<K>> Map<T, K>(
+            this Return<T> result,
+            Func<T, Task<Return<K>>> func
         )
         {
             if (result.IsFailure)
-                return Result.Failure<K>(result.Error);
+                return Return.Failure<K>(result.Error);
 
-            Result<K> value = await func(result.Value).DefaultAwait();
+            Return<K> value = await func(result.Value).DefaultAwait();
             return value;
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<Result<K>> Map<T, K, TContext>(
-            this Result<T> result,
-            Func<T, TContext, Task<Result<K>>> func,
+        public static async Task<Return<K>> Map<T, K, TContext>(
+            this Return<T> result,
+            Func<T, TContext, Task<Return<K>>> func,
             TContext context
         )
         {
             if (result.IsFailure)
-                return Result.Failure<K>(result.Error);
+                return Return.Failure<K>(result.Error);
 
-            Result<K> value = await func(result.Value, context).DefaultAwait();
+            Return<K> value = await func(result.Value, context).DefaultAwait();
             return value;
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<Result<K>> Map<K>(this Result result, Func<Task<K>> func)
+        public static async Task<Return<K>> Map<K>(this Return result, Func<Task<K>> func)
         {
             if (result.IsFailure)
-                return Result.Failure<K>(result.Error);
+                return Return.Failure<K>(result.Error);
 
             K value = await func().DefaultAwait();
 
-            return Result.Success(value);
+            return Return.Success(value);
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<Result<K>> Map<K, TContext>(
-            this Result result,
+        public static async Task<Return<K>> Map<K, TContext>(
+            this Return result,
             Func<TContext, Task<K>> func,
             TContext context
         )
         {
             if (result.IsFailure)
-                return Result.Failure<K>(result.Error);
+                return Return.Failure<K>(result.Error);
 
             K value = await func(context).DefaultAwait();
 
-            return Result.Success(value);
+            return Return.Success(value);
         }
     }
 }

@@ -9,18 +9,18 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Passes the result to the given valueTask action (regardless of success/failure state) to yield a final output value.
         /// </summary>
-        public static async ValueTask<T> Finally<T>(this ValueTask<Result> resultTask, Func<Result, ValueTask<T>> valueTask)
+        public static async ValueTask<T> Finally<T>(this ValueTask<Return> resultTask, Func<Return, ValueTask<T>> valueTask)
         {
-            Result result = await resultTask;
+            Return result = await resultTask;
             return await valueTask(result);
         }
 
         /// <summary>
         ///     Passes the result to the given valueTask action (regardless of success/failure state) to yield a final output value.
         /// </summary>
-        public static async ValueTask<K> Finally<T, K>(this ValueTask<Result<T>> resultTask, Func<Result<T>, ValueTask<K>> valueTask)
+        public static async ValueTask<K> Finally<T, K>(this ValueTask<Return<T>> resultTask, Func<Return<T>, ValueTask<K>> valueTask)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
             return await valueTask(result);
         }
 
@@ -36,10 +36,10 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Passes the result to the given valueTask action (regardless of success/failure state) to yield a final output value.
         /// </summary>
-        public static async ValueTask<K> Finally<T, K, E>(this ValueTask<Result<T, E>> resultTask,
-            Func<Result<T, E>, ValueTask<K>> valueTask)
+        public static async ValueTask<K> Finally<T, K, E>(this ValueTask<Return<T, E>> resultTask,
+            Func<Return<T, E>, ValueTask<K>> valueTask)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
             return await valueTask(result);
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace CSharpFunctionalExtensions
+﻿using System;
+
+namespace CSharpFunctionalExtensions
 {
     public interface IResult
     {
@@ -20,7 +22,7 @@
     {
     }
 
-    public interface IResult<out T> : IResult<T, string>
+    public interface IResult<out T> : IResult<T, Exception>
     {
     }
 

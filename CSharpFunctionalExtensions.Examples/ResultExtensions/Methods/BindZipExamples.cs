@@ -12,10 +12,10 @@ namespace CSharpFunctionalExtensions.Examples.ResultExtensions.Methods
 
             return;
 
-            Task<Result<string>> FetchFirstEntity() =>
-                Task.FromResult(Result.Success("Hello"));
+            Task<Return<string>> FetchFirstEntity() =>
+                Task.FromResult(Return.Success("Hello"));
 
-            Result<string> FetchSecondEntity(string _) =>
+            Return<string> FetchSecondEntity(string _) =>
                 "World";
         }
     }

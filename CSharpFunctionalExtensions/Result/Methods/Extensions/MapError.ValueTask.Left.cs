@@ -9,43 +9,43 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given valueTask action.
         /// </summary>
-        public static async ValueTask<Result> MapError(
-            this ValueTask<Result> resultTask,
-            Func<string, string> errorFactory
+        public static async ValueTask<Return> MapError(
+            this ValueTask<Return> resultTask,
+            Func<Exception, Exception> errorFactory
         )
         {
             var result = await resultTask;
             if (result.IsSuccess)
             {
-                return Result.Success();
+                return Return.Success();
             }
 
             var error = errorFactory(result.Error);
-            return Result.Failure(error);
+            return Return.Failure(error);
         }
 
-        public static async ValueTask<Result> MapError<TContext>(
-            this ValueTask<Result> resultTask,
-            Func<string, TContext, string> errorFactory,
+        public static async ValueTask<Return> MapError<TContext>(
+            this ValueTask<Return> resultTask,
+            Func<Exception, TContext, string> errorFactory,
             TContext context
         )
         {
             var result = await resultTask;
             if (result.IsSuccess)
             {
-                return Result.Success();
+                return Return.Success();
             }
 
             var error = errorFactory(result.Error, context);
-            return Result.Failure(error);
+            return Return.Failure(error);
         }
 
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given valueTask action.
         /// </summary>
         public static async ValueTask<UnitResult<E>> MapError<E>(
-            this ValueTask<Result> resultTask,
-            Func<string, E> errorFactory
+            this ValueTask<Return> resultTask,
+            Func<Exception, E> errorFactory
         )
         {
             var result = await resultTask;
@@ -59,8 +59,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
         }
 
         public static async ValueTask<UnitResult<E>> MapError<E, TContext>(
-            this ValueTask<Result> resultTask,
-            Func<string, TContext, E> errorFactory,
+            this ValueTask<Return> resultTask,
+            Func<Exception, TContext, E> errorFactory,
             TContext context
         )
         {
@@ -77,90 +77,90 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given valueTask action.
         /// </summary>
-        public static async ValueTask<Result<T>> MapError<T>(
-            this ValueTask<Result<T>> resultTask,
-            Func<string, string> errorFactory
+        public static async ValueTask<Return<T>> MapError<T>(
+            this ValueTask<Return<T>> resultTask,
+            Func<Exception, Exception> errorFactory
         )
         {
             var result = await resultTask;
             if (result.IsSuccess)
             {
-                return Result.Success(result.Value);
+                return Return.Success(result.Value);
             }
 
             var error = errorFactory(result.Error);
-            return Result.Failure<T>(error);
+            return Return.Failure<T>(error);
         }
 
-        public static async ValueTask<Result<T>> MapError<T, TContext>(
-            this ValueTask<Result<T>> resultTask,
-            Func<string, TContext, string> errorFactory,
+        public static async ValueTask<Return<T>> MapError<T, TContext>(
+            this ValueTask<Return<T>> resultTask,
+            Func<Exception, TContext, string> errorFactory,
             TContext context
         )
         {
             var result = await resultTask;
             if (result.IsSuccess)
             {
-                return Result.Success(result.Value);
+                return Return.Success(result.Value);
             }
 
             var error = errorFactory(result.Error, context);
-            return Result.Failure<T>(error);
+            return Return.Failure<T>(error);
         }
 
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given valueTask action.
         /// </summary>
-        public static async ValueTask<Result<T, E>> MapError<T, E>(
-            this ValueTask<Result<T>> resultTask,
-            Func<string, E> errorFactory
+        public static async ValueTask<Return<T, E>> MapError<T, E>(
+            this ValueTask<Return<T>> resultTask,
+            Func<Exception, E> errorFactory
         )
         {
             var result = await resultTask;
             if (result.IsSuccess)
             {
-                return Result.Success<T, E>(result.Value);
+                return Return.Success<T, E>(result.Value);
             }
 
             var error = errorFactory(result.Error);
-            return Result.Failure<T, E>(error);
+            return Return.Failure<T, E>(error);
         }
 
-        public static async ValueTask<Result<T, E>> MapError<T, E, TContext>(
-            this ValueTask<Result<T>> resultTask,
-            Func<string, TContext, E> errorFactory,
+        public static async ValueTask<Return<T, E>> MapError<T, E, TContext>(
+            this ValueTask<Return<T>> resultTask,
+            Func<Exception, TContext, E> errorFactory,
             TContext context
         )
         {
             var result = await resultTask;
             if (result.IsSuccess)
             {
-                return Result.Success<T, E>(result.Value);
+                return Return.Success<T, E>(result.Value);
             }
 
             var error = errorFactory(result.Error, context);
-            return Result.Failure<T, E>(error);
+            return Return.Failure<T, E>(error);
         }
 
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given valueTask action.
         /// </summary>
-        public static async ValueTask<Result> MapError<E>(
+        public static async ValueTask<Return> MapError<E>(
             this ValueTask<UnitResult<E>> resultTask,
-            Func<E, string> errorFactory
+            Func<E, Exception> errorFactory
         )
         {
             var result = await resultTask;
             if (result.IsSuccess)
             {
-                return Result.Success();
+                return Return.Success();
             }
 
             var error = errorFactory(result.Error);
-            return Result.Failure(error);
+            return Return.Failure(error);
         }
 
-        public static async ValueTask<Result> MapError<E, TContext>(
+        public static async ValueTask<Return> MapError<E, TContext>(
             this ValueTask<UnitResult<E>> resultTask,
             Func<E, TContext, string> errorFactory,
             TContext context
@@ -169,11 +169,11 @@ namespace CSharpFunctionalExtensions.ValueTasks
             var result = await resultTask;
             if (result.IsSuccess)
             {
-                return Result.Success();
+                return Return.Success();
             }
 
             var error = errorFactory(result.Error, context);
-            return Result.Failure(error);
+            return Return.Failure(error);
         }
 
         /// <summary>
@@ -213,23 +213,23 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given valueTask action.
         /// </summary>
-        public static async ValueTask<Result<T>> MapError<T, E>(
-            this ValueTask<Result<T, E>> resultTask,
-            Func<E, string> errorFactory
+        public static async ValueTask<Return<T>> MapError<T, E>(
+            this ValueTask<Return<T, E>> resultTask,
+            Func<E, Exception> errorFactory
         )
         {
             var result = await resultTask;
             if (result.IsSuccess)
             {
-                return Result.Success(result.Value);
+                return Return.Success(result.Value);
             }
 
             var error = errorFactory(result.Error);
-            return Result.Failure<T>(error);
+            return Return.Failure<T>(error);
         }
 
-        public static async ValueTask<Result<T>> MapError<T, E, TContext>(
-            this ValueTask<Result<T, E>> resultTask,
+        public static async ValueTask<Return<T>> MapError<T, E, TContext>(
+            this ValueTask<Return<T, E>> resultTask,
             Func<E, TContext, string> errorFactory,
             TContext context
         )
@@ -237,33 +237,33 @@ namespace CSharpFunctionalExtensions.ValueTasks
             var result = await resultTask;
             if (result.IsSuccess)
             {
-                return Result.Success(result.Value);
+                return Return.Success(result.Value);
             }
 
             var error = errorFactory(result.Error, context);
-            return Result.Failure<T>(error);
+            return Return.Failure<T>(error);
         }
 
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given valueTask action.
         /// </summary>
-        public static async ValueTask<Result<T, E2>> MapError<T, E, E2>(
-            this ValueTask<Result<T, E>> resultTask,
+        public static async ValueTask<Return<T, E2>> MapError<T, E, E2>(
+            this ValueTask<Return<T, E>> resultTask,
             Func<E, E2> errorFactory
         )
         {
             var result = await resultTask;
             if (result.IsSuccess)
             {
-                return Result.Success<T, E2>(result.Value);
+                return Return.Success<T, E2>(result.Value);
             }
 
             var error = errorFactory(result.Error);
-            return Result.Failure<T, E2>(error);
+            return Return.Failure<T, E2>(error);
         }
 
-        public static async ValueTask<Result<T, E2>> MapError<T, E, E2, TContext>(
-            this ValueTask<Result<T, E>> resultTask,
+        public static async ValueTask<Return<T, E2>> MapError<T, E, E2, TContext>(
+            this ValueTask<Return<T, E>> resultTask,
             Func<E, TContext, E2> errorFactory,
             TContext context
         )
@@ -271,11 +271,11 @@ namespace CSharpFunctionalExtensions.ValueTasks
             var result = await resultTask;
             if (result.IsSuccess)
             {
-                return Result.Success<T, E2>(result.Value);
+                return Return.Success<T, E2>(result.Value);
             }
 
             var error = errorFactory(result.Error, context);
-            return Result.Failure<T, E2>(error);
+            return Return.Failure<T, E2>(error);
         }
     }
 }

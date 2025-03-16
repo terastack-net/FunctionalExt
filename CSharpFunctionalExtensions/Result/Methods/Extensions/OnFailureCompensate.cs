@@ -4,8 +4,8 @@ namespace CSharpFunctionalExtensions
 {
     public static partial class ResultExtensions
     {
-        public static Result<T, E> OnFailureCompensate<T, E>(this Result<T, E> result,
-            Func<Result<T, E>> func)
+        public static Return<T, E> OnFailureCompensate<T, E>(this Return<T, E> result,
+            Func<Return<T, E>> func)
         {
             if (result.IsFailure)
                 return func();
@@ -13,7 +13,7 @@ namespace CSharpFunctionalExtensions
             return result;
         }
         
-        public static Result<T> OnFailureCompensate<T>(this Result<T> result, Func<Result<T>> func)
+        public static Return<T> OnFailureCompensate<T>(this Return<T> result, Func<Return<T>> func)
         {
             if (result.IsFailure)
                 return func();
@@ -21,7 +21,7 @@ namespace CSharpFunctionalExtensions
             return result;
         }
         
-        public static Result OnFailureCompensate(this Result result, Func<Result> func)
+        public static Return OnFailureCompensate(this Return result, Func<Return> func)
         {
             if (result.IsFailure)
                 return func();
@@ -29,8 +29,8 @@ namespace CSharpFunctionalExtensions
             return result;
         }
         
-        public static Result<T, E> OnFailureCompensate<T, E>(this Result<T, E> result,
-            Func<E, Result<T, E>> func)
+        public static Return<T, E> OnFailureCompensate<T, E>(this Return<T, E> result,
+            Func<E, Return<T, E>> func)
         {
             if (result.IsFailure)
                 return func(result.Error);
@@ -38,7 +38,7 @@ namespace CSharpFunctionalExtensions
             return result;
         }
         
-        public static Result<T> OnFailureCompensate<T>(this Result<T> result, Func<string, Result<T>> func)
+        public static Return<T> OnFailureCompensate<T>(this Return<T> result, Func<Exception, Return<T>> func)
         {
             if (result.IsFailure)
                 return func(result.Error);
@@ -46,7 +46,7 @@ namespace CSharpFunctionalExtensions
             return result;
         }
 
-        public static Result OnFailureCompensate(this Result result, Func<string, Result> func)
+        public static Return OnFailureCompensate(this Return result, Func<Exception, Return> func)
         {
             if (result.IsFailure)
                 return func(result.Error);

@@ -8,27 +8,27 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async Task<Result<T>> TapError<T>(this Task<Result<T>> resultTask, Action action)
+        public static async Task<Return<T>> TapError<T>(this Task<Return<T>> resultTask, Action action)
         {
-            Result<T> result = await resultTask.DefaultAwait();
+            Return<T> result = await resultTask.DefaultAwait();
             return result.TapError(action);
         }
 
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async Task<Result> TapError(this Task<Result> resultTask, Action action)
+        public static async Task<Return> TapError(this Task<Return> resultTask, Action action)
         {
-            Result result = await resultTask.DefaultAwait();
+            Return result = await resultTask.DefaultAwait();
             return result.TapError(action);
         }
 
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async Task<Result<T, E>> TapError<T, E>(this Task<Result<T, E>> resultTask, Action action)
+        public static async Task<Return<T, E>> TapError<T, E>(this Task<Return<T, E>> resultTask, Action action)
         {
-            Result<T, E> result = await resultTask.DefaultAwait();
+            Return<T, E> result = await resultTask.DefaultAwait();
             return result.TapError(action);
         }
 
@@ -53,27 +53,27 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async Task<Result<T>> TapError<T>(this Task<Result<T>> resultTask, Action<string> action)
+        public static async Task<Return<T>> TapError<T>(this Task<Return<T>> resultTask, Action<Exception> action)
         {
-            Result<T> result = await resultTask.DefaultAwait();
+            Return<T> result = await resultTask.DefaultAwait();
             return result.TapError(action);
         }
 
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async Task<Result<T, E>> TapError<T, E>(this Task<Result<T, E>> resultTask, Action<E> action)
+        public static async Task<Return<T, E>> TapError<T, E>(this Task<Return<T, E>> resultTask, Action<E> action)
         {
-            Result<T, E> result = await resultTask.DefaultAwait();
+            Return<T, E> result = await resultTask.DefaultAwait();
             return result.TapError(action);
         }
 
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async Task<Result> TapError(this Task<Result> resultTask, Action<string> action)
+        public static async Task<Return> TapError(this Task<Return> resultTask, Action<Exception> action)
         {
-            Result result = await resultTask.DefaultAwait();
+            Return result = await resultTask.DefaultAwait();
             return result.TapError(action);
         }
     }

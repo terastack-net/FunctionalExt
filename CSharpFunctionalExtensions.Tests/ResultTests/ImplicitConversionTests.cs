@@ -10,7 +10,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Implicit_conversion_of_dynamic_result()
         {
-            Result<dynamic> result = Result.Success<dynamic>((dynamic)"result");
+            Return<dynamic> result = Return.Success<dynamic>((dynamic)"result");
 
             Type type = result.Value.GetType();
             type.Should().Be(typeof(string));
@@ -21,7 +21,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         {
             string value = "result";
 
-            Result<string> result = value;
+            Return<string> result = value;
 
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().Be(value);
@@ -32,7 +32,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         {
             string value = "result";
 
-            Result<string, int> result = value;
+            Return<string, int> result = value;
 
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().Be(value);
@@ -43,7 +43,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         {
             int value = 42;
 
-            Result<string, int> result = value;
+            Return<string, int> result = value;
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(value);
@@ -64,9 +64,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         public void Result_of_dynamic_can_be_cast_as_dynamic_result()
         {
             dynamic value = "Test";
-            dynamic result = Result.Success(value);
+            dynamic result = Return.Success(value);
 
-            var cast = (Result<dynamic>)result;
+            var cast = (Return<dynamic>)result;
 
             string castValue = cast.Value;
             castValue.Should().Be(value);
@@ -76,9 +76,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         public void Value_in_Result_TE_can_be_cast_to_dynamic()
         {
             dynamic value = "Test";
-            dynamic result = Result.Success<string, MyError>(value);
+            dynamic result = Return.Success<string, MyError>(value);
 
-            var cast = (Result<dynamic, MyError>)result;
+            var cast = (Return<dynamic, MyError>)result;
 
             string castValue = cast.Value;
             castValue.Should().Be(value);
@@ -87,7 +87,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Result_can_be_cast_to_UnitResult()
         {
-            Result result = Result.Failure("Error");
+            Return result = Return.Failure("Error");
 
             UnitResult<string> unitResult = result;
 
@@ -98,7 +98,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Result_T_can_be_cast_to_UnitResult()
         {
-            Result<MyClass> result = Result.Failure<MyClass>("Error");
+            Return<MyClass> result = Return.Failure<MyClass>("Error");
 
             UnitResult<string> unitResult = result;
 
@@ -110,7 +110,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         public void Result_TE_can_be_cast_to_UnitResult()
         {
             var error = new MyError();
-            Result<MyClass, MyError> result = Result.Failure<MyClass, MyError>(error);
+            Return<MyClass, MyError> result = Return.Failure<MyClass, MyError>(error);
 
             UnitResult<MyError> unitResult = result;
 
@@ -122,9 +122,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         public void Error_in_Result_TE_can_be_cast_to_dynamic()
         {
             dynamic error = new MyError();
-            dynamic result = Result.Failure<string, MyError>(error);
+            dynamic result = Return.Failure<string, MyError>(error);
 
-            var cast = (Result<string, dynamic>)result;
+            var cast = (Return<string, dynamic>)result;
 
             MyError castError = cast.Error;
             castError.Should().Be(error);
@@ -153,17 +153,17 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
 
         private static IResult<ICovariantResult> GetCovariantResultT()
         {
-            return Result.Success(new CovariantResult());
+            return Return.Success(new CovariantResult());
         }
 
         private static IResult<ICovariantResult, IMyError> GetCovariantSuccessResultTE()
         {
-            return Result.Success<CovariantResult, MyError>(new CovariantResult());
+            return Return.Success<CovariantResult, MyError>(new CovariantResult());
         }
 
         private static IResult<ICovariantResult, IMyError> GetCovariantFailureResultTE()
         {
-            return Result.Failure<CovariantResult, MyError>(new MyError());
+            return Return.Failure<CovariantResult, MyError>(new MyError());
         }
 
         private interface ICovariantResult

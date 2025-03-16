@@ -11,7 +11,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false)]
         public void TapTry_executes_action_on_result_success_and_returns_self(bool isSuccess)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
             var returned = result.TapTry(Action);
 
@@ -24,7 +24,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false)]
         public void TapTry_handles_exception_and_returns_error(bool isSuccess)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
             var returned = result.TapTry(Throwing);
 
@@ -43,7 +43,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapTryIf_executes_action_on_result_success_and_returns_self(bool isSuccess, bool condition)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
             var returned = result.TapIfTry(condition, Action);
 
@@ -58,7 +58,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapTryIf_handles_exception_and_returns_error(bool isSuccess, bool condition)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
             var returned = result.TapIfTry(condition, Throwing);
 

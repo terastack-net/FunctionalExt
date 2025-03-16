@@ -7,9 +7,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_returns_success_and_does_not_execute_func()
         {
-            Result input = Result.Success();
+            Return input = Return.Success();
 
-            Result output = input.Compensate(GetErrorResult);
+            Return output = input.Compensate(GetErrorResult);
 
             AssertSuccess(output, executed: false);
         }
@@ -17,9 +17,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_returns_failure_and_execute_func_returns_success()
         {
-            Result input = Result.Failure(ErrorMessage);
+            Return input = Return.Failure(ErrorMessage);
 
-            Result output = input.Compensate(GetSuccessResult);
+            Return output = input.Compensate(GetSuccessResult);
 
             AssertSuccess(output, executed: true);
         }
@@ -27,9 +27,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_returns_failure_and_execute_func_returns_failure()
         {
-            Result input = Result.Failure(ErrorMessage);
+            Return input = Return.Failure(ErrorMessage);
 
-            Result output = input.Compensate(GetErrorResult);
+            Return output = input.Compensate(GetErrorResult);
 
             AssertFailure(output, executed: true);
         }
@@ -37,7 +37,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_returns_E_success_and_does_not_execute_func()
         {
-            Result input = Result.Success();
+            Return input = Return.Success();
 
             UnitResult<E> output = input.Compensate(GetErrorUnitResult);
 
@@ -47,7 +47,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_returns_E_failure_and_execute_func_returns_success()
         {
-            Result input = Result.Failure(ErrorMessage);
+            Return input = Return.Failure(ErrorMessage);
 
             UnitResult<E> output = input.Compensate(GetSuccessUnitResult);
 
@@ -57,7 +57,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_returns_E_failure_and_execute_func_returns_failure()
         {
-            Result input = Result.Failure(ErrorMessage);
+            Return input = Return.Failure(ErrorMessage);
 
             UnitResult<E> output = input.Compensate(GetErrorUnitResult);
 
@@ -67,9 +67,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_returns_success_and_does_not_execute_func()
         {
-            Result<T> input = Result.Success(T.Value);
+            Return<T> input = Return.Success(T.Value);
 
-            Result output = input.Compensate(GetErrorResult);
+            Return output = input.Compensate(GetErrorResult);
 
             AssertSuccess(output, executed: false);
         }
@@ -77,9 +77,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_returns_failure_and_execute_func_returns_success()
         {
-            Result<T> input = Result.Failure<T>(ErrorMessage);
+            Return<T> input = Return.Failure<T>(ErrorMessage);
 
-            Result output = input.Compensate(GetSuccessResult);
+            Return output = input.Compensate(GetSuccessResult);
 
             AssertSuccess(output, executed: true);
         }
@@ -87,9 +87,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_returns_failure_and_execute_func_returns_failure()
         {
-            Result<T> input = Result.Failure<T>(ErrorMessage);
+            Return<T> input = Return.Failure<T>(ErrorMessage);
 
-            Result output = input.Compensate(GetErrorResult);
+            Return output = input.Compensate(GetErrorResult);
 
             AssertFailure(output, executed: true);
         }
@@ -97,9 +97,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_returns_T_success_and_does_not_execute_func()
         {
-            Result<T> input = Result.Success(T.Value);
+            Return<T> input = Return.Success(T.Value);
 
-            Result<T> output = input.Compensate(GetErrorValueResult);
+            Return<T> output = input.Compensate(GetErrorValueResult);
 
             AssertSuccess(output, executed: false);
         }
@@ -107,9 +107,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_returns_T_failure_and_execute_func_returns_success()
         {
-            Result<T> input = Result.Failure<T>(ErrorMessage);
+            Return<T> input = Return.Failure<T>(ErrorMessage);
 
-            Result<T> output = input.Compensate(GetSuccessValueResult);
+            Return<T> output = input.Compensate(GetSuccessValueResult);
 
             AssertSuccess(output, executed: true);
         }
@@ -117,9 +117,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_returns_T_failure_and_execute_func_returns_failure()
         {
-            Result<T> input = Result.Failure<T>(ErrorMessage);
+            Return<T> input = Return.Failure<T>(ErrorMessage);
 
-            Result<T> output = input.Compensate(GetErrorValueResult);
+            Return<T> output = input.Compensate(GetErrorValueResult);
 
             AssertFailure(output, executed: true);
         }
@@ -127,9 +127,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_returns_T_E_success_and_does_not_execute_func()
         {
-            Result<T> input = Result.Success(T.Value);
+            Return<T> input = Return.Success(T.Value);
 
-            Result<T, E> output = input.Compensate(GetErrorValueErrorResult);
+            Return<T, E> output = input.Compensate(GetErrorValueErrorResult);
 
             AssertSuccess(output, executed: false);
         }
@@ -137,9 +137,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_returns_T_E_failure_and_execute_func_returns_success()
         {
-            Result<T> input = Result.Failure<T>(ErrorMessage);
+            Return<T> input = Return.Failure<T>(ErrorMessage);
 
-            Result<T, E> output = input.Compensate(GetSuccessValueErrorResult);
+            Return<T, E> output = input.Compensate(GetSuccessValueErrorResult);
 
             AssertSuccess(output, executed: true);
         }
@@ -147,9 +147,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_returns_T_E_failure_and_execute_func_returns_failure()
         {
-            Result<T> input = Result.Failure<T>(ErrorMessage);
+            Return<T> input = Return.Failure<T>(ErrorMessage);
 
-            Result<T, E> output = input.Compensate(GetErrorValueErrorResult);
+            Return<T, E> output = input.Compensate(GetErrorValueErrorResult);
 
             AssertFailure(output, executed: true);
         }
@@ -159,7 +159,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             UnitResult<E> input = UnitResult.Success<E>();
 
-            Result output = input.Compensate(GetErrorResult);
+            Return output = input.Compensate(GetErrorResult);
 
             AssertSuccess(output, executed: false);
         }
@@ -169,7 +169,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             UnitResult<E> input = UnitResult.Failure(E.Value);
 
-            Result output = input.Compensate(GetSuccessResult);
+            Return output = input.Compensate(GetSuccessResult);
 
             AssertSuccess(output, executed: true);
         }
@@ -179,7 +179,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             UnitResult<E> input = UnitResult.Failure(E.Value);
 
-            Result output = input.Compensate(GetErrorResult);
+            Return output = input.Compensate(GetErrorResult);
 
             AssertFailure(output, executed: true);
         }
@@ -217,9 +217,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_E_returns_success_and_does_not_execute_func()
         {
-            Result<T, E> input = Result.Success<T, E>(T.Value);
+            Return<T, E> input = Return.Success<T, E>(T.Value);
 
-            Result output = input.Compensate(GetErrorResult);
+            Return output = input.Compensate(GetErrorResult);
 
             AssertSuccess(output, executed: false);
         }
@@ -227,9 +227,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_E_returns_failure_and_execute_func_returns_success()
         {
-            Result<T, E> input = Result.Failure<T, E>(E.Value);
+            Return<T, E> input = Return.Failure<T, E>(E.Value);
 
-            Result output = input.Compensate(GetSuccessResult);
+            Return output = input.Compensate(GetSuccessResult);
 
             AssertSuccess(output, executed: true);
         }
@@ -237,9 +237,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_E_returns_failure_and_execute_func_returns_failure()
         {
-            Result<T, E> input = Result.Failure<T, E>(E.Value);
+            Return<T, E> input = Return.Failure<T, E>(E.Value);
 
-            Result output = input.Compensate(GetErrorResult);
+            Return output = input.Compensate(GetErrorResult);
 
             AssertFailure(output, executed: true);
         }
@@ -247,7 +247,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_E_returns_E2_success_and_does_not_execute_func()
         {
-            Result<T, E> input = Result.Success<T, E>(T.Value);
+            Return<T, E> input = Return.Success<T, E>(T.Value);
 
             UnitResult<E2> output = input.Compensate(GetErrorUnitResult);
 
@@ -257,7 +257,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_E_returns_E2_failure_and_execute_func_returns_success()
         {
-            Result<T, E> input = Result.Failure<T, E>(E.Value);
+            Return<T, E> input = Return.Failure<T, E>(E.Value);
 
             UnitResult<E2> output = input.Compensate(GetSuccessUnitResult);
 
@@ -267,7 +267,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_E_returns_E2_failure_and_execute_func_returns_failure()
         {
-            Result<T, E> input = Result.Failure<T, E>(E.Value);
+            Return<T, E> input = Return.Failure<T, E>(E.Value);
 
             UnitResult<E2> output = input.Compensate(GetErrorUnitResult);
 
@@ -278,9 +278,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_E_returns_T_E2_success_and_does_not_execute_func()
         {
-            Result<T, E> input = Result.Success<T, E>(T.Value);
+            Return<T, E> input = Return.Success<T, E>(T.Value);
 
-            Result<T, E2> output = input.Compensate(GetErrorValueErrorResult);
+            Return<T, E2> output = input.Compensate(GetErrorValueErrorResult);
 
             AssertSuccess(output, executed: false);
         }
@@ -288,9 +288,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_E_returns_T_E2_failure_and_execute_func_returns_success()
         {
-            Result<T, E> input = Result.Failure<T, E>(E.Value);
+            Return<T, E> input = Return.Failure<T, E>(E.Value);
 
-            Result<T, E2> output = input.Compensate(GetSuccessValueErrorResult);
+            Return<T, E2> output = input.Compensate(GetSuccessValueErrorResult);
 
             AssertSuccess(output, executed: true);
         }
@@ -298,9 +298,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Compensate_T_E_returns_T_E2_failure_and_execute_func_returns_failure()
         {
-            Result<T, E> input = Result.Failure<T, E>(E.Value);
+            Return<T, E> input = Return.Failure<T, E>(E.Value);
 
-            Result<T, E2> output = input.Compensate(GetErrorValueErrorResult);
+            Return<T, E2> output = input.Compensate(GetErrorValueErrorResult);
 
             AssertFailure(output, executed: true);
         }

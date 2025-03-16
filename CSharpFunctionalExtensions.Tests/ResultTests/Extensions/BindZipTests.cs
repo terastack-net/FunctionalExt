@@ -10,7 +10,7 @@ public class BindZipTests : BindTestsBase
     [Fact]
     public void BindZip_T_with_Bind_K_returns_success()
     {
-        Result<(T, K)> output = Success_T(T.Value).BindZip(_ => Success_K());
+        Return<(T, K)> output = Success_T(T.Value).BindZip(_ => Success_K());
 
         using (var _ = new AssertionScope())
         {
@@ -25,7 +25,7 @@ public class BindZipTests : BindTestsBase
     [Fact]
     public void BindZip_T_With_Bind_K_eight_times_returns_success()
     {
-        Result<(T, K, K, K, K, K, K, K)> output = Success_T(T.Value)
+        Return<(T, K, K, K, K, K, K, K)> output = Success_T(T.Value)
             .BindZip(_                     => Success_K())
             .BindZip((_, _)                => Success_K())
             .BindZip((_, _, _)             => Success_K())

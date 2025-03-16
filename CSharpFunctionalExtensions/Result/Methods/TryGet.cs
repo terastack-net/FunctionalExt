@@ -1,4 +1,5 @@
 #if NET45_OR_GREATER || NETSTANDARD || NETCORE || NET5_0_OR_GREATER
+using System;
 using System.Runtime.CompilerServices;
 #endif
 #if NET5_0_OR_GREATER
@@ -7,7 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CSharpFunctionalExtensions
 {
-    partial struct Result
+    partial struct Return
     {
 #if NET45_OR_GREATER || NETSTANDARD || NETCORE || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -16,14 +17,14 @@ namespace CSharpFunctionalExtensions
 #if NET5_0_OR_GREATER
             [NotNullWhen(true), MaybeNullWhen(false)]
 #endif
-            out string error)
+            out Exception error)
         {
             error = _error;
             return IsFailure;
         }
     }
 
-    partial struct Result<T>
+    partial struct Return<T>
     {
 #if NET45_OR_GREATER || NETSTANDARD || NETCORE || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -45,7 +46,7 @@ namespace CSharpFunctionalExtensions
 #if NET5_0_OR_GREATER
             [NotNullWhen(true), MaybeNullWhen(false)]
 #endif
-            out string error)
+            out Exception error)
         {
             error = _error;
             return IsFailure;
@@ -62,7 +63,7 @@ namespace CSharpFunctionalExtensions
 #if NET5_0_OR_GREATER
             [NotNullWhen(false), MaybeNullWhen(true)]
 #endif
-            out string error
+            out Exception error
             )
         {
             value = _value;
@@ -77,7 +78,7 @@ namespace CSharpFunctionalExtensions
 #if NET5_0_OR_GREATER
             [NotNullWhen(true), MaybeNullWhen(false)]
 #endif
-            out string error,
+            out Exception error,
 #if NET5_0_OR_GREATER
             [NotNullWhen(false), MaybeNullWhen(true)]
 #endif
@@ -90,7 +91,7 @@ namespace CSharpFunctionalExtensions
         }
     }
 
-    partial struct Result<T, E>
+    partial struct Return<T, E>
     {
 
 #if NET45_OR_GREATER || NETSTANDARD || NETCORE || NET5_0_OR_GREATER

@@ -3,42 +3,42 @@ using System.Threading.Tasks;
 
 namespace CSharpFunctionalExtensions
 {
-    public partial struct Result
+    public partial struct Return
     {
         /// <summary>
         ///     Creates a result whose success/failure reflects the supplied condition. Opposite of SuccessIf().
         /// </summary>
-        public static Result FailureIf(bool isFailure, string error)
+        public static Return FailureIf(bool isFailure, Exception error)
             => SuccessIf(!isFailure, error);
 
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of SuccessIf().
         /// </summary>
-        public static Result FailureIf(Func<bool> failurePredicate, string error)
+        public static Return FailureIf(Func<bool> failurePredicate, Exception error)
             => SuccessIf(!failurePredicate(), error);
         
         /// <summary>
         ///     Creates a result whose success/failure reflects the supplied condition. Opposite of SuccessIf().
         /// </summary>
-        public static Result<T> FailureIf<T>(bool isFailure, T value, string error)
+        public static Return<T> FailureIf<T>(bool isFailure, T value, Exception error)
             => SuccessIf(!isFailure, value, error);
 
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of SuccessIf().
         /// </summary>
-        public static Result<T> FailureIf<T>(Func<bool> failurePredicate, in T value, string error)
+        public static Return<T> FailureIf<T>(Func<bool> failurePredicate, in T value, Exception error)
             => SuccessIf(!failurePredicate(), value, error);
         
         /// <summary>
         ///     Creates a result whose success/failure reflects the supplied condition. Opposite of SuccessIf().
         /// </summary>
-        public static Result<T, E> FailureIf<T, E>(bool isFailure, in T value, in E error)
+        public static Return<T, E> FailureIf<T, E>(bool isFailure, in T value, in E error)
             => SuccessIf(!isFailure, value, error);
 
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of SuccessIf().
         /// </summary>
-        public static Result<T, E> FailureIf<T, E>(Func<bool> failurePredicate, in T value, in E error)
+        public static Return<T, E> FailureIf<T, E>(Func<bool> failurePredicate, in T value, in E error)
             => SuccessIf(!failurePredicate(), value, error);
     }
 

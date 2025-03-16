@@ -40,16 +40,16 @@ namespace CSharpFunctionalExtensions.Examples.ResultExtensions
 
 
         // A method that returns a Result
-        Result DoWork() => Result.Success();
-        Task<Result> DoWorkAsync() => Task.FromResult(Result.Success());
+        Return DoWork() => Return.Success();
+        Task<Return> DoWorkAsync() => Task.FromResult(Return.Success());
 
         // A method that returns a Result<T>
-        Result<Customer> GetCustomer(int customer) => Result.Success(new Customer());
-        Task<Result<Customer>> GetCustomerAsync(int customer) => Task.FromResult(Result.Success(new Customer()));
+        Return<Customer> GetCustomer(int customer) => Return.Success(new Customer());
+        Task<Return<Customer>> GetCustomerAsync(int customer) => Task.FromResult(Return.Success(new Customer()));
 
         // A method that returns a Result<T, E>
-        Result<Customer, Error> GetCustomerB(int customer) => Result.Success<Customer, Error>(new Customer());
-        Task<Result<Customer, Error>> GetCustomerBAsync(int customer) => Task.FromResult(Result.Success<Customer, Error>(new Customer()));
+        Return<Customer, Error> GetCustomerB(int customer) => Return.Success<Customer, Error>(new Customer());
+        Task<Return<Customer, Error>> GetCustomerBAsync(int customer) => Task.FromResult(Return.Success<Customer, Error>(new Customer()));
 
 
         public void ResultExtensions()

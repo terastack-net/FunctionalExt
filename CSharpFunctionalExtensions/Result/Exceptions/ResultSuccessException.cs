@@ -5,7 +5,7 @@ namespace CSharpFunctionalExtensions
     public class ResultSuccessException : Exception
     {
         internal ResultSuccessException()
-            : base(Result.Messages.ErrorIsInaccessibleForSuccess)
+            : base(Return.Messages.ErrorIsInaccessibleForSuccess)
         {
         }
     }

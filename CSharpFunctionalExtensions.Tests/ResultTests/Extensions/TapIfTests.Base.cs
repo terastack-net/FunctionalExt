@@ -30,22 +30,22 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             actionExecuted = true;
         }
 
-        protected Result Func_Result(bool _)
+        protected Return Func_Result(bool _)
         {
             actionExecuted = true;
-            return Result.Success();
+            return Return.Success();
         }
 
-        protected Result<K> Func_Result_K(bool _)
+        protected Return<K> Func_Result_K(bool _)
         {
             actionExecuted = true;
-            return Result.Success(K.Value);
+            return Return.Success(K.Value);
         }
 
-        protected Result<K, E> Func_Result_K_E(bool _)
+        protected Return<K, E> Func_Result_K_E(bool _)
         {
             actionExecuted = true;
-            return Result.Success<K, E>(K.Value);
+            return Return.Success<K, E>(K.Value);
         }
 
         protected Task Task_Action()
@@ -66,22 +66,22 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             return Task.CompletedTask;
         }
         
-        protected Task<Result> Task_Func_Result(bool _)
+        protected Task<Return> Task_Func_Result(bool _)
         {
             actionExecuted = true;
-            return Result.Success().AsTask();
+            return Return.Success().AsTask();
         }
         
-        protected Task<Result<K>> Task_Func_Result_K(bool _)
+        protected Task<Return<K>> Task_Func_Result_K(bool _)
         {
             actionExecuted = true;
-            return Result.Success(K.Value).AsTask();
+            return Return.Success(K.Value).AsTask();
         }
 
-        protected Task<Result<K, E>> Task_Func_Result_K_E(bool _)
+        protected Task<Return<K, E>> Task_Func_Result_K_E(bool _)
         {
             actionExecuted = true;
-            return Result.Success<K, E>(K.Value).AsTask();
+            return Return.Success<K, E>(K.Value).AsTask();
         }
 
         protected ValueTask ValueTask_Action()
@@ -102,22 +102,22 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             return ValueTask.CompletedTask;
         }
         
-        protected ValueTask<Result> ValueTask_Func_Result(bool _)
+        protected ValueTask<Return> ValueTask_Func_Result(bool _)
         {
             actionExecuted = true;
-            return Result.Success().AsValueTask();
+            return Return.Success().AsValueTask();
         }
 
-        protected ValueTask<Result<K>> ValueTask_Func_Result_K(bool _)
+        protected ValueTask<Return<K>> ValueTask_Func_Result_K(bool _)
         {
             actionExecuted = true;
-            return Result.Success(K.Value).AsValueTask();
+            return Return.Success(K.Value).AsValueTask();
         }
 
-        protected ValueTask<Result<K, E>> ValueTask_Func_Result_K_E(bool _)
+        protected ValueTask<Return<K, E>> ValueTask_Func_Result_K_E(bool _)
         {
             actionExecuted = true;
-            return Result.Success<K, E>(K.Value).AsValueTask();
+            return Return.Success<K, E>(K.Value).AsValueTask();
         }
 
         protected bool Predicate(bool b)

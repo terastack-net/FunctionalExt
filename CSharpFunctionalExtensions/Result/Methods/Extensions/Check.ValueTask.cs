@@ -9,40 +9,40 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     If the calling result is a success, the given valueTask action is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static async ValueTask<Result<T>> Check<T>(this ValueTask<Result<T>> resultTask,
-            Func<T, ValueTask<Result>> valueTask)
+        public static async ValueTask<Return<T>> Check<T>(this ValueTask<Return<T>> resultTask,
+            Func<T, ValueTask<Return>> valueTask)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
             return await result.Bind(valueTask).Map(() => result.Value);
         }
 
         /// <summary>
         ///     If the calling result is a success, the given valueTask action is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static async ValueTask<Result<T>> Check<T, K>(this ValueTask<Result<T>> resultTask,
-            Func<T, ValueTask<Result<K>>> valueTask)
+        public static async ValueTask<Return<T>> Check<T, K>(this ValueTask<Return<T>> resultTask,
+            Func<T, ValueTask<Return<K>>> valueTask)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
             return await result.Bind(valueTask).Map(_ => result.Value);
         }
 
         /// <summary>
         ///     If the calling result is a success, the given valueTask action is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static async ValueTask<Result<T, E>> Check<T, K, E>(this ValueTask<Result<T, E>> resultTask,
-            Func<T, ValueTask<Result<K, E>>> valueTask)
+        public static async ValueTask<Return<T, E>> Check<T, K, E>(this ValueTask<Return<T, E>> resultTask,
+            Func<T, ValueTask<Return<K, E>>> valueTask)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
             return await result.Bind(valueTask).Map(_ => result.Value);
         }
 
         /// <summary>
         ///     If the calling result is a success, the given valueTask action is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static async ValueTask<Result<T, E>> Check<T, E>(this ValueTask<Result<T, E>> resultTask,
+        public static async ValueTask<Return<T, E>> Check<T, E>(this ValueTask<Return<T, E>> resultTask,
             Func<T, ValueTask<UnitResult<E>>> valueTask)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
             return await result.Bind(valueTask).Map(() => result.Value);
         }
 

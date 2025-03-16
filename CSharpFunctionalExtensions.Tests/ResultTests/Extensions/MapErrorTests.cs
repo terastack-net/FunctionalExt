@@ -10,10 +10,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_returns_success()
         {
-            Result result = Result.Success();
+            Return result = Return.Success();
             var invocations = 0;
 
-            Result actual = result.MapError(error =>
+            Return actual = result.MapError(error =>
             {
                 invocations++;
                 return $"{error} {error}";
@@ -26,10 +26,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_returns_success_with_context()
         {
-            Result result = Result.Success();
+            Return result = Return.Success();
             var invocations = 0;
 
-            Result actual = result.MapError(
+            Return actual = result.MapError(
                 (error, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -46,10 +46,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_returns_new_failure()
         {
-            Result result = Result.Failure(ErrorMessage);
+            Return result = Return.Failure(ErrorMessage);
             var invocations = 0;
 
-            Result actual = result.MapError(error =>
+            Return actual = result.MapError(error =>
             {
                 invocations++;
                 return $"{error} {error}";
@@ -63,10 +63,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_returns_new_failure_with_context()
         {
-            Result result = Result.Failure(ErrorMessage);
+            Return result = Return.Failure(ErrorMessage);
             var invocations = 0;
 
-            Result actual = result.MapError(
+            Return actual = result.MapError(
                 (error, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -84,7 +84,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_returns_UnitResult_success()
         {
-            Result result = Result.Success();
+            Return result = Return.Success();
             var invocations = 0;
 
             UnitResult<E> actual = result.MapError(error =>
@@ -100,7 +100,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_returns_UnitResult_success_with_context()
         {
-            Result result = Result.Success();
+            Return result = Return.Success();
             var invocations = 0;
 
             UnitResult<E> actual = result.MapError(
@@ -120,7 +120,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_returns_new_UnitResult_failure()
         {
-            Result result = Result.Failure(ErrorMessage);
+            Return result = Return.Failure(ErrorMessage);
             var invocations = 0;
 
             UnitResult<E> actual = result.MapError(error =>
@@ -137,7 +137,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_returns_new_UnitResult_failure_with_context()
         {
-            Result result = Result.Failure(ErrorMessage);
+            Return result = Return.Failure(ErrorMessage);
             var invocations = 0;
 
             UnitResult<E> actual = result.MapError(
@@ -158,10 +158,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_returns_success()
         {
-            Result<T> result = Result.Success(T.Value);
+            Return<T> result = Return.Success(T.Value);
             var invocations = 0;
 
-            Result<T> actual = result.MapError(error =>
+            Return<T> actual = result.MapError(error =>
             {
                 invocations++;
                 return $"{error} {error}";
@@ -175,10 +175,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_returns_success_with_context()
         {
-            Result<T> result = Result.Success(T.Value);
+            Return<T> result = Return.Success(T.Value);
             var invocations = 0;
 
-            Result<T> actual = result.MapError(
+            Return<T> actual = result.MapError(
                 (error, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -196,10 +196,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_returns_new_failure()
         {
-            Result<T> result = Result.Failure<T>(ErrorMessage);
+            Return<T> result = Return.Failure<T>(ErrorMessage);
             var invocations = 0;
 
-            Result<T> actual = result.MapError(error =>
+            Return<T> actual = result.MapError(error =>
             {
                 invocations++;
                 return $"{error} {error}";
@@ -213,10 +213,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_returns_new_failure_with_context()
         {
-            Result<T> result = Result.Failure<T>(ErrorMessage);
+            Return<T> result = Return.Failure<T>(ErrorMessage);
             var invocations = 0;
 
-            Result<T> actual = result.MapError(
+            Return<T> actual = result.MapError(
                 (error, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -237,7 +237,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             UnitResult<E> result = UnitResult.Success<E>();
             var invocations = 0;
 
-            Result actual = result.MapError(error =>
+            Return actual = result.MapError(error =>
             {
                 invocations++;
                 return $"{error} {error}";
@@ -253,7 +253,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             UnitResult<E> result = UnitResult.Success<E>();
             var invocations = 0;
 
-            Result actual = result.MapError(
+            Return actual = result.MapError(
                 (error, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -273,7 +273,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             UnitResult<E> result = UnitResult.Failure(E.Value);
             var invocations = 0;
 
-            Result actual = result.MapError(error =>
+            Return actual = result.MapError(error =>
             {
                 error.Should().Be(E.Value);
                 invocations++;
@@ -291,7 +291,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             UnitResult<E> result = UnitResult.Failure(E.Value);
             var invocations = 0;
 
-            Result actual = result.MapError(
+            Return actual = result.MapError(
                 (error, context) =>
                 {
                     error.Should().Be(E.Value);
@@ -386,10 +386,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_E_returns_success()
         {
-            Result<T> result = Result.Success(T.Value);
+            Return<T> result = Return.Success(T.Value);
             var invocations = 0;
 
-            Result<T, E> actual = result.MapError(_ =>
+            Return<T, E> actual = result.MapError(_ =>
             {
                 invocations++;
                 return E.Value;
@@ -403,10 +403,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_E_returns_success_with_context()
         {
-            Result<T> result = Result.Success(T.Value);
+            Return<T> result = Return.Success(T.Value);
             var invocations = 0;
 
-            Result<T, E> actual = result.MapError(
+            Return<T, E> actual = result.MapError(
                 (_, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -424,10 +424,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_E_returns_new_failure()
         {
-            Result<T> result = Result.Failure<T>(ErrorMessage);
+            Return<T> result = Return.Failure<T>(ErrorMessage);
             var invocations = 0;
 
-            Result<T, E> actual = result.MapError(error =>
+            Return<T, E> actual = result.MapError(error =>
             {
                 error.Should().Be(ErrorMessage);
                 invocations++;
@@ -442,10 +442,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_E_returns_new_failure_with_context()
         {
-            Result<T> result = Result.Failure<T>(ErrorMessage);
+            Return<T> result = Return.Failure<T>(ErrorMessage);
             var invocations = 0;
 
-            Result<T, E> actual = result.MapError(
+            Return<T, E> actual = result.MapError(
                 (error, context) =>
                 {
                     error.Should().Be(ErrorMessage);
@@ -464,10 +464,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_E_string_returns_success()
         {
-            Result<T, E> result = Result.Success<T, E>(T.Value);
+            Return<T, E> result = Return.Success<T, E>(T.Value);
             var invocations = 0;
 
-            Result<T> actual = result.MapError(_ =>
+            Return<T> actual = result.MapError(_ =>
             {
                 invocations++;
                 return "error";
@@ -481,10 +481,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_E_string_returns_success_with_context()
         {
-            Result<T, E> result = Result.Success<T, E>(T.Value);
+            Return<T, E> result = Return.Success<T, E>(T.Value);
             var invocations = 0;
 
-            Result<T> actual = result.MapError(
+            Return<T> actual = result.MapError(
                 (_, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -502,10 +502,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_E_E2_returns_success()
         {
-            Result<T, E> result = Result.Success<T, E>(T.Value);
+            Return<T, E> result = Return.Success<T, E>(T.Value);
             var invocations = 0;
 
-            Result<T, E2> actual = result.MapError(_ =>
+            Return<T, E2> actual = result.MapError(_ =>
             {
                 invocations++;
                 return E2.Value;
@@ -519,10 +519,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_E_E2_returns_success_with_context()
         {
-            Result<T, E> result = Result.Success<T, E>(T.Value);
+            Return<T, E> result = Return.Success<T, E>(T.Value);
             var invocations = 0;
 
-            Result<T, E2> actual = result.MapError(
+            Return<T, E2> actual = result.MapError(
                 (_, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -540,10 +540,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_E_string_returns_new_failure()
         {
-            Result<T, E> result = Result.Failure<T, E>(E.Value);
+            Return<T, E> result = Return.Failure<T, E>(E.Value);
             var invocations = 0;
 
-            Result<T> actual = result.MapError(error =>
+            Return<T> actual = result.MapError(error =>
             {
                 error.Should().Be(E.Value);
                 invocations++;
@@ -558,10 +558,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_E_string_returns_new_failure_with_context()
         {
-            Result<T, E> result = Result.Failure<T, E>(E.Value);
+            Return<T, E> result = Return.Failure<T, E>(E.Value);
             var invocations = 0;
 
-            Result<T> actual = result.MapError(
+            Return<T> actual = result.MapError(
                 (error, context) =>
                 {
                     error.Should().Be(E.Value);
@@ -580,10 +580,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_E_E2_returns_new_failure()
         {
-            Result<T, E> result = Result.Failure<T, E>(E.Value);
+            Return<T, E> result = Return.Failure<T, E>(E.Value);
             var invocations = 0;
 
-            Result<T, E2> actual = result.MapError(error =>
+            Return<T, E2> actual = result.MapError(error =>
             {
                 error.Should().Be(E.Value);
                 invocations++;
@@ -598,10 +598,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void MapError_T_E_E2_returns_new_failure_with_context()
         {
-            Result<T, E> result = Result.Failure<T, E>(E.Value);
+            Return<T, E> result = Return.Failure<T, E>(E.Value);
             var invocations = 0;
 
-            Result<T, E2> actual = result.MapError(
+            Return<T, E2> actual = result.MapError(
                 (error, context) =>
                 {
                     error.Should().Be(E.Value);

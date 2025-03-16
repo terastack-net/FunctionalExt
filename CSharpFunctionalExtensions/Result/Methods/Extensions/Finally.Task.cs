@@ -8,18 +8,18 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Passes the result to the given function (regardless of success/failure state) to yield a final output value.
         /// </summary>
-        public static async Task<T> Finally<T>(this Task<Result> resultTask, Func<Result, Task<T>> func)
+        public static async Task<T> Finally<T>(this Task<Return> resultTask, Func<Return, Task<T>> func)
         {
-            Result result = await resultTask.DefaultAwait();
+            Return result = await resultTask.DefaultAwait();
             return await func(result).DefaultAwait();
         }
 
         /// <summary>
         ///     Passes the result to the given function (regardless of success/failure state) to yield a final output value.
         /// </summary>
-        public static async Task<K> Finally<T, K>(this Task<Result<T>> resultTask, Func<Result<T>, Task<K>> func)
+        public static async Task<K> Finally<T, K>(this Task<Return<T>> resultTask, Func<Return<T>, Task<K>> func)
         {
-            Result<T> result = await resultTask.DefaultAwait();
+            Return<T> result = await resultTask.DefaultAwait();
             return await func(result).DefaultAwait();
         }
 
@@ -35,10 +35,10 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Passes the result to the given function (regardless of success/failure state) to yield a final output value.
         /// </summary>
-        public static async Task<K> Finally<T, K, E>(this Task<Result<T, E>> resultTask,
-            Func<Result<T, E>, Task<K>> func)
+        public static async Task<K> Finally<T, K, E>(this Task<Return<T, E>> resultTask,
+            Func<Return<T, E>, Task<K>> func)
         {
-            Result<T, E> result = await resultTask.DefaultAwait();
+            Return<T, E> result = await resultTask.DefaultAwait();
             return await func(result).DefaultAwait();
         }
     }

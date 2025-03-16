@@ -6,10 +6,10 @@ namespace CSharpFunctionalExtensions.ValueTasks
 {
     public static partial class ResultExtensions
     {
-        public static ValueTask<Result<K>> MapWithTransactionScope<T, K>(this Result<T> self, Func<T, ValueTask<K>> f)
+        public static ValueTask<Return<K>> MapWithTransactionScope<T, K>(this Return<T> self, Func<T, ValueTask<K>> f)
             => WithTransactionScope(() => self.Map(f));
 
-        public static ValueTask<Result<K>> MapWithTransactionScope<K>(this Result self, Func<ValueTask<K>> f)
+        public static ValueTask<Return<K>> MapWithTransactionScope<K>(this Return self, Func<ValueTask<K>> f)
             => WithTransactionScope(() => self.Map(f));
     }
 }

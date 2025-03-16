@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CSharpFunctionalExtensions
 {
-    public partial struct Result
+    public partial struct Return
     {
         public override string ToString()
         {
@@ -13,7 +13,7 @@ namespace CSharpFunctionalExtensions
     }
 
 
-    public partial struct Result<T>
+    public partial struct Return<T>
     {
         public override string ToString()
         {
@@ -22,7 +22,7 @@ namespace CSharpFunctionalExtensions
     }
 
 
-    public partial struct Result<T, E>
+    public partial struct Return<T, E>
     {
         public override string ToString()
         {

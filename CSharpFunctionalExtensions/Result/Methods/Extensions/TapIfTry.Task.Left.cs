@@ -9,7 +9,7 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success and the condition is true. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result> TapIfTry(this Task<Result> resultTask, bool condition, Action action)
+        public static async Task<Return> TapIfTry(this Task<Return> resultTask, bool condition, Action action)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapIfTry(condition, action);
@@ -19,7 +19,7 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success and the condition is true. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result<T>> TapIfTry<T>(this Task<Result<T>> resultTask, bool condition, Action action)
+        public static async Task<Return<T>> TapIfTry<T>(this Task<Return<T>> resultTask, bool condition, Action action)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapIfTry(condition, action);
@@ -29,7 +29,7 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success and the condition is true. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result<T>> TapIfTry<T>(this Task<Result<T>> resultTask, bool condition, Action<T> action)
+        public static async Task<Return<T>> TapIfTry<T>(this Task<Return<T>> resultTask, bool condition, Action<T> action)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapIfTry(condition, action);
@@ -49,7 +49,7 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success and the condition is true. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result<T, E>> TapIfTry<T, E>(this Task<Result<T, E>> resultTask, bool condition, Action action, Func<Exception, E> errorHandler)
+        public static async Task<Return<T, E>> TapIfTry<T, E>(this Task<Return<T, E>> resultTask, bool condition, Action action, Func<Exception, E> errorHandler)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapIfTry(condition, action, errorHandler);
@@ -59,7 +59,7 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success and the condition is true. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result<T, E>> TapIfTry<T, E>(this Task<Result<T, E>> resultTask, bool condition, Action<T> action, Func<Exception, E> errorHandler)
+        public static async Task<Return<T, E>> TapIfTry<T, E>(this Task<Return<T, E>> resultTask, bool condition, Action<T> action, Func<Exception, E> errorHandler)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapIfTry(condition, action, errorHandler);
@@ -69,7 +69,7 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success and the predicate is true. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result<T>> TapIfTry<T>(this Task<Result<T>> resultTask, Func<T, bool> predicate, Action action)
+        public static async Task<Return<T>> TapIfTry<T>(this Task<Return<T>> resultTask, Func<T, bool> predicate, Action action)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapIfTry(predicate, action);
@@ -79,7 +79,7 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success and the predicate is true. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result<T>> TapIfTry<T>(this Task<Result<T>> resultTask, Func<T, bool> predicate, Action<T> action)
+        public static async Task<Return<T>> TapIfTry<T>(this Task<Return<T>> resultTask, Func<T, bool> predicate, Action<T> action)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapIfTry(predicate, action);
@@ -89,7 +89,7 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success and the predicate is true. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result<T, E>> TapIfTry<T, E>(this Task<Result<T, E>> resultTask, Func<T, bool> predicate, Action action, Func<Exception, E> errorHandler)
+        public static async Task<Return<T, E>> TapIfTry<T, E>(this Task<Return<T, E>> resultTask, Func<T, bool> predicate, Action action, Func<Exception, E> errorHandler)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapIfTry(predicate, action, errorHandler);
@@ -99,7 +99,7 @@ namespace CSharpFunctionalExtensions
         ///     Executes the given action if the calling result is a success and the predicate is true. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<Result<T, E>> TapIfTry<T, E>(this Task<Result<T, E>> resultTask, Func<T, bool> predicate, Action<T> action, Func<Exception, E> errorHandler)
+        public static async Task<Return<T, E>> TapIfTry<T, E>(this Task<Return<T, E>> resultTask, Func<T, bool> predicate, Action<T> action, Func<Exception, E> errorHandler)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapIfTry(predicate, action, errorHandler);

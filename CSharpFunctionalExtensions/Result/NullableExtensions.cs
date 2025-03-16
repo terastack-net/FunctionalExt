@@ -6,45 +6,45 @@ namespace CSharpFunctionalExtensions
 
     public static partial class NullableExtensions
     {
-        public static Result<T, E> ToResult<T, E>(in this T? nullable, E error)
+        public static Return<T, E> ToResult<T, E>(in this T? nullable, E error)
             where T : struct
         {
             if (!nullable.HasValue)
-                return Result.Failure<T, E>(error);
+                return Return.Failure<T, E>(error);
 
-            return Result.Success<T, E>(nullable.Value);
+            return Return.Success<T, E>(nullable.Value);
         }
-        public static Result<T, E> ToResult<T, E>(this T? obj, E error)
+        public static Return<T, E> ToResult<T, E>(this T? obj, E error)
             where T : class
         {
             if (obj == null)
-                return Result.Failure<T, E>(error);
+                return Return.Failure<T, E>(error);
 
-            return Result.Success<T, E>(obj);
+            return Return.Success<T, E>(obj);
         }
 
-        public static async Task<Result<T, E>> ToResultAsync<T, E>(this Task<T?> nullableTask, E errors)
+        public static async Task<Return<T, E>> ToResultAsync<T, E>(this Task<T?> nullableTask, E errors)
             where T : struct
         {
             var nullable = await nullableTask.ConfigureAwait(false);
             return nullable.ToResult(errors);
         }
 
-        public static async Task<Result<T, E>> ToResultAsync<T, E>(this Task<T?> nullableTask, E errors)
+        public static async Task<Return<T, E>> ToResultAsync<T, E>(this Task<T?> nullableTask, E errors)
         where T : class
         {
             var nullable = await nullableTask.ConfigureAwait(false);
             return nullable.ToResult(errors);
         }
         
-        public static async ValueTask<Result<T, E>> ToResultAsync<T, E>(this ValueTask<T?> nullableTask, E errors)
+        public static async ValueTask<Return<T, E>> ToResultAsync<T, E>(this ValueTask<T?> nullableTask, E errors)
             where T : struct
         {
             var nullable = await nullableTask.ConfigureAwait(false);
             return nullable.ToResult(errors);
         }
 
-        public static async ValueTask<Result<T, E>> ToResultAsync<T, E>(this ValueTask<T?> nullableTask, E errors)
+        public static async ValueTask<Return<T, E>> ToResultAsync<T, E>(this ValueTask<T?> nullableTask, E errors)
             where T : class
         {
             var nullable = await nullableTask.ConfigureAwait(false);

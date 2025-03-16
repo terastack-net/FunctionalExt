@@ -1,14 +1,16 @@
-﻿namespace CSharpFunctionalExtensions
+﻿using System;
+
+namespace CSharpFunctionalExtensions
 {
-    public partial struct Result
+    public partial struct Return
     {
         internal static class Messages
         {
             public static readonly string ErrorIsInaccessibleForSuccess =
                 "You attempted to access the Error property for a successful result. A successful result has no Error.";
 
-            public static string ValueIsInaccessibleForFailure(string error) =>
-                $"You attempted to access the Value property for a failed result. A failed result has no Value. The error was: {error}";
+            public static string ValueIsInaccessibleForFailure(Exception error) =>
+                $"You attempted to access the Value property for a failed result. A failed result has no Value. The error was: {error.Message}";
 
             public static readonly string ErrorObjectIsNotProvidedForFailure =
                 "You attempted to create a failure result, which must have an error, but a null error object (or empty string) was passed to the constructor.";

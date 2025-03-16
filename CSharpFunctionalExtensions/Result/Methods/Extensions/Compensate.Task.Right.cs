@@ -5,17 +5,17 @@ namespace CSharpFunctionalExtensions
 {
     public static partial class ResultExtensions
     {
-        public static Task<Result> Compensate(this Result result, Func<string, Task<Result>> func)
+        public static Task<Return> Compensate(this Return result, Func<Exception, Task<Return>> func)
         {
             if (result.IsSuccess)
             {
-                return Result.Success().AsCompletedTask();
+                return Return.Success().AsCompletedTask();
             }
 
             return func(result.Error);
         }
 
-        public static Task<UnitResult<E>> Compensate<E>(this Result result, Func<string, Task<UnitResult<E>>> func)
+        public static Task<UnitResult<E>> Compensate<E>(this Return result, Func<Exception, Task<UnitResult<E>>> func)
         {
             if (result.IsSuccess)
             {
@@ -25,41 +25,41 @@ namespace CSharpFunctionalExtensions
             return func(result.Error);
         }
 
-        public static Task<Result> Compensate<T>(this Result<T> result, Func<string, Task<Result>> func)
+        public static Task<Return> Compensate<T>(this Return<T> result, Func<Exception, Task<Return>> func)
         {
             if (result.IsSuccess)
             {
-                return Result.Success().AsCompletedTask();
+                return Return.Success().AsCompletedTask();
             }
 
             return func(result.Error);
         }
 
-        public static Task<Result<T>> Compensate<T>(this Result<T> result, Func<string, Task<Result<T>>> func)
+        public static Task<Return<T>> Compensate<T>(this Return<T> result, Func<Exception, Task<Return<T>>> func)
         {
             if (result.IsSuccess)
             {
-                return Result.Success(result.Value).AsCompletedTask();
+                return Return.Success(result.Value).AsCompletedTask();
             }
 
             return func(result.Error);
         }
 
-        public static Task<Result<T, E>> Compensate<T, E>(this Result<T> result, Func<string, Task<Result<T, E>>> func)
+        public static Task<Return<T, E>> Compensate<T, E>(this Return<T> result, Func<Exception, Task<Return<T, E>>> func)
         {
             if (result.IsSuccess)
             {
-                return Result.Success<T, E>(result.Value).AsCompletedTask();
+                return Return.Success<T, E>(result.Value).AsCompletedTask();
             }
 
             return func(result.Error);
         }
 
-        public static Task<Result> Compensate<E>(this UnitResult<E> result, Func<E, Task<Result>> func)
+        public static Task<Return> Compensate<E>(this UnitResult<E> result, Func<E, Task<Return>> func)
         {
             if (result.IsSuccess)
             {
-                return Result.Success().AsCompletedTask();
+                return Return.Success().AsCompletedTask();
             }
 
             return func(result.Error);
@@ -75,17 +75,17 @@ namespace CSharpFunctionalExtensions
             return func(result.Error);
         }
 
-        public static Task<Result> Compensate<T, E>(this Result<T, E> result, Func<E, Task<Result>> func)
+        public static Task<Return> Compensate<T, E>(this Return<T, E> result, Func<E, Task<Return>> func)
         {
             if (result.IsSuccess)
             {
-                return Result.Success().AsCompletedTask();
+                return Return.Success().AsCompletedTask();
             }
 
             return func(result.Error);
         }
 
-        public static Task<UnitResult<E2>> Compensate<T, E, E2>(this Result<T, E> result, Func<E, Task<UnitResult<E2>>> func)
+        public static Task<UnitResult<E2>> Compensate<T, E, E2>(this Return<T, E> result, Func<E, Task<UnitResult<E2>>> func)
         {
             if (result.IsSuccess)
             {
@@ -95,11 +95,11 @@ namespace CSharpFunctionalExtensions
             return func(result.Error);
         }
 
-        public static Task<Result<T, E2>> Compensate<T, E, E2>(this Result<T, E> result, Func<E, Task<Result<T, E2>>> func)
+        public static Task<Return<T, E2>> Compensate<T, E, E2>(this Return<T, E> result, Func<E, Task<Return<T, E2>>> func)
         {
             if (result.IsSuccess)
             {
-                return Result.Success<T, E2>(result.Value).AsCompletedTask();
+                return Return.Success<T, E2>(result.Value).AsCompletedTask();
             }
 
             return func(result.Error);

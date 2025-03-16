@@ -6,17 +6,17 @@ namespace CSharpFunctionalExtensions.ValueTasks
 {
     public static partial class ResultExtensions
     {
-        public static ValueTask<Result> Compensate(this Result result, Func<string, ValueTask<Result>> valueTask)
+        public static ValueTask<Return> Compensate(this Return result, Func<Exception, ValueTask<Return>> valueTask)
         {
             if (result.IsSuccess)
             {
-                return Result.Success().AsCompletedValueTask();
+                return Return.Success().AsCompletedValueTask();
             }
 
             return valueTask(result.Error);
         }
 
-        public static ValueTask<UnitResult<E>> Compensate<E>(this Result result, Func<string, ValueTask<UnitResult<E>>> valueTask)
+        public static ValueTask<UnitResult<E>> Compensate<E>(this Return result, Func<Exception, ValueTask<UnitResult<E>>> valueTask)
         {
             if (result.IsSuccess)
             {
@@ -26,41 +26,41 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return valueTask(result.Error);
         }
 
-        public static ValueTask<Result> Compensate<T>(this Result<T> result, Func<string, ValueTask<Result>> valueTask)
+        public static ValueTask<Return> Compensate<T>(this Return<T> result, Func<Exception, ValueTask<Return>> valueTask)
         {
             if (result.IsSuccess)
             {
-                return Result.Success().AsCompletedValueTask();
+                return Return.Success().AsCompletedValueTask();
             }
 
             return valueTask(result.Error);
         }
 
-        public static ValueTask<Result<T>> Compensate<T>(this Result<T> result, Func<string, ValueTask<Result<T>>> valueTask)
+        public static ValueTask<Return<T>> Compensate<T>(this Return<T> result, Func<Exception, ValueTask<Return<T>>> valueTask)
         {
             if (result.IsSuccess)
             {
-                return Result.Success(result.Value).AsCompletedValueTask();
+                return Return.Success(result.Value).AsCompletedValueTask();
             }
 
             return valueTask(result.Error);
         }
 
-        public static ValueTask<Result<T, E>> Compensate<T, E>(this Result<T> result, Func<string, ValueTask<Result<T, E>>> valueTask)
+        public static ValueTask<Return<T, E>> Compensate<T, E>(this Return<T> result, Func<Exception, ValueTask<Return<T, E>>> valueTask)
         {
             if (result.IsSuccess)
             {
-                return Result.Success<T, E>(result.Value).AsCompletedValueTask();
+                return Return.Success<T, E>(result.Value).AsCompletedValueTask();
             }
 
             return valueTask(result.Error);
         }
 
-        public static ValueTask<Result> Compensate<E>(this UnitResult<E> result, Func<E, ValueTask<Result>> valueTask)
+        public static ValueTask<Return> Compensate<E>(this UnitResult<E> result, Func<E, ValueTask<Return>> valueTask)
         {
             if (result.IsSuccess)
             {
-                return Result.Success().AsCompletedValueTask();
+                return Return.Success().AsCompletedValueTask();
             }
 
             return valueTask(result.Error);
@@ -76,17 +76,17 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return valueTask(result.Error);
         }
 
-        public static ValueTask<Result> Compensate<T, E>(this Result<T, E> result, Func<E, ValueTask<Result>> valueTask)
+        public static ValueTask<Return> Compensate<T, E>(this Return<T, E> result, Func<E, ValueTask<Return>> valueTask)
         {
             if (result.IsSuccess)
             {
-                return Result.Success().AsCompletedValueTask();
+                return Return.Success().AsCompletedValueTask();
             }
 
             return valueTask(result.Error);
         }
 
-        public static ValueTask<UnitResult<E2>> Compensate<T, E, E2>(this Result<T, E> result, Func<E, ValueTask<UnitResult<E2>>> valueTask)
+        public static ValueTask<UnitResult<E2>> Compensate<T, E, E2>(this Return<T, E> result, Func<E, ValueTask<UnitResult<E2>>> valueTask)
         {
             if (result.IsSuccess)
             {
@@ -96,11 +96,11 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return valueTask(result.Error);
         }
 
-        public static ValueTask<Result<T, E2>> Compensate<T, E, E2>(this Result<T, E> result, Func<E, ValueTask<Result<T, E2>>> valueTask)
+        public static ValueTask<Return<T, E2>> Compensate<T, E, E2>(this Return<T, E> result, Func<E, ValueTask<Return<T, E2>>> valueTask)
         {
             if (result.IsSuccess)
             {
-                return Result.Success<T, E2>(result.Value).AsCompletedValueTask();
+                return Return.Success<T, E2>(result.Value).AsCompletedValueTask();
             }
 
             return valueTask(result.Error);

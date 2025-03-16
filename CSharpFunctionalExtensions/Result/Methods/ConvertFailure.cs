@@ -2,12 +2,12 @@
 
 namespace CSharpFunctionalExtensions
 {
-    public partial struct Result
+    public partial struct Return
     {
         /// <summary>
         ///     Throws if the result is a success. Else returns a new failure result of the given type.
         /// </summary>
-        public Result<K> ConvertFailure<K>()
+        public Return<K> ConvertFailure<K>()
         {
             if (IsSuccess)
                 throw new InvalidOperationException(Messages.ConvertFailureExceptionOnSuccess);
@@ -16,42 +16,42 @@ namespace CSharpFunctionalExtensions
         }
     }
 
-    public partial struct Result<T>
+    public partial struct Return<T>
     {
         /// <summary>
         ///     Throws if the result is a success. Else returns a new failure result.
         /// </summary>
-        public Result ConvertFailure()
+        public Return ConvertFailure()
         {
             if (IsSuccess)
-                throw new InvalidOperationException(Result.Messages.ConvertFailureExceptionOnSuccess);
+                throw new InvalidOperationException(Return.Messages.ConvertFailureExceptionOnSuccess);
 
-            return Result.Failure(Error);
+            return Return.Failure(Error);
         }
 
         /// <summary>
         ///     Throws if the result is a success. Else returns a new failure result of the given type.
         /// </summary>
-        public Result<K> ConvertFailure<K>()
+        public Return<K> ConvertFailure<K>()
         {
             if (IsSuccess)
-                throw new InvalidOperationException(Result.Messages.ConvertFailureExceptionOnSuccess);
+                throw new InvalidOperationException(Return.Messages.ConvertFailureExceptionOnSuccess);
 
-            return Result.Failure<K>(Error);
+            return Return.Failure<K>(Error);
         }
     }
 
-    public partial struct Result<T, E>
+    public partial struct Return<T, E>
     {
         /// <summary>
         ///     Throws if the result is a success. Else returns a new failure result of the given type.
         /// </summary>
-        public Result<K, E> ConvertFailure<K>()
+        public Return<K, E> ConvertFailure<K>()
         {
             if (IsSuccess)
-                throw new InvalidOperationException(Result.Messages.ConvertFailureExceptionOnSuccess);
+                throw new InvalidOperationException(Return.Messages.ConvertFailureExceptionOnSuccess);
 
-            return Result.Failure<K, E>(Error);
+            return Return.Failure<K, E>(Error);
         }
     }
 
@@ -60,12 +60,12 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Throws if the result is a success. Else returns a new failure result of the given type.
         /// </summary>
-        public Result<K, E> ConvertFailure<K>()
+        public Return<K, E> ConvertFailure<K>()
         {
             if (IsSuccess)
-                throw new InvalidOperationException(Result.Messages.ConvertFailureExceptionOnSuccess);
+                throw new InvalidOperationException(Return.Messages.ConvertFailureExceptionOnSuccess);
 
-            return Result.Failure<K, E>(Error);
+            return Return.Failure<K, E>(Error);
         }
     }
 }

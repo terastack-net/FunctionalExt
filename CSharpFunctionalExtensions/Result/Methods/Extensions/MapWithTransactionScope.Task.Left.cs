@@ -6,10 +6,10 @@ namespace CSharpFunctionalExtensions
 {
     public static partial class ResultExtensions
     {
-        public static Task<Result<K>> MapWithTransactionScope<T, K>(this Task<Result<T>> self, Func<T, K> f)
+        public static Task<Return<K>> MapWithTransactionScope<T, K>(this Task<Return<T>> self, Func<T, K> f)
             => WithTransactionScope(() => self.Map(f));
 
-        public static Task<Result<K>> MapWithTransactionScope<K>(this Task<Result> self, Func<K> f)
+        public static Task<Return<K>> MapWithTransactionScope<K>(this Task<Return> self, Func<K> f)
             => WithTransactionScope(() => self.Map(f));
     }
 }

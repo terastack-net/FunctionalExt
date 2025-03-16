@@ -47,9 +47,9 @@ namespace CSharpFunctionalExtensions.Examples.ResultExtensions
         {
         }
 
-        Task<Result<Customer>> AskManager(long id)
+        Task<Return<Customer>> AskManager(long id)
         {
-            return Task.FromResult(Result.Success(new Customer()));
+            return Task.FromResult(Return.Success(new Customer()));
         }
 
         public Task<Maybe<Customer>> GetByIdAsync(long id)
@@ -87,14 +87,14 @@ namespace CSharpFunctionalExtensions.Examples.ResultExtensions
 
         public class EmailGateway
         {
-            public Result SendPromotionNotification(string email)
+            public Return SendPromotionNotification(string email)
             {
-                return Result.Success();
+                return Return.Success();
             }
 
-            public Task<Result> SendPromotionNotificationAsync(string email)
+            public Task<Return> SendPromotionNotificationAsync(string email)
             {
-                return Task.FromResult(Result.Success());
+                return Task.FromResult(Return.Success());
             }
         }
     }

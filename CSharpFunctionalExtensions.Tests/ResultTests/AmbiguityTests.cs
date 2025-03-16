@@ -15,24 +15,24 @@ public class AmbiguityTests
     [Fact]
     public async Task The_following_code_should_compile_without_raising_ambiguity_errors()
     {
-        Result<T1, E> result = Result.Success<T1, E>(new());
+        Return<T1, E> result = Return.Success<T1, E>(new());
 
-        Task<Result<T2, E>> GetTask() => Task.FromResult(Result.Success<T2, E>(new()));
+        Task<Return<T2, E>> GetTask() => Task.FromResult(Return.Success<T2, E>(new()));
 
         await result
             .Bind(async _ => await GetTask());
     }
 
-    private Task<Result<Profile>> GetProfileAsync() =>
-        Result.Try(async () =>
+    private Task<Return<Profile>> GetProfileAsync() =>
+        Return.Try(async () =>
         {
             await Task.Yield();
 
             return new Profile();
         });
 
-    private Task<Result<Profile, Error>> GetProfileWithErrorAsync() =>
-        Result.Try(async () =>
+    private Task<Return<Profile, Error>> GetProfileWithErrorAsync() =>
+        Return.Try(async () =>
         {
             await Task.Yield();
 

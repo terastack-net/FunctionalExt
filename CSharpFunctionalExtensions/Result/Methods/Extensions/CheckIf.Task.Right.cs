@@ -11,7 +11,7 @@ namespace CSharpFunctionalExtensions
 {
     public static partial class AsyncResultExtensionsRightOperand
     {
-        public static Task<Result<T>> CheckIf<T>(this Result<T> result, bool condition, Func<T, Task<Result>> func)
+        public static Task<Return<T>> CheckIf<T>(this Return<T> result, bool condition, Func<T, Task<Return>> func)
         {
             if (condition)
                 return result.Check(func);
@@ -19,7 +19,7 @@ namespace CSharpFunctionalExtensions
                 return Task.FromResult(result);
         }
 
-        public static Task<Result<T>> CheckIf<T, K>(this Result<T> result, bool condition, Func<T, Task<Result<K>>> func)
+        public static Task<Return<T>> CheckIf<T, K>(this Return<T> result, bool condition, Func<T, Task<Return<K>>> func)
         {
             if (condition)
                 return result.Check(func);
@@ -27,7 +27,7 @@ namespace CSharpFunctionalExtensions
                 return Task.FromResult(result);
         }
 
-        public static Task<Result<T, E>> CheckIf<T, K, E>(this Result<T, E> result, bool condition, Func<T, Task<Result<K, E>>> func)
+        public static Task<Return<T, E>> CheckIf<T, K, E>(this Return<T, E> result, bool condition, Func<T, Task<Return<K, E>>> func)
         {
             if (condition)
                 return result.Check(func);
@@ -35,7 +35,7 @@ namespace CSharpFunctionalExtensions
                 return Task.FromResult(result);
         }
 
-        public static Task<Result<T, E>> CheckIf<T, E>(this Result<T, E> result, bool condition, Func<T, Task<UnitResult<E>>> func)
+        public static Task<Return<T, E>> CheckIf<T, E>(this Return<T, E> result, bool condition, Func<T, Task<UnitResult<E>>> func)
         {
             if (condition)
                 return result.Check(func);
@@ -51,7 +51,7 @@ namespace CSharpFunctionalExtensions
                 return Task.FromResult(result);
         }
 
-        public static Task<Result<T>> CheckIf<T>(this Result<T> result, Func<T, bool> predicate, Func<T, Task<Result>> func)
+        public static Task<Return<T>> CheckIf<T>(this Return<T> result, Func<T, bool> predicate, Func<T, Task<Return>> func)
         {
             if (result.IsSuccess && predicate(result.Value))
                 return result.Check(func);
@@ -59,7 +59,7 @@ namespace CSharpFunctionalExtensions
                 return Task.FromResult(result);
         }
 
-        public static Task<Result<T>> CheckIf<T, K>(this Result<T> result, Func<T, bool> predicate, Func<T, Task<Result<K>>> func)
+        public static Task<Return<T>> CheckIf<T, K>(this Return<T> result, Func<T, bool> predicate, Func<T, Task<Return<K>>> func)
         {
             if (result.IsSuccess && predicate(result.Value))
                 return result.Check(func);
@@ -67,7 +67,7 @@ namespace CSharpFunctionalExtensions
                 return Task.FromResult(result);
         }
 
-        public static Task<Result<T, E>> CheckIf<T, K, E>(this Result<T, E> result, Func<T, bool> predicate, Func<T, Task<Result<K, E>>> func)
+        public static Task<Return<T, E>> CheckIf<T, K, E>(this Return<T, E> result, Func<T, bool> predicate, Func<T, Task<Return<K, E>>> func)
         {
             if (result.IsSuccess && predicate(result.Value))
                 return result.Check(func);
@@ -75,7 +75,7 @@ namespace CSharpFunctionalExtensions
                 return Task.FromResult(result);
         }
 
-        public static Task<Result<T, E>> CheckIf<T, E>(this Result<T, E> result, Func<T, bool> predicate, Func<T, Task<UnitResult<E>>> func)
+        public static Task<Return<T, E>> CheckIf<T, E>(this Return<T, E> result, Func<T, bool> predicate, Func<T, Task<UnitResult<E>>> func)
         {
             if (result.IsSuccess && predicate(result.Value))
                 return result.Check(func);

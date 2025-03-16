@@ -9,7 +9,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result> TapIf(this Result result, bool condition, Func<ValueTask> valueTask)
+        public static ValueTask<Return> TapIf(this Return result, bool condition, Func<ValueTask> valueTask)
         {
             if (condition)
                 return result.Tap(valueTask);
@@ -20,7 +20,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result<T>> TapIf<T>(this Result<T> result, bool condition, Func<ValueTask> valueTask)
+        public static ValueTask<Return<T>> TapIf<T>(this Return<T> result, bool condition, Func<ValueTask> valueTask)
         {
             if (condition)
                 return result.Tap(valueTask);
@@ -31,7 +31,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result<T>> TapIf<T>(this Result<T> result, bool condition, Func<T, ValueTask> valueTask)
+        public static ValueTask<Return<T>> TapIf<T>(this Return<T> result, bool condition, Func<T, ValueTask> valueTask)
         {
             if (condition)
                 return result.Tap(valueTask);
@@ -42,7 +42,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result<T, E>> TapIf<T, E>(this Result<T, E> result, bool condition, Func<ValueTask> valueTask)
+        public static ValueTask<Return<T, E>> TapIf<T, E>(this Return<T, E> result, bool condition, Func<ValueTask> valueTask)
         {
             if (condition)
                 return result.Tap(valueTask);
@@ -53,7 +53,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result<T, E>> TapIf<T, E>(this Result<T, E> result, bool condition, Func<T, ValueTask> valueTask)
+        public static ValueTask<Return<T, E>> TapIf<T, E>(this Return<T, E> result, bool condition, Func<T, ValueTask> valueTask)
         {
             if (condition)
                 return result.Tap(valueTask);
@@ -75,7 +75,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result<T>> TapIf<T>(this Result<T> result, Func<T, bool> predicate, Func<ValueTask> valueTask)
+        public static ValueTask<Return<T>> TapIf<T>(this Return<T> result, Func<T, bool> predicate, Func<ValueTask> valueTask)
         {
             if (result.IsSuccess && predicate(result.Value))
                 return result.Tap(valueTask);
@@ -86,7 +86,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result<T>> TapIf<T>(this Result<T> result, Func<T, bool> predicate, Func<T, ValueTask> valueTask)
+        public static ValueTask<Return<T>> TapIf<T>(this Return<T> result, Func<T, bool> predicate, Func<T, ValueTask> valueTask)
         {
             if (result.IsSuccess && predicate(result.Value))
                 return result.Tap(valueTask);
@@ -97,7 +97,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result<T, E>> TapIf<T, E>(this Result<T, E> result, Func<T, bool> predicate, Func<ValueTask> valueTask)
+        public static ValueTask<Return<T, E>> TapIf<T, E>(this Return<T, E> result, Func<T, bool> predicate, Func<ValueTask> valueTask)
         {
             if (result.IsSuccess && predicate(result.Value))
                 return result.Tap(valueTask);
@@ -108,7 +108,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result<T, E>> TapIf<T, E>(this Result<T, E> result, Func<T, bool> predicate, Func<T, ValueTask> valueTask)
+        public static ValueTask<Return<T, E>> TapIf<T, E>(this Return<T, E> result, Func<T, bool> predicate, Func<T, ValueTask> valueTask)
         {
             if (result.IsSuccess && predicate(result.Value))
                 return result.Tap(valueTask);

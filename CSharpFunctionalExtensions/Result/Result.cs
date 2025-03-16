@@ -5,23 +5,23 @@ using System.Runtime.Serialization;
 namespace CSharpFunctionalExtensions
 {
     [Serializable]
-    public readonly partial struct Result : IResult, ISerializable, IError<string>
+    public readonly partial struct Return : IResult, ISerializable, IError<Exception>
     {
         public bool IsFailure { get; }
         public bool IsSuccess => !IsFailure;
 
-        private readonly string _error;
-        public string Error => ResultCommonLogic.GetErrorWithSuccessGuard(IsFailure, _error);
+        private readonly Exception _error;
+        public Exception Error => ResultCommonLogic.GetErrorWithSuccessGuard(IsFailure, _error);
 
-        private Result(bool isFailure, string error)
+        private Return(bool isFailure, Exception error)
         {
             IsFailure = ResultCommonLogic.ErrorStateGuard(isFailure, error);
             _error = error;
         }
 
-        private Result(SerializationInfo info, StreamingContext context)
+        private Return(SerializationInfo info, StreamingContext context)
         {
-            SerializationValue<string> values = ResultCommonLogic.Deserialize(info);
+            SerializationValue<Exception> values = ResultCommonLogic.Deserialize(info);
             IsFailure = values.IsFailure;
             _error = values.Error;
         }
@@ -31,10 +31,10 @@ namespace CSharpFunctionalExtensions
             ResultCommonLogic.GetObjectData(this, info);
         }
 
-        public static implicit operator UnitResult<string>(Result result)
+        public static implicit operator UnitResult<Exception>(Return result)
         {
             if (result.IsSuccess)
-                return UnitResult.Success<string>();
+                return UnitResult.Success<Exception>();
             else
                 return UnitResult.Failure(result.Error);
         }

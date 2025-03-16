@@ -20,48 +20,48 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         protected static string ErrorHandler(Exception _) => ErrorMessage2;
         protected static E ErrorHandler_E(Exception _) => E.Value2;
 
-        protected void AssertSuccess(Result<K,E> result)
+        protected void AssertSuccess(Return<K,E> result)
         {
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().Be(K.Value);
             FuncExecuted.Should().BeTrue();
         }
 
-        protected void AssertSuccess(Result<K> result)
+        protected void AssertSuccess(Return<K> result)
         {
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().Be(K.Value);                   
             FuncExecuted.Should().BeTrue();
         }
 
-        protected void AssertFailure(Result<K,E> result)
+        protected void AssertFailure(Return<K,E> result)
         {
             AssertFailure(result, E.Value, false);
         }
-        protected void AssertFailureFromHandler(Result<K, E> result)
+        protected void AssertFailureFromHandler(Return<K, E> result)
         {
             AssertFailure(result, E.Value2, true);
         }
-        protected void AssertFailure(Result result)
+        protected void AssertFailure(Return result)
         {
             AssertFailure(result, ErrorMessage, false);
         }
-        protected void AssertFailureFromHandler(Result result)
+        protected void AssertFailureFromHandler(Return result)
         {
             AssertFailure(result, ErrorMessage2, true);
         }
-        protected void AssertFailureFromDefaultHandler(Result result)
+        protected void AssertFailureFromDefaultHandler(Return result)
         {
             AssertFailure(result, ErrorMessage, true);
         }
 
-        protected void AssertFailure(Result result, string message, bool fromFunc)
+        protected void AssertFailure(Return result, string message, bool fromFunc)
         {
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(message);
             FuncExecuted.Should().Be(fromFunc);
         }
-        protected void AssertFailure(Result<T,E> result, E error, bool fromFunc)
+        protected void AssertFailure(Return<T,E> result, E error, bool fromFunc)
         {
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(error);

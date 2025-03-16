@@ -9,15 +9,15 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is false. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result<T>> Ensure<T>(this ValueTask<Result<T>> resultTask, Func<T, ValueTask<bool>> valueTaskPredicate, string errorMessage)
+        public static async ValueTask<Return<T>> Ensure<T>(this ValueTask<Return<T>> resultTask, Func<T, ValueTask<bool>> valueTaskPredicate, Exception errorMessage)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
 
             if (result.IsFailure)
                 return result;
 
             if (!await valueTaskPredicate(result.Value))
-                return Result.Failure<T>(errorMessage);
+                return Return.Failure<T>(errorMessage);
 
             return result;
         }
@@ -25,15 +25,15 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is false. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result<T, E>> Ensure<T, E>(this ValueTask<Result<T, E>> resultTask, Func<T, ValueTask<bool>> valueTaskPredicate, E error)
+        public static async ValueTask<Return<T, E>> Ensure<T, E>(this ValueTask<Return<T, E>> resultTask, Func<T, ValueTask<bool>> valueTaskPredicate, E error)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
 
             if (result.IsFailure)
                 return result;
 
             if (!await valueTaskPredicate(result.Value))
-                return Result.Failure<T, E>(error);
+                return Return.Failure<T, E>(error);
 
             return result;
         }
@@ -41,15 +41,15 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is false. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result<T, E>> Ensure<T, E>(this ValueTask<Result<T, E>> resultTask, Func<T, ValueTask<bool>> valueTaskPredicate, Func<T, E> valueTaskErrorPredicate)
+        public static async ValueTask<Return<T, E>> Ensure<T, E>(this ValueTask<Return<T, E>> resultTask, Func<T, ValueTask<bool>> valueTaskPredicate, Func<T, E> valueTaskErrorPredicate)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
 
             if (result.IsFailure)
                 return result;
 
             if (!await valueTaskPredicate(result.Value))
-                return Result.Failure<T, E>(valueTaskErrorPredicate(result.Value));
+                return Return.Failure<T, E>(valueTaskErrorPredicate(result.Value));
 
             return result;
         }
@@ -57,15 +57,15 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is false. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result<T, E>> Ensure<T, E>(this ValueTask<Result<T, E>> resultTask, Func<T, ValueTask<bool>> valueTaskPredicate, Func<T, ValueTask<E>> valueTaskErrorPredicate)
+        public static async ValueTask<Return<T, E>> Ensure<T, E>(this ValueTask<Return<T, E>> resultTask, Func<T, ValueTask<bool>> valueTaskPredicate, Func<T, ValueTask<E>> valueTaskErrorPredicate)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
 
             if (result.IsFailure)
                 return result;
 
             if (!await valueTaskPredicate(result.Value))
-                return Result.Failure<T, E>(await valueTaskErrorPredicate(result.Value));
+                return Return.Failure<T, E>(await valueTaskErrorPredicate(result.Value));
 
             return result;
         }
@@ -73,15 +73,15 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is false. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result<T>> Ensure<T>(this ValueTask<Result<T>> resultTask, Func<T, ValueTask<bool>> predicateValueTask, Func<T, string> valueTaskErrorPredicate)
+        public static async ValueTask<Return<T>> Ensure<T>(this ValueTask<Return<T>> resultTask, Func<T, ValueTask<bool>> predicateValueTask, Func<T, string> valueTaskErrorPredicate)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
 
             if (result.IsFailure)
                 return result;
 
             if (!await predicateValueTask(result.Value))
-                return Result.Failure<T>(valueTaskErrorPredicate(result.Value));
+                return Return.Failure<T>(valueTaskErrorPredicate(result.Value));
 
             return result;
         }
@@ -89,15 +89,15 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is false. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result<T>> Ensure<T>(this ValueTask<Result<T>> resultTask, Func<T, ValueTask<bool>> valueTaskPredicate, Func<T, ValueTask<string>> valueTaskErrorPredicate)
+        public static async ValueTask<Return<T>> Ensure<T>(this ValueTask<Return<T>> resultTask, Func<T, ValueTask<bool>> valueTaskPredicate, Func<T, ValueTask<string>> valueTaskErrorPredicate)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
 
             if (result.IsFailure)
                 return result;
 
             if (!await valueTaskPredicate(result.Value))
-                return Result.Failure<T>(await valueTaskErrorPredicate(result.Value));
+                return Return.Failure<T>(await valueTaskErrorPredicate(result.Value));
 
             return result;
         }
@@ -105,15 +105,15 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is false. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result> Ensure(this ValueTask<Result> resultTask, Func<ValueTask<bool>> valueTaskPredicate, string errorMessage)
+        public static async ValueTask<Return> Ensure(this ValueTask<Return> resultTask, Func<ValueTask<bool>> valueTaskPredicate, Exception errorMessage)
         {
-            Result result = await resultTask;
+            Return result = await resultTask;
 
             if (result.IsFailure)
                 return result;
 
             if (!await valueTaskPredicate())
-                return Result.Failure(errorMessage);
+                return Return.Failure(errorMessage);
 
             return result;
         }
@@ -121,9 +121,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is a failure result. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result> Ensure(this ValueTask<Result> resultTask, Func<ValueTask<Result>> valueTaskPredicate)
+        public static async ValueTask<Return> Ensure(this ValueTask<Return> resultTask, Func<ValueTask<Return>> valueTaskPredicate)
         {
-          Result result = await resultTask;
+          Return result = await resultTask;
           
           if (result.IsFailure)
             return result;
@@ -131,7 +131,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
           var predicateResult = await valueTaskPredicate();
           
           if (predicateResult.IsFailure)
-            return Result.Failure(predicateResult.Error);
+            return Return.Failure(predicateResult.Error);
 
           return result;
         }
@@ -139,9 +139,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is a failure result. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result<T>> Ensure<T>(this ValueTask<Result<T>> resultTask, Func<ValueTask<Result>> valueTaskPredicate)
+        public static async ValueTask<Return<T>> Ensure<T>(this ValueTask<Return<T>> resultTask, Func<ValueTask<Return>> valueTaskPredicate)
         {
-          Result<T> result = await resultTask;
+          Return<T> result = await resultTask;
           
           if (result.IsFailure)
             return result;
@@ -149,7 +149,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
           var predicateResult = await valueTaskPredicate();
           
           if (predicateResult.IsFailure)
-            return Result.Failure<T>(predicateResult.Error);
+            return Return.Failure<T>(predicateResult.Error);
 
           return result;
         }
@@ -157,9 +157,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is a failure result. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result> Ensure<T>(this ValueTask<Result> resultTask, Func<ValueTask<Result<T>>> valueTaskPredicate)
+        public static async ValueTask<Return> Ensure<T>(this ValueTask<Return> resultTask, Func<ValueTask<Return<T>>> valueTaskPredicate)
         {
-          Result result = await resultTask;
+          Return result = await resultTask;
           
           if (result.IsFailure)
             return result;
@@ -167,7 +167,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
           var predicateResult = await valueTaskPredicate();
           
           if (predicateResult.IsFailure)
-            return Result.Failure<T>(predicateResult.Error);
+            return Return.Failure<T>(predicateResult.Error);
 
           return result;
         }
@@ -175,9 +175,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is a failure result. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result<T>> Ensure<T>(this ValueTask<Result<T>> resultTask, Func<ValueTask<Result<T>>> valueTaskPredicate)
+        public static async ValueTask<Return<T>> Ensure<T>(this ValueTask<Return<T>> resultTask, Func<ValueTask<Return<T>>> valueTaskPredicate)
         {
-          Result<T> result = await resultTask;
+          Return<T> result = await resultTask;
           
           if (result.IsFailure)
             return result;
@@ -185,7 +185,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
           var predicateResult = await valueTaskPredicate();
           
           if (predicateResult.IsFailure)
-            return Result.Failure<T>(predicateResult.Error);
+            return Return.Failure<T>(predicateResult.Error);
         
           return result;
         }
@@ -193,9 +193,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is a failure result. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result<T>> Ensure<T>(this ValueTask<Result<T>> resultTask, Func<T,ValueTask<Result>> valueTaskPredicate)
+        public static async ValueTask<Return<T>> Ensure<T>(this ValueTask<Return<T>> resultTask, Func<T,ValueTask<Return>> valueTaskPredicate)
         {
-          Result<T> result = await resultTask;
+          Return<T> result = await resultTask;
           
           if (result.IsFailure)
             return result;
@@ -203,7 +203,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
           var predicateResult = await valueTaskPredicate(result.Value);
           
           if (predicateResult.IsFailure)
-            return Result.Failure<T>(predicateResult.Error);
+            return Return.Failure<T>(predicateResult.Error);
 
           return result;
         }
@@ -211,9 +211,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Returns a new failure result if the predicate is a failure result. Otherwise returns the starting result.
         /// </summary>
-        public static async ValueTask<Result<T>> Ensure<T>(this ValueTask<Result<T>> resultTask, Func<T,ValueTask<Result<T>>> valueTaskPredicate)
+        public static async ValueTask<Return<T>> Ensure<T>(this ValueTask<Return<T>> resultTask, Func<T,ValueTask<Return<T>>> valueTaskPredicate)
         {
-          Result<T> result = await resultTask;
+          Return<T> result = await resultTask;
           
           if (result.IsFailure)
             return result;
@@ -221,7 +221,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
           var predicateResult = await valueTaskPredicate(result.Value);
           
           if (predicateResult.IsFailure)
-            return Result.Failure<T>(predicateResult.Error);
+            return Return.Failure<T>(predicateResult.Error);
 
           return result;
         }

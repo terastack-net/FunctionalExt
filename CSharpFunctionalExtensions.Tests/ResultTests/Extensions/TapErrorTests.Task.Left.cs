@@ -11,9 +11,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false)]
         public async Task TapError_Task_Left_executes_action_on_result_failure_and_returns_self(bool isSuccess)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
-            Result returned = await result.AsTask().TapError(Action);
+            Return returned = await result.AsTask().TapError(Action);
 
             actionExecuted.Should().Be(!isSuccess);
             result.Should().Be(returned);
@@ -24,9 +24,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false)]
         public async Task TapError_Task_Left_executes_action_string_on_result_failure_and_returns_self(bool isSuccess)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
-            Result returned = await result.AsTask().TapError(ActionString);
+            Return returned = await result.AsTask().TapError(ActionString);
 
             actionExecuted.Should().Be(!isSuccess);
             result.Should().Be(returned);
@@ -37,9 +37,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false)]
         public async Task TapError_Task_Left_T_executes_action_on_result_failure_and_returns_self(bool isSuccess)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
-            Result<T> returned = await result.AsTask().TapError(Action);
+            Return<T> returned = await result.AsTask().TapError(Action);
 
             actionExecuted.Should().Be(!isSuccess);
             result.Should().Be(returned);
@@ -50,9 +50,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false)]
         public async Task TapError_Task_Left_T_executes_action_string_on_result_failure_and_returns_self(bool isSuccess)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
-            Result<T> returned = await result.AsTask().TapError(ActionString);
+            Return<T> returned = await result.AsTask().TapError(ActionString);
 
             actionExecuted.Should().Be(!isSuccess);
             result.Should().Be(returned);
@@ -89,9 +89,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false)]
         public async Task TapError_Task_Left_T_E_executes_action_on_result_failure_and_returns_self(bool isSuccess)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
-            Result<T, E> returned = await result.AsTask().TapError(Action);
+            Return<T, E> returned = await result.AsTask().TapError(Action);
 
             actionExecuted.Should().Be(!isSuccess);
             result.Should().Be(returned);
@@ -102,9 +102,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false)]
         public async Task TapError_Task_Left_T_E_executes_action_T_on_result_failure_and_returns_self(bool isSuccess)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
-            Result<T, E> returned = await result.AsTask().TapError(ActionError);
+            Return<T, E> returned = await result.AsTask().TapError(ActionError);
 
             actionExecuted.Should().Be(!isSuccess);
             result.Should().Be(returned);

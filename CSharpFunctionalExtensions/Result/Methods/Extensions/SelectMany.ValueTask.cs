@@ -9,24 +9,24 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     This method should be used in linq queries. We recommend using Bind method.
         /// </summary>
-        public static async ValueTask<Result<TR>> SelectMany<T, TK, TR>(
-            this ValueTask<Result<T>> resultTask,
-            Func<T, ValueTask<Result<TK>>> valueTask,
+        public static async ValueTask<Return<TR>> SelectMany<T, TK, TR>(
+            this ValueTask<Return<T>> resultTask,
+            Func<T, ValueTask<Return<TK>>> valueTask,
             Func<T, TK, TR> project)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
             return await result.SelectMany(valueTask, project);
         }
 
         /// <summary>
         ///     This method should be used in linq queries. We recommend using Bind method.
         /// </summary>
-        public static async ValueTask<Result<TR, TE>> SelectMany<T, TK, TE, TR>(
-            this ValueTask<Result<T, TE>> resultTask,
-            Func<T, ValueTask<Result<TK, TE>>> valueTask,
+        public static async ValueTask<Return<TR, TE>> SelectMany<T, TK, TE, TR>(
+            this ValueTask<Return<T, TE>> resultTask,
+            Func<T, ValueTask<Return<TK, TE>>> valueTask,
             Func<T, TK, TR> project)
         {
-            Result<T, TE> result = await resultTask;
+            Return<T, TE> result = await resultTask;
             return await result.SelectMany(valueTask, project);
         }
     }

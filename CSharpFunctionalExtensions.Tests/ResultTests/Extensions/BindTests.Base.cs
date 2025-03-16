@@ -17,73 +17,73 @@ namespace CSharpFunctionalExtensions.Tests
 
         protected bool FuncExecuted => _funcExecuted;
 
-        protected Result Success()
+        protected Return Success()
         {
             _funcExecuted = true;
-            return Result.Success();
+            return Return.Success();
         }
 
-        protected Result Failure()
+        protected Return Failure()
         {
             _funcExecuted = false;
-            return Result.Failure(ErrorMessage);
+            return Return.Failure(ErrorMessage);
         }
 
-        protected Result<T> Success_T(T value)
+        protected Return<T> Success_T(T value)
         {
             _funcExecuted = true;
             FuncParam = value;
-            return Result.Success(value);
+            return Return.Success(value);
         }
 
-        protected Result<T> Failure_T()
+        protected Return<T> Failure_T()
         {
             _funcExecuted = false;
-            return Result.Failure<T>(ErrorMessage);
+            return Return.Failure<T>(ErrorMessage);
         }
 
-        protected Result<T, E> Failure_T_E()
+        protected Return<T, E> Failure_T_E()
         {
             _funcExecuted = false;
-            return Result.Failure<T, E>(E.Value);
+            return Return.Failure<T, E>(E.Value);
         }
 
-        protected Result<K> Success_K()
+        protected Return<K> Success_K()
         {
             _funcExecuted = true;
-            return Result.Success(K.Value);
+            return Return.Success(K.Value);
         }
-        protected Result<K> Failure_K()
+        protected Return<K> Failure_K()
         {
             _funcExecuted = false;
-            return Result.Failure<K>(ErrorMessage);
+            return Return.Failure<K>(ErrorMessage);
         }
 
-        protected Result<K> Success_T_Func_K(T value)
-        {
-            _funcExecuted = true;
-            FuncParam = value;
-            return Result.Success(K.Value);
-        }
-
-        protected Result<K, E> Success_T_E_Func_K(T value)
+        protected Return<K> Success_T_Func_K(T value)
         {
             _funcExecuted = true;
             FuncParam = value;
-            return Result.Success<K, E>(K.Value);
+            return Return.Success(K.Value);
         }
 
-        protected Result<K, E> Failure_T_E_Func_K(T value)
+        protected Return<K, E> Success_T_E_Func_K(T value)
+        {
+            _funcExecuted = true;
+            FuncParam = value;
+            return Return.Success<K, E>(K.Value);
+        }
+
+        protected Return<K, E> Failure_T_E_Func_K(T value)
         {
             _funcExecuted = false;
             FuncParam = value;
-            return Result.Failure<K, E>(E.Value);
+            return Return.Failure<K, E>(E.Value);
         }
 
-        protected Result<T, E> Success_T_E()
+        protected Return<T, E> Success_T_E()
         {
             _funcExecuted = true;
-            return Result.Success<T, E>(T.Value);
+            return Return.Success<T, E>(T.Value);
         }
 
         protected UnitResult<E> UnitResult_Success_E()
@@ -105,57 +105,57 @@ namespace CSharpFunctionalExtensions.Tests
             return UnitResult.Success<E>();
         }
 
-        protected Task<Result> Task_Success()
+        protected Task<Return> Task_Success()
         {
             return Success().AsTask();
         }
 
-        protected Task<Result> Task_Failure()
+        protected Task<Return> Task_Failure()
         {
             return Failure().AsTask();
         }
 
-        protected Task<Result<T>> Task_Success_T(T value)
+        protected Task<Return<T>> Task_Success_T(T value)
         {
             return Success_T(value).AsTask();
         }
 
-        protected Task<Result<T>> Task_Failure_T()
+        protected Task<Return<T>> Task_Failure_T()
         {
             return Failure_T().AsTask();
         }
 
-        protected Task<Result<T, E>> Task_Failure_T_E()
+        protected Task<Return<T, E>> Task_Failure_T_E()
         {
             return Failure_T_E().AsTask();
         }
 
-        protected Task<Result<K>> Task_Success_K()
+        protected Task<Return<K>> Task_Success_K()
         {
             return Success_K().AsTask();
         }
 
-        protected Task<Result<K>> Task_Failure_K()
+        protected Task<Return<K>> Task_Failure_K()
         {
             return Failure_K().AsTask();
         }
 
-        protected Task<Result<K>> Func_T_Task_Success_K(T value)
+        protected Task<Return<K>> Func_T_Task_Success_K(T value)
         {
             return Success_T_Func_K(value).AsTask();
         }
 
-        protected Task<Result<K, E>> Task_Success_K_E(T value)
+        protected Task<Return<K, E>> Task_Success_K_E(T value)
         {
             return Success_T_E_Func_K(value).AsTask();
         }
 
-        protected Task<Result<K, E>> Task_Failure_K_E(T value)
+        protected Task<Return<K, E>> Task_Failure_K_E(T value)
         {
             return Failure_T_E_Func_K(value).AsTask();            
         }
 
-        protected Task<Result<T, E>> Task_Success_T_E()
+        protected Task<Return<T, E>> Task_Success_T_E()
         {            
             return Success_T_E().AsTask();
         }
@@ -175,60 +175,60 @@ namespace CSharpFunctionalExtensions.Tests
             return UnitResult_E_T(value).AsTask();
         }
 
-        protected ValueTask<Result> ValueTask_Success()
+        protected ValueTask<Return> ValueTask_Success()
         {
             return Success().AsValueTask();
         }
 
-        protected ValueTask<Result> ValueTask_Failure()
+        protected ValueTask<Return> ValueTask_Failure()
         {
             return Failure().AsValueTask();
         }
 
-        protected ValueTask<Result<T>> ValueTask_Success_T(T value)
+        protected ValueTask<Return<T>> ValueTask_Success_T(T value)
         {
             return Success_T(value).AsValueTask();
         }
 
-        protected ValueTask<Result<T>> ValueTask_Failure_T()
+        protected ValueTask<Return<T>> ValueTask_Failure_T()
         {
             return Failure_T().AsValueTask();
         }
-        protected ValueTask<Result<T, E>> ValueTask_Success_T_E()
+        protected ValueTask<Return<T, E>> ValueTask_Success_T_E()
         {
             return Success_T_E().AsValueTask();
         }
 
-        protected ValueTask<Result<T, E>> ValueTask_Failure_T_E()
+        protected ValueTask<Return<T, E>> ValueTask_Failure_T_E()
         {
             return Failure_T_E().AsValueTask();
         }
 
-        protected ValueTask<Result<K>> ValueTask_Success_K()
+        protected ValueTask<Return<K>> ValueTask_Success_K()
         {
             return Success_K().AsValueTask();
         }
-        protected ValueTask<Result<K>> ValueTask_Failure_K()
+        protected ValueTask<Return<K>> ValueTask_Failure_K()
         {
             return Failure_K().AsValueTask();
         }
 
-        protected ValueTask<Result<K>> Func_T_ValueTask_Success_K(T value)
+        protected ValueTask<Return<K>> Func_T_ValueTask_Success_K(T value)
         {
             return Success_T_Func_K(value).AsValueTask();
         }
 
-        protected ValueTask<Result<K, E>> ValueTask_Success_K_E(T value)
+        protected ValueTask<Return<K, E>> ValueTask_Success_K_E(T value)
         {
             return Success_T_E_Func_K(value).AsValueTask();
         }
 
-        protected ValueTask<Result<K, E>> ValueTask_Failure_K_E(T value)
+        protected ValueTask<Return<K, E>> ValueTask_Failure_K_E(T value)
         {
             return Failure_T_E_Func_K(value).AsValueTask();
         }
 
-        protected ValueTask<Result<T, E>> Func_ValueTask_Success_T_E()
+        protected ValueTask<Return<T, E>> Func_ValueTask_Success_T_E()
         {
             return Success_T_E().AsValueTask();
         }
@@ -248,21 +248,21 @@ namespace CSharpFunctionalExtensions.Tests
             return UnitResult_E_T(value).AsValueTask();
         }
 
-        protected void AssertFailure(Result output)
+        protected void AssertFailure(Return output)
         {
             _funcExecuted.Should().BeFalse();
             output.IsFailure.Should().BeTrue();
             output.Error.Should().Be(ErrorMessage);
         }
 
-        protected void AssertFailure(Result<K> output)
+        protected void AssertFailure(Return<K> output)
         {
             _funcExecuted.Should().BeFalse();
             output.IsFailure.Should().BeTrue();
             output.Error.Should().Be(ErrorMessage);
         }
 
-        protected void AssertFailure(Result<K, E> output)
+        protected void AssertFailure(Return<K, E> output)
         {
             _funcExecuted.Should().BeFalse();
             output.IsFailure.Should().BeTrue();
@@ -276,20 +276,20 @@ namespace CSharpFunctionalExtensions.Tests
             output.Error.Should().Be(E.Value);
         }
 
-        protected void AssertSuccess(Result output)
+        protected void AssertSuccess(Return output)
         {
             _funcExecuted.Should().BeTrue();
             output.IsSuccess.Should().BeTrue();
         }
 
-        protected void AssertSuccess(Result<K> output)
+        protected void AssertSuccess(Return<K> output)
         {
             _funcExecuted.Should().BeTrue();
             output.IsSuccess.Should().BeTrue();
             output.Value.Should().Be(K.Value);
         }
 
-        protected void AssertSuccess(Result<K, E> output)
+        protected void AssertSuccess(Return<K, E> output)
         {
             _funcExecuted.Should().BeTrue();
             output.IsSuccess.Should().BeTrue();

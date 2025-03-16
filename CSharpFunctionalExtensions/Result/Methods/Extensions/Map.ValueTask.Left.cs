@@ -9,32 +9,32 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Creates a new result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async ValueTask<Result<K, E>> Map<T, K, E>(
-            this ValueTask<Result<T, E>> resultTask,
+        public static async ValueTask<Return<K, E>> Map<T, K, E>(
+            this ValueTask<Return<T, E>> resultTask,
             Func<T, K> valueTask
         )
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
             return result.Map(valueTask);
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async ValueTask<Result<K, E>> Map<T, K, E, TContext>(
-            this ValueTask<Result<T, E>> resultTask,
+        public static async ValueTask<Return<K, E>> Map<T, K, E, TContext>(
+            this ValueTask<Return<T, E>> resultTask,
             Func<T, TContext, K> valueTask,
             TContext context
         )
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
             return result.Map(valueTask, context);
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async ValueTask<Result<K, E>> Map<K, E>(
+        public static async ValueTask<Return<K, E>> Map<K, E>(
             this ValueTask<UnitResult<E>> resultTask,
             Func<K> valueTask
         )
@@ -46,7 +46,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Creates a new result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async ValueTask<Result<K, E>> Map<K, E, TContext>(
+        public static async ValueTask<Return<K, E>> Map<K, E, TContext>(
             this ValueTask<UnitResult<E>> resultTask,
             Func<TContext, K> valueTask,
             TContext context
@@ -59,50 +59,50 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Creates a new result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async ValueTask<Result<K>> Map<T, K>(
-            this ValueTask<Result<T>> resultTask,
+        public static async ValueTask<Return<K>> Map<T, K>(
+            this ValueTask<Return<T>> resultTask,
             Func<T, K> valueTask
         )
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
             return result.Map(valueTask);
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async ValueTask<Result<K>> Map<T, K, TContext>(
-            this ValueTask<Result<T>> resultTask,
+        public static async ValueTask<Return<K>> Map<T, K, TContext>(
+            this ValueTask<Return<T>> resultTask,
             Func<T, TContext, K> valueTask,
             TContext context
         )
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
             return result.Map(valueTask, context);
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async ValueTask<Result<K>> Map<K>(
-            this ValueTask<Result> resultTask,
+        public static async ValueTask<Return<K>> Map<K>(
+            this ValueTask<Return> resultTask,
             Func<K> valueTask
         )
         {
-            Result result = await resultTask;
+            Return result = await resultTask;
             return result.Map(valueTask);
         }
 
         /// <summary>
         ///     Creates a new result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async ValueTask<Result<K>> Map<K, TContext>(
-            this ValueTask<Result> resultTask,
+        public static async ValueTask<Return<K>> Map<K, TContext>(
+            this ValueTask<Return> resultTask,
             Func<TContext, K> valueTask,
             TContext context
         )
         {
-            Result result = await resultTask;
+            Return result = await resultTask;
             return result.Map(valueTask, context);
         }
     }

@@ -13,7 +13,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public async Task Check_ValueTask_Right_T_func_result(bool resultSuccess, bool funcSuccess)
         {
-            Result<T> result = Result.SuccessIf(resultSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(resultSuccess, T.Value, ErrorMessage);
 
             var returned = await result.Check(_ => GetResult(funcSuccess).AsValueTask());
 
@@ -27,7 +27,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public async Task Check_ValueTask_Right_T_func_result_KE(bool resultSuccess, bool funcSuccess)
         {
-            Result<T, E> result = Result.SuccessIf(resultSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(resultSuccess, T.Value, E.Value);
 
             var returned = await result.Check(Func_ValueTask_Result_KE(funcSuccess));
 
@@ -41,7 +41,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public async Task Check_ValueTask_Right_T_func_result_K(bool resultSuccess, bool funcSuccess)
         {
-            Result<T> result = Result.SuccessIf(resultSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(resultSuccess, T.Value, ErrorMessage);
 
             var returned = await result.Check(Func_ValueTask_Result_K(funcSuccess));
 
@@ -55,7 +55,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public async Task Check_ValueTask_Right_T_func_result_TE(bool resultSuccess, bool funcSuccess)
         {
-            Result<T, E> result = Result.SuccessIf(resultSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(resultSuccess, T.Value, E.Value);
 
             var returned = await result.Check(Func_ValueTask_Result_TE(funcSuccess));
 
@@ -69,7 +69,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public async Task Check_ValueTask_Right_T_func_UnitResult_E(bool resultSuccess, bool funcSuccess)
         {
-            UnitResult<E> result = Result.SuccessIf(resultSuccess, T.Value, E.Value);
+            UnitResult<E> result = Return.SuccessIf(resultSuccess, T.Value, E.Value);
 
             var returned = await result.Check(Func_ValueTask_UnitResult_E(funcSuccess));
 

@@ -17,9 +17,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
-            Result<T> returned = await result.MapIf(condition, GetValueTaskAction());
+            Return<T> returned = await result.MapIf(condition, GetValueTaskAction());
 
             actionExecuted.Should().Be(isSuccess && condition);
             returned.Should().Be(GetExpectedValueResult(isSuccess, condition));
@@ -35,9 +35,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
-            Result<T, E> returned = await result.MapIf(condition, GetValueTaskAction());
+            Return<T, E> returned = await result.MapIf(condition, GetValueTaskAction());
 
             actionExecuted.Should().Be(isSuccess && condition);
             returned.Should().Be(GetExpectedValueErrorResult(isSuccess, condition));
@@ -53,9 +53,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
-            Result<T> returned = await result.MapIf(
+            Return<T> returned = await result.MapIf(
                 GetValuePredicate(condition),
                 GetValueTaskAction()
             );
@@ -75,9 +75,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
-            Result<T, E> returned = await result.MapIf(
+            Return<T, E> returned = await result.MapIf(
                 GetValuePredicate(condition),
                 GetValueTaskAction()
             );
@@ -97,9 +97,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
-            Result<T> returned = await result.MapIf(
+            Return<T> returned = await result.MapIf(
                 condition,
                 (value, context) =>
                 {
@@ -123,9 +123,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
-            Result<T, E> returned = await result.MapIf(
+            Return<T, E> returned = await result.MapIf(
                 condition,
                 (value, context) =>
                 {
@@ -149,9 +149,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
-            Result<T> returned = await result.MapIf(
+            Return<T> returned = await result.MapIf(
                 (value, context) => GetValuePredicate(condition)(value),
                 (value, context) =>
                 {
@@ -176,9 +176,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
-            Result<T, E> returned = await result.MapIf(
+            Return<T, E> returned = await result.MapIf(
                 (value, context) => GetValuePredicate(condition)(value),
                 (value, context) =>
                 {

@@ -5,13 +5,13 @@ namespace CSharpFunctionalExtensions
 {
     public static partial class ResultExtensions
     {
-        public static async Task<Result> BindIf(this Task<Result> resultTask, bool condition, Func<Result> func)
+        public static async Task<Return> BindIf(this Task<Return> resultTask, bool condition, Func<Return> func)
         {
             var result = await resultTask.DefaultAwait();
             return result.BindIf(condition, func);
         }
 
-        public static async Task<Result<T>> BindIf<T>(this Task<Result<T>> resultTask, bool condition, Func<T, Result<T>> func)
+        public static async Task<Return<T>> BindIf<T>(this Task<Return<T>> resultTask, bool condition, Func<T, Return<T>> func)
         {
             var result = await resultTask.DefaultAwait();
             return result.BindIf(condition, func);
@@ -23,19 +23,19 @@ namespace CSharpFunctionalExtensions
             return result.BindIf(condition, func);
         }
 
-        public static async Task<Result<T, E>> BindIf<T, E>(this Task<Result<T, E>> resultTask, bool condition, Func<T, Result<T, E>> func)
+        public static async Task<Return<T, E>> BindIf<T, E>(this Task<Return<T, E>> resultTask, bool condition, Func<T, Return<T, E>> func)
         {
             var result = await resultTask.DefaultAwait();
             return result.BindIf(condition, func);
         }
 
-        public static async Task<Result> BindIf(this Task<Result> resultTask, Func<bool> predicate, Func<Result> func)
+        public static async Task<Return> BindIf(this Task<Return> resultTask, Func<bool> predicate, Func<Return> func)
         {
             var result = await resultTask.DefaultAwait();
             return result.BindIf(predicate, func);
         }
 
-        public static async Task<Result<T>> BindIf<T>(this Task<Result<T>> resultTask, Func<T, bool> predicate, Func<T, Result<T>> func)
+        public static async Task<Return<T>> BindIf<T>(this Task<Return<T>> resultTask, Func<T, bool> predicate, Func<T, Return<T>> func)
         {
             var result = await resultTask.DefaultAwait();
             return result.BindIf(predicate, func);
@@ -47,7 +47,7 @@ namespace CSharpFunctionalExtensions
             return result.BindIf(predicate, func);
         }
 
-        public static async Task<Result<T, E>> BindIf<T, E>(this Task<Result<T, E>> resultTask, Func<T, bool> predicate, Func<T, Result<T, E>> func)
+        public static async Task<Return<T, E>> BindIf<T, E>(this Task<Return<T, E>> resultTask, Func<T, bool> predicate, Func<T, Return<T, E>> func)
         {
             var result = await resultTask.DefaultAwait();
             return result.BindIf(predicate, func);

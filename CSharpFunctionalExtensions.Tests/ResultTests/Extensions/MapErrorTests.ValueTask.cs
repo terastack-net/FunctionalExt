@@ -12,10 +12,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_returns_success()
         {
-            ValueTask<Result> result = Result.Success().AsValueTask();
+            ValueTask<Return> result = Return.Success().AsValueTask();
             var invocations = 0;
 
-            Result actual = await result.MapError(error =>
+            Return actual = await result.MapError(error =>
             {
                 invocations++;
                 return $"{error} {error}".AsCompletedValueTask();
@@ -28,10 +28,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_returns_success_with_context()
         {
-            ValueTask<Result> result = Result.Success().AsValueTask();
+            ValueTask<Return> result = Return.Success().AsValueTask();
             var invocations = 0;
 
-            Result actual = await result.MapError(
+            Return actual = await result.MapError(
                 (error, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -48,10 +48,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_returns_new_failure()
         {
-            ValueTask<Result> result = Result.Failure(ErrorMessage).AsValueTask();
+            ValueTask<Return> result = Return.Failure(ErrorMessage).AsValueTask();
             var invocations = 0;
 
-            Result actual = await result.MapError(error =>
+            Return actual = await result.MapError(error =>
             {
                 invocations++;
                 return $"{error} {error}".AsCompletedValueTask();
@@ -65,10 +65,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_returns_new_failure_with_context()
         {
-            ValueTask<Result> result = Result.Failure(ErrorMessage).AsValueTask();
+            ValueTask<Return> result = Return.Failure(ErrorMessage).AsValueTask();
             var invocations = 0;
 
-            Result actual = await result.MapError(
+            Return actual = await result.MapError(
                 (error, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -86,7 +86,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_returns_UnitResult_success()
         {
-            ValueTask<Result> result = Result.Success().AsValueTask();
+            ValueTask<Return> result = Return.Success().AsValueTask();
             var invocations = 0;
 
             UnitResult<E> actual = await result.MapError(error =>
@@ -102,7 +102,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_returns_UnitResult_success_with_context()
         {
-            ValueTask<Result> result = Result.Success().AsValueTask();
+            ValueTask<Return> result = Return.Success().AsValueTask();
             var invocations = 0;
 
             UnitResult<E> actual = await result.MapError(
@@ -122,7 +122,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_returns_new_UnitResult_failure()
         {
-            ValueTask<Result> result = Result.Failure(ErrorMessage).AsValueTask();
+            ValueTask<Return> result = Return.Failure(ErrorMessage).AsValueTask();
             var invocations = 0;
 
             UnitResult<E> actual = await result.MapError(error =>
@@ -139,7 +139,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_returns_new_UnitResult_failure_with_context()
         {
-            ValueTask<Result> result = Result.Failure(ErrorMessage).AsValueTask();
+            ValueTask<Return> result = Return.Failure(ErrorMessage).AsValueTask();
             var invocations = 0;
 
             UnitResult<E> actual = await result.MapError(
@@ -160,10 +160,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_returns_success()
         {
-            ValueTask<Result<T>> result = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> result = Return.Success(T.Value).AsValueTask();
             var invocations = 0;
 
-            Result<T> actual = await result.MapError(error =>
+            Return<T> actual = await result.MapError(error =>
             {
                 invocations++;
                 return $"{error} {error}".AsCompletedValueTask();
@@ -177,10 +177,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_returns_success_with_context()
         {
-            ValueTask<Result<T>> result = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> result = Return.Success(T.Value).AsValueTask();
             var invocations = 0;
 
-            Result<T> actual = await result.MapError(
+            Return<T> actual = await result.MapError(
                 (error, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -198,10 +198,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_returns_new_failure()
         {
-            ValueTask<Result<T>> result = Result.Failure<T>(ErrorMessage).AsValueTask();
+            ValueTask<Return<T>> result = Return.Failure<T>(ErrorMessage).AsValueTask();
             var invocations = 0;
 
-            Result<T> actual = await result.MapError(error =>
+            Return<T> actual = await result.MapError(error =>
             {
                 invocations++;
                 return $"{error} {error}".AsCompletedValueTask();
@@ -215,10 +215,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_returns_new_failure_with_context()
         {
-            ValueTask<Result<T>> result = Result.Failure<T>(ErrorMessage).AsValueTask();
+            ValueTask<Return<T>> result = Return.Failure<T>(ErrorMessage).AsValueTask();
             var invocations = 0;
 
-            Result<T> actual = await result.MapError(
+            Return<T> actual = await result.MapError(
                 (error, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -239,7 +239,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             ValueTask<UnitResult<E>> result = UnitResult.Success<E>().AsValueTask();
             var invocations = 0;
 
-            Result actual = await result.MapError(error =>
+            Return actual = await result.MapError(error =>
             {
                 invocations++;
                 return $"{error} {error}".AsCompletedValueTask();
@@ -255,7 +255,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             ValueTask<UnitResult<E>> result = UnitResult.Success<E>().AsValueTask();
             var invocations = 0;
 
-            Result actual = await result.MapError(
+            Return actual = await result.MapError(
                 (error, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -275,7 +275,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             ValueTask<UnitResult<E>> result = UnitResult.Failure(E.Value).AsValueTask();
             var invocations = 0;
 
-            Result actual = await result.MapError(error =>
+            Return actual = await result.MapError(error =>
             {
                 error.Should().Be(E.Value);
                 invocations++;
@@ -293,7 +293,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             ValueTask<UnitResult<E>> result = UnitResult.Failure(E.Value).AsValueTask();
             var invocations = 0;
 
-            Result actual = await result.MapError(
+            Return actual = await result.MapError(
                 (error, context) =>
                 {
                     error.Should().Be(E.Value);
@@ -388,10 +388,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_E_returns_success()
         {
-            ValueTask<Result<T>> result = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> result = Return.Success(T.Value).AsValueTask();
             var invocations = 0;
 
-            Result<T, E> actual = await result.MapError(_ =>
+            Return<T, E> actual = await result.MapError(_ =>
             {
                 invocations++;
                 return E.Value.AsCompletedValueTask();
@@ -405,10 +405,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_E_returns_success_with_context()
         {
-            ValueTask<Result<T>> result = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> result = Return.Success(T.Value).AsValueTask();
             var invocations = 0;
 
-            Result<T, E> actual = await result.MapError(
+            Return<T, E> actual = await result.MapError(
                 (_, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -426,10 +426,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_E_returns_new_failure()
         {
-            ValueTask<Result<T>> result = Result.Failure<T>(ErrorMessage).AsValueTask();
+            ValueTask<Return<T>> result = Return.Failure<T>(ErrorMessage).AsValueTask();
             var invocations = 0;
 
-            Result<T, E> actual = await result.MapError(error =>
+            Return<T, E> actual = await result.MapError(error =>
             {
                 error.Should().Be(ErrorMessage);
                 invocations++;
@@ -444,10 +444,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_E_returns_new_failure_with_context()
         {
-            ValueTask<Result<T>> result = Result.Failure<T>(ErrorMessage).AsValueTask();
+            ValueTask<Return<T>> result = Return.Failure<T>(ErrorMessage).AsValueTask();
             var invocations = 0;
 
-            Result<T, E> actual = await result.MapError(
+            Return<T, E> actual = await result.MapError(
                 (error, context) =>
                 {
                     error.Should().Be(ErrorMessage);
@@ -466,10 +466,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_E_string_returns_success()
         {
-            ValueTask<Result<T, E>> result = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> result = Return.Success<T, E>(T.Value).AsValueTask();
             var invocations = 0;
 
-            Result<T> actual = await result.MapError(_ =>
+            Return<T> actual = await result.MapError(_ =>
             {
                 invocations++;
                 return "error".AsCompletedValueTask();
@@ -483,10 +483,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_E_string_returns_success_with_context()
         {
-            ValueTask<Result<T, E>> result = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> result = Return.Success<T, E>(T.Value).AsValueTask();
             var invocations = 0;
 
-            Result<T> actual = await result.MapError(
+            Return<T> actual = await result.MapError(
                 (_, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -504,10 +504,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_E_E2_returns_success()
         {
-            ValueTask<Result<T, E>> result = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> result = Return.Success<T, E>(T.Value).AsValueTask();
             var invocations = 0;
 
-            Result<T, E2> actual = await result.MapError(_ =>
+            Return<T, E2> actual = await result.MapError(_ =>
             {
                 invocations++;
                 return E2.Value.AsCompletedValueTask();
@@ -521,10 +521,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_E_E2_returns_success_with_context()
         {
-            ValueTask<Result<T, E>> result = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> result = Return.Success<T, E>(T.Value).AsValueTask();
             var invocations = 0;
 
-            Result<T, E2> actual = await result.MapError(
+            Return<T, E2> actual = await result.MapError(
                 (_, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -542,10 +542,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_E_string_returns_new_failure()
         {
-            ValueTask<Result<T, E>> result = Result.Failure<T, E>(E.Value).AsValueTask();
+            ValueTask<Return<T, E>> result = Return.Failure<T, E>(E.Value).AsValueTask();
             var invocations = 0;
 
-            Result<T> actual = await result.MapError(error =>
+            Return<T> actual = await result.MapError(error =>
             {
                 error.Should().Be(E.Value);
                 invocations++;
@@ -560,10 +560,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_E_string_returns_new_failure_with_context()
         {
-            ValueTask<Result<T, E>> result = Result.Failure<T, E>(E.Value).AsValueTask();
+            ValueTask<Return<T, E>> result = Return.Failure<T, E>(E.Value).AsValueTask();
             var invocations = 0;
 
-            Result<T> actual = await result.MapError(
+            Return<T> actual = await result.MapError(
                 (error, context) =>
                 {
                     error.Should().Be(E.Value);
@@ -582,10 +582,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_E_E2_returns_new_failure()
         {
-            ValueTask<Result<T, E>> result = Result.Failure<T, E>(E.Value).AsValueTask();
+            ValueTask<Return<T, E>> result = Return.Failure<T, E>(E.Value).AsValueTask();
             var invocations = 0;
 
-            Result<T, E2> actual = await result.MapError(error =>
+            Return<T, E2> actual = await result.MapError(error =>
             {
                 error.Should().Be(E.Value);
                 invocations++;
@@ -600,10 +600,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapError_ValueTask_T_E_E2_returns_new_failure_with_context()
         {
-            ValueTask<Result<T, E>> result = Result.Failure<T, E>(E.Value).AsValueTask();
+            ValueTask<Return<T, E>> result = Return.Failure<T, E>(E.Value).AsValueTask();
             var invocations = 0;
 
-            Result<T, E2> actual = await result.MapError(
+            Return<T, E2> actual = await result.MapError(
                 (error, context) =>
                 {
                     error.Should().Be(E.Value);

@@ -11,7 +11,7 @@ namespace CSharpFunctionalExtensions.Json.Serialization
         {
             if (!typeToConvert.IsGenericType) return false;
 
-            return typeToConvert.GetGenericTypeDefinition() == typeof(Result<>);
+            return typeToConvert.GetGenericTypeDefinition() == typeof(Return<>);
         }
 
         public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
@@ -25,9 +25,9 @@ namespace CSharpFunctionalExtensions.Json.Serialization
         }
     }
 
-    internal class ResultOfTJsonConverter<T> : JsonConverter<Result<T>>
+    internal class ResultOfTJsonConverter<T> : JsonConverter<Return<T>>
     {
-        public override Result<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Return<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             try
             {
@@ -35,34 +35,34 @@ namespace CSharpFunctionalExtensions.Json.Serialization
             }
             catch (JsonException)
             {
-                return Result.Failure<T>(DtoMessages.ContentJsonNotResult);
+                return Return.Failure<T>(DtoMessages.ContentJsonNotResult);
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, Result<T> value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Return<T> value, JsonSerializerOptions options)
         => JsonSerializer.Serialize(writer, ToResultDto(value), options);
 
-        private static Result<T> ToResult(ResultDto<T>? resultDto)
+        private static Return<T> ToResult(ResultDto<T>? resultDto)
         {
             if (resultDto is not null)
             {
                 if (resultDto.IsSuccess)
                 {
-                    return Result.Success<T>(resultDto.Value!);
+                    return Return.Success<T>(resultDto.Value!);
                 }
 
                 if (resultDto.Error is not null)
                 {
-                    return Result.Failure<T>(resultDto.Error);
+                    return Return.Failure<T>(resultDto.Error);
                 }
 
-                return Result.Failure<T>("ResultDto was not successful and ErrorMessage is null");
+                return Return.Failure<T>("ResultDto was not successful and ErrorMessage is null");
             }
 
-            return Result.Failure<T>(DtoMessages.ContentJsonNotResult);
+            return Return.Failure<T>(DtoMessages.ContentJsonNotResult);
         }
 
-        private static ResultDto<T> ToResultDto(Result<T> result)
+        private static ResultDto<T> ToResultDto(Return<T> result)
         => result.IsSuccess
            ? ResultDto.Success<T>(result.Value)
            : ResultDto.Failure<T>(result.Error);

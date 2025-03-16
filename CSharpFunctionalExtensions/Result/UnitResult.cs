@@ -67,7 +67,7 @@ namespace CSharpFunctionalExtensions
         /// </summary>
         public static UnitResult<E> Success<E>()
         {
-            return Result.Success<E>();
+            return Return.Success<E>();
         }
     }
 }

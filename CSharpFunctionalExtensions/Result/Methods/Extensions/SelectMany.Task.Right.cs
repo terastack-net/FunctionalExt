@@ -8,9 +8,9 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     This method should be used in linq queries. We recommend using Bind method.
         /// </summary>
-        public static Task<Result<TR>> SelectMany<T, TK, TR>(
-            this Result<T> result,
-            Func<T, Task<Result<TK>>> func,
+        public static Task<Return<TR>> SelectMany<T, TK, TR>(
+            this Return<T> result,
+            Func<T, Task<Return<TK>>> func,
             Func<T, TK, TR> project)
         {
             return result
@@ -21,9 +21,9 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     This method should be used in linq queries. We recommend using Bind method.
         /// </summary>
-        public static Task<Result<TR, TE>> SelectMany<T, TK, TE, TR>(
-            this Result<T, TE> result,
-            Func<T, Task<Result<TK, TE>>> func,
+        public static Task<Return<TR, TE>> SelectMany<T, TK, TE, TR>(
+            this Return<T, TE> result,
+            Func<T, Task<Return<TK, TE>>> func,
             Func<T, TK, TR> project)
         {
             return result

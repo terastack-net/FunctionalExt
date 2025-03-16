@@ -5,9 +5,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
 {
     public abstract class TestBase
     {
-        protected const string ErrorMessage = "Error Message";
+        protected static readonly Exception ErrorMessage = new Exception( "Error Message" );
 
-        protected const string ErrorMessage2 = "Error Message2";
+        protected static readonly Exception ErrorMessage2 = new Exception( "Error Message2" );
 
         protected class T
         {

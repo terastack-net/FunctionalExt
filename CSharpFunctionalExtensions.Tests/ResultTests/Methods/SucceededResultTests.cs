@@ -10,7 +10,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Can_create_a_non_generic_version()
         {
-            Result result = Result.Success();
+            Return result = Return.Success();
 
             result.IsFailure.Should().Be(false);
             result.IsSuccess.Should().Be(true);
@@ -21,7 +21,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         {
             var myClass = new MyClass();
 
-            Result<MyClass> result = Result.Success(myClass);
+            Return<MyClass> result = Return.Success(myClass);
 
             result.IsFailure.Should().Be(false);
             result.IsSuccess.Should().Be(true);
@@ -31,7 +31,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Can_create_a_UnitResult()
         {
-            UnitResult<MyErrorClass> result = Result.Success<MyErrorClass>();
+            UnitResult<MyErrorClass> result = Return.Success<MyErrorClass>();
 
             result.IsFailure.Should().Be(false);
             result.IsSuccess.Should().Be(true);
@@ -56,7 +56,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Can_create_without_Value()
         {
-            Result<MyClass> result = Result.Success((MyClass)null);
+            Return<MyClass> result = Return.Success((MyClass)null);
 
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().BeNull();
@@ -65,7 +65,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Cannot_access_Error_non_generic_version()
         {
-            Result result = Result.Success();
+            Return result = Return.Success();
 
             Action action = () =>
             {
@@ -78,7 +78,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Cannot_access_Error_generic_version()
         {
-            Result<MyClass> result = Result.Success(new MyClass());
+            Return<MyClass> result = Return.Success(new MyClass());
 
             Action action = () =>
             {
@@ -91,7 +91,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Cannot_access_Error_generic_error_version()
         {
-            Result<MyClass, MyErrorClass> result = Result.Success<MyClass, MyErrorClass>(new MyClass());
+            Return<MyClass, MyErrorClass> result = Return.Success<MyClass, MyErrorClass>(new MyClass());
 
             Action action = () =>
             {
@@ -104,7 +104,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         [Fact]
         public void Cannot_access_Error_UnitResult_version()
         {
-            UnitResult<MyErrorClass> result = Result.Success<MyErrorClass>();
+            UnitResult<MyErrorClass> result = Return.Success<MyErrorClass>();
 
             Action action = () =>
             {
@@ -118,7 +118,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests
         {
             var myClass = new MyClass();
 
-            Result<MyClass, E> result = Result.Success<MyClass, E>(myClass);
+            Return<MyClass, E> result = Return.Success<MyClass, E>(myClass);
 
             result.IsFailure.Should().Be(false);
             result.IsSuccess.Should().Be(true);

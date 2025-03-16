@@ -11,7 +11,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void Check_T_func_result(bool resultSuccess, bool funcSuccess)
         {
-            Result<T> result = Result.SuccessIf(resultSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(resultSuccess, T.Value, ErrorMessage);
 
             var returned = result.Check(_ => GetResult(funcSuccess));
 
@@ -26,7 +26,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void Check_T_func_result_K(bool resultSuccess, bool funcSuccess)
         {
-            Result<T> result = Result.SuccessIf(resultSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(resultSuccess, T.Value, ErrorMessage);
 
             var returned = result.Check(Func_Result_K(funcSuccess));
 
@@ -40,7 +40,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void Check_T_func_result_KE(bool resultSuccess, bool funcSuccess)
         {
-            Result<T, E> result = Result.SuccessIf(resultSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(resultSuccess, T.Value, E.Value);
 
             var returned = result.Check(Func_Result_KE(funcSuccess));
 
@@ -54,7 +54,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void Check_T_func_result_TE(bool resultSuccess, bool funcSuccess)
         {
-            Result<T, E> result = Result.SuccessIf(resultSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(resultSuccess, T.Value, E.Value);
 
             var returned = result.Check(Func_Result_TE(funcSuccess));
 

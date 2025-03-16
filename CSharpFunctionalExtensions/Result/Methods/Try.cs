@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 
 namespace CSharpFunctionalExtensions
 {
-    public partial struct Result
+    public partial struct Return
     {
         /// <summary>
         ///     Attempts to execute the supplied action. Returns a Result indicating whether the action executed successfully.
         /// </summary>
-        public static Result Try(Action action, Func<Exception, string> errorHandler = null)
+        public static Return Try(Action action, Func<Exception, Exception> errorHandler = null)
         {
             errorHandler ??= Configuration.DefaultTryErrorHandler;
 
@@ -19,7 +19,7 @@ namespace CSharpFunctionalExtensions
             }
             catch (Exception exc)
             {
-                string message = errorHandler(exc);
+                var message = errorHandler(exc);
                 return Failure(message);
             }
         }
@@ -28,7 +28,7 @@ namespace CSharpFunctionalExtensions
         ///     Attempts to execute the supplied function. Returns a Result indicating whether the function executed successfully.
         ///     If the function executed successfully, the result contains its return value.
         /// </summary>
-        public static Result<T> Try<T>(Func<T> func, Func<Exception, string> errorHandler = null)
+        public static Return<T> Try<T>(Func<T> func, Func<Exception, Exception> errorHandler = null)
         {
             errorHandler ??= Configuration.DefaultTryErrorHandler;
 
@@ -38,7 +38,7 @@ namespace CSharpFunctionalExtensions
             }
             catch (Exception exc)
             {
-                string message = errorHandler(exc);
+                var message = errorHandler(exc);
                 return Failure<T>(message);
             }
         }
@@ -47,7 +47,7 @@ namespace CSharpFunctionalExtensions
         ///     Attempts to execute the supplied function. Returns a Result indicating whether the function executed successfully.
         ///     If the function executed successfully, the result contains its return value.
         /// </summary>
-        public static Result<T, E> Try<T, E>(Func<T> func, Func<Exception, E> errorHandler)
+        public static Return<T, E> Try<T, E>(Func<T> func, Func<Exception, E> errorHandler)
         {
             try
             {

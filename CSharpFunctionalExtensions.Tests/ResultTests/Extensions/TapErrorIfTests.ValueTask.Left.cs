@@ -13,7 +13,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapErrorIf_ValueTask_Left_executes_action_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
             var returned = result.AsValueTask().TapErrorIf(condition, Action).Result;
 
@@ -28,7 +28,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapErrorIf_ValueTask_Left_executes_action_String_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
             var returned = result.AsValueTask().TapErrorIf(condition, Action_String).Result;
 
@@ -43,7 +43,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapErrorIf_ValueTask_Left_T_executes_action_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
             var returned = result.AsValueTask().TapErrorIf(condition, Action).Result;
 
@@ -58,7 +58,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapErrorIf_ValueTask_Left_T_executes_action_T_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
             var returned = result.AsValueTask().TapErrorIf(condition, Action_String).Result;
 
@@ -73,7 +73,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapErrorIf_ValueTask_Left_T_E_executes_action_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
             var returned = result.AsValueTask().TapErrorIf(condition, Action).Result;
 
@@ -88,7 +88,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapErrorIf_ValueTask_Left_T_E_executes_action_T_conditionally_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
             var returned = result.AsValueTask().TapErrorIf(condition, Action_E).Result;
 
@@ -133,7 +133,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapErrorIf_ValueTask_Left_executes_action_per_predicate_and_returns_self(bool isSuccess, bool condition)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
             var returned = result.AsValueTask().TapErrorIf(Predicate_String(condition), Action).Result;
 
@@ -149,7 +149,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapErrorIf_ValueTask_Left_executes_action_String_per_predicate_and_returns_self(bool isSuccess, bool condition)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
             var returned = result.AsValueTask().TapErrorIf(Predicate_String(condition), Action_String).Result;
 
@@ -165,7 +165,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapErrorIf_ValueTask_Left_T_executes_action_per_predicate_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
             var returned = result.AsValueTask().TapErrorIf(Predicate_String(condition), Action).Result;
 
@@ -181,7 +181,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapErrorIf_ValueTask_Left_T_executes_action_String_per_predicate_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
             var returned = result.AsValueTask().TapErrorIf(Predicate_String(condition), Action_String).Result;
 
@@ -197,7 +197,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapErrorIf_ValueTask_Left_T_E_executes_action_per_predicate_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
             var returned = result.AsValueTask().TapErrorIf(Predicate_E(condition), Action).Result;
 
@@ -213,7 +213,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false)]
         public void TapErrorIf_ValueTask_Left_T_E_executes_action_E_per_predicate_and_returns_self(bool isSuccess, bool condition)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
             var returned = result.AsValueTask().TapErrorIf(Predicate_E(condition), Action_E).Result;
 

@@ -5,19 +5,19 @@ namespace CSharpFunctionalExtensions
 {
     public static partial class ResultExtensions
     {
-        public static Result<K> BindWithTransactionScope<T, K>(this Result<T> self, Func<T, Result<K>> f)
+        public static Return<K> BindWithTransactionScope<T, K>(this Return<T> self, Func<T, Return<K>> f)
             => WithTransactionScope(() => self.Bind(f));
 
-        public static Result<K> BindWithTransactionScope<K>(this Result self, Func<Result<K>> f)
+        public static Return<K> BindWithTransactionScope<K>(this Return self, Func<Return<K>> f)
             => WithTransactionScope(() => self.Bind(f));
 
-        public static Result BindWithTransactionScope<T>(this Result<T> self, Func<T, Result> f)
+        public static Return BindWithTransactionScope<T>(this Return<T> self, Func<T, Return> f)
             => WithTransactionScope(() => self.Bind(f));
 
-        public static Result BindWithTransactionScope(this Result self, Func<Result> f)
+        public static Return BindWithTransactionScope(this Return self, Func<Return> f)
             => WithTransactionScope(() => self.Bind(f));
 
-        public static Result<K, E> BindWithTransactionScope<T, K, E>(this Result<T, E> self, Func<T, Result<K, E>> f)
+        public static Return<K, E> BindWithTransactionScope<T, K, E>(this Return<T, E> self, Func<T, Return<K, E>> f)
             => WithTransactionScope(() => self.Bind(f));
     }
 }

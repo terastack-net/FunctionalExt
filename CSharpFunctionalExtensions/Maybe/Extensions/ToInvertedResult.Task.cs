@@ -5,7 +5,7 @@ namespace CSharpFunctionalExtensions
 {
     public static partial class MaybeExtensions
     {
-        public static async Task<Result> ToInvertedResult<T>(this Task<Maybe<T>> maybeTask, string errorMessage)
+        public static async Task<Return> ToInvertedResult<T>(this Task<Maybe<T>> maybeTask, string errorMessage)
         {
             var maybe = await maybeTask.DefaultAwait();
             return maybe.ToInvertedResult(errorMessage);

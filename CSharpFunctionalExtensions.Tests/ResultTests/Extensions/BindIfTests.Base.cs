@@ -16,7 +16,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             predicateExecuted = false;
         }
 
-        protected Func<Result> GetAction(bool isSuccess)
+        protected Func<Return> GetAction(bool isSuccess)
         {
             if (!isSuccess)
             {
@@ -26,7 +26,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             return SuccessAction;
         }
 
-        protected Func<Task<Result>> GetTaskAction(bool isSuccess)
+        protected Func<Task<Return>> GetTaskAction(bool isSuccess)
         {
             if (!isSuccess)
             {
@@ -36,7 +36,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             return () => Task.FromResult(SuccessAction());
         }
 
-        protected Func<ValueTask<Result>> GetValueTaskAction(bool isSuccess)
+        protected Func<ValueTask<Return>> GetValueTaskAction(bool isSuccess)
         {
             if (!isSuccess)
             {
@@ -46,7 +46,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             return () => SuccessAction().AsCompletedValueTask();
         }
         
-        protected Func<T, Result<T>> GetValueAction(bool isSuccess)
+        protected Func<T, Return<T>> GetValueAction(bool isSuccess)
         {
             if (!isSuccess)
             {
@@ -56,7 +56,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             return SuccessValueAction;
         }
 
-        protected Func<T, Task<Result<T>>> GetTaskValueAction(bool isSuccess)
+        protected Func<T, Task<Return<T>>> GetTaskValueAction(bool isSuccess)
         {
             if (!isSuccess)
             {
@@ -66,7 +66,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             return t => Task.FromResult(SuccessValueAction(t));
         }
         
-        protected Func<T, ValueTask<Result<T>>> GetValueTaskValueAction(bool isSuccess)
+        protected Func<T, ValueTask<Return<T>>> GetValueTaskValueAction(bool isSuccess)
         {
             if (!isSuccess)
             {
@@ -106,7 +106,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             return () => SuccessErrorAction().AsCompletedValueTask();
         }
 
-        protected Func<T, Result<T, E>> GetValueErrorAction(bool isSuccess)
+        protected Func<T, Return<T, E>> GetValueErrorAction(bool isSuccess)
         {
             if (!isSuccess)
             {
@@ -116,7 +116,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             return SuccessValueErrorAction;
         }
 
-        protected Func<T, Task<Result<T, E>>> GetTaskValueErrorAction(bool isSuccess)
+        protected Func<T, Task<Return<T, E>>> GetTaskValueErrorAction(bool isSuccess)
         {
             if (!isSuccess)
             {
@@ -126,7 +126,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             return t => Task.FromResult(SuccessValueErrorAction(t));
         }
 
-        protected Func<T, ValueTask<Result<T, E>>> GetValueTaskValueErrorAction(bool isSuccess)
+        protected Func<T, ValueTask<Return<T, E>>> GetValueTaskValueErrorAction(bool isSuccess)
         {
             if (!isSuccess)
             {
@@ -137,38 +137,38 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         }
 
         
-        protected Result SuccessAction()
+        protected Return SuccessAction()
         {
             actionExecuted.Should().BeFalse();
 
             actionExecuted = true;
-            return Result.Success();
+            return Return.Success();
         }
 
-        protected Result FailureAction()
+        protected Return FailureAction()
         {
             actionExecuted.Should().BeFalse();
 
             actionExecuted = true;
-            return Result.Failure(ErrorMessage2);
+            return Return.Failure(ErrorMessage2);
         }
 
-        protected Result<T> SuccessValueAction(T value)
+        protected Return<T> SuccessValueAction(T value)
         {
             actionExecuted.Should().BeFalse();
             value.Should().Be(T.Value);
 
             actionExecuted = true;
-            return Result.Success(T.Value2);
+            return Return.Success(T.Value2);
         }
 
-        protected Result<T> FailureValueAction(T value)
+        protected Return<T> FailureValueAction(T value)
         {
             actionExecuted.Should().BeFalse();
             value.Should().Be(T.Value);
 
             actionExecuted = true;
-            return Result.Failure<T>(ErrorMessage2);
+            return Return.Failure<T>(ErrorMessage2);
         }
 
         protected UnitResult<E> SuccessErrorAction()
@@ -187,22 +187,22 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             return UnitResult.Failure(E.Value2);
         }
 
-        protected Result<T, E> SuccessValueErrorAction(T value)
+        protected Return<T, E> SuccessValueErrorAction(T value)
         {
             actionExecuted.Should().BeFalse();
             value.Should().Be(T.Value);
 
             actionExecuted = true;
-            return Result.Success<T, E>(T.Value2);
+            return Return.Success<T, E>(T.Value2);
         }
 
-        protected Result<T, E> FailureValueErrorAction(T value)
+        protected Return<T, E> FailureValueErrorAction(T value)
         {
             actionExecuted.Should().BeFalse();
             value.Should().Be(T.Value);
 
             actionExecuted = true;
-            return Result.Failure<T, E>(E.Value2);
+            return Return.Failure<T, E>(E.Value2);
         }
 
         protected Func<bool> GetPredicate(bool value)
@@ -228,25 +228,25 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             };
         }
 
-        protected static Result GetExpectedResult(bool isSuccess, bool condition, bool isSuccessAction)
+        protected static Return GetExpectedResult(bool isSuccess, bool condition, bool isSuccessAction)
         {
             var success = CheckSuccess(isSuccess, condition, isSuccessAction);
             var resultChanged = isSuccess && condition;
 
-            return Result.SuccessIf(success, !resultChanged ? ErrorMessage : ErrorMessage2);
+            return Return.SuccessIf(success, !resultChanged ? ErrorMessage : ErrorMessage2);
         }
 
-        protected static Result<T> GetExpectedValueResult(bool isSuccess, bool condition, bool isSuccessAction)
+        protected static Return<T> GetExpectedValueResult(bool isSuccess, bool condition, bool isSuccessAction)
         {
             var success = CheckSuccess(isSuccess, condition, isSuccessAction);
             var resultChanged = isSuccess && condition;
 
             if (!resultChanged)
             {
-                return Result.SuccessIf(success, T.Value, ErrorMessage);
+                return Return.SuccessIf(success, T.Value, ErrorMessage);
             }
 
-            return Result.SuccessIf(success, T.Value2, ErrorMessage2);
+            return Return.SuccessIf(success, T.Value2, ErrorMessage2);
         }
 
         protected static UnitResult<E> GetExpectedErrorResult(bool isSuccess, bool condition, bool isSuccessAction)
@@ -262,17 +262,17 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             return UnitResult.SuccessIf(success, E.Value2);
         }
 
-        protected static Result<T, E> GetExpectedValueErrorResult(bool isSuccess, bool condition, bool isSuccessAction)
+        protected static Return<T, E> GetExpectedValueErrorResult(bool isSuccess, bool condition, bool isSuccessAction)
         {
             var success = CheckSuccess(isSuccess, condition, isSuccessAction);
             var resultChanged = isSuccess && condition;
 
             if (!resultChanged)
             {
-                return Result.SuccessIf(success, T.Value, E.Value);
+                return Return.SuccessIf(success, T.Value, E.Value);
             }
 
-            return Result.SuccessIf(success, T.Value2, E.Value2);
+            return Return.SuccessIf(success, T.Value2, E.Value2);
         }
 
         protected static bool CheckSuccess(bool isSuccess, bool condition, bool isSuccessAction)

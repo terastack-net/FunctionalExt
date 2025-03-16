@@ -6,7 +6,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
 {
     public static partial class ResultExtensions
     {
-        public static async ValueTask<T> GetValueOrDefault<T>(this Result<T> result, Func<ValueTask<T>> valueTask)
+        public static async ValueTask<T> GetValueOrDefault<T>(this Return<T> result, Func<ValueTask<T>> valueTask)
         {
             if (result.IsFailure)
                 return await valueTask();
@@ -14,7 +14,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Value;
         }
 
-        public static async ValueTask<K> GetValueOrDefault<T, K>(this Result<T> result, Func<T, K> selector,
+        public static async ValueTask<K> GetValueOrDefault<T, K>(this Return<T> result, Func<T, K> selector,
             Func<ValueTask<K>> valueTask)
         {
             if (result.IsFailure)
@@ -23,7 +23,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return selector(result.Value);
         }
 
-        public static async ValueTask<K> GetValueOrDefault<T, K>(this Result<T> result, Func<T, ValueTask<K>> valueTask,
+        public static async ValueTask<K> GetValueOrDefault<T, K>(this Return<T> result, Func<T, ValueTask<K>> valueTask,
             K defaultValue = default)
         {
             if (result.IsFailure)
@@ -32,7 +32,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return await valueTask(result.Value);
         }
 
-        public static async ValueTask<K> GetValueOrDefault<T, K>(this Result<T> result, Func<T, ValueTask<K>> valueTask,
+        public static async ValueTask<K> GetValueOrDefault<T, K>(this Return<T> result, Func<T, ValueTask<K>> valueTask,
             Func<ValueTask<K>> defaultValue)
         {
             if (result.IsFailure)

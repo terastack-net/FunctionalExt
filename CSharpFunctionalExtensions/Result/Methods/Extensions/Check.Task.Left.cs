@@ -8,36 +8,36 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     If the calling result is a success, the given function is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static async Task<Result<T>> Check<T>(this Task<Result<T>> resultTask, Func<T, Result> func)
+        public static async Task<Return<T>> Check<T>(this Task<Return<T>> resultTask, Func<T, Return> func)
         {
-            Result<T> result = await resultTask.DefaultAwait();
+            Return<T> result = await resultTask.DefaultAwait();
             return result.Check(func);
         }
 
         /// <summary>
         ///     If the calling result is a success, the given function is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static async Task<Result<T>> Check<T, K>(this Task<Result<T>> resultTask, Func<T, Result<K>> func)
+        public static async Task<Return<T>> Check<T, K>(this Task<Return<T>> resultTask, Func<T, Return<K>> func)
         {
-            Result<T> result = await resultTask.DefaultAwait();
+            Return<T> result = await resultTask.DefaultAwait();
             return result.Check(func);
         }
 
         /// <summary>
         ///     If the calling result is a success, the given function is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static async Task<Result<T, E>> Check<T, K, E>(this Task<Result<T, E>> resultTask, Func<T, Result<K, E>> func)
+        public static async Task<Return<T, E>> Check<T, K, E>(this Task<Return<T, E>> resultTask, Func<T, Return<K, E>> func)
         {
-            Result<T, E> result = await resultTask.DefaultAwait();
+            Return<T, E> result = await resultTask.DefaultAwait();
             return result.Check(func);
         }
 
         /// <summary>
         ///     If the calling result is a success, the given function is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static async Task<Result<T, E>> Check<T, E>(this Task<Result<T, E>> resultTask, Func<T, UnitResult<E>> func)
+        public static async Task<Return<T, E>> Check<T, E>(this Task<Return<T, E>> resultTask, Func<T, UnitResult<E>> func)
         {
-            Result<T, E> result = await resultTask.DefaultAwait();
+            Return<T, E> result = await resultTask.DefaultAwait();
             return result.Check(func);
         }
 

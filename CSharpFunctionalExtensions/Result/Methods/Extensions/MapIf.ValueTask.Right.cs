@@ -6,8 +6,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
 {
     public static partial class ResultExtensions
     {
-        public static ValueTask<Result<T>> MapIf<T>(
-            this Result<T> result,
+        public static ValueTask<Return<T>> MapIf<T>(
+            this Return<T> result,
             bool condition,
             Func<T, ValueTask<T>> valueTask
         )
@@ -20,8 +20,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Map(valueTask);
         }
 
-        public static ValueTask<Result<T>> MapIf<T, TContext>(
-            this Result<T> result,
+        public static ValueTask<Return<T>> MapIf<T, TContext>(
+            this Return<T> result,
             bool condition,
             Func<T, TContext, ValueTask<T>> valueTask,
             TContext context
@@ -35,8 +35,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Map(valueTask, context);
         }
 
-        public static ValueTask<Result<T, E>> MapIf<T, E>(
-            this Result<T, E> result,
+        public static ValueTask<Return<T, E>> MapIf<T, E>(
+            this Return<T, E> result,
             bool condition,
             Func<T, ValueTask<T>> valueTask
         )
@@ -49,8 +49,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Map(valueTask);
         }
 
-        public static ValueTask<Result<T, E>> MapIf<T, E, TContext>(
-            this Result<T, E> result,
+        public static ValueTask<Return<T, E>> MapIf<T, E, TContext>(
+            this Return<T, E> result,
             bool condition,
             Func<T, TContext, ValueTask<T>> valueTask,
             TContext context
@@ -64,8 +64,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Map(valueTask, context);
         }
 
-        public static ValueTask<Result<T>> MapIf<T>(
-            this Result<T> result,
+        public static ValueTask<Return<T>> MapIf<T>(
+            this Return<T> result,
             Func<T, bool> predicate,
             Func<T, ValueTask<T>> valueTask
         )
@@ -78,8 +78,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Map(valueTask);
         }
 
-        public static ValueTask<Result<T>> MapIf<T, TContext>(
-            this Result<T> result,
+        public static ValueTask<Return<T>> MapIf<T, TContext>(
+            this Return<T> result,
             Func<T, TContext, bool> predicate,
             Func<T, TContext, ValueTask<T>> valueTask,
             TContext context
@@ -93,8 +93,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Map(valueTask, context);
         }
 
-        public static ValueTask<Result<T, E>> MapIf<T, E>(
-            this Result<T, E> result,
+        public static ValueTask<Return<T, E>> MapIf<T, E>(
+            this Return<T, E> result,
             Func<T, bool> predicate,
             Func<T, ValueTask<T>> valueTask
         )
@@ -107,8 +107,8 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Map(valueTask);
         }
 
-        public static ValueTask<Result<T, E>> MapIf<T, E, TContext>(
-            this Result<T, E> result,
+        public static ValueTask<Return<T, E>> MapIf<T, E, TContext>(
+            this Return<T, E> result,
             Func<T, TContext, bool> predicate,
             Func<T, TContext, ValueTask<T>> valueTask,
             TContext context

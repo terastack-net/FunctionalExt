@@ -17,9 +17,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false, false)]
         public async Task BindIf_Task_Left_executes_func_conditionally_and_returns_new_result(bool isSuccess, bool condition, bool isSuccessAction)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
-            Result returned = await result.BindIf(condition, GetTaskAction(isSuccessAction));
+            Return returned = await result.BindIf(condition, GetTaskAction(isSuccessAction));
 
             actionExecuted.Should().Be(isSuccess && condition);
             returned.Should().Be(GetExpectedResult(isSuccess, condition, isSuccessAction));
@@ -36,9 +36,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false, false)]
         public async Task BindIf_Task_Left_T_executes_func_conditionally_and_returns_new_result(bool isSuccess, bool condition, bool isSuccessAction)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
-            Result<T> returned = await result.BindIf(condition, GetTaskValueAction(isSuccessAction));
+            Return<T> returned = await result.BindIf(condition, GetTaskValueAction(isSuccessAction));
 
             actionExecuted.Should().Be(isSuccess && condition);
             returned.Should().Be(GetExpectedValueResult(isSuccess, condition, isSuccessAction));
@@ -74,9 +74,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false, false)]
         public async Task BindIf_Task_Left_T_E_executes_func_conditionally_and_returns_new_result(bool isSuccess, bool condition, bool isSuccessAction)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
-            Result<T, E> returned = await result.BindIf(condition, GetTaskValueErrorAction(isSuccessAction));
+            Return<T, E> returned = await result.BindIf(condition, GetTaskValueErrorAction(isSuccessAction));
 
             actionExecuted.Should().Be(isSuccess && condition);
             returned.Should().Be(GetExpectedValueErrorResult(isSuccess, condition, isSuccessAction));
@@ -93,9 +93,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false, false)]
         public async Task BindIf_Task_Left_computes_predicate_executes_func_conditionally_and_returns_new_result(bool isSuccess, bool condition, bool isSuccessAction)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
-            Result returned = await result.BindIf(GetPredicate(condition), GetTaskAction(isSuccessAction));
+            Return returned = await result.BindIf(GetPredicate(condition), GetTaskAction(isSuccessAction));
 
             predicateExecuted.Should().Be(isSuccess);
             actionExecuted.Should().Be(isSuccess && condition);
@@ -113,9 +113,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false, false)]
         public async Task BindIf_Task_Left_computes_predicate_T_executes_func_conditionally_and_returns_new_result(bool isSuccess, bool condition, bool isSuccessAction)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
-            Result<T> returned = await result.BindIf(GetValuePredicate(condition), GetTaskValueAction(isSuccessAction));
+            Return<T> returned = await result.BindIf(GetValuePredicate(condition), GetTaskValueAction(isSuccessAction));
 
             predicateExecuted.Should().Be(isSuccess);
             actionExecuted.Should().Be(isSuccess && condition);
@@ -153,9 +153,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false, false)]
         public async Task BindIf_Task_Left_computes_predicate_T_E_executes_func_conditionally_and_returns_new_result(bool isSuccess, bool condition, bool isSuccessAction)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
-            Result<T, E> returned = await result.BindIf(GetValuePredicate(condition), GetTaskValueErrorAction(isSuccessAction));
+            Return<T, E> returned = await result.BindIf(GetValuePredicate(condition), GetTaskValueErrorAction(isSuccessAction));
 
             predicateExecuted.Should().Be(isSuccess);
             actionExecuted.Should().Be(isSuccess && condition);

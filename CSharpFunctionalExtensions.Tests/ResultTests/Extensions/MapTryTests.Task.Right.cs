@@ -9,9 +9,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapTry_execute_task_func_K_on_success_returns_success()
         {
-            Result sut = Result.Success();
+            Return sut = Return.Success();
 
-            Result<K> result = await sut.MapTry(Task_Func_K);
+            Return<K> result = await sut.MapTry(Task_Func_K);
 
             AssertSuccess(result);
         }
@@ -19,9 +19,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapTry_execute_task_func_K_on_failure_returns_failure()
         {
-            Result sut = Result.Failure(ErrorMessage);
+            Return sut = Return.Failure(ErrorMessage);
 
-            Result<K> result = await sut.MapTry(Task_Func_K);
+            Return<K> result = await sut.MapTry(Task_Func_K);
 
             AssertFailure(result);
         }
@@ -29,9 +29,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapTry_execute_throwing_task_func_K_on_success_returns_failure_with_exception_message()
         {
-            Result sut = Result.Success();
+            Return sut = Return.Success();
 
-            Result<K> result = await sut.MapTry(Task_Throwing_K);
+            Return<K> result = await sut.MapTry(Task_Throwing_K);
 
             AssertFailureFromDefaultHandler(result);
         }
@@ -39,9 +39,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapTry_execute_throwing_task_func_K_on_success_with_custom_error_handler_returns_failure_with_custom_message()
         {
-            Result sut = Result.Success();
+            Return sut = Return.Success();
 
-            Result<K> result = await sut.MapTry(Task_Throwing_K, ErrorHandler);
+            Return<K> result = await sut.MapTry(Task_Throwing_K, ErrorHandler);
 
             AssertFailureFromHandler(result);
         }
@@ -51,9 +51,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapTry_execute_task_func_K_on_success_T_returns_success()
         {
-            Result<T> sut = Result.Success(T.Value);
+            Return<T> sut = Return.Success(T.Value);
 
-            Result<K> result = await sut.MapTry(Task_Func_T_K);
+            Return<K> result = await sut.MapTry(Task_Func_T_K);
 
             AssertSuccess(result);
         }
@@ -61,9 +61,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapTry_execute_task_func_K_on_failure_T_returns_failure()
         {
-            Result<T> sut = Result.Failure<T>(ErrorMessage);
+            Return<T> sut = Return.Failure<T>(ErrorMessage);
 
-            Result<K> result = await sut.MapTry(Task_Func_T_K);
+            Return<K> result = await sut.MapTry(Task_Func_T_K);
 
             AssertFailure(result);
         }
@@ -71,9 +71,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapTry_execute_throwing_task_func_K_on_success_T_returns_failure_with_exception_message()
         {
-            Result<T> sut = Result.Success(T.Value);
+            Return<T> sut = Return.Success(T.Value);
 
-            Result<K> result = await sut.MapTry(Task_Throwing_T_K);
+            Return<K> result = await sut.MapTry(Task_Throwing_T_K);
 
             AssertFailureFromDefaultHandler(result);
         }
@@ -81,9 +81,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapTry_execute_throwing_task_func_K_on_success_T_with_custom_error_handler_returns_failure_with_custom_message()
         {
-            Result<T> sut = Result.Success(T.Value);
+            Return<T> sut = Return.Success(T.Value);
 
-            Result<K> result = await sut.MapTry(Task_Throwing_T_K, ErrorHandler);
+            Return<K> result = await sut.MapTry(Task_Throwing_T_K, ErrorHandler);
 
             AssertFailureFromHandler(result);
         }
@@ -93,9 +93,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapTry_execute_task_func_T_K_on_success_T_E_returns_success()
         {
-            Result<T, E> sut = Result.Success<T, E>(T.Value);
+            Return<T, E> sut = Return.Success<T, E>(T.Value);
 
-            Result<K, E> result = await sut.MapTry(Task_Func_T_K, ErrorHandler_E);
+            Return<K, E> result = await sut.MapTry(Task_Func_T_K, ErrorHandler_E);
 
             AssertSuccess(result);
         }
@@ -103,9 +103,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapTry_execute_task_func_T_K_on_failure_T_E_returns_failure()
         {
-            Result<T, E> sut = Result.Failure<T, E>(E.Value);
+            Return<T, E> sut = Return.Failure<T, E>(E.Value);
 
-            Result<K, E> result = await sut.MapTry(Task_Func_T_K, ErrorHandler_E);
+            Return<K, E> result = await sut.MapTry(Task_Func_T_K, ErrorHandler_E);
 
             AssertFailure(result);
         }
@@ -113,9 +113,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task MapTry_execute_throwing_task_func_K_on_success_T_E_returns_failure_with_value_from_error_handler()
         {
-            Result<T, E> sut = Result.Success<T, E>(T.Value);
+            Return<T, E> sut = Return.Success<T, E>(T.Value);
 
-            Result<K, E> result = await sut.MapTry(Task_Throwing_T_K, ErrorHandler_E);
+            Return<K, E> result = await sut.MapTry(Task_Throwing_T_K, ErrorHandler_E);
 
             AssertFailureFromHandler(result);
         }        
@@ -127,7 +127,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             UnitResult<E> sut = UnitResult.Success<E>();
 
-            Result<K, E> result = await sut.MapTry(Task_Func_K, ErrorHandler_E);
+            Return<K, E> result = await sut.MapTry(Task_Func_K, ErrorHandler_E);
 
             AssertSuccess(result);
         }
@@ -137,7 +137,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             UnitResult<E> sut = UnitResult.Failure(E.Value);
 
-            Result<K, E> result = await sut.MapTry(Task_Func_K, ErrorHandler_E);
+            Return<K, E> result = await sut.MapTry(Task_Func_K, ErrorHandler_E);
 
             AssertFailure(result);
         }
@@ -147,7 +147,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             UnitResult<E> sut = UnitResult.Success<E>();
 
-            Result<K, E> result = await sut.MapTry(Task_Throwing_K, ErrorHandler_E);
+            Return<K, E> result = await sut.MapTry(Task_Throwing_K, ErrorHandler_E);
 
             AssertFailureFromHandler(result);
         }

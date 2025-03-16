@@ -10,7 +10,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask Bind_ValueTask_returns_failure_and_does_not_execute_func()
         {
-            Result output = await ValueTask_Failure().Bind(ValueTask_Success);
+            Return output = await ValueTask_Failure().Bind(ValueTask_Success);
 
             AssertFailure(output);
         }
@@ -18,7 +18,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask Bind_ValueTask_selects_new_result()
         {
-            Result output = await ValueTask_Success().Bind(ValueTask_Success);
+            Return output = await ValueTask_Success().Bind(ValueTask_Success);
             
             AssertSuccess(output);
         }
@@ -26,7 +26,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask Bind_ValueTask_T_returns_failure_and_does_not_execute_func()
         {
-            Result output = await ValueTask_Failure_T().Bind(ValueTask_Success_T);
+            Return output = await ValueTask_Failure_T().Bind(ValueTask_Success_T);
 
             AssertFailure(output);
         }
@@ -34,7 +34,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask Bind_ValueTask_T_selects_new_result()
         {
-            Result output = await ValueTask_Success_T(T.Value).Bind(ValueTask_Success_T);
+            Return output = await ValueTask_Success_T(T.Value).Bind(ValueTask_Success_T);
 
             FuncParam.Should().Be(T.Value);
             AssertSuccess(output);
@@ -43,21 +43,21 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask Bind_ValueTask_K_returns_failure_and_does_not_execute_func()
         {
-            Result<K> output = await ValueTask_Failure().Bind(ValueTask_Success_K);
+            Return<K> output = await ValueTask_Failure().Bind(ValueTask_Success_K);
             AssertFailure(output);
         }
 
         [Fact]
         public async ValueTask Bind_ValueTask_K_selects_new_result()
         {
-            Result<K> output = await ValueTask_Success().Bind(ValueTask_Success_K);
+            Return<K> output = await ValueTask_Success().Bind(ValueTask_Success_K);
             AssertSuccess(output);
         }
 
         [Fact]
         public async ValueTask Bind_ValueTask_T_K_returns_failure_and_does_not_execute_func()
         {
-            Result<K> output = await ValueTask_Failure_T().Bind(Func_T_ValueTask_Success_K);
+            Return<K> output = await ValueTask_Failure_T().Bind(Func_T_ValueTask_Success_K);
 
             AssertFailure(output);
         }
@@ -65,7 +65,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask Bind_ValueTask_T_K_selects_new_result()
         {
-            Result<K> output = await ValueTask_Success_T(T.Value).Bind(Func_T_ValueTask_Success_K);
+            Return<K> output = await ValueTask_Success_T(T.Value).Bind(Func_T_ValueTask_Success_K);
 
             FuncParam.Should().Be(T.Value);
             AssertSuccess(output);
@@ -74,14 +74,14 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask Bind_ValueTask_T_K_E_returns_failure_and_does_not_execute_func()
         {
-            Result<K, E> output = await ValueTask_Failure_T_E().Bind(ValueTask_Success_K_E);
+            Return<K, E> output = await ValueTask_Failure_T_E().Bind(ValueTask_Success_K_E);
             AssertFailure(output);
         }
 
         [Fact]
         public async ValueTask Bind_ValueTask_T_K_E_selects_new_result()
         {
-            Result<K, E> output = await Func_ValueTask_Success_T_E().Bind(ValueTask_Success_K_E);
+            Return<K, E> output = await Func_ValueTask_Success_T_E().Bind(ValueTask_Success_K_E);
 
             FuncParam.Should().Be(T.Value);
             AssertSuccess(output);

@@ -8,7 +8,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Match_Result_Success()
         {
-            var result = Result.Success();
+            var result = Return.Success();
 
             result.Match(OnSuccess, OnFailure_String);
 
@@ -18,7 +18,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Match_Result_Failure()
         {
-            var result = Result.Failure(ErrorMessage);
+            var result = Return.Failure(ErrorMessage);
 
             result.Match(OnSuccess, OnFailure_String);
 
@@ -28,7 +28,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Match_Result_Success_Returns_K()
         {
-            var result = Result.Success();
+            var result = Return.Success();
 
             var matched = result.Match(OnSuccess_K, OnFailure_String_K);
 
@@ -39,7 +39,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Match_Result_Failure_Returns_K()
         {
-            var result = Result.Failure(ErrorMessage);
+            var result = Return.Failure(ErrorMessage);
 
             var matched = result.Match(OnSuccess_K, OnFailure_String_K);
 
@@ -50,7 +50,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Match_Result_T_Success()
         {
-            var result = Result.Success(T.Value);
+            var result = Return.Success(T.Value);
 
             var matched = result.Match(OnSuccess_T_K, OnFailure_String_K);
 
@@ -62,7 +62,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Match_Result_T_Failure()
         {
-            var result = Result.Failure<T>(ErrorMessage);
+            var result = Return.Failure<T>(ErrorMessage);
 
             result.Match(OnSuccess_T, OnFailure_String);
 
@@ -72,7 +72,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Match_Result_T_Success_Returns_K()
         {
-            var result = Result.Success(T.Value);
+            var result = Return.Success(T.Value);
 
             var matched = result.Match(OnSuccess_T_K, OnFailure_String_K);
 
@@ -84,7 +84,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Match_Result_T_Failure_Returns_K()
         {
-            var result = Result.Failure<T>(ErrorMessage);
+            var result = Return.Failure<T>(ErrorMessage);
 
             var matched = result.Match(OnSuccess_T_K, OnFailure_String_K);
 
@@ -96,7 +96,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Match_Result_T_E_Success()
         {
-            var result = Result.Success<T,E>(T.Value);
+            var result = Return.Success<T,E>(T.Value);
 
             result.Match(OnSuccess_T, OnFailure_E);
 
@@ -106,7 +106,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Match_Result_T_E_Failure_Success()
         {
-            var result = Result.Failure<T,E>(E.Value);
+            var result = Return.Failure<T,E>(E.Value);
 
             result.Match(OnSuccess_T, OnFailure_E);
 
@@ -116,7 +116,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Match_Result_T_E_Success_Returns_K()
         {
-            var result = Result.Success<T,E>(T.Value);
+            var result = Return.Success<T,E>(T.Value);
 
             var matched = result.Match(OnSuccess_T_K, OnFailure_E_K);
 
@@ -128,7 +128,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Match_Result_T_E_Failure_Returns_K()
         {
-            var result = Result.Failure<T,E>(E.Value);
+            var result = Return.Failure<T,E>(E.Value);
 
             var matched = result.Match(OnSuccess_T_K, OnFailure_E_K);
 

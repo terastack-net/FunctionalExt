@@ -8,11 +8,11 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         [Fact]
         public void FirstFailureOrSuccess_returns_the_first_failed_result()
         {
-            Result result1 = Result.Success();
-            Result result2 = Result.Failure("Failure 1");
-            Result result3 = Result.Failure("Failure 2");
+            Return result1 = Return.Success();
+            Return result2 = Return.Failure("Failure 1");
+            Return result3 = Return.Failure("Failure 2");
 
-            Result result = Result.FirstFailureOrSuccess(result1, result2, result3);
+            Return result = Return.FirstFailureOrSuccess(result1, result2, result3);
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be("Failure 1");
@@ -22,14 +22,14 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         [Fact]
         public void FirstFailureOrSuccess_returns_success_if_no_failures()
         {
-            Result result1 = Result.Success();
-            Result result2 = Result.Success();
-            Result result3 = Result.Success();
+            Return result1 = Return.Success();
+            Return result2 = Return.Success();
+            Return result3 = Return.Success();
 
-            Result result = Result.FirstFailureOrSuccess(result1, result2, result3);
+            Return result = Return.FirstFailureOrSuccess(result1, result2, result3);
 
             result.IsSuccess.Should().BeTrue();
-            result.Should().Be(Result.Success());
+            result.Should().Be(Return.Success());
         }
     }
 }

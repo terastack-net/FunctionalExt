@@ -10,7 +10,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         [Fact]
         public void Create_value_is_null_Success_result_expected()
         {
-            Result result = Result.SuccessIf(true, 7, null);
+            Return result = Return.SuccessIf(true, 7, null);
 
             result.IsSuccess.Should().BeTrue();
         }
@@ -19,7 +19,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         public void Create_error_is_null_Exception_expected()
         {
             Action resultAction = () =>
-                Result.SuccessIf<int, string>(false, 7, null);
+                Return.SuccessIf<int, string>(false, 7, null);
 
             FluentActions.Invoking(resultAction).Should().Throw<ArgumentNullException>();
         }
@@ -27,7 +27,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         [Fact]
         public void Create_error_is_default_Failure_result_expected()
         {
-            Result<bool, int> result = Result.SuccessIf<bool, int>(false, false, 0);
+            Return<bool, int> result = Return.SuccessIf<bool, int>(false, false, 0);
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(0);
@@ -36,7 +36,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         [Fact]
         public void Create_argument_is_true_Success_result_expected()
         {
-            Result result = Result.SuccessIf(true, string.Empty);
+            Return result = Return.SuccessIf(true, string.Empty);
 
             result.IsSuccess.Should().BeTrue();
         }
@@ -44,7 +44,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         [Fact]
         public void Create_argument_is_false_Failure_result_expected()
         {
-            Result result = Result.SuccessIf(false, "simple result error");
+            Return result = Return.SuccessIf(false, "simple result error");
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be("simple result error");
@@ -53,7 +53,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         [Fact]
         public void Create_predicate_is_true_Success_result_expected()
         {
-            Result result = Result.SuccessIf(() => true, string.Empty);
+            Return result = Return.SuccessIf(() => true, string.Empty);
 
             result.IsSuccess.Should().BeTrue();
         }
@@ -61,7 +61,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         [Fact]
         public void Create_predicate_is_false_Failure_result_expected()
         {
-            Result result = Result.SuccessIf(() => false, "predicate result error");
+            Return result = Return.SuccessIf(() => false, "predicate result error");
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be("predicate result error");
@@ -70,7 +70,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         [Fact]
         public async Task Create_async_predicate_is_true_Success_result_expected()
         {
-            Result result = await Result.SuccessIf(() => Task.FromResult(true), string.Empty);
+            Return result = await Return.SuccessIf(() => Task.FromResult(true), string.Empty);
 
             result.IsSuccess.Should().BeTrue();
         }
@@ -78,7 +78,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         [Fact]
         public async Task Create_async_predicate_is_false_Failure_result_expected()
         {
-            Result result = await Result.SuccessIf(() => Task.FromResult(false), "predicate result error");
+            Return result = await Return.SuccessIf(() => Task.FromResult(false), "predicate result error");
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be("predicate result error");
@@ -88,7 +88,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         public void Create_generic_argument_is_true_Success_result_expected()
         {
             byte val = 7;
-            Result<byte> result = Result.SuccessIf(true, val, string.Empty);
+            Return<byte> result = Return.SuccessIf(true, val, string.Empty);
 
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().Be(val);
@@ -98,7 +98,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         public void Create_generic_argument_is_false_Failure_result_expected()
         {
             double val = .56;
-            Result<double> result = Result.SuccessIf(false, val, "simple result error");
+            Return<double> result = Return.SuccessIf(false, val, "simple result error");
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be("simple result error");
@@ -109,7 +109,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         {
             DateTime val = new DateTime(2000, 1, 1);
 
-            Result<DateTime> result = Result.SuccessIf(() => true, val, string.Empty);
+            Return<DateTime> result = Return.SuccessIf(() => true, val, string.Empty);
 
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().Be(val);
@@ -120,7 +120,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         {
             string val = "string value";
 
-            Result<string> result = Result.SuccessIf(() => false, val, "predicate result error");
+            Return<string> result = Return.SuccessIf(() => false, val, "predicate result error");
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be("predicate result error");
@@ -131,7 +131,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         {
             int val = 42;
 
-            Result<int> result = await Result.SuccessIf(() => Task.FromResult(true), val, string.Empty);
+            Return<int> result = await Return.SuccessIf(() => Task.FromResult(true), val, string.Empty);
 
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().Be(val);
@@ -142,7 +142,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         {
             bool val = true;
 
-            Result<bool> result = await Result.SuccessIf(() => Task.FromResult(false), val, "predicate result error");
+            Return<bool> result = await Return.SuccessIf(() => Task.FromResult(false), val, "predicate result error");
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be("predicate result error");
@@ -213,7 +213,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         public void Create_error_generic_argument_is_true_Success_result_expected()
         {
             byte val = 7;
-            Result<byte, Error> result = Result.SuccessIf(true, val, new Error());
+            Return<byte, Error> result = Return.SuccessIf(true, val, new Error());
 
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().Be(val);
@@ -225,7 +225,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
             double val = .56;
             var error = new Error();
 
-            Result<double, Error> result = Result.SuccessIf(false, val, error);
+            Return<double, Error> result = Return.SuccessIf(false, val, error);
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(error);
@@ -236,7 +236,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         {
             DateTime val = new DateTime(2000, 1, 1);
 
-            Result<DateTime, Error> result = Result.SuccessIf(() => true, val, new Error());
+            Return<DateTime, Error> result = Return.SuccessIf(() => true, val, new Error());
 
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().Be(val);
@@ -248,7 +248,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
             string val = "string value";
             var error = new Error();
 
-            Result<string, Error> result = Result.SuccessIf(() => false, val, error);
+            Return<string, Error> result = Return.SuccessIf(() => false, val, error);
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(error);
@@ -259,7 +259,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
         {
             int val = 42;
 
-            Result<int, Error> result = await Result.SuccessIf(() => Task.FromResult(true), val, new Error());
+            Return<int, Error> result = await Return.SuccessIf(() => Task.FromResult(true), val, new Error());
 
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().Be(val);
@@ -271,7 +271,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods
             bool val = true;
             var error = new Error();
 
-            Result<bool, Error> result = await Result.SuccessIf(() => Task.FromResult(false), val, error);
+            Return<bool, Error> result = await Return.SuccessIf(() => Task.FromResult(false), val, error);
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(error);

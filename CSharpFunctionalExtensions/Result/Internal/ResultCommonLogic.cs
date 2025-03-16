@@ -12,7 +12,7 @@ namespace CSharpFunctionalExtensions.Internal
             info.AddValue("IsSuccess", result.IsSuccess);
         }
 
-        internal static void GetObjectData(Result result, SerializationInfo info)
+        internal static void GetObjectData(Return result, SerializationInfo info)
         {
             GetObjectDataCommon(result, info);
             if (result.IsFailure)
@@ -21,7 +21,7 @@ namespace CSharpFunctionalExtensions.Internal
             }
         }
 
-        internal static void GetObjectData<T>(Result<T> result, SerializationInfo info)
+        internal static void GetObjectData<T>(Return<T> result, SerializationInfo info)
         {
             GetObjectDataCommon(result, info);
             if (result.IsFailure)
@@ -35,7 +35,7 @@ namespace CSharpFunctionalExtensions.Internal
             }
         }
 
-        internal static void GetObjectData<T, E>(Result<T, E> result, SerializationInfo info)
+        internal static void GetObjectData<T, E>(Return<T, E> result, SerializationInfo info)
         {
             GetObjectDataCommon(result, info);
             if (result.IsFailure)
@@ -63,12 +63,12 @@ namespace CSharpFunctionalExtensions.Internal
             if (isFailure)
             {
                 if (error == null || (error is string && error.Equals(string.Empty)))
-                    throw new ArgumentNullException(nameof(error), Result.Messages.ErrorObjectIsNotProvidedForFailure);
+                    throw new ArgumentNullException(nameof(error), Return.Messages.ErrorObjectIsNotProvidedForFailure);
             }
             else
             {
                 if (!EqualityComparer<E>.Default.Equals(error, default))
-                    throw new ArgumentException(Result.Messages.ErrorObjectIsProvidedForSuccess, nameof(error));
+                    throw new ArgumentException(Return.Messages.ErrorObjectIsProvidedForSuccess, nameof(error));
             }
 
             return isFailure;
@@ -77,7 +77,7 @@ namespace CSharpFunctionalExtensions.Internal
         internal static E GetErrorWithSuccessGuard<E>(bool isFailure, E error) =>
             isFailure ? error : throw new ResultSuccessException();
 
-        internal static SerializationValue<string> Deserialize(SerializationInfo info) => Deserialize<string>(info);
+        internal static SerializationValue<Exception> Deserialize(SerializationInfo info) => Deserialize<Exception>(info);
 
         internal static SerializationValue<E> Deserialize<E>(SerializationInfo info)
         {

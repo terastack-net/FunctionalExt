@@ -10,7 +10,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Match_ValueTask_Right_Result_Success()
         {
-            var result = Result.Success();
+            var result = Return.Success();
 
             await result.Match(OnSuccess_ValueTask, OnFailure_String_ValueTask);
 
@@ -20,7 +20,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Match_ValueTask_Right_Result_Failure()
         {
-            var result = Result.Failure(ErrorMessage);
+            var result = Return.Failure(ErrorMessage);
 
             await result.Match(OnSuccess_ValueTask, OnFailure_String_ValueTask);
 
@@ -30,7 +30,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Match_ValueTask_Right_Result_Success_Returns_K()
         {
-            var result = Result.Success();
+            var result = Return.Success();
 
             var matched = await result.Match(OnSuccess_K_ValueTask, OnFailure_String_K_ValueTask);
 
@@ -41,7 +41,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Match_ValueTask_Right_Result_Failure_Returns_K()
         {
-            var result = Result.Failure(ErrorMessage);
+            var result = Return.Failure(ErrorMessage);
 
             var matched = await result.Match(OnSuccess_K_ValueTask, OnFailure_String_K_ValueTask);
 
@@ -52,7 +52,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Match_ValueTask_Right_Result_T_Success()
         {
-            var result = Result.Success(T.Value);
+            var result = Return.Success(T.Value);
 
             var matched = await result.Match(OnSuccess_T_K_ValueTask, OnFailure_String_K_ValueTask);
 
@@ -64,7 +64,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Match_ValueTask_Right_Result_T_Failure()
         {
-            var result = Result.Failure<T>(ErrorMessage);
+            var result = Return.Failure<T>(ErrorMessage);
 
             await result.Match(OnSuccess_T_ValueTask, OnFailure_String_ValueTask);
 
@@ -74,7 +74,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Match_ValueTask_Right_Result_T_Success_Returns_K()
         {
-            var result = Result.Success(T.Value);
+            var result = Return.Success(T.Value);
 
             var matched = await result.Match(OnSuccess_T_K_ValueTask, OnFailure_String_K_ValueTask);
 
@@ -86,7 +86,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Match_ValueTask_Right_Result_T_Failure_Returns_K()
         {
-            var result = Result.Failure<T>(ErrorMessage);
+            var result = Return.Failure<T>(ErrorMessage);
 
             var matched = await result.Match(OnSuccess_T_K_ValueTask, OnFailure_String_K_ValueTask);
 
@@ -98,7 +98,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Match_ValueTask_Right_Result_T_E_Success()
         {
-            var result = Result.Success<T,E>(T.Value);
+            var result = Return.Success<T,E>(T.Value);
 
             await result.Match(OnSuccess_T_ValueTask, OnFailure_E_ValueTask);
 
@@ -108,7 +108,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Match_ValueTask_Right_Result_T_E_Failure_Success()
         {
-            var result = Result.Failure<T,E>(E.Value);
+            var result = Return.Failure<T,E>(E.Value);
 
             await result.Match(OnSuccess_T_ValueTask, OnFailure_E_ValueTask);
 
@@ -118,7 +118,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Match_ValueTask_Right_Result_T_E_Success_Returns_K()
         {
-            var result = Result.Success<T,E>(T.Value);
+            var result = Return.Success<T,E>(T.Value);
 
             var matched = await result.Match(OnSuccess_T_K_ValueTask, OnFailure_E_K_ValueTask);
 
@@ -130,7 +130,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Match_ValueTask_Right_Result_T_E_Failure_Returns_K()
         {
-            var result = Result.Failure<T,E>(E.Value);
+            var result = Return.Failure<T,E>(E.Value);
 
             var matched = await result.Match(OnSuccess_T_K_ValueTask, OnFailure_E_K_ValueTask);
 

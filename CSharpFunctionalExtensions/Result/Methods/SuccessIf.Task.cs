@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 
 namespace CSharpFunctionalExtensions
 {
-    public partial struct Result
+    public partial struct Return
     {
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of FailureIf().
         /// </summary>
-        public static async Task<Result> SuccessIf(Func<Task<bool>> predicate, string error)
+        public static async Task<Return> SuccessIf(Func<Task<bool>> predicate, Exception error)
         {
             bool isSuccess = await predicate().DefaultAwait();
             return SuccessIf(isSuccess, error);
@@ -17,7 +17,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of FailureIf().
         /// </summary>
-        public static async Task<Result<T>> SuccessIf<T>(Func<Task<bool>> predicate, T value, string error)
+        public static async Task<Return<T>> SuccessIf<T>(Func<Task<bool>> predicate, T value, Exception error)
         {
             bool isSuccess = await predicate().DefaultAwait();
             return SuccessIf(isSuccess, value, error);
@@ -26,7 +26,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of FailureIf().
         /// </summary>
-        public static async Task<Result<T, E>> SuccessIf<T, E>(Func<Task<bool>> predicate, T value, E error)
+        public static async Task<Return<T, E>> SuccessIf<T, E>(Func<Task<bool>> predicate, T value, E error)
         {
             bool isSuccess = await predicate().DefaultAwait();
             return SuccessIf(isSuccess, value, error);

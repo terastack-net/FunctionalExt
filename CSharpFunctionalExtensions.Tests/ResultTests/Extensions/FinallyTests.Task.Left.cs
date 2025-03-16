@@ -10,7 +10,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false)]
         public async Task Finally_Task_Left_result_returns_K(bool isSuccess)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
             K output = await result.AsTask().Finally(Func_Result);
 
             AssertCalled(result, output);
@@ -21,7 +21,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false)]
         public async Task Finally_Task_Left_result_T_returns_K(bool isSuccess)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
             K output = await result.AsTask().Finally(Func_Result_T);
 
             AssertCalled(result, output);
@@ -32,7 +32,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false)]
         public async Task Finally_Task_Left_result_T_E_returns_K(bool isSuccess)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
             K output = await result.AsTask().Finally(Func_Result_T_E);
 
             AssertCalled(result, output);

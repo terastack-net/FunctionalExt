@@ -9,9 +9,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     This method should be used in linq queries. We recommend using Bind method.
         /// </summary>
-        public static ValueTask<Result<TR>> SelectMany<T, TK, TR>(
-            this Result<T> result,
-            Func<T, ValueTask<Result<TK>>> valueTask,
+        public static ValueTask<Return<TR>> SelectMany<T, TK, TR>(
+            this Return<T> result,
+            Func<T, ValueTask<Return<TK>>> valueTask,
             Func<T, TK, TR> project)
         {
             return result
@@ -22,9 +22,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     This method should be used in linq queries. We recommend using Bind method.
         /// </summary>
-        public static ValueTask<Result<TR, TE>> SelectMany<T, TK, TE, TR>(
-            this Result<T, TE> result,
-            Func<T, ValueTask<Result<TK, TE>>> valueTask,
+        public static ValueTask<Return<TR, TE>> SelectMany<T, TK, TE, TR>(
+            this Return<T, TE> result,
+            Func<T, ValueTask<Return<TK, TE>>> valueTask,
             Func<T, TK, TR> project)
         {
             return result

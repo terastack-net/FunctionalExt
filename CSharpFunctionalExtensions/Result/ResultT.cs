@@ -5,27 +5,27 @@ using System.Runtime.Serialization;
 namespace CSharpFunctionalExtensions
 {
     [Serializable]
-    public readonly partial struct Result<T> : IResult<T>, ISerializable
+    public readonly partial struct Return<T> : IResult<T>, ISerializable
     {
         public bool IsFailure { get; }
         public bool IsSuccess => !IsFailure;
 
-        private readonly string _error;
-        public string Error => ResultCommonLogic.GetErrorWithSuccessGuard(IsFailure, _error);
+        private readonly Exception _error;
+        public Exception Error => ResultCommonLogic.GetErrorWithSuccessGuard(IsFailure, _error);
 
         private readonly T _value;
         public T Value => IsSuccess ? _value : throw new ResultFailureException(Error);
 
-        internal Result(bool isFailure, string error, T value)
+        internal Return(bool isFailure, Exception error, T value)
         {
             IsFailure = ResultCommonLogic.ErrorStateGuard(isFailure, error);
             _error = error;
             _value = value;
         }
 
-        private Result(SerializationInfo info, StreamingContext context)
+        private Return(SerializationInfo info, StreamingContext context)
         {
-            SerializationValue<string> values = ResultCommonLogic.Deserialize(info);
+            SerializationValue<Exception> values = ResultCommonLogic.Deserialize(info);
             IsFailure = values.IsFailure;
             _error = values.Error;
             _value = IsFailure ? default : (T)info.GetValue("Value", typeof(T));
@@ -44,31 +44,36 @@ namespace CSharpFunctionalExtensions
             return Value;
         }
 
-        public static implicit operator Result<T>(T value)
+        public static implicit operator Return<T>(T value)
         {
             if (value is IResult<T> result)
             {
-                string resultError = result.IsFailure ? result.Error : default;
+                Exception resultError = result.IsFailure ? result.Error : default;
                 T resultValue = result.IsSuccess ? result.Value : default;
 
-                return new Result<T>(result.IsFailure, resultError, resultValue);
+                return new Return<T>(result.IsFailure, resultError, resultValue);
             }
 
-            return Result.Success(value);
+            return Return.Success(value);
         }
 
-        public static implicit operator Result(Result<T> result)
+        public static implicit operator Return<T>(Exception value)
+        {
+            return Return.Failure<T>(value);
+        }
+
+        public static implicit operator Return(Return<T> result)
         {
             if (result.IsSuccess)
-                return Result.Success();
+                return Return.Success();
             else
-                return Result.Failure(result.Error);
+                return Return.Failure(result.Error);
         }
 
-        public static implicit operator UnitResult<string>(Result<T> result)
+        public static implicit operator UnitResult<Exception>(Return<T> result)
         {
             if (result.IsSuccess)
-                return UnitResult.Success<string>();
+                return UnitResult.Success<Exception>();
             else
                 return UnitResult.Failure(result.Error);
         }

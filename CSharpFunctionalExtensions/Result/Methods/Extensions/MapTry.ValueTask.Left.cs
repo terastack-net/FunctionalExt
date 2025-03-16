@@ -10,10 +10,10 @@ namespace CSharpFunctionalExtensions.ValueTasks
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         ///     If a given function throws an exception, an error is returned from the given error handler
         /// </summary>
-        public static async ValueTask<Result<K, E>> MapTry<T, K, E>(this ValueTask<Result<T, E>> resultTask, Func<T, K> valueTask,
+        public static async ValueTask<Return<K, E>> MapTry<T, K, E>(this ValueTask<Return<T, E>> resultTask, Func<T, K> valueTask,
             Func<Exception, E> errorHandler)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
             return result.MapTry(valueTask, errorHandler);
         }
 
@@ -21,7 +21,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         ///     If a given function throws an exception, an error is returned from the given error handler
         /// </summary>
-        public static async ValueTask<Result<K, E>> MapTry<K, E>(this ValueTask<UnitResult<E>> resultTask, Func<K> valueTask,
+        public static async ValueTask<Return<K, E>> MapTry<K, E>(this ValueTask<UnitResult<E>> resultTask, Func<K> valueTask,
             Func<Exception, E> errorHandler)
         {
             UnitResult<E> result = await resultTask;
@@ -32,10 +32,10 @@ namespace CSharpFunctionalExtensions.ValueTasks
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         ///     If a given function throws an exception, an error is returned from the given error handler
         /// </summary>
-        public static async ValueTask<Result<K>> MapTry<T, K>(this ValueTask<Result<T>> resultTask, Func<T, K> valueTask,
-            Func<Exception, string> errorHandler = null)
+        public static async ValueTask<Return<K>> MapTry<T, K>(this ValueTask<Return<T>> resultTask, Func<T, K> valueTask,
+            Func<Exception, Exception> errorHandler = null)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
             return result.MapTry(valueTask, errorHandler);
         }
 
@@ -43,10 +43,10 @@ namespace CSharpFunctionalExtensions.ValueTasks
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         ///     If a given function throws an exception, an error is returned from the given error handler
         /// </summary>
-        public static async ValueTask<Result<K>> MapTry<K>(this ValueTask<Result> resultTask, Func<K> valueTask,
-            Func<Exception, string> errorHandler = null)
+        public static async ValueTask<Return<K>> MapTry<K>(this ValueTask<Return> resultTask, Func<K> valueTask,
+            Func<Exception, Exception> errorHandler = null)
         {
-            Result result = await resultTask;
+            Return result = await resultTask;
             return result.MapTry(valueTask, errorHandler);
         }
     }

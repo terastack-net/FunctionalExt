@@ -8,8 +8,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Map_executes_on_success_returns_new_success()
         {
-            Result result = Result.Success();
-            Result<K> actual = result.Map(Func_K);
+            Return result = Return.Success();
+            Return<K> actual = result.Map(Func_K);
 
             actual.IsSuccess.Should().BeTrue();
             actual.Value.Should().Be(K.Value);
@@ -19,8 +19,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Map_executes_on_failure_returns_new_failure()
         {
-            Result result = Result.Failure(ErrorMessage);
-            Result<K> actual = result.Map(Func_K);
+            Return result = Return.Failure(ErrorMessage);
+            Return<K> actual = result.Map(Func_K);
 
             actual.IsSuccess.Should().BeFalse();
             FuncExecuted.Should().BeFalse();
@@ -29,8 +29,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Map_T_executes_on_success_returns_new_success()
         {
-            Result<T> result = Result.Success(T.Value);
-            Result<K> actual = result.Map(Func_T_K);
+            Return<T> result = Return.Success(T.Value);
+            Return<K> actual = result.Map(Func_T_K);
 
             actual.IsSuccess.Should().BeTrue();
             actual.Value.Should().Be(K.Value);
@@ -40,8 +40,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Map_T_executes_on_failure_returns_new_failure()
         {
-            Result<T> result = Result.Failure<T>(ErrorMessage);
-            Result<K> actual = result.Map(Func_T_K);
+            Return<T> result = Return.Failure<T>(ErrorMessage);
+            Return<K> actual = result.Map(Func_T_K);
 
             actual.IsSuccess.Should().BeFalse();
             actual.Error.Should().Be(ErrorMessage);
@@ -51,8 +51,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Map_T_E_executes_on_success_returns_new_success()
         {
-            Result<T, E> result = Result.Success<T, E>(T.Value);
-            Result<K, E> actual = result.Map(Func_T_K);
+            Return<T, E> result = Return.Success<T, E>(T.Value);
+            Return<K, E> actual = result.Map(Func_T_K);
 
             actual.IsSuccess.Should().BeTrue();
             actual.Value.Should().Be(K.Value);
@@ -62,8 +62,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Map_T_E_executes_on_failure_returns_new_failure()
         {
-            Result<T, E> result = Result.Failure<T, E>(E.Value);
-            Result<K, E> actual = result.Map(Func_T_K);
+            Return<T, E> result = Return.Failure<T, E>(E.Value);
+            Return<K, E> actual = result.Map(Func_T_K);
 
             actual.IsSuccess.Should().BeFalse();
             actual.Error.Should().Be(E.Value);
@@ -74,7 +74,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         public void Map_UnitResult_E_executes_on_success_returns_success()
         {
             UnitResult<E> result = UnitResult.Success<E>();
-            Result<K, E> actual = result.Map(Func_K);
+            Return<K, E> actual = result.Map(Func_K);
 
             actual.IsSuccess.Should().BeTrue();
             actual.Value.Should().Be(K.Value);
@@ -85,7 +85,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         public void Map_UnitResult_E_executes_on_failure_returns_new_failure()
         {
             UnitResult<E> result = UnitResult.Failure(E.Value);
-            Result<K, E> actual = result.Map(Func_K);
+            Return<K, E> actual = result.Map(Func_K);
 
             actual.IsSuccess.Should().BeFalse();
             actual.Error.Should().Be(E.Value);
@@ -95,8 +95,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Map_with_context_executes_on_success_and_passes_correct_context()
         {
-            Result result = Result.Success();
-            Result<K> actual = result.Map(
+            Return result = Return.Success();
+            Return<K> actual = result.Map(
                 (context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -113,8 +113,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Map_with_context_executes_on_failure_and_passes_correct_context()
         {
-            Result result = Result.Failure(ErrorMessage);
-            Result<K> actual = result.Map(
+            Return result = Return.Failure(ErrorMessage);
+            Return<K> actual = result.Map(
                 (context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -130,8 +130,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Map_T_with_context_executes_on_success_and_passes_correct_context()
         {
-            Result<T> result = Result.Success(T.Value);
-            Result<K> actual = result.Map(
+            Return<T> result = Return.Success(T.Value);
+            Return<K> actual = result.Map(
                 (value, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -148,8 +148,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Map_T_with_context_executes_on_failure_and_passes_correct_context()
         {
-            Result<T> result = Result.Failure<T>(ErrorMessage);
-            Result<K> actual = result.Map(
+            Return<T> result = Return.Failure<T>(ErrorMessage);
+            Return<K> actual = result.Map(
                 (value, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -166,8 +166,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Map_T_E_with_context_executes_on_success_and_passes_correct_context()
         {
-            Result<T, E> result = Result.Success<T, E>(T.Value);
-            Result<K, E> actual = result.Map(
+            Return<T, E> result = Return.Success<T, E>(T.Value);
+            Return<K, E> actual = result.Map(
                 (value, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -184,8 +184,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public void Map_T_E_with_context_executes_on_failure_and_passes_correct_context()
         {
-            Result<T, E> result = Result.Failure<T, E>(E.Value);
-            Result<K, E> actual = result.Map(
+            Return<T, E> result = Return.Failure<T, E>(E.Value);
+            Return<K, E> actual = result.Map(
                 (value, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -203,7 +203,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         public void Map_UnitResult_E_with_context_executes_on_success_and_passes_correct_context()
         {
             UnitResult<E> result = UnitResult.Success<E>();
-            Result<K, E> actual = result.Map(
+            Return<K, E> actual = result.Map(
                 (context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -221,7 +221,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         public void Map_UnitResult_E_with_context_executes_on_failure_and_passes_correct_context()
         {
             UnitResult<E> result = UnitResult.Failure(E.Value);
-            Result<K, E> actual = result.Map(
+            Return<K, E> actual = result.Map(
                 (context) =>
                 {
                     context.Should().Be(ContextMessage);

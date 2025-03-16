@@ -2,12 +2,12 @@
 
 namespace CSharpFunctionalExtensions
 {
-    public partial struct Result
+    public partial struct Return
     {
         /// <summary>
         ///     Creates a result whose success/failure reflects the supplied condition. Opposite of FailureIf().
         /// </summary>
-        public static Result SuccessIf(bool isSuccess, string error)
+        public static Return SuccessIf(bool isSuccess, Exception error)
         {
             return isSuccess
                 ? Success()
@@ -17,7 +17,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of FailureIf().
         /// </summary>
-        public static Result SuccessIf(Func<bool> predicate, string error)
+        public static Return SuccessIf(Func<bool> predicate, Exception error)
         {
             return SuccessIf(predicate(), error);
         }
@@ -25,7 +25,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Creates a result whose success/failure reflects the supplied condition. Opposite of FailureIf().
         /// </summary>
-        public static Result<T> SuccessIf<T>(bool isSuccess, in T value, string error)
+        public static Return<T> SuccessIf<T>(bool isSuccess, in T value, Exception error)
         {
             return isSuccess
                 ? Success(value)
@@ -35,7 +35,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of FailureIf().
         /// </summary>
-        public static Result<T> SuccessIf<T>(Func<bool> predicate, in T value, string error)
+        public static Return<T> SuccessIf<T>(Func<bool> predicate, in T value, Exception error)
         {
             return SuccessIf(predicate(), value, error);
         }
@@ -43,7 +43,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Creates a result whose success/failure reflects the supplied condition. Opposite of FailureIf().
         /// </summary>
-        public static Result<T, E> SuccessIf<T, E>(bool isSuccess, in T value, in E error)
+        public static Return<T, E> SuccessIf<T, E>(bool isSuccess, in T value, in E error)
         {
             return isSuccess
                 ? Success<T, E>(value)
@@ -53,7 +53,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of FailureIf().
         /// </summary>
-        public static Result<T, E> SuccessIf<T, E>(Func<bool> predicate, in T value, in E error)
+        public static Return<T, E> SuccessIf<T, E>(Func<bool> predicate, in T value, in E error)
         {
             return SuccessIf(predicate(), value, error);
         }

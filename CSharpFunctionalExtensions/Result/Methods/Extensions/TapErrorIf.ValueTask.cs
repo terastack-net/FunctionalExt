@@ -9,7 +9,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result> TapErrorIf(this ValueTask<Result> resultTask, bool condition, Func<ValueTask> valueTask)
+        public static ValueTask<Return> TapErrorIf(this ValueTask<Return> resultTask, bool condition, Func<ValueTask> valueTask)
         {
             if (condition)
             {
@@ -22,7 +22,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result> TapErrorIf(this ValueTask<Result> resultTask, bool condition, Func<string, ValueTask> valueTask)
+        public static ValueTask<Return> TapErrorIf(this ValueTask<Return> resultTask, bool condition, Func<Exception, ValueTask> valueTask)
         {
             if (condition)
             {
@@ -35,7 +35,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result<T>> TapErrorIf<T>(this ValueTask<Result<T>> resultTask, bool condition, Func<ValueTask> valueTask)
+        public static ValueTask<Return<T>> TapErrorIf<T>(this ValueTask<Return<T>> resultTask, bool condition, Func<ValueTask> valueTask)
         {
             if (condition)
             {
@@ -48,7 +48,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result<T>> TapErrorIf<T>(this ValueTask<Result<T>> resultTask, bool condition, Func<string, ValueTask> valueTask)
+        public static ValueTask<Return<T>> TapErrorIf<T>(this ValueTask<Return<T>> resultTask, bool condition, Func<Exception, ValueTask> valueTask)
         {
             if (condition)
             {
@@ -61,7 +61,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result<T, E>> TapErrorIf<T, E>(this ValueTask<Result<T, E>> resultTask, bool condition, Func<ValueTask> valueTask)
+        public static ValueTask<Return<T, E>> TapErrorIf<T, E>(this ValueTask<Return<T, E>> resultTask, bool condition, Func<ValueTask> valueTask)
         {
             if (condition)
             {
@@ -74,7 +74,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<Result<T, E>> TapErrorIf<T, E>(this ValueTask<Result<T, E>> resultTask, bool condition, Func<E, ValueTask> valueTask)
+        public static ValueTask<Return<T, E>> TapErrorIf<T, E>(this ValueTask<Return<T, E>> resultTask, bool condition, Func<E, ValueTask> valueTask)
         {
             if (condition)
             {
@@ -113,9 +113,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result> TapErrorIf(this ValueTask<Result> resultTask, Func<string, bool> predicate, Func<ValueTask> valueTask)
+        public static async ValueTask<Return> TapErrorIf(this ValueTask<Return> resultTask, Func<Exception, bool> predicate, Func<ValueTask> valueTask)
         {
-            Result result = await resultTask;
+            Return result = await resultTask;
 
             if (result.IsFailure && predicate(result.Error))
             {
@@ -128,9 +128,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result> TapErrorIf(this ValueTask<Result> resultTask, Func<string, bool> predicate, Func<string, ValueTask> valueTask)
+        public static async ValueTask<Return> TapErrorIf(this ValueTask<Return> resultTask, Func<Exception, bool> predicate, Func<Exception, ValueTask> valueTask)
         {
-            Result result = await resultTask;
+            Return result = await resultTask;
 
             if (result.IsFailure && predicate(result.Error))
             {
@@ -143,9 +143,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T>> TapErrorIf<T>(this ValueTask<Result<T>> resultTask, Func<string, bool> predicate, Func<ValueTask> valueTask)
+        public static async ValueTask<Return<T>> TapErrorIf<T>(this ValueTask<Return<T>> resultTask, Func<Exception, bool> predicate, Func<ValueTask> valueTask)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
 
             if (result.IsFailure && predicate(result.Error))
             {
@@ -158,9 +158,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T>> TapErrorIf<T>(this ValueTask<Result<T>> resultTask, Func<string, bool> predicate, Func<string, ValueTask> valueTask)
+        public static async ValueTask<Return<T>> TapErrorIf<T>(this ValueTask<Return<T>> resultTask, Func<Exception, bool> predicate, Func<Exception, ValueTask> valueTask)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
 
             if (result.IsFailure && predicate(result.Error))
             {
@@ -173,9 +173,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T, E>> TapErrorIf<T, E>(this ValueTask<Result<T, E>> resultTask, Func<E, bool> predicate, Func<ValueTask> valueTask)
+        public static async ValueTask<Return<T, E>> TapErrorIf<T, E>(this ValueTask<Return<T, E>> resultTask, Func<E, bool> predicate, Func<ValueTask> valueTask)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
 
             if (result.IsFailure && predicate(result.Error))
             {
@@ -188,9 +188,9 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T, E>> TapErrorIf<T, E>(this ValueTask<Result<T, E>> resultTask, Func<E, bool> predicate, Func<E, ValueTask> valueTask)
+        public static async ValueTask<Return<T, E>> TapErrorIf<T, E>(this ValueTask<Return<T, E>> resultTask, Func<E, bool> predicate, Func<E, ValueTask> valueTask)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
 
             if (result.IsFailure && predicate(result.Error))
             {

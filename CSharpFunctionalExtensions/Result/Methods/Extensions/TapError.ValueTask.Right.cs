@@ -9,7 +9,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T>> TapError<T>(this Result<T> result, Func<ValueTask> valueTask)
+        public static async ValueTask<Return<T>> TapError<T>(this Return<T> result, Func<ValueTask> valueTask)
         {
             if (result.IsFailure)
             {
@@ -22,7 +22,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T, E>> TapError<T, E>(this Result<T, E> result, Func<ValueTask> valueTask)
+        public static async ValueTask<Return<T, E>> TapError<T, E>(this Return<T, E> result, Func<ValueTask> valueTask)
         {
             if (result.IsFailure)
             {
@@ -35,7 +35,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result> TapError(this Result result, Func<ValueTask> valueTask)
+        public static async ValueTask<Return> TapError(this Return result, Func<ValueTask> valueTask)
         {
             if (result.IsFailure)
             {
@@ -48,7 +48,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result> TapError(this Result result, Func<string, ValueTask> valueTask)
+        public static async ValueTask<Return> TapError(this Return result, Func<Exception, ValueTask> valueTask)
         {
             if (result.IsFailure)
             {
@@ -87,7 +87,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T>> TapError<T>(this Result<T> result, Func<string, ValueTask> valueTask)
+        public static async ValueTask<Return<T>> TapError<T>(this Return<T> result, Func<Exception, ValueTask> valueTask)
         {
             if (result.IsFailure)
             {
@@ -100,7 +100,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T, E>> TapError<T, E>(this Result<T, E> result, Func<E, ValueTask> valueTask)
+        public static async ValueTask<Return<T, E>> TapError<T, E>(this Return<T, E> result, Func<E, ValueTask> valueTask)
         {
             if (result.IsFailure)
             {

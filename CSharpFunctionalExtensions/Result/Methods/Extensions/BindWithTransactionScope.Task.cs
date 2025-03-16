@@ -6,19 +6,19 @@ namespace CSharpFunctionalExtensions
 {
     public static partial class ResultExtensions
     {
-        public static Task<Result<K, E>> BindWithTransactionScope<T, K, E>(this Task<Result<T, E>> self, Func<T, Task<Result<K, E>>> f)
+        public static Task<Return<K, E>> BindWithTransactionScope<T, K, E>(this Task<Return<T, E>> self, Func<T, Task<Return<K, E>>> f)
             => WithTransactionScope(() => self.Bind(f));
 
-        public static Task<Result<K>> BindWithTransactionScope<T, K>(this Task<Result<T>> self, Func<T, Task<Result<K>>> f)
+        public static Task<Return<K>> BindWithTransactionScope<T, K>(this Task<Return<T>> self, Func<T, Task<Return<K>>> f)
             => WithTransactionScope(() => self.Bind(f));
 
-        public static Task<Result<K>> BindWithTransactionScope<K>(this Task<Result> self, Func<Task<Result<K>>> f)
+        public static Task<Return<K>> BindWithTransactionScope<K>(this Task<Return> self, Func<Task<Return<K>>> f)
             => WithTransactionScope(() => self.Bind(f));
 
-        public static Task<Result> BindWithTransactionScope<T>(this Task<Result<T>> self, Func<T, Task<Result>> f)
+        public static Task<Return> BindWithTransactionScope<T>(this Task<Return<T>> self, Func<T, Task<Return>> f)
             => WithTransactionScope(() => self.Bind(f));
 
-        public static Task<Result> BindWithTransactionScope(this Task<Result> self, Func<Task<Result>> f)
+        public static Task<Return> BindWithTransactionScope(this Task<Return> self, Func<Task<Return>> f)
             => WithTransactionScope(() => self.Bind(f));
     }
 }

@@ -47,28 +47,28 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             };
         }
 
-        protected static Result<T> GetExpectedValueResult(bool isSuccess, bool condition)
+        protected static Return<T> GetExpectedValueResult(bool isSuccess, bool condition)
         {
             var resultChanged = isSuccess && condition;
 
             if (!resultChanged)
             {
-                return Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+                return Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
             }
 
-            return Result.SuccessIf(isSuccess, T.Value2, ErrorMessage2);
+            return Return.SuccessIf(isSuccess, T.Value2, ErrorMessage2);
         }
 
-        protected static Result<T, E> GetExpectedValueErrorResult(bool isSuccess, bool condition)
+        protected static Return<T, E> GetExpectedValueErrorResult(bool isSuccess, bool condition)
         {
             var resultChanged = isSuccess && condition;
 
             if (!resultChanged)
             {
-                return Result.SuccessIf(isSuccess, T.Value, E.Value);
+                return Return.SuccessIf(isSuccess, T.Value, E.Value);
             }
 
-            return Result.SuccessIf(isSuccess, T.Value2, E.Value2);
+            return Return.SuccessIf(isSuccess, T.Value2, E.Value2);
         }
 
         protected readonly string ContextMessage = "Context data";

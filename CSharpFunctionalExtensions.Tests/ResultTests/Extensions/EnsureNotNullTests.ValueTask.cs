@@ -12,9 +12,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_T_with_class_returns_failed_return_for_failed_result()
         {
-            Result<T?> result = Result.Failure<T?>(ErrorMessage);
+            Return<T?> result = Return.Failure<T?>(ErrorMessage);
 
-            Result<T> returned = await result.AsValueTask().EnsureNotNull(ErrorMessage2);
+            Return<T> returned = await result.AsValueTask().EnsureNotNull(ErrorMessage2);
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(ErrorMessage);
@@ -23,9 +23,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_V_with_struct_returns_failed_return_for_failed_result()
         {
-            Result<V?> result = Result.Failure<V?>(ErrorMessage);
+            Return<V?> result = Return.Failure<V?>(ErrorMessage);
 
-            Result<V> returned = await result.AsValueTask().EnsureNotNull(ErrorMessage2);
+            Return<V> returned = await result.AsValueTask().EnsureNotNull(ErrorMessage2);
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(ErrorMessage);
@@ -34,9 +34,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_T_with_class_returns_original_success_result_if_value_is_not_null()
         {
-            Result<T?> result = Result.Success<T?>(T.Value);
+            Return<T?> result = Return.Success<T?>(T.Value);
 
-            Result<T> returned = await result.AsValueTask().EnsureNotNull(ErrorMessage2);
+            Return<T> returned = await result.AsValueTask().EnsureNotNull(ErrorMessage2);
 
             returned.IsSuccess.Should().BeTrue();
             returned.Value.Should().Be(T.Value);
@@ -45,9 +45,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_V_with_struct_returns_original_success_result_if_value_is_not_null()
         {
-            Result<V?> result = Result.Success<V?>(V.Value);
+            Return<V?> result = Return.Success<V?>(V.Value);
 
-            Result<V> returned = await result.AsValueTask().EnsureNotNull(ErrorMessage2);
+            Return<V> returned = await result.AsValueTask().EnsureNotNull(ErrorMessage2);
 
             returned.IsSuccess.Should().BeTrue();
             returned.Value.Should().Be(V.Value);
@@ -56,9 +56,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_T_with_class_returns_failed_result_for_success_result_if_value_is_null()
         {
-            Result<T?> result = Result.Success<T?>(null);
+            Return<T?> result = Return.Success<T?>(null);
 
-            Result<T> returned = await result.AsValueTask().EnsureNotNull(ErrorMessage2);
+            Return<T> returned = await result.AsValueTask().EnsureNotNull(ErrorMessage2);
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(ErrorMessage2);
@@ -67,9 +67,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_V_with_struct_returns_failed_result_for_success_result_if_value_is_null()
         {
-            Result<V?> result = Result.Success<V?>(null);
+            Return<V?> result = Return.Success<V?>(null);
 
-            Result<V> returned = await result.AsValueTask().EnsureNotNull(ErrorMessage2);
+            Return<V> returned = await result.AsValueTask().EnsureNotNull(ErrorMessage2);
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(ErrorMessage2);
@@ -78,9 +78,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_T_factory_with_class_returns_failed_return_for_failed_result()
         {
-            Result<T?> result = Result.Failure<T?>(ErrorMessage);
+            Return<T?> result = Return.Failure<T?>(ErrorMessage);
 
-            Result<T> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(ErrorMessage2));
+            Return<T> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(ErrorMessage2));
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(ErrorMessage);
@@ -90,9 +90,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_V_factory_with_struct_returns_failed_return_for_failed_result()
         {
-            Result<V?> result = Result.Failure<V?>(ErrorMessage);
+            Return<V?> result = Return.Failure<V?>(ErrorMessage);
 
-            Result<V> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(ErrorMessage2));
+            Return<V> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(ErrorMessage2));
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(ErrorMessage);
@@ -102,9 +102,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_T_factory_with_class_returns_original_success_result_if_value_is_not_null()
         {
-            Result<T?> result = Result.Success<T?>(T.Value);
+            Return<T?> result = Return.Success<T?>(T.Value);
 
-            Result<T> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(ErrorMessage2));
+            Return<T> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(ErrorMessage2));
 
             returned.IsSuccess.Should().BeTrue();
             returned.Value.Should().Be(T.Value);
@@ -114,9 +114,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_V_factory_with_struct_returns_original_success_result_if_value_is_not_null()
         {
-            Result<V?> result = Result.Success<V?>(V.Value);
+            Return<V?> result = Return.Success<V?>(V.Value);
 
-            Result<V> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(ErrorMessage2));
+            Return<V> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(ErrorMessage2));
 
             returned.IsSuccess.Should().BeTrue();
             returned.Value.Should().Be(V.Value);
@@ -126,9 +126,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_T_factory_with_class_returns_failed_result_for_success_result_if_value_is_null()
         {
-            Result<T?> result = Result.Success<T?>(null);
+            Return<T?> result = Return.Success<T?>(null);
 
-            Result<T> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(ErrorMessage2));
+            Return<T> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(ErrorMessage2));
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(ErrorMessage2);
@@ -138,9 +138,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_V_factory_with_struct_returns_failed_result_for_success_result_if_value_is_null()
         {
-            Result<V?> result = Result.Success<V?>(null);
+            Return<V?> result = Return.Success<V?>(null);
 
-            Result<V> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(ErrorMessage2));
+            Return<V> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(ErrorMessage2));
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(ErrorMessage2);
@@ -150,9 +150,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_T_E_with_class_returns_failed_return_for_failed_result()
         {
-            Result<T?, E> result = Result.Failure<T?, E>(E.Value);
+            Return<T?, E> result = Return.Failure<T?, E>(E.Value);
 
-            Result<T, E> returned = await result.AsValueTask().EnsureNotNull(E.Value2);
+            Return<T, E> returned = await result.AsValueTask().EnsureNotNull(E.Value2);
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(E.Value);
@@ -161,9 +161,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_V_E_with_struct_returns_failed_return_for_failed_result()
         {
-            Result<V?, E> result = Result.Failure<V?, E>(E.Value);
+            Return<V?, E> result = Return.Failure<V?, E>(E.Value);
 
-            Result<V, E> returned = await result.AsValueTask().EnsureNotNull(E.Value2);
+            Return<V, E> returned = await result.AsValueTask().EnsureNotNull(E.Value2);
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(E.Value);
@@ -172,9 +172,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_T_E_with_class_returns_original_success_result_if_value_is_not_null()
         {
-            Result<T?, E> result = Result.Success<T?, E>(T.Value);
+            Return<T?, E> result = Return.Success<T?, E>(T.Value);
 
-            Result<T, E> returned = await result.AsValueTask().EnsureNotNull(E.Value2);
+            Return<T, E> returned = await result.AsValueTask().EnsureNotNull(E.Value2);
 
             returned.IsSuccess.Should().BeTrue();
             returned.Value.Should().Be(T.Value);
@@ -183,9 +183,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_V_E_with_struct_returns_original_success_result_if_value_is_not_null()
         {
-            Result<V?, E> result = Result.Success<V?, E>(V.Value);
+            Return<V?, E> result = Return.Success<V?, E>(V.Value);
 
-            Result<V, E> returned = await result.AsValueTask().EnsureNotNull(E.Value2);
+            Return<V, E> returned = await result.AsValueTask().EnsureNotNull(E.Value2);
 
             returned.IsSuccess.Should().BeTrue();
             returned.Value.Should().Be(V.Value);
@@ -194,9 +194,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_T_E_with_class_returns_failed_result_for_success_result_if_value_is_null()
         {
-            Result<T?, E> result = Result.Success<T?, E>(null);
+            Return<T?, E> result = Return.Success<T?, E>(null);
 
-            Result<T, E> returned = await result.AsValueTask().EnsureNotNull(E.Value2);
+            Return<T, E> returned = await result.AsValueTask().EnsureNotNull(E.Value2);
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(E.Value2);
@@ -205,9 +205,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_V_E_with_struct_returns_failed_result_for_success_result_if_value_is_null()
         {
-            Result<V?, E> result = Result.Success<V?, E>(null);
+            Return<V?, E> result = Return.Success<V?, E>(null);
 
-            Result<V, E> returned = await result.AsValueTask().EnsureNotNull(E.Value2);
+            Return<V, E> returned = await result.AsValueTask().EnsureNotNull(E.Value2);
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(E.Value2);
@@ -216,9 +216,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_T_E_factory_with_class_returns_failed_return_for_failed_result()
         {
-            Result<T?, E> result = Result.Failure<T?, E>(E.Value);
+            Return<T?, E> result = Return.Failure<T?, E>(E.Value);
 
-            Result<T, E> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(E.Value2));
+            Return<T, E> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(E.Value2));
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(E.Value);
@@ -228,9 +228,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_V_E_factory_with_struct_returns_failed_return_for_failed_result()
         {
-            Result<V?, E> result = Result.Failure<V?, E>(E.Value);
+            Return<V?, E> result = Return.Failure<V?, E>(E.Value);
 
-            Result<V, E> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(E.Value2));
+            Return<V, E> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(E.Value2));
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(E.Value);
@@ -240,9 +240,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_T_E_factory_with_class_returns_original_success_result_if_value_is_not_null()
         {
-            Result<T?, E> result = Result.Success<T?, E>(T.Value);
+            Return<T?, E> result = Return.Success<T?, E>(T.Value);
 
-            Result<T, E> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(E.Value2));
+            Return<T, E> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(E.Value2));
 
             returned.IsSuccess.Should().BeTrue();
             returned.Value.Should().Be(T.Value);
@@ -252,9 +252,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_V_E_factory_with_struct_returns_original_success_result_if_value_is_not_null()
         {
-            Result<V?, E> result = Result.Success<V?, E>(V.Value);
+            Return<V?, E> result = Return.Success<V?, E>(V.Value);
 
-            Result<V, E> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(E.Value2));
+            Return<V, E> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(E.Value2));
 
             returned.IsSuccess.Should().BeTrue();
             returned.Value.Should().Be(V.Value);
@@ -264,9 +264,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_T_E_factory_with_class_returns_failed_result_for_success_result_if_value_is_null()
         {
-            Result<T?, E> result = Result.Success<T?, E>(null);
+            Return<T?, E> result = Return.Success<T?, E>(null);
 
-            Result<T, E> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(E.Value2));
+            Return<T, E> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(E.Value2));
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(E.Value2);
@@ -276,9 +276,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task EnsureNotNull_ValueTask_V_E_factory_with_struct_returns_failed_result_for_success_result_if_value_is_null()
         {
-            Result<V?, E> result = Result.Success<V?, E>(null);
+            Return<V?, E> result = Return.Success<V?, E>(null);
 
-            Result<V, E> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(E.Value2));
+            Return<V, E> returned = await result.AsValueTask().EnsureNotNull(GetValueTaskErrorFactory(E.Value2));
 
             returned.IsSuccess.Should().BeFalse();
             returned.Error.Should().Be(E.Value2);

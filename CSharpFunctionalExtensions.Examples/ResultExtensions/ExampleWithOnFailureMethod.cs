@@ -34,9 +34,9 @@ namespace CSharpFunctionalExtensions.Examples.ResultExtensions
 
         private class PaymentGateway
         {
-            public Result ChargePayment(Customer customer, decimal moneyAmount)
+            public Return ChargePayment(Customer customer, decimal moneyAmount)
             {
-                return Result.Success();
+                return Return.Success();
             }
 
             public void RollbackLastTransaction()
@@ -52,9 +52,9 @@ namespace CSharpFunctionalExtensions.Examples.ResultExtensions
 
         private class Database
         {
-            public Result Save(Customer customer)
+            public Return Save(Customer customer)
             {
-                return Result.Success();
+                return Return.Success();
             }
         }
     }

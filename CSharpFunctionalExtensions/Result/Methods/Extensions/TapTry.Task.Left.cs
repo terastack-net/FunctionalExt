@@ -8,7 +8,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static async Task<Result> TapTry(this Task<Result> resultTask, Action action)
+        public static async Task<Return> TapTry(this Task<Return> resultTask, Action action)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapTry(action);
@@ -17,7 +17,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static async Task<Result<T>> TapTry<T>(this Task<Result<T>> resultTask, Action action)
+        public static async Task<Return<T>> TapTry<T>(this Task<Return<T>> resultTask, Action action)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapTry(action);
@@ -26,7 +26,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static async Task<Result<T>> TapTry<T>(this Task<Result<T>> resultTask, Action<T> action)
+        public static async Task<Return<T>> TapTry<T>(this Task<Return<T>> resultTask, Action<T> action)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapTry(action);
@@ -44,7 +44,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static async Task<Result<T, E>> TapTry<T, E>(this Task<Result<T, E>> resultTask, Action action, Func<Exception, E> errorHandler)
+        public static async Task<Return<T, E>> TapTry<T, E>(this Task<Return<T, E>> resultTask, Action action, Func<Exception, E> errorHandler)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapTry(action, errorHandler);
@@ -53,7 +53,7 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static async Task<Result<T, E>> TapTry<T, E>(this Task<Result<T, E>> resultTask, Action<T> action, Func<Exception, E> errorHandler)
+        public static async Task<Return<T, E>> TapTry<T, E>(this Task<Return<T, E>> resultTask, Action<T> action, Func<Exception, E> errorHandler)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapTry(action, errorHandler);

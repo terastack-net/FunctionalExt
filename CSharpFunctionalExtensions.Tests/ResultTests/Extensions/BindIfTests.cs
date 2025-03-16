@@ -16,9 +16,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false, false)]
         public void BindIf_executes_func_conditionally_and_returns_new_result(bool isSuccess, bool condition, bool isSuccessAction)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
-            Result returned = result.BindIf(condition, GetAction(isSuccessAction));
+            Return returned = result.BindIf(condition, GetAction(isSuccessAction));
 
             actionExecuted.Should().Be(isSuccess && condition);
             returned.Should().Be(GetExpectedResult(isSuccess, condition, isSuccessAction));
@@ -35,9 +35,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false, false)]
         public void BindIf_T_executes_func_conditionally_and_returns_new_result(bool isSuccess, bool condition, bool isSuccessAction)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
-            Result<T> returned = result.BindIf(condition, GetValueAction(isSuccessAction));
+            Return<T> returned = result.BindIf(condition, GetValueAction(isSuccessAction));
 
             actionExecuted.Should().Be(isSuccess && condition);
             returned.Should().Be(GetExpectedValueResult(isSuccess, condition, isSuccessAction));
@@ -73,9 +73,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false, false)]
         public void BindIf_T_E_executes_func_conditionally_and_returns_new_result(bool isSuccess, bool condition, bool isSuccessAction)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
-            Result<T, E> returned = result.BindIf(condition, GetValueErrorAction(isSuccessAction));
+            Return<T, E> returned = result.BindIf(condition, GetValueErrorAction(isSuccessAction));
 
             actionExecuted.Should().Be(isSuccess && condition);
             returned.Should().Be(GetExpectedValueErrorResult(isSuccess, condition, isSuccessAction));
@@ -92,9 +92,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false, false)]
         public void BindIf_computes_predicate_executes_func_conditionally_and_returns_new_result(bool isSuccess, bool condition, bool isSuccessAction)
         {
-            Result result = Result.SuccessIf(isSuccess, ErrorMessage);
+            Return result = Return.SuccessIf(isSuccess, ErrorMessage);
 
-            Result returned = result.BindIf(GetPredicate(condition), GetAction(isSuccessAction));
+            Return returned = result.BindIf(GetPredicate(condition), GetAction(isSuccessAction));
 
             predicateExecuted.Should().Be(isSuccess);
             actionExecuted.Should().Be(isSuccess && condition);
@@ -112,9 +112,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false, false)]
         public void BindIf_computes_predicate_T_executes_func_conditionally_and_returns_new_result(bool isSuccess, bool condition, bool isSuccessAction)
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
 
-            Result<T> returned = result.BindIf(GetValuePredicate(condition), GetValueAction(isSuccessAction));
+            Return<T> returned = result.BindIf(GetValuePredicate(condition), GetValueAction(isSuccessAction));
 
             predicateExecuted.Should().Be(isSuccess);
             actionExecuted.Should().Be(isSuccess && condition);
@@ -152,9 +152,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [InlineData(false, false, false)]
         public void BindIf_computes_predicate_T_E_executes_func_conditionally_and_returns_new_result(bool isSuccess, bool condition, bool isSuccessAction)
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
 
-            Result<T, E> returned = result.BindIf(GetValuePredicate(condition), GetValueErrorAction(isSuccessAction));
+            Return<T, E> returned = result.BindIf(GetValuePredicate(condition), GetValueErrorAction(isSuccessAction));
 
             predicateExecuted.Should().Be(isSuccess);
             actionExecuted.Should().Be(isSuccess && condition);

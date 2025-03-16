@@ -10,9 +10,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_success_on_valuetask_success_returns_success()
         {
-            ValueTask<Result> sut = Result.Success().AsValueTask();
+            ValueTask<Return> sut = Return.Success().AsValueTask();
 
-            Result result = await sut.BindTry(Success);
+            Return result = await sut.BindTry(Success);
 
             AssertSuccess(result);
         }
@@ -20,9 +20,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_success_on_valuetask_failure_returns_failure()
         {
-            ValueTask<Result> sut = Result.Failure(ErrorMessage).AsValueTask();
+            ValueTask<Return> sut = Return.Failure(ErrorMessage).AsValueTask();
 
-            Result result = await sut.BindTry(Success);
+            Return result = await sut.BindTry(Success);
 
             AssertFailure(result);
         }
@@ -30,9 +30,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_failure_on_valuetask_success_returns_failure()
         {
-            ValueTask<Result> sut = Result.Success().AsValueTask();
+            ValueTask<Return> sut = Return.Success().AsValueTask();
 
-            Result result = await sut.BindTry(Failure);
+            Return result = await sut.BindTry(Failure);
 
             AssertFailure(result);
         }
@@ -40,9 +40,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_throwing_func_on_valuetask_success_returns_failure_with_exception_message()
         {
-            ValueTask<Result> sut = Result.Success().AsValueTask();
+            ValueTask<Return> sut = Return.Success().AsValueTask();
 
-            Result result = await sut.BindTry(Throwing);
+            Return result = await sut.BindTry(Throwing);
 
             AssertFailure(result);
         }
@@ -50,9 +50,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_throwing_func_on_valuetask_success_with_custom_error_handler_returns_failure_with_custom_message()
         {
-            ValueTask<Result> sut = Result.Success().AsValueTask();
+            ValueTask<Return> sut = Return.Success().AsValueTask();
 
-            Result result = await sut.BindTry(Throwing, e => ErrorMessage2);
+            Return result = await sut.BindTry(Throwing, e => ErrorMessage2);
 
             AssertFailure(result, ErrorMessage2);
         }
@@ -62,9 +62,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_success_K_on_valuetask_success_returns_success()
         {
-            ValueTask<Result> sut = Result.Success().AsValueTask();
+            ValueTask<Return> sut = Return.Success().AsValueTask();
 
-            Result<K> result = await sut.BindTry(Success_K);
+            Return<K> result = await sut.BindTry(Success_K);
 
             AssertSuccess(result);
         }
@@ -72,9 +72,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_success_K_on_valuetask_failure_returns_failure()
         {
-            ValueTask<Result> sut = Result.Failure(ErrorMessage).AsValueTask();
+            ValueTask<Return> sut = Return.Failure(ErrorMessage).AsValueTask();
 
-            Result<K> result = await sut.BindTry(Success_K);
+            Return<K> result = await sut.BindTry(Success_K);
 
             AssertFailure(result);
         }
@@ -82,9 +82,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_failure_K_on_valuetask_success_returns_failure()
         {
-            ValueTask<Result> sut = Result.Success().AsValueTask();
+            ValueTask<Return> sut = Return.Success().AsValueTask();
 
-            Result<K> result = await sut.BindTry(Failure_K);
+            Return<K> result = await sut.BindTry(Failure_K);
 
             AssertFailure(result);
         }
@@ -92,9 +92,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_throwing_func_K_on_valuetask_success_returns_failure_with_exception_message()
         {
-            ValueTask<Result> sut = Result.Success().AsValueTask();
+            ValueTask<Return> sut = Return.Success().AsValueTask();
 
-            Result<K> result = await sut.BindTry(Throwing_K);
+            Return<K> result = await sut.BindTry(Throwing_K);
 
             AssertFailure(result);
         }
@@ -102,9 +102,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_throwing_func_K_on_success_with_custom_error_handler_returns_failure_with_custom_message()
         {
-            ValueTask<Result> sut = Result.Success().AsValueTask();
+            ValueTask<Return> sut = Return.Success().AsValueTask();
 
-            Result<K> result = await sut.BindTry(Throwing_K, e => ErrorMessage2);
+            Return<K> result = await sut.BindTry(Throwing_K, e => ErrorMessage2);
 
             AssertFailure(result, ErrorMessage2);
         }
@@ -114,9 +114,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_success_on_valuetask_success_T_returns_success()
         {
-            ValueTask<Result<T>> sut = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> sut = Return.Success(T.Value).AsValueTask();
 
-            Result result = await sut.BindTry(t => Success());
+            Return result = await sut.BindTry(t => Success());
 
             AssertSuccess(result);
         }
@@ -124,9 +124,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_valuetask_func_returning_success_T_on_valuetask_failure_returns_failure()
         {
-            ValueTask<Result<T>> sut = Result.Failure<T>(ErrorMessage).AsValueTask();
+            ValueTask<Return<T>> sut = Return.Failure<T>(ErrorMessage).AsValueTask();
 
-            Result result = await sut.BindTry(t => Success());
+            Return result = await sut.BindTry(t => Success());
 
             AssertFailure(result);
         }
@@ -134,9 +134,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_failure_on_valuetask_success_T_returns_failure()
         {
-            ValueTask<Result<T>> sut = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> sut = Return.Success(T.Value).AsValueTask();
 
-            Result result = await sut.BindTry(t => Failure());
+            Return result = await sut.BindTry(t => Failure());
 
             AssertFailure(result);
         }
@@ -144,9 +144,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_throwing_func_on_valuetask_success_T_returns_failure_with_exception_message()
         {
-            ValueTask<Result<T>> sut = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> sut = Return.Success(T.Value).AsValueTask();
 
-            Result result = await sut.BindTry(t => Throwing());
+            Return result = await sut.BindTry(t => Throwing());
 
             AssertFailure(result);
         }
@@ -154,9 +154,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_throwing_func_on_success_T_with_custom_error_handler_returns_failure_with_custom_message()
         {
-            ValueTask<Result<T>> sut = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> sut = Return.Success(T.Value).AsValueTask();
 
-            Result result = await sut.BindTry(t => Throwing(), e => ErrorMessage2);
+            Return result = await sut.BindTry(t => Throwing(), e => ErrorMessage2);
 
             AssertFailure(result, ErrorMessage2);
         }
@@ -166,9 +166,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_success_K_on_valuetask_success_T_returns_success()
         {
-            ValueTask<Result<T>> sut = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> sut = Return.Success(T.Value).AsValueTask();
 
-            Result<K> result = await sut.BindTry(t => Success_K());
+            Return<K> result = await sut.BindTry(t => Success_K());
 
             AssertSuccess(result);
         }
@@ -176,9 +176,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_success_K_on_valuetask_failure_T_returns_failure()
         {
-            ValueTask<Result<T>> sut = Result.Failure<T>(ErrorMessage).AsValueTask();
+            ValueTask<Return<T>> sut = Return.Failure<T>(ErrorMessage).AsValueTask();
 
-            Result<K> result = await sut.BindTry(t => Success_K());
+            Return<K> result = await sut.BindTry(t => Success_K());
 
             AssertFailure(result);
         }
@@ -186,9 +186,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_failure_K_on_valuetask_success_T_returns_failure()
         {
-            ValueTask<Result<T>> sut = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> sut = Return.Success(T.Value).AsValueTask();
 
-            Result<K> result = await sut.BindTry(t => Failure_K());
+            Return<K> result = await sut.BindTry(t => Failure_K());
 
             AssertFailure(result);
         }
@@ -196,9 +196,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_throwing_func_K_on_valuetask_success_T_returns_failure_with_exception_message()
         {
-            ValueTask<Result<T>> sut = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> sut = Return.Success(T.Value).AsValueTask();
 
-            Result<K> result = await sut.BindTry(t => Throwing_K());
+            Return<K> result = await sut.BindTry(t => Throwing_K());
 
             AssertFailure(result);
         }
@@ -206,9 +206,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_throwing_func_K_on_success_T_with_custom_error_handler_returns_failure_with_custom_message()
         {
-            ValueTask<Result<T>> sut = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> sut = Return.Success(T.Value).AsValueTask();
 
-            Result<K> result = await sut.BindTry(t => Throwing_K(), e => ErrorMessage2);
+            Return<K> result = await sut.BindTry(t => Throwing_K(), e => ErrorMessage2);
 
             AssertFailure(result, ErrorMessage2);
         }
@@ -218,7 +218,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_success_E_on_valuetask_success_T_E_returns_success()
         {
-            ValueTask<Result<T, E>> sut = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> sut = Return.Success<T, E>(T.Value).AsValueTask();
 
             UnitResult<E> result = await sut.BindTry(t => UnitResult_Success_E(), e => E.Value2);
 
@@ -228,7 +228,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_success_E_on_valuetask_failure_T_E_returns_failure()
         {
-            ValueTask<Result<T, E>> sut = Result.Failure<T, E>(E.Value).AsValueTask();
+            ValueTask<Return<T, E>> sut = Return.Failure<T, E>(E.Value).AsValueTask();
 
             UnitResult<E> result = await sut.BindTry(t => UnitResult_Success_E(), e => E.Value2);
 
@@ -238,7 +238,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_failure_E_on_valuetask_success_T_E_returns_failure()
         {
-            ValueTask<Result<T, E>> sut = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> sut = Return.Success<T, E>(T.Value).AsValueTask();
 
             UnitResult<E> result = await sut.BindTry(t => UnitResult_Failure_E(), e => E.Value2);
 
@@ -248,7 +248,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_throwing_func_E_on_success_T_E_returns_failure_with_value_from_error_handler()
         {
-            ValueTask<Result<T, E>> sut = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> sut = Return.Success<T, E>(T.Value).AsValueTask();
 
             UnitResult<E> result = await sut.BindTry(t => Throwing_E(), e => E.Value2);
 
@@ -260,9 +260,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_success_K_E_on_valuetask_success_T_E_returns_success()
         {
-            ValueTask<Result<T, E>> sut = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> sut = Return.Success<T, E>(T.Value).AsValueTask();
 
-            Result<K, E> result = await sut.BindTry(Success_T_E_Func_K, e => E.Value2);
+            Return<K, E> result = await sut.BindTry(Success_T_E_Func_K, e => E.Value2);
 
             AssertSuccess(result);
         }
@@ -270,9 +270,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_success_K_E_on_valuetask_failure_T_E_returns_failure()
         {
-            ValueTask<Result<T, E>> sut = Result.Failure<T, E>(E.Value).AsValueTask();
+            ValueTask<Return<T, E>> sut = Return.Failure<T, E>(E.Value).AsValueTask();
 
-            Result<K, E> result = await sut.BindTry(Success_T_E_Func_K, e => E.Value2);
+            Return<K, E> result = await sut.BindTry(Success_T_E_Func_K, e => E.Value2);
 
             AssertFailure(result);
         }
@@ -280,9 +280,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_func_returning_failure_K_E_on_valuetask_success_T_E_returns_failure()
         {
-            ValueTask<Result<T, E>> sut = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> sut = Return.Success<T, E>(T.Value).AsValueTask();
 
-            Result<K, E> result = await sut.BindTry(Failure_T_E_Func_K, e => E.Value2);
+            Return<K, E> result = await sut.BindTry(Failure_T_E_Func_K, e => E.Value2);
 
             AssertFailure(result);
         }
@@ -290,9 +290,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async ValueTask BindTry_execute_throwing_func_K_E_on_success_T_E_returns_failure_with_value_from_error_handler()
         {
-            ValueTask<Result<T, E>> sut = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> sut = Return.Success<T, E>(T.Value).AsValueTask();
 
-            Result<K, E> result = await sut.BindTry(t => Throwing_K_E(), e => E.Value2);
+            Return<K, E> result = await sut.BindTry(t => Throwing_K_E(), e => E.Value2);
 
             AssertFailure(result, E.Value2);
         }
@@ -304,7 +304,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             ValueTask<UnitResult<E>> sut = UnitResult.Success<E>().AsValueTask();
 
-            Result<T, E> result = await sut.BindTry(Success_T_E, e => E.Value2);
+            Return<T, E> result = await sut.BindTry(Success_T_E, e => E.Value2);
 
             AssertSuccess(result);
         }
@@ -314,7 +314,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             ValueTask<UnitResult<E>> sut = UnitResult.Failure(E.Value).AsValueTask();
 
-            Result<T, E> result = await sut.BindTry(Success_T_E, e => E.Value2);
+            Return<T, E> result = await sut.BindTry(Success_T_E, e => E.Value2);
 
             AssertFailure(result);
         }
@@ -324,7 +324,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             ValueTask<UnitResult<E>> sut = UnitResult.Success<E>().AsValueTask();
 
-            Result<T, E> result = await sut.BindTry(Failure_T_E, e => E.Value2);
+            Return<T, E> result = await sut.BindTry(Failure_T_E, e => E.Value2);
 
             AssertFailure(result);
         }
@@ -334,7 +334,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             ValueTask<UnitResult<E>> sut = UnitResult.Success<E>().AsValueTask();
 
-            Result<T, E> result = await sut.BindTry(Throwing_T_E, e => E.Value2);
+            Return<T, E> result = await sut.BindTry(Throwing_T_E, e => E.Value2);
 
             AssertFailure(result, E.Value2);
         }

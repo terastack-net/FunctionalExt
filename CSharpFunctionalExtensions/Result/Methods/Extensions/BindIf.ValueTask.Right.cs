@@ -6,7 +6,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
 {
     public static partial class ResultExtensions
     {
-        public static ValueTask<Result> BindIf(this Result result, bool condition, Func<ValueTask<Result>> valueTask)
+        public static ValueTask<Return> BindIf(this Return result, bool condition, Func<ValueTask<Return>> valueTask)
         {
             if (!condition)
             {
@@ -16,7 +16,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Bind(valueTask);
         }
 
-        public static ValueTask<Result<T>> BindIf<T>(this Result<T> result, bool condition, Func<T, ValueTask<Result<T>>> valueTask)
+        public static ValueTask<Return<T>> BindIf<T>(this Return<T> result, bool condition, Func<T, ValueTask<Return<T>>> valueTask)
         {
             if (!condition)
             {
@@ -36,7 +36,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Bind(valueTask);
         }
 
-        public static ValueTask<Result<T, E>> BindIf<T, E>(this Result<T, E> result, bool condition, Func<T, ValueTask<Result<T, E>>> valueTask)
+        public static ValueTask<Return<T, E>> BindIf<T, E>(this Return<T, E> result, bool condition, Func<T, ValueTask<Return<T, E>>> valueTask)
         {
             if (!condition)
             {
@@ -46,7 +46,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Bind(valueTask);
         }
 
-        public static ValueTask<Result> BindIf(this Result result, Func<bool> predicate, Func<ValueTask<Result>> valueTask)
+        public static ValueTask<Return> BindIf(this Return result, Func<bool> predicate, Func<ValueTask<Return>> valueTask)
         {
             if (!result.IsSuccess || !predicate())
             {
@@ -56,7 +56,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Bind(valueTask);
         }
 
-        public static ValueTask<Result<T>> BindIf<T>(this Result<T> result, Func<T, bool> predicate, Func<T, ValueTask<Result<T>>> valueTask)
+        public static ValueTask<Return<T>> BindIf<T>(this Return<T> result, Func<T, bool> predicate, Func<T, ValueTask<Return<T>>> valueTask)
         {
             if (!result.IsSuccess || !predicate(result.Value))
             {
@@ -76,7 +76,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
             return result.Bind(valueTask);
         }
 
-        public static ValueTask<Result<T, E>> BindIf<T, E>(this Result<T, E> result, Func<T, bool> predicate, Func<T, ValueTask<Result<T, E>>> valueTask)
+        public static ValueTask<Return<T, E>> BindIf<T, E>(this Return<T, E> result, Func<T, bool> predicate, Func<T, ValueTask<Return<T, E>>> valueTask)
         {
             if (!result.IsSuccess || !predicate(result.Value))
             {

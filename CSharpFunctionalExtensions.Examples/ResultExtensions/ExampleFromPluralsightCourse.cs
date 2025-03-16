@@ -39,9 +39,9 @@ namespace CSharpFunctionalExtensions.Examples.ResultExtensions
 
         public class EmailGateway
         {
-            public Result SendPromotionNotification(string email)
+            public Return SendPromotionNotification(string email)
             {
-                return Result.Success();
+                return Return.Success();
             }
         }
     }

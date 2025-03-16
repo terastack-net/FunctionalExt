@@ -8,7 +8,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods.Try
         [Fact]
         public void Try_execute_action_success_without_error_handler_function_result_expected()
         {
-            var result = Result.Try(Action);
+            var result = Return.Try(Action);
             result.IsSuccess.Should().BeTrue();
             FuncExecuted.Should().BeTrue();
         }
@@ -16,7 +16,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods.Try
         [Fact]
         public void Try_execute_action_failed_without_error_handler_failed_result_expected()
         {
-            var result = Result.Try(Throwing_Action);
+            var result = Return.Try(Throwing_Action);
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(ErrorMessage);
@@ -25,7 +25,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods.Try
         [Fact]
         public void Try_execute_action_failed_with_error_handler_failed_result_expected()
         {
-            var result = Result.Try(Throwing_Action, ErrorHandler);
+            var result = Return.Try(Throwing_Action, ErrorHandler);
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(ErrorHandlerMessage);
@@ -34,7 +34,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods.Try
         [Fact] 
         public void Try_T_execute_function_success_without_error_handler_function_result_expected()
         {
-            var result = Result.Try(Func_T);
+            var result = Return.Try(Func_T);
 
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().Be(T.Value);
@@ -44,7 +44,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods.Try
         [Fact] 
         public void Try_T_execute_function_failed_without_error_handler_failed_result_expected()
         {
-            var result = Result.Try(Throwing_Func_T);
+            var result = Return.Try(Throwing_Func_T);
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(ErrorMessage);
@@ -53,7 +53,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods.Try
         [Fact] 
         public void Try_T_execute_function_failed_with_error_handler_failed_result_expected()
         {
-            var result = Result.Try(Throwing_Func_T, ErrorHandler);
+            var result = Return.Try(Throwing_Func_T, ErrorHandler);
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(ErrorHandlerMessage);
@@ -62,7 +62,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods.Try
         [Fact]
         public void Try_T_E_execute_function_success_without_error_handler_function_result_expected()
         {
-            var result = Result.Try(Func_T, ErrorHandler_E);
+            var result = Return.Try(Func_T, ErrorHandler_E);
 
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().Be(T.Value);
@@ -72,7 +72,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods.Try
         [Fact] 
         public void Try_T_E_execute_function_failed_without_error_handler_failed_result_expected()
         {
-            var result = Result.Try(Throwing_Func_T, ErrorHandler_E);
+            var result = Return.Try(Throwing_Func_T, ErrorHandler_E);
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(E.Value);
@@ -81,7 +81,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Methods.Try
         [Fact] 
         public void Try_T_E_execute_function_failed_with_error_handler_failed_result_expected()
         {
-            var result = Result.Try(Throwing_Func_T, ErrorHandler_E);
+            var result = Return.Try(Throwing_Func_T, ErrorHandler_E);
 
             result.IsFailure.Should().BeTrue();
             result.Error.Should().Be(E.Value);

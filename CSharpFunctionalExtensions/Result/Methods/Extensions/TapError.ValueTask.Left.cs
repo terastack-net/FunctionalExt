@@ -9,27 +9,27 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T>> TapError<T>(this ValueTask<Result<T>> resultTask, Action action)
+        public static async ValueTask<Return<T>> TapError<T>(this ValueTask<Return<T>> resultTask, Action action)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
             return result.TapError(action);
         }
 
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result> TapError(this ValueTask<Result> resultTask, Action action)
+        public static async ValueTask<Return> TapError(this ValueTask<Return> resultTask, Action action)
         {
-            Result result = await resultTask;
+            Return result = await resultTask;
             return result.TapError(action);
         }
 
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T, E>> TapError<T, E>(this ValueTask<Result<T, E>> resultTask, Action action)
+        public static async ValueTask<Return<T, E>> TapError<T, E>(this ValueTask<Return<T, E>> resultTask, Action action)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
             return result.TapError(action);
         }
 
@@ -54,27 +54,27 @@ namespace CSharpFunctionalExtensions.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T>> TapError<T>(this ValueTask<Result<T>> resultTask, Action<string> action)
+        public static async ValueTask<Return<T>> TapError<T>(this ValueTask<Return<T>> resultTask, Action<Exception> action)
         {
-            Result<T> result = await resultTask;
+            Return<T> result = await resultTask;
             return result.TapError(action);
         }
 
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result<T, E>> TapError<T, E>(this ValueTask<Result<T, E>> resultTask, Action<E> action)
+        public static async ValueTask<Return<T, E>> TapError<T, E>(this ValueTask<Return<T, E>> resultTask, Action<E> action)
         {
-            Result<T, E> result = await resultTask;
+            Return<T, E> result = await resultTask;
             return result.TapError(action);
         }
 
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<Result> TapError(this ValueTask<Result> resultTask, Action<string> action)
+        public static async ValueTask<Return> TapError(this ValueTask<Return> resultTask, Action<Exception> action)
         {
-            Result result = await resultTask;
+            Return result = await resultTask;
             return result.TapError(action);
         }
     }

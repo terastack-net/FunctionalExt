@@ -15,8 +15,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
-            Result<T> returned = result.MapIf(condition, GetAction());
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> returned = result.MapIf(condition, GetAction());
             actionExecuted.Should().Be(isSuccess && condition);
             returned.Should().Be(GetExpectedValueResult(isSuccess, condition));
         }
@@ -31,8 +31,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
-            Result<T, E> returned = result.MapIf(condition, GetAction());
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> returned = result.MapIf(condition, GetAction());
             actionExecuted.Should().Be(isSuccess && condition);
             returned.Should().Be(GetExpectedValueErrorResult(isSuccess, condition));
         }
@@ -47,8 +47,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
-            Result<T> returned = result.MapIf(GetValuePredicate(condition), GetAction());
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> returned = result.MapIf(GetValuePredicate(condition), GetAction());
             predicateExecuted.Should().Be(isSuccess);
             actionExecuted.Should().Be(isSuccess && condition);
             returned.Should().Be(GetExpectedValueResult(isSuccess, condition));
@@ -64,8 +64,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
-            Result<T, E> returned = result.MapIf(GetValuePredicate(condition), GetAction());
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> returned = result.MapIf(GetValuePredicate(condition), GetAction());
             predicateExecuted.Should().Be(isSuccess);
             actionExecuted.Should().Be(isSuccess && condition);
             returned.Should().Be(GetExpectedValueErrorResult(isSuccess, condition));
@@ -81,8 +81,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
-            Result<T> returned = result.MapIf(
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> returned = result.MapIf(
                 condition,
                 (value, context) =>
                 {
@@ -105,8 +105,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
-            Result<T, E> returned = result.MapIf(
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> returned = result.MapIf(
                 condition,
                 (value, context) =>
                 {
@@ -129,8 +129,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T> result = Result.SuccessIf(isSuccess, T.Value, ErrorMessage);
-            Result<T> returned = result.MapIf(
+            Return<T> result = Return.SuccessIf(isSuccess, T.Value, ErrorMessage);
+            Return<T> returned = result.MapIf(
                 (value, context) =>
                 {
                     context.Should().Be(ContextMessage);
@@ -158,8 +158,8 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
             bool condition
         )
         {
-            Result<T, E> result = Result.SuccessIf(isSuccess, T.Value, E.Value);
-            Result<T, E> returned = result.MapIf(
+            Return<T, E> result = Return.SuccessIf(isSuccess, T.Value, E.Value);
+            Return<T, E> returned = result.MapIf(
                 (value, context) =>
                 {
                     context.Should().Be(ContextMessage);

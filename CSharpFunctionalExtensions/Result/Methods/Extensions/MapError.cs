@@ -7,30 +7,30 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static Result MapError(this Result result, Func<string, string> errorFactory)
+        public static Return MapError(this Return result, Func<Exception, Exception> errorFactory)
         {
             if (result.IsFailure)
-                return Result.Failure(errorFactory(result.Error));
+                return Return.Failure(errorFactory(result.Error));
 
-            return Result.Success();
+            return Return.Success();
         }
 
-        public static Result MapError<TContext>(
-            this Result result,
-            Func<string, TContext, string> errorFactory,
+        public static Return MapError<TContext>(
+            this Return result,
+            Func<Exception, TContext, string> errorFactory,
             TContext context
         )
         {
             if (result.IsFailure)
-                return Result.Failure(errorFactory(result.Error, context));
+                return Return.Failure(errorFactory(result.Error, context));
 
-            return Result.Success();
+            return Return.Success();
         }
 
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static UnitResult<E> MapError<E>(this Result result, Func<string, E> errorFactory)
+        public static UnitResult<E> MapError<E>(this Return result, Func<Exception, E> errorFactory)
         {
             if (result.IsFailure)
                 return UnitResult.Failure(errorFactory(result.Error));
@@ -39,8 +39,8 @@ namespace CSharpFunctionalExtensions
         }
 
         public static UnitResult<E> MapError<E, TContext>(
-            this Result result,
-            Func<string, TContext, E> errorFactory,
+            this Return result,
+            Func<Exception, TContext, E> errorFactory,
             TContext context
         )
         {
@@ -53,76 +53,76 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static Result<T> MapError<T>(
-            this Result<T> result,
-            Func<string, string> errorFactory
+        public static Return<T> MapError<T>(
+            this Return<T> result,
+            Func<Exception, Exception> errorFactory
         )
         {
             if (result.IsFailure)
-                return Result.Failure<T>(errorFactory(result.Error));
+                return Return.Failure<T>(errorFactory(result.Error));
 
-            return Result.Success(result.Value);
+            return Return.Success(result.Value);
         }
 
-        public static Result<T> MapError<T, TContext>(
-            this Result<T> result,
-            Func<string, TContext, string> errorFactory,
+        public static Return<T> MapError<T, TContext>(
+            this Return<T> result,
+            Func<Exception, TContext, Exception> errorFactory,
             TContext context
         )
         {
             if (result.IsFailure)
-                return Result.Failure<T>(errorFactory(result.Error, context));
+                return Return.Failure<T>(errorFactory(result.Error, context));
 
-            return Result.Success(result.Value);
+            return Return.Success(result.Value);
         }
 
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static Result<T, E> MapError<T, E>(
-            this Result<T> result,
-            Func<string, E> errorFactory
+        public static Return<T, E> MapError<T, E>(
+            this Return<T> result,
+            Func<Exception, E> errorFactory
         )
         {
             if (result.IsFailure)
-                return Result.Failure<T, E>(errorFactory(result.Error));
+                return Return.Failure<T, E>(errorFactory(result.Error));
 
-            return Result.Success<T, E>(result.Value);
+            return Return.Success<T, E>(result.Value);
         }
 
-        public static Result<T, E> MapError<T, E, TContext>(
-            this Result<T> result,
-            Func<string, TContext, E> errorFactory,
+        public static Return<T, E> MapError<T, E, TContext>(
+            this Return<T> result,
+            Func<Exception, TContext, E> errorFactory,
             TContext context
         )
         {
             if (result.IsFailure)
-                return Result.Failure<T, E>(errorFactory(result.Error, context));
+                return Return.Failure<T, E>(errorFactory(result.Error, context));
 
-            return Result.Success<T, E>(result.Value);
+            return Return.Success<T, E>(result.Value);
         }
 
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static Result MapError<E>(this UnitResult<E> result, Func<E, string> errorFactory)
+        public static Return MapError<E>(this UnitResult<E> result, Func<E, Exception> errorFactory)
         {
             if (result.IsFailure)
-                return Result.Failure(errorFactory(result.Error));
+                return Return.Failure(errorFactory(result.Error));
 
-            return Result.Success();
+            return Return.Success();
         }
 
-        public static Result MapError<E, TContext>(
+        public static Return MapError<E, TContext>(
             this UnitResult<E> result,
             Func<E, TContext, string> errorFactory,
             TContext context
         )
         {
             if (result.IsFailure)
-                return Result.Failure(errorFactory(result.Error, context));
+                return Return.Failure(errorFactory(result.Error, context));
 
-            return Result.Success();
+            return Return.Success();
         }
 
         /// <summary>
@@ -154,53 +154,53 @@ namespace CSharpFunctionalExtensions
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static Result<T> MapError<T, E>(
-            this Result<T, E> result,
-            Func<E, string> errorFactory
+        public static Return<T> MapError<T, E>(
+            this Return<T, E> result,
+            Func<E, Exception> errorFactory
         )
         {
             if (result.IsFailure)
-                return Result.Failure<T>(errorFactory(result.Error));
+                return Return.Failure<T>(errorFactory(result.Error));
 
-            return Result.Success(result.Value);
+            return Return.Success(result.Value);
         }
 
-        public static Result<T> MapError<T, E, TContext>(
-            this Result<T, E> result,
-            Func<E, TContext, string> errorFactory,
+        public static Return<T> MapError<T, E, TContext>(
+            this Return<T, E> result,
+            Func<E, TContext, Exception> errorFactory,
             TContext context
         )
         {
             if (result.IsFailure)
-                return Result.Failure<T>(errorFactory(result.Error, context));
+                return Return.Failure<T>(errorFactory(result.Error, context));
 
-            return Result.Success(result.Value);
+            return Return.Success(result.Value);
         }
 
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static Result<T, E2> MapError<T, E, E2>(
-            this Result<T, E> result,
+        public static Return<T, E2> MapError<T, E, E2>(
+            this Return<T, E> result,
             Func<E, E2> errorFactory
         )
         {
             if (result.IsFailure)
-                return Result.Failure<T, E2>(errorFactory(result.Error));
+                return Return.Failure<T, E2>(errorFactory(result.Error));
 
-            return Result.Success<T, E2>(result.Value);
+            return Return.Success<T, E2>(result.Value);
         }
 
-        public static Result<T, E2> MapError<T, E, E2, TContext>(
-            this Result<T, E> result,
+        public static Return<T, E2> MapError<T, E, E2, TContext>(
+            this Return<T, E> result,
             Func<E, TContext, E2> errorFactory,
             TContext context
         )
         {
             if (result.IsFailure)
-                return Result.Failure<T, E2>(errorFactory(result.Error, context));
+                return Return.Failure<T, E2>(errorFactory(result.Error, context));
 
-            return Result.Success<T, E2>(result.Value);
+            return Return.Success<T, E2>(result.Value);
         }
     }
 }

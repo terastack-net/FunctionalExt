@@ -9,9 +9,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_returns_success_and_does_not_execute_func()
         {
-            ValueTask<Result> input = Result.Success().AsValueTask();
+            ValueTask<Return> input = Return.Success().AsValueTask();
 
-            Result output = await input.Compensate(GetErrorResultValueTask);
+            Return output = await input.Compensate(GetErrorResultValueTask);
 
             AssertSuccess(output, executed: false);
         }
@@ -19,9 +19,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_returns_failure_and_does_not_execute_func()
         {
-            ValueTask<Result> input = Result.Failure(ErrorMessage).AsValueTask();
+            ValueTask<Return> input = Return.Failure(ErrorMessage).AsValueTask();
 
-            Result output = await input.Compensate(GetSuccessResultValueTask);
+            Return output = await input.Compensate(GetSuccessResultValueTask);
 
             AssertSuccess(output);
         }
@@ -29,9 +29,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_returns_success_and_execute_func()
         {
-            ValueTask<Result> input = Result.Failure(ErrorMessage).AsValueTask();
+            ValueTask<Return> input = Return.Failure(ErrorMessage).AsValueTask();
 
-            Result output = await input.Compensate(GetErrorResultValueTask);
+            Return output = await input.Compensate(GetErrorResultValueTask);
 
             AssertFailure(output, executed: true);
         }
@@ -39,7 +39,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_returns_E_success_and_does_not_execute_func()
         {
-            ValueTask<Result> input = Result.Success().AsValueTask();
+            ValueTask<Return> input = Return.Success().AsValueTask();
 
             UnitResult<E> output = await input.Compensate(GetErrorUnitResultValueTask);
 
@@ -49,7 +49,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_returns_E_failure_and_does_not_execute_func()
         {
-            ValueTask<Result> input = Result.Failure(ErrorMessage).AsValueTask();
+            ValueTask<Return> input = Return.Failure(ErrorMessage).AsValueTask();
 
             UnitResult<E> output = await input.Compensate(GetSuccessUnitResultValueTask);
 
@@ -59,7 +59,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_returns_E_success_and_execute_func()
         {
-            ValueTask<Result> input = Result.Failure(ErrorMessage).AsValueTask();
+            ValueTask<Return> input = Return.Failure(ErrorMessage).AsValueTask();
 
             UnitResult<E> output = await input.Compensate(GetErrorUnitResultValueTask);
 
@@ -69,9 +69,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_returns_success_and_does_not_execute_func()
         {
-            ValueTask<Result<T>> input = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> input = Return.Success(T.Value).AsValueTask();
 
-            Result output = await input.Compensate(GetErrorResultValueTask);
+            Return output = await input.Compensate(GetErrorResultValueTask);
 
             AssertSuccess(output, executed: false);
         }
@@ -79,9 +79,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_returns_failure_and_does_not_execute_func()
         {
-            ValueTask<Result<T>> input = Result.Failure<T>(ErrorMessage).AsValueTask();
+            ValueTask<Return<T>> input = Return.Failure<T>(ErrorMessage).AsValueTask();
 
-            Result output = await input.Compensate(GetSuccessResultValueTask);
+            Return output = await input.Compensate(GetSuccessResultValueTask);
 
             AssertSuccess(output);
         }
@@ -89,9 +89,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_returns_success_and_execute_func()
         {
-            ValueTask<Result<T>> input = Result.Failure<T>(ErrorMessage).AsValueTask();
+            ValueTask<Return<T>> input = Return.Failure<T>(ErrorMessage).AsValueTask();
 
-            Result output = await input.Compensate(GetErrorResultValueTask);
+            Return output = await input.Compensate(GetErrorResultValueTask);
 
             AssertFailure(output, executed: true);
         }
@@ -99,9 +99,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_returns_T_success_and_does_not_execute_func()
         {
-            ValueTask<Result<T>> input = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> input = Return.Success(T.Value).AsValueTask();
 
-            Result<T> output = await input.Compensate(GetErrorValueResultValueTask);
+            Return<T> output = await input.Compensate(GetErrorValueResultValueTask);
 
             AssertSuccess(output, executed: false);
         }
@@ -109,9 +109,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_returns_T_failure_and_does_not_execute_func()
         {
-            ValueTask<Result<T>> input = Result.Failure<T>(ErrorMessage).AsValueTask();
+            ValueTask<Return<T>> input = Return.Failure<T>(ErrorMessage).AsValueTask();
 
-            Result<T> output = await input.Compensate(GetSuccessValueResultValueTask);
+            Return<T> output = await input.Compensate(GetSuccessValueResultValueTask);
 
             AssertSuccess(output);
         }
@@ -119,9 +119,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_returns_T_success_and_execute_func()
         {
-            ValueTask<Result<T>> input = Result.Failure<T>(ErrorMessage).AsValueTask();
+            ValueTask<Return<T>> input = Return.Failure<T>(ErrorMessage).AsValueTask();
 
-            Result<T> output = await input.Compensate(GetErrorValueResultValueTask);
+            Return<T> output = await input.Compensate(GetErrorValueResultValueTask);
 
             AssertFailure(output, executed: true);
         }
@@ -129,9 +129,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_returns_T_E_success_and_does_not_execute_func()
         {
-            ValueTask<Result<T>> input = Result.Success(T.Value).AsValueTask();
+            ValueTask<Return<T>> input = Return.Success(T.Value).AsValueTask();
 
-            Result<T, E> output = await input.Compensate(GetErrorValueErrorResultValueTask);
+            Return<T, E> output = await input.Compensate(GetErrorValueErrorResultValueTask);
 
             AssertSuccess(output, executed: false);
         }
@@ -139,9 +139,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_returns_T_E_failure_and_does_not_execute_func()
         {
-            ValueTask<Result<T>> input = Result.Failure<T>(ErrorMessage).AsValueTask();
+            ValueTask<Return<T>> input = Return.Failure<T>(ErrorMessage).AsValueTask();
 
-            Result<T, E> output = await input.Compensate(GetSuccessValueErrorResultValueTask);
+            Return<T, E> output = await input.Compensate(GetSuccessValueErrorResultValueTask);
 
             AssertSuccess(output);
         }
@@ -149,9 +149,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_returns_T_E_success_and_execute_func()
         {
-            ValueTask<Result<T>> input = Result.Failure<T>(ErrorMessage).AsValueTask();
+            ValueTask<Return<T>> input = Return.Failure<T>(ErrorMessage).AsValueTask();
 
-            Result<T, E> output = await input.Compensate(GetErrorValueErrorResultValueTask);
+            Return<T, E> output = await input.Compensate(GetErrorValueErrorResultValueTask);
 
             AssertFailure(output, executed: true);
         }
@@ -161,7 +161,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             ValueTask<UnitResult<E>> input = UnitResult.Success<E>().AsValueTask();
 
-            Result output = await input.Compensate(GetErrorResultValueTask);
+            Return output = await input.Compensate(GetErrorResultValueTask);
 
             AssertSuccess(output, executed: false);
         }
@@ -171,7 +171,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             ValueTask<UnitResult<E>> input = UnitResult.Failure(E.Value).AsValueTask();
 
-            Result output = await input.Compensate(GetSuccessResultValueTask);
+            Return output = await input.Compensate(GetSuccessResultValueTask);
 
             AssertSuccess(output);
         }
@@ -181,7 +181,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         {
             ValueTask<UnitResult<E>> input = UnitResult.Failure(E.Value).AsValueTask();
 
-            Result output = await input.Compensate(GetErrorResultValueTask);
+            Return output = await input.Compensate(GetErrorResultValueTask);
 
             AssertFailure(output, executed: true);
         }
@@ -219,9 +219,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_E_returns_success_and_does_not_execute_func()
         {
-            ValueTask<Result<T, E>> input = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> input = Return.Success<T, E>(T.Value).AsValueTask();
 
-            Result output = await input.Compensate(GetErrorResultValueTask);
+            Return output = await input.Compensate(GetErrorResultValueTask);
 
             AssertSuccess(output, executed: false);
         }
@@ -229,9 +229,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_E_returns_failure_and_does_not_execute_func()
         {
-            ValueTask<Result<T, E>> input = Result.Failure<T, E>(E.Value).AsValueTask();
+            ValueTask<Return<T, E>> input = Return.Failure<T, E>(E.Value).AsValueTask();
 
-            Result output = await input.Compensate(GetSuccessResultValueTask);
+            Return output = await input.Compensate(GetSuccessResultValueTask);
 
             AssertSuccess(output);
         }
@@ -239,9 +239,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_E_returns_success_and_execute_func()
         {
-            ValueTask<Result<T, E>> input = Result.Failure<T, E>(E.Value).AsValueTask();
+            ValueTask<Return<T, E>> input = Return.Failure<T, E>(E.Value).AsValueTask();
 
-            Result output = await input.Compensate(GetErrorResultValueTask);
+            Return output = await input.Compensate(GetErrorResultValueTask);
 
             AssertFailure(output, executed: true);
         }
@@ -249,7 +249,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_E_returns_E2_success_and_does_not_execute_func()
         {
-            ValueTask<Result<T, E>> input = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> input = Return.Success<T, E>(T.Value).AsValueTask();
 
             UnitResult<E2> output = await input.Compensate(GetErrorUnitResultValueTask);
 
@@ -259,7 +259,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_E_returns_E2_failure_and_does_not_execute_func()
         {
-            ValueTask<Result<T, E>> input = Result.Failure<T, E>(E.Value).AsValueTask();
+            ValueTask<Return<T, E>> input = Return.Failure<T, E>(E.Value).AsValueTask();
 
             UnitResult<E2> output = await input.Compensate(GetSuccessUnitResultValueTask);
 
@@ -269,7 +269,7 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_E_returns_E2_success_and_execute_func()
         {
-            ValueTask<Result<T, E>> input = Result.Failure<T, E>(E.Value).AsValueTask();
+            ValueTask<Return<T, E>> input = Return.Failure<T, E>(E.Value).AsValueTask();
 
             UnitResult<E2> output = await input.Compensate(GetErrorUnitResultValueTask);
 
@@ -280,9 +280,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_E_returns_T_E2_success_and_does_not_execute_func()
         {
-            ValueTask<Result<T, E>> input = Result.Success<T, E>(T.Value).AsValueTask();
+            ValueTask<Return<T, E>> input = Return.Success<T, E>(T.Value).AsValueTask();
 
-            Result<T, E2> output = await input.Compensate(GetErrorValueErrorResultValueTask);
+            Return<T, E2> output = await input.Compensate(GetErrorValueErrorResultValueTask);
 
             AssertSuccess(output, executed: false);
         }
@@ -290,9 +290,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_E_returns_T_E2_failure_and_does_not_execute_func()
         {
-            ValueTask<Result<T, E>> input = Result.Failure<T, E>(E.Value).AsValueTask();
+            ValueTask<Return<T, E>> input = Return.Failure<T, E>(E.Value).AsValueTask();
 
-            Result<T, E2> output = await input.Compensate(GetSuccessValueErrorResultValueTask);
+            Return<T, E2> output = await input.Compensate(GetSuccessValueErrorResultValueTask);
 
             AssertSuccess(output);
         }
@@ -300,9 +300,9 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
         [Fact]
         public async Task Compensate_ValueTask_T_E_returns_T_E2_success_and_execute_func()
         {
-            ValueTask<Result<T, E>> input = Result.Failure<T, E>(E.Value).AsValueTask();
+            ValueTask<Return<T, E>> input = Return.Failure<T, E>(E.Value).AsValueTask();
 
-            Result<T, E2> output = await input.Compensate(GetErrorValueErrorResultValueTask);
+            Return<T, E2> output = await input.Compensate(GetErrorValueErrorResultValueTask);
 
             AssertFailure(output, executed: true);
         }

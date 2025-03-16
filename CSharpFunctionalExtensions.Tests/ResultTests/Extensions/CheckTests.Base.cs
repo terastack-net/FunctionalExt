@@ -7,21 +7,21 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
     {
         protected bool actionExecuted;
         
-        protected Result GetResult(bool isSuccess)
+        protected Return GetResult(bool isSuccess)
         {
             actionExecuted = true;
             return isSuccess
-                ? Result.Success()
+                ? Return.Success()
                 : FailedResult;
         }
         
-        protected Func<T, Result<K>> Func_Result_K(bool isSuccess)
+        protected Func<T, Return<K>> Func_Result_K(bool isSuccess)
         {
             return isSuccess
-                ? new Func<T, Result<K>>(t =>
+                ? new Func<T, Return<K>>(t =>
                 {
                     actionExecuted = true;
-                    return Result.Success(K.Value);
+                    return Return.Success(K.Value);
                 })
                 : t =>
                 {
@@ -30,13 +30,13 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
                 };
         }
 
-        protected Func<T, Result<K, E>> Func_Result_KE(bool isSuccess)
+        protected Func<T, Return<K, E>> Func_Result_KE(bool isSuccess)
         {
             return isSuccess
-                ? new Func<T, Result<K, E>>(t =>
+                ? new Func<T, Return<K, E>>(t =>
                 {
                     actionExecuted = true;
-                    return Result.Success<K, E>(K.Value);
+                    return Return.Success<K, E>(K.Value);
                 })
                 : t =>
                 {
@@ -75,13 +75,13 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
                 };
         }
 
-        protected Func<T, Task<Result<K>>> Func_Task_Result_K(bool isSuccess)
+        protected Func<T, Task<Return<K>>> Func_Task_Result_K(bool isSuccess)
         {
             return isSuccess
-                ? new Func<T, Task<Result<K>>>(t =>
+                ? new Func<T, Task<Return<K>>>(t =>
                 {
                     actionExecuted = true;
-                    return Result.Success(K.Value).AsTask();
+                    return Return.Success(K.Value).AsTask();
                 })
                 : t =>
                 {
@@ -90,13 +90,13 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
                 };
         }
 
-        protected Func<T, Task<Result<K, E>>> Func_Task_Result_KE(bool isSuccess)
+        protected Func<T, Task<Return<K, E>>> Func_Task_Result_KE(bool isSuccess)
         {
             return isSuccess
-                ? new Func<T, Task<Result<K, E>>>(t =>
+                ? new Func<T, Task<Return<K, E>>>(t =>
                 {
                     actionExecuted = true;
-                    return Result.Success<K, E>(K.Value).AsTask();
+                    return Return.Success<K, E>(K.Value).AsTask();
                 })
                 : t =>
                 {
@@ -135,13 +135,13 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
                 };
         }
 
-        protected Func<T, ValueTask<Result<K>>> Func_ValueTask_Result_K(bool isSuccess)
+        protected Func<T, ValueTask<Return<K>>> Func_ValueTask_Result_K(bool isSuccess)
         {
             return isSuccess
-                ? new Func<T, ValueTask<Result<K>>>(t =>
+                ? new Func<T, ValueTask<Return<K>>>(t =>
                 {
                     actionExecuted = true;
-                    return Result.Success(K.Value).AsValueTask();
+                    return Return.Success(K.Value).AsValueTask();
                 })
                 : t =>
                 {
@@ -150,13 +150,13 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
                 };
         }
 
-        protected Func<T, ValueTask<Result<K, E>>> Func_ValueTask_Result_KE(bool isSuccess)
+        protected Func<T, ValueTask<Return<K, E>>> Func_ValueTask_Result_KE(bool isSuccess)
         {
             return isSuccess
-                ? new Func<T, ValueTask<Result<K, E>>>(t =>
+                ? new Func<T, ValueTask<Return<K, E>>>(t =>
                 {
                     actionExecuted = true;
-                    return Result.Success<K, E>(K.Value).AsValueTask();
+                    return Return.Success<K, E>(K.Value).AsValueTask();
                 })
                 : t =>
                 {
@@ -195,10 +195,10 @@ namespace CSharpFunctionalExtensions.Tests.ResultTests.Extensions
                 };
         }
         
-        protected Result<T> FailedResultT => Result.Failure<T>(ErrorMessage);
-        protected Result<K> FailedResultK => Result.Failure<K>(ErrorMessage);
-        protected Result<K, E> FailedResultKE => Result.Failure<K, E>(E.Value);
+        protected Return<T> FailedResultT => Return.Failure<T>(ErrorMessage);
+        protected Return<K> FailedResultK => Return.Failure<K>(ErrorMessage);
+        protected Return<K, E> FailedResultKE => Return.Failure<K, E>(E.Value);
         protected UnitResult<E> FailedUnitResultE => UnitResult.Failure(E.Value);
-        protected Result FailedResult => Result.Failure(ErrorMessage);
+        protected Return FailedResult => Return.Failure(ErrorMessage);
     }
 }
