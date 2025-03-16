@@ -79,7 +79,7 @@ namespace FunctionalReturn
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static async Task<UnitResult<E>> BindTry<T, E>(this Task<Return<T, E>> resultTask, Func<T, Task<UnitResult<E>>> func,
+        public static async Task<UnitReturn<E>> BindTry<T, E>(this Task<Return<T, E>> resultTask, Func<T, Task<UnitReturn<E>>> func,
             Func<Exception, E> errorHandler)
         {
             var result = await resultTask.DefaultAwait();
@@ -114,7 +114,7 @@ namespace FunctionalReturn
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-		public static async Task<Return<T, E>> BindTry<T, E>(this Task<UnitResult<E>> resultTask, Func<Task<Return<T, E>>> func,
+		public static async Task<Return<T, E>> BindTry<T, E>(this Task<UnitReturn<E>> resultTask, Func<Task<Return<T, E>>> func,
             Func<Exception, E> errorHandler)
         {
             var result = await resultTask.DefaultAwait();
@@ -130,7 +130,7 @@ namespace FunctionalReturn
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static async Task<UnitResult<E>> BindTry<E>(this Task<UnitResult<E>> resultTask, Func<Task<UnitResult<E>>> func,
+        public static async Task<UnitReturn<E>> BindTry<E>(this Task<UnitReturn<E>> resultTask, Func<Task<UnitReturn<E>>> func,
 			Func<Exception, E> errorHandler)
 		{
 			var result = await resultTask.DefaultAwait();

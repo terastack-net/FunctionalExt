@@ -31,7 +31,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given valueTask action.
         /// </summary>
-        public static async ValueTask<UnitResult<E>> MapError<E>(
+        public static async ValueTask<UnitReturn<E>> MapError<E>(
             this ValueTask<Return> resultTask,
             Func<Exception, ValueTask<E>> errorFactory
         )
@@ -40,7 +40,7 @@ namespace FunctionalReturn.ValueTasks
             return await result.MapError(errorFactory);
         }
 
-        public static async ValueTask<UnitResult<E>> MapError<E, TContext>(
+        public static async ValueTask<UnitReturn<E>> MapError<E, TContext>(
             this ValueTask<Return> resultTask,
             Func<Exception, TContext, ValueTask<E>> errorFactory,
             TContext context
@@ -98,7 +98,7 @@ namespace FunctionalReturn.ValueTasks
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given valueTask action.
         /// </summary>
         public static async ValueTask<Return> MapError<E>(
-            this ValueTask<UnitResult<E>> resultTask,
+            this ValueTask<UnitReturn<E>> resultTask,
             Func<E, ValueTask<string>> errorFactory
         )
         {
@@ -107,7 +107,7 @@ namespace FunctionalReturn.ValueTasks
         }
 
         public static async ValueTask<Return> MapError<E, TContext>(
-            this ValueTask<UnitResult<E>> resultTask,
+            this ValueTask<UnitReturn<E>> resultTask,
             Func<E, TContext, ValueTask<string>> errorFactory,
             TContext context
         )
@@ -119,8 +119,8 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given valueTask action.
         /// </summary>
-        public static async ValueTask<UnitResult<E2>> MapError<E, E2>(
-            this ValueTask<UnitResult<E>> resultTask,
+        public static async ValueTask<UnitReturn<E2>> MapError<E, E2>(
+            this ValueTask<UnitReturn<E>> resultTask,
             Func<E, ValueTask<E2>> errorFactory
         )
         {
@@ -128,8 +128,8 @@ namespace FunctionalReturn.ValueTasks
             return await result.MapError(errorFactory);
         }
 
-        public static async ValueTask<UnitResult<E2>> MapError<E, E2, TContext>(
-            this ValueTask<UnitResult<E>> resultTask,
+        public static async ValueTask<UnitReturn<E2>> MapError<E, E2, TContext>(
+            this ValueTask<UnitReturn<E>> resultTask,
             Func<E, TContext, ValueTask<E2>> errorFactory,
             TContext context
         )

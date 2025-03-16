@@ -42,7 +42,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static async ValueTask<UnitResult<E>> Tap<E>(this UnitResult<E> result, Func<ValueTask> valueTask)
+        public static async ValueTask<UnitReturn<E>> Tap<E>(this UnitReturn<E> result, Func<ValueTask> valueTask)
         {
             if (result.IsSuccess)
                 await valueTask();

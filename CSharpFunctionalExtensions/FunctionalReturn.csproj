@@ -2,8 +2,12 @@
   <Import Project="../Common.Build.props" />
 
   <PropertyGroup>
-    <PackageId>CSharpFunctionalExtensions</PackageId>
+    <PackageId>FunctionalReturn</PackageId>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
+    <Authors>TeraStack</Authors>
+    <Description>FunctionalReturn - functional return for C#</Description>
+    <PackageTags>C# Functional Return</PackageTags>
+    <RepositoryUrl>https://github.com/terastack-net/FunctionalReturn</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

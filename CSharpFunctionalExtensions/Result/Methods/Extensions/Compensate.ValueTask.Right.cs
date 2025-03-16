@@ -16,11 +16,11 @@ namespace FunctionalReturn.ValueTasks
             return valueTask(result.Error);
         }
 
-        public static ValueTask<UnitResult<E>> Compensate<E>(this Return result, Func<Exception, ValueTask<UnitResult<E>>> valueTask)
+        public static ValueTask<UnitReturn<E>> Compensate<E>(this Return result, Func<Exception, ValueTask<UnitReturn<E>>> valueTask)
         {
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E>().AsCompletedValueTask();
+                return UnitReturn.Success<E>().AsCompletedValueTask();
             }
 
             return valueTask(result.Error);
@@ -56,7 +56,7 @@ namespace FunctionalReturn.ValueTasks
             return valueTask(result.Error);
         }
 
-        public static ValueTask<Return> Compensate<E>(this UnitResult<E> result, Func<E, ValueTask<Return>> valueTask)
+        public static ValueTask<Return> Compensate<E>(this UnitReturn<E> result, Func<E, ValueTask<Return>> valueTask)
         {
             if (result.IsSuccess)
             {
@@ -66,11 +66,11 @@ namespace FunctionalReturn.ValueTasks
             return valueTask(result.Error);
         }
 
-        public static ValueTask<UnitResult<E2>> Compensate<E, E2>(this UnitResult<E> result, Func<E, ValueTask<UnitResult<E2>>> valueTask)
+        public static ValueTask<UnitReturn<E2>> Compensate<E, E2>(this UnitReturn<E> result, Func<E, ValueTask<UnitReturn<E2>>> valueTask)
         {
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E2>().AsCompletedValueTask();
+                return UnitReturn.Success<E2>().AsCompletedValueTask();
             }
 
             return valueTask(result.Error);
@@ -86,11 +86,11 @@ namespace FunctionalReturn.ValueTasks
             return valueTask(result.Error);
         }
 
-        public static ValueTask<UnitResult<E2>> Compensate<T, E, E2>(this Return<T, E> result, Func<E, ValueTask<UnitResult<E2>>> valueTask)
+        public static ValueTask<UnitReturn<E2>> Compensate<T, E, E2>(this Return<T, E> result, Func<E, ValueTask<UnitReturn<E2>>> valueTask)
         {
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E2>().AsCompletedValueTask();
+                return UnitReturn.Success<E2>().AsCompletedValueTask();
             }
 
             return valueTask(result.Error);

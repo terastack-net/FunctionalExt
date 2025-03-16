@@ -64,10 +64,10 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Selects result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static ValueTask<UnitResult<E>> Bind<E>(this UnitResult<E> result, Func<ValueTask<UnitResult<E>>> valueTask)
+        public static ValueTask<UnitReturn<E>> Bind<E>(this UnitReturn<E> result, Func<ValueTask<UnitReturn<E>>> valueTask)
         {
             if (result.IsFailure)
-                return UnitResult.Failure(result.Error).AsCompletedValueTask();
+                return UnitReturn.Failure(result.Error).AsCompletedValueTask();
 
             return valueTask();
         }
@@ -75,7 +75,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Selects result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static ValueTask<Return<T, E>> Bind<T, E>(this UnitResult<E> result, Func<ValueTask<Return<T, E>>> valueTask)
+        public static ValueTask<Return<T, E>> Bind<T, E>(this UnitReturn<E> result, Func<ValueTask<Return<T, E>>> valueTask)
         {
             if (result.IsFailure)
                 return Return.Failure<T, E>(result.Error).AsCompletedValueTask();
@@ -86,10 +86,10 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Selects result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static ValueTask<UnitResult<E>> Bind<T, E>(this Return<T, E> result, Func<T, ValueTask<UnitResult<E>>> valueTask)
+        public static ValueTask<UnitReturn<E>> Bind<T, E>(this Return<T, E> result, Func<T, ValueTask<UnitReturn<E>>> valueTask)
         {
             if (result.IsFailure)
-                return UnitResult.Failure(result.Error).AsCompletedValueTask();
+                return UnitReturn.Failure(result.Error).AsCompletedValueTask();
 
             return valueTask(result.Value);
         }

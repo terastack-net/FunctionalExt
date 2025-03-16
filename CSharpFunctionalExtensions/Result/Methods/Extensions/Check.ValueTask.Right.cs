@@ -33,7 +33,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     If the calling result is a success, the given valueTask action is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static async ValueTask<Return<T, E>> Check<T, E>(this Return<T, E> result, Func<T, ValueTask<UnitResult<E>>> valueTask)
+        public static async ValueTask<Return<T, E>> Check<T, E>(this Return<T, E> result, Func<T, ValueTask<UnitReturn<E>>> valueTask)
         {
             return await result.Bind(valueTask).Map(() => result.Value);
         }
@@ -41,7 +41,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     If the calling result is a success, the given valueTask action is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static async ValueTask<UnitResult<E>> Check<E>(this UnitResult<E> result, Func<ValueTask<UnitResult<E>>> valueTask)
+        public static async ValueTask<UnitReturn<E>> Check<E>(this UnitReturn<E> result, Func<ValueTask<UnitReturn<E>>> valueTask)
         {
             return await result.Bind(valueTask).Map(() => result);
         }

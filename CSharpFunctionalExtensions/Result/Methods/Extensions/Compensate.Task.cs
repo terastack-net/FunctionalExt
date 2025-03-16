@@ -11,7 +11,7 @@ namespace FunctionalReturn
             return await result.Compensate(func).DefaultAwait();
         }
 
-        public static async Task<UnitResult<E>> Compensate<E>(this Task<Return> resultTask, Func<Exception, Task<UnitResult<E>>> func)
+        public static async Task<UnitReturn<E>> Compensate<E>(this Task<Return> resultTask, Func<Exception, Task<UnitReturn<E>>> func)
         {
             var result = await resultTask.DefaultAwait();
             return await result.Compensate(func).DefaultAwait();
@@ -35,13 +35,13 @@ namespace FunctionalReturn
             return await result.Compensate(func).DefaultAwait();
         }
 
-        public static async Task<Return> Compensate<E>(this Task<UnitResult<E>> resultTask, Func<E, Task<Return>> func)
+        public static async Task<Return> Compensate<E>(this Task<UnitReturn<E>> resultTask, Func<E, Task<Return>> func)
         {
             var result = await resultTask.DefaultAwait();
             return await result.Compensate(func).DefaultAwait();
         }
 
-        public static async Task<UnitResult<E2>> Compensate<E, E2>(this Task<UnitResult<E>> resultTask, Func<E, Task<UnitResult<E2>>> func)
+        public static async Task<UnitReturn<E2>> Compensate<E, E2>(this Task<UnitReturn<E>> resultTask, Func<E, Task<UnitReturn<E2>>> func)
         {
             var result = await resultTask.DefaultAwait();
             return await result.Compensate(func).DefaultAwait();
@@ -53,7 +53,7 @@ namespace FunctionalReturn
             return await result.Compensate(func).DefaultAwait();
         }
 
-        public static async Task<UnitResult<E2>> Compensate<T, E, E2>(this Task<Return<T, E>> resultTask, Func<E, Task<UnitResult<E2>>> func)
+        public static async Task<UnitReturn<E2>> Compensate<T, E, E2>(this Task<Return<T, E>> resultTask, Func<E, Task<UnitReturn<E2>>> func)
         {
             var result = await resultTask.DefaultAwait();
             return await result.Compensate(func).DefaultAwait();

@@ -21,10 +21,10 @@ namespace FunctionalReturn.ValueTasks
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         ///     If a given function throws an exception, an error is returned from the given error handler
         /// </summary>
-        public static async ValueTask<Return<K, E>> MapTry<K, E>(this ValueTask<UnitResult<E>> resultTask, Func<K> valueTask,
+        public static async ValueTask<Return<K, E>> MapTry<K, E>(this ValueTask<UnitReturn<E>> resultTask, Func<K> valueTask,
             Func<Exception, E> errorHandler)
         {
-            UnitResult<E> result = await resultTask;
+            UnitReturn<E> result = await resultTask;
             return result.MapTry(valueTask, errorHandler);
         }
 

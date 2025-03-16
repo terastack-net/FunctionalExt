@@ -69,9 +69,9 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<UnitResult<E>> TapError<E>(this ValueTask<UnitResult<E>> resultTask, Func<E, ValueTask> valueTask)
+        public static async ValueTask<UnitReturn<E>> TapError<E>(this ValueTask<UnitReturn<E>> resultTask, Func<E, ValueTask> valueTask)
         {
-            UnitResult<E> result = await resultTask;
+            UnitReturn<E> result = await resultTask;
 
             if (result.IsFailure)
             {
@@ -84,9 +84,9 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async ValueTask<UnitResult<E>> TapError<E>(this ValueTask<UnitResult<E>> resultTask, Func<ValueTask> valueTask)
+        public static async ValueTask<UnitReturn<E>> TapError<E>(this ValueTask<UnitReturn<E>> resultTask, Func<ValueTask> valueTask)
         {
-            UnitResult<E> result = await resultTask;
+            UnitReturn<E> result = await resultTask;
 
             if (result.IsFailure)
             {

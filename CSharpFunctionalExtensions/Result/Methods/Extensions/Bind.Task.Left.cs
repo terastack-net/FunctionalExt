@@ -53,25 +53,25 @@ namespace FunctionalReturn
         /// <summary>
         ///     Selects result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<UnitResult<E>> Bind<E>(this Task<UnitResult<E>> resultTask, Func<UnitResult<E>> func)
+        public static async Task<UnitReturn<E>> Bind<E>(this Task<UnitReturn<E>> resultTask, Func<UnitReturn<E>> func)
         {
-            UnitResult<E> result = await resultTask.DefaultAwait();
+            UnitReturn<E> result = await resultTask.DefaultAwait();
             return result.Bind(func);
         }
 
         /// <summary>
         ///     Selects result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<Return<T, E>> Bind<T, E>(this Task<UnitResult<E>> resultTask, Func<Return<T, E>> func)
+        public static async Task<Return<T, E>> Bind<T, E>(this Task<UnitReturn<E>> resultTask, Func<Return<T, E>> func)
         {
-            UnitResult<E> result = await resultTask.DefaultAwait();
+            UnitReturn<E> result = await resultTask.DefaultAwait();
             return result.Bind(func);
         }
 
         /// <summary>
         ///     Selects result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async Task<UnitResult<E>> Bind<T, E>(this Task<Return<T, E>> resultTask, Func<T, UnitResult<E>> func)
+        public static async Task<UnitReturn<E>> Bind<T, E>(this Task<Return<T, E>> resultTask, Func<T, UnitReturn<E>> func)
         {
             Return<T, E> result = await resultTask.DefaultAwait();
             return result.Bind(func);

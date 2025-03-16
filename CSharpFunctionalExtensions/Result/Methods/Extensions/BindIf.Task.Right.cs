@@ -25,7 +25,7 @@ namespace FunctionalReturn
             return result.Bind(func);
         }
 
-        public static Task<UnitResult<E>> BindIf<E>(this UnitResult<E> result, bool condition, Func<Task<UnitResult<E>>> func)
+        public static Task<UnitReturn<E>> BindIf<E>(this UnitReturn<E> result, bool condition, Func<Task<UnitReturn<E>>> func)
         {
             if (!condition)
             {
@@ -65,7 +65,7 @@ namespace FunctionalReturn
             return result.Bind(func);
         }
 
-        public static Task<UnitResult<E>> BindIf<E>(this UnitResult<E> result, Func<bool> predicate, Func<Task<UnitResult<E>>> func)
+        public static Task<UnitReturn<E>> BindIf<E>(this UnitReturn<E> result, Func<bool> predicate, Func<Task<UnitReturn<E>>> func)
         {
             if (!result.IsSuccess || !predicate())
             {

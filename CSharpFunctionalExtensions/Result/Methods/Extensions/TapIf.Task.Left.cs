@@ -63,7 +63,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a success and condition is true. Returns the calling result.
         /// </summary>
-        public static Task<UnitResult<E>> TapIf<E>(this Task<UnitResult<E>> resultTask, bool condition, Action action)
+        public static Task<UnitReturn<E>> TapIf<E>(this Task<UnitReturn<E>> resultTask, bool condition, Action action)
         {
             if (condition)
                 return resultTask.Tap(action);
@@ -139,9 +139,9 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a success and condition is true. Returns the calling result.
         /// </summary>
-        public static async Task<UnitResult<E>> TapIf<E>(this Task<UnitResult<E>> resultTask, Func<bool> predicate, Action action)
+        public static async Task<UnitReturn<E>> TapIf<E>(this Task<UnitReturn<E>> resultTask, Func<bool> predicate, Action action)
         {
-            UnitResult<E> result = await resultTask.DefaultAwait();
+            UnitReturn<E> result = await resultTask.DefaultAwait();
 
             if (result.IsSuccess && predicate())
                 return result.Tap(action);

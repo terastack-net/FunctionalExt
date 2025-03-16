@@ -20,11 +20,11 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the given result is a success returns a new success result. Otherwise it returns the result of the given function.
         /// </summary>
-        public static UnitResult<E> Compensate<E>(this Return result, Func<Exception, UnitResult<E>> func)
+        public static UnitReturn<E> Compensate<E>(this Return result, Func<Exception, UnitReturn<E>> func)
         {
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E>();
+                return UnitReturn.Success<E>();
             }
 
             return func(result.Error);
@@ -72,7 +72,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the given result is a success returns a new success result. Otherwise it returns the result of the given function.
         /// </summary>
-        public static Return Compensate<E>(this UnitResult<E> result, Func<E, Return> func)
+        public static Return Compensate<E>(this UnitReturn<E> result, Func<E, Return> func)
         {
             if (result.IsSuccess)
             {
@@ -85,11 +85,11 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the given result is a success returns a new success result. Otherwise it returns the result of the given function.
         /// </summary>
-        public static UnitResult<E2> Compensate<E, E2>(this UnitResult<E> result, Func<E, UnitResult<E2>> func)
+        public static UnitReturn<E2> Compensate<E, E2>(this UnitReturn<E> result, Func<E, UnitReturn<E2>> func)
         {
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E2>();
+                return UnitReturn.Success<E2>();
             }
 
             return func(result.Error);
@@ -111,11 +111,11 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the given result is a success returns a new success result. Otherwise it returns the result of the given function.
         /// </summary>
-        public static UnitResult<E2> Compensate<T, E, E2>(this Return<T, E> result, Func<E, UnitResult<E2>> func)
+        public static UnitReturn<E2> Compensate<T, E, E2>(this Return<T, E> result, Func<E, UnitReturn<E2>> func)
         {
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E2>();
+                return UnitReturn.Success<E2>();
             }
 
             return func(result.Error);

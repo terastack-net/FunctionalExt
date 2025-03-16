@@ -15,11 +15,11 @@ namespace FunctionalReturn
             return func(result.Error);
         }
 
-        public static Task<UnitResult<E>> Compensate<E>(this Return result, Func<Exception, Task<UnitResult<E>>> func)
+        public static Task<UnitReturn<E>> Compensate<E>(this Return result, Func<Exception, Task<UnitReturn<E>>> func)
         {
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E>().AsCompletedTask();
+                return UnitReturn.Success<E>().AsCompletedTask();
             }
 
             return func(result.Error);
@@ -55,7 +55,7 @@ namespace FunctionalReturn
             return func(result.Error);
         }
 
-        public static Task<Return> Compensate<E>(this UnitResult<E> result, Func<E, Task<Return>> func)
+        public static Task<Return> Compensate<E>(this UnitReturn<E> result, Func<E, Task<Return>> func)
         {
             if (result.IsSuccess)
             {
@@ -65,11 +65,11 @@ namespace FunctionalReturn
             return func(result.Error);
         }
 
-        public static Task<UnitResult<E2>> Compensate<E, E2>(this UnitResult<E> result, Func<E, Task<UnitResult<E2>>> func)
+        public static Task<UnitReturn<E2>> Compensate<E, E2>(this UnitReturn<E> result, Func<E, Task<UnitReturn<E2>>> func)
         {
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E2>().AsCompletedTask();
+                return UnitReturn.Success<E2>().AsCompletedTask();
             }
 
             return func(result.Error);
@@ -85,11 +85,11 @@ namespace FunctionalReturn
             return func(result.Error);
         }
 
-        public static Task<UnitResult<E2>> Compensate<T, E, E2>(this Return<T, E> result, Func<E, Task<UnitResult<E2>>> func)
+        public static Task<UnitReturn<E2>> Compensate<T, E, E2>(this Return<T, E> result, Func<E, Task<UnitReturn<E2>>> func)
         {
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E2>().AsCompletedTask();
+                return UnitReturn.Success<E2>().AsCompletedTask();
             }
 
             return func(result.Error);

@@ -68,9 +68,9 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async Task<UnitResult<E>> TapError<E>(this Task<UnitResult<E>> resultTask, Func<E, Task> func)
+        public static async Task<UnitReturn<E>> TapError<E>(this Task<UnitReturn<E>> resultTask, Func<E, Task> func)
         {
-            UnitResult<E> result = await resultTask.DefaultAwait();
+            UnitReturn<E> result = await resultTask.DefaultAwait();
 
             if (result.IsFailure)
             {
@@ -83,9 +83,9 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static async Task<UnitResult<E>> TapError<E>(this Task<UnitResult<E>> resultTask, Func<Task> func)
+        public static async Task<UnitReturn<E>> TapError<E>(this Task<UnitReturn<E>> resultTask, Func<Task> func)
         {
-            UnitResult<E> result = await resultTask.DefaultAwait();
+            UnitReturn<E> result = await resultTask.DefaultAwait();
 
             if (result.IsFailure)
             {

@@ -30,7 +30,7 @@ namespace FunctionalReturn.ValueTasks
                 return resultTask;
         }
 
-        public static ValueTask<Return<T, E>> CheckIf<T, E>(this ValueTask<Return<T, E>> resultTask, bool condition, Func<T, UnitResult<E>> valueTask)
+        public static ValueTask<Return<T, E>> CheckIf<T, E>(this ValueTask<Return<T, E>> resultTask, bool condition, Func<T, UnitReturn<E>> valueTask)
         {
             if (condition)
                 return resultTask.Check(valueTask);
@@ -38,7 +38,7 @@ namespace FunctionalReturn.ValueTasks
                 return resultTask;
         }
 
-        public static ValueTask<UnitResult<E>> CheckIf<E>(this ValueTask<UnitResult<E>> resultTask, bool condition, Func<UnitResult<E>> valueTask)
+        public static ValueTask<UnitReturn<E>> CheckIf<E>(this ValueTask<UnitReturn<E>> resultTask, bool condition, Func<UnitReturn<E>> valueTask)
         {
             if (condition)
                 return resultTask.Check(valueTask);
@@ -76,7 +76,7 @@ namespace FunctionalReturn.ValueTasks
                 return result;
         }
 
-        public static async ValueTask<Return<T, E>> CheckIf<T, E>(this ValueTask<Return<T, E>> resultTask, Func<T, bool> predicate, Func<T, UnitResult<E>> valueTask)
+        public static async ValueTask<Return<T, E>> CheckIf<T, E>(this ValueTask<Return<T, E>> resultTask, Func<T, bool> predicate, Func<T, UnitReturn<E>> valueTask)
         {
             Return<T, E> result = await resultTask;
 
@@ -86,9 +86,9 @@ namespace FunctionalReturn.ValueTasks
                 return result;
         }
 
-        public static async ValueTask<UnitResult<E>> CheckIf<E>(this ValueTask<UnitResult<E>> resultTask, Func<bool> predicate, Func<UnitResult<E>> valueTask)
+        public static async ValueTask<UnitReturn<E>> CheckIf<E>(this ValueTask<UnitReturn<E>> resultTask, Func<bool> predicate, Func<UnitReturn<E>> valueTask)
         {
-            UnitResult<E> result = await resultTask;
+            UnitReturn<E> result = await resultTask;
 
             if (result.IsSuccess && predicate())
                 return result.Check(valueTask);

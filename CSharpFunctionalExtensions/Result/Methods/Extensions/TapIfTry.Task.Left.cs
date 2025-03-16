@@ -39,7 +39,7 @@ namespace FunctionalReturn
         ///     Executes the given action if the calling result is a success and the condition is true. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<UnitResult<E>> TapIfTry<E>(this Task<UnitResult<E>> resultTask, bool condition, Action action, Func<Exception, E> errorHandler)
+        public static async Task<UnitReturn<E>> TapIfTry<E>(this Task<UnitReturn<E>> resultTask, bool condition, Action action, Func<Exception, E> errorHandler)
         {
             var result = await resultTask.DefaultAwait();
             return result.TapIfTry(condition, action, errorHandler);

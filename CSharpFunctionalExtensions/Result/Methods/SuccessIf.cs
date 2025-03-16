@@ -61,14 +61,14 @@ namespace FunctionalReturn
     }
 
     /// <summary>
-    /// Alternative entrypoint for <see cref="UnitResult{E}" /> to avoid ambiguous calls
+    /// Alternative entrypoint for <see cref="UnitReturn{E}" /> to avoid ambiguous calls
     /// </summary>
-    public static partial class UnitResult
+    public static partial class UnitReturn
     {
         /// <summary>
         ///     Creates a result whose success/failure reflects the supplied condition. Opposite of FailureIf().
         /// </summary>
-        public static UnitResult<E> SuccessIf<E>(bool isSuccess, in E error)
+        public static UnitReturn<E> SuccessIf<E>(bool isSuccess, in E error)
         {
             return isSuccess
                 ? Success<E>()
@@ -78,7 +78,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of FailureIf().
         /// </summary>
-        public static UnitResult<E> SuccessIf<E>(Func<bool> predicate, in E error)
+        public static UnitReturn<E> SuccessIf<E>(Func<bool> predicate, in E error)
         {
             return SuccessIf(predicate(), error);
         }

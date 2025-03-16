@@ -30,7 +30,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static async Task<UnitResult<E>> MapError<E>(
+        public static async Task<UnitReturn<E>> MapError<E>(
             this Task<Return> resultTask,
             Func<Exception, Task<E>> errorFactory
         )
@@ -39,7 +39,7 @@ namespace FunctionalReturn
             return await result.MapError(errorFactory).DefaultAwait();
         }
 
-        public static async Task<UnitResult<E>> MapError<E, TContext>(
+        public static async Task<UnitReturn<E>> MapError<E, TContext>(
             this Task<Return> resultTask,
             Func<Exception, TContext, Task<E>> errorFactory,
             TContext context
@@ -97,7 +97,7 @@ namespace FunctionalReturn
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
         public static async Task<Return> MapError<E>(
-            this Task<UnitResult<E>> resultTask,
+            this Task<UnitReturn<E>> resultTask,
             Func<E, Task<string>> errorFactory
         )
         {
@@ -106,7 +106,7 @@ namespace FunctionalReturn
         }
 
         public static async Task<Return> MapError<E, TContext>(
-            this Task<UnitResult<E>> resultTask,
+            this Task<UnitReturn<E>> resultTask,
             Func<E, TContext, Task<string>> errorFactory,
             TContext context
         )
@@ -118,8 +118,8 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static async Task<UnitResult<E2>> MapError<E, E2>(
-            this Task<UnitResult<E>> resultTask,
+        public static async Task<UnitReturn<E2>> MapError<E, E2>(
+            this Task<UnitReturn<E>> resultTask,
             Func<E, Task<E2>> errorFactory
         )
         {
@@ -127,8 +127,8 @@ namespace FunctionalReturn
             return await result.MapError(errorFactory).DefaultAwait();
         }
 
-        public static async Task<UnitResult<E2>> MapError<E, E2, TContext>(
-            this Task<UnitResult<E>> resultTask,
+        public static async Task<UnitReturn<E2>> MapError<E, E2, TContext>(
+            this Task<UnitReturn<E>> resultTask,
             Func<E, TContext, Task<E2>> errorFactory,
             TContext context
         )

@@ -26,9 +26,9 @@ namespace FunctionalReturn
         /// <summary>
         ///     Passes the result to the given function (regardless of success/failure state) to yield a final output value.
         /// </summary>
-        public static async Task<K> Finally<K, E>(this Task<UnitResult<E>> resultTask, Func<UnitResult<E>, Task<K>> func) 
+        public static async Task<K> Finally<K, E>(this Task<UnitReturn<E>> resultTask, Func<UnitReturn<E>, Task<K>> func) 
         {
-            UnitResult<E> result = await resultTask.DefaultAwait();
+            UnitReturn<E> result = await resultTask.DefaultAwait();
             return await func(result).DefaultAwait();
         }
 

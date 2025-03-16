@@ -101,11 +101,11 @@ namespace FunctionalReturn
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static async Task<UnitResult<E>> BindTry<E>(this UnitResult<E> result, Func<Task<UnitResult<E>>> func,
+        public static async Task<UnitReturn<E>> BindTry<E>(this UnitReturn<E> result, Func<Task<UnitReturn<E>>> func,
             Func<Exception, E> errorHandler)
         {            
             return result.IsFailure
-                ? UnitResult.Failure(result.Error)
+                ? UnitReturn.Failure(result.Error)
                 : await Return.Try(() => func(), errorHandler).Bind(r => r).DefaultAwait();
         }
 
@@ -119,7 +119,7 @@ namespace FunctionalReturn
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static async Task<Return<T, E>> BindTry<T, E>(this UnitResult<E> result, Func<Task<Return<T, E>>> func,
+        public static async Task<Return<T, E>> BindTry<T, E>(this UnitReturn<E> result, Func<Task<Return<T, E>>> func,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
@@ -137,11 +137,11 @@ namespace FunctionalReturn
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static async Task<UnitResult<E>> BindTry<T, E>(this Return<T, E> result, Func<T, Task<UnitResult<E>>> func,
+        public static async Task<UnitReturn<E>> BindTry<T, E>(this Return<T, E> result, Func<T, Task<UnitReturn<E>>> func,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
-                ? UnitResult.Failure(result.Error)
+                ? UnitReturn.Failure(result.Error)
                 : await Return.Try(() => func(result.Value), errorHandler).Bind(r => r).DefaultAwait();           
         }
     }

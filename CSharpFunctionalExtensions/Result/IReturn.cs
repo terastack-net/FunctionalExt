@@ -2,7 +2,7 @@
 
 namespace FunctionalReturn
 {
-    public interface IResult
+    public interface IReturn
     {
         bool IsFailure { get; }
         bool IsSuccess { get; }
@@ -18,15 +18,15 @@ namespace FunctionalReturn
         E Error { get; }
     }
 
-    public interface IResult<out T, out E> : IValue<T>, IUnitResult<E>
+    public interface IReturn<out T, out E> : IValue<T>, IUnitReturn<E>
     {
     }
 
-    public interface IResult<out T> : IResult<T, Exception>
+    public interface IReturn<out T> : IReturn<T, Exception>
     {
     }
 
-    public interface IUnitResult<out E> : IResult, IError<E>
+    public interface IUnitReturn<out E> : IReturn, IError<E>
     {
     }
 }

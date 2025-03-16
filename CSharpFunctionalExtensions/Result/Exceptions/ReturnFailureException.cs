@@ -2,18 +2,19 @@
 
 namespace FunctionalReturn
 {
-    public class ResultFailureException : Exception
+    public class ReturnFailureException : Exception
     {
         public Exception Error { get; }
 
-        internal ResultFailureException(Exception error)
+        internal ReturnFailureException(Exception error)
             : base(Return.Messages.ValueIsInaccessibleForFailure(error))
         {
             Error = error;
         }
     }
 
-    public class ResultFailureException<E> : ResultFailureException
+    public class ResultFailureException<E> : ReturnFailureException
+
     {
         public new E Error { get; }
 

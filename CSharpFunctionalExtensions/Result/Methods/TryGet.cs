@@ -159,7 +159,7 @@ namespace FunctionalReturn
         }
     }
 
-    partial struct UnitResult<E>
+    partial struct UnitReturn<E>
     {
 #if NET45_OR_GREATER || NETSTANDARD || NETCORE || NET5_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

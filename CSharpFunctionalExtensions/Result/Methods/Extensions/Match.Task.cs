@@ -35,7 +35,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Returns the result of the given <paramref name="onSuccess"/> function if the calling Result is a success. Otherwise, it returns the result of the given <paramref name="onFailure"/> function.
         /// </summary>
-        public static async Task<K> Match<K, E>(this Task<UnitResult<E>> resultTask, Func<Task<K>> onSuccess, Func<E, Task<K>> onFailure)
+        public static async Task<K> Match<K, E>(this Task<UnitReturn<E>> resultTask, Func<Task<K>> onSuccess, Func<E, Task<K>> onFailure)
         {
             return await (await resultTask.DefaultAwait())
                 .Match(onSuccess, onFailure).DefaultAwait();
@@ -53,7 +53,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Invokes the given <paramref name="onSuccess"/> action if the calling Result is a success. Otherwise, it invokes the given <paramref name="onFailure"/> action.
         /// </summary>
-        public static async Task Match<E>(this Task<UnitResult<E>> resultTask, Func<Task> onSuccess, Func<E, Task> onFailure)
+        public static async Task Match<E>(this Task<UnitReturn<E>> resultTask, Func<Task> onSuccess, Func<E, Task> onFailure)
         {
             await (await resultTask.DefaultAwait())
                 .Match(onSuccess, onFailure).DefaultAwait();

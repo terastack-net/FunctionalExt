@@ -42,24 +42,24 @@ namespace FunctionalReturn
             => SuccessIf(!failurePredicate(), value, error);
     }
 
-    public static partial class UnitResult
+    public static partial class UnitReturn
     {
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of SuccessIf().
         /// </summary>
-        public static UnitResult<E> FailureIf<E>(bool isFailure, in E error)
+        public static UnitReturn<E> FailureIf<E>(bool isFailure, in E error)
             => SuccessIf(!isFailure, error);
 
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of SuccessIf().
         /// </summary>
-        public static UnitResult<E> FailureIf<E>(Func<bool> failurePredicate, in E error)
+        public static UnitReturn<E> FailureIf<E>(Func<bool> failurePredicate, in E error)
             => SuccessIf(!failurePredicate(), error);
 
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of SuccessIf().
         /// </summary>
-        public static async Task<UnitResult<E>> FailureIf<E>(Func<Task<bool>> failurePredicate, E error)
+        public static async Task<UnitReturn<E>> FailureIf<E>(Func<Task<bool>> failurePredicate, E error)
         {
             bool isFailure = await failurePredicate().DefaultAwait();
             return SuccessIf(!isFailure, error);

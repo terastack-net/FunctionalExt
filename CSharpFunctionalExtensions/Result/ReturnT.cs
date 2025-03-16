@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace FunctionalReturn
 {
     [Serializable]
-    public readonly partial struct Return<T> : IResult<T>, ISerializable
+    public readonly partial struct Return<T> : IReturn<T>, ISerializable
     {
         public bool IsFailure { get; }
         public bool IsSuccess => !IsFailure;
@@ -14,7 +14,7 @@ namespace FunctionalReturn
         public Exception Error => ResultCommonLogic.GetErrorWithSuccessGuard(IsFailure, _error);
 
         private readonly T _value;
-        public T Value => IsSuccess ? _value : throw new ResultFailureException(Error);
+        public T Value => IsSuccess ? _value : throw new ReturnFailureException(Error);
 
         internal Return(bool isFailure, Exception error, T value)
         {
@@ -46,7 +46,7 @@ namespace FunctionalReturn
 
         public static implicit operator Return<T>(T value)
         {
-            if (value is IResult<T> result)
+            if (value is IReturn<T> result)
             {
                 Exception resultError = result.IsFailure ? result.Error : default;
                 T resultValue = result.IsSuccess ? result.Value : default;
@@ -70,12 +70,12 @@ namespace FunctionalReturn
                 return Return.Failure(result.Error);
         }
 
-        public static implicit operator UnitResult<Exception>(Return<T> result)
+        public static implicit operator UnitReturn<Exception>(Return<T> result)
         {
             if (result.IsSuccess)
-                return UnitResult.Success<Exception>();
+                return UnitReturn.Success<Exception>();
             else
-                return UnitResult.Failure(result.Error);
+                return UnitReturn.Failure(result.Error);
         }
     }
 }

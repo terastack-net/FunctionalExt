@@ -34,7 +34,7 @@ namespace FunctionalReturn.ValueTasks
         }
 
         public static ValueTask<Return<T, E>> CheckIf<T, E>(this ValueTask<Return<T, E>> resultTask, bool condition,
-            Func<T, ValueTask<UnitResult<E>>> valueTask)
+            Func<T, ValueTask<UnitReturn<E>>> valueTask)
         {
             if (condition)
                 return resultTask.Check(valueTask);
@@ -42,8 +42,8 @@ namespace FunctionalReturn.ValueTasks
                 return resultTask;
         }
 
-        public static ValueTask<UnitResult<E>> CheckIf<E>(this ValueTask<UnitResult<E>> resultTask, bool condition,
-            Func<ValueTask<UnitResult<E>>> valueTask)
+        public static ValueTask<UnitReturn<E>> CheckIf<E>(this ValueTask<UnitReturn<E>> resultTask, bool condition,
+            Func<ValueTask<UnitReturn<E>>> valueTask)
         {
             if (condition)
                 return resultTask.Check(valueTask);
@@ -85,7 +85,7 @@ namespace FunctionalReturn.ValueTasks
         }
 
         public static async ValueTask<Return<T, E>> CheckIf<T, E>(this ValueTask<Return<T, E>> resultTask,
-            Func<T, bool> predicate, Func<T, ValueTask<UnitResult<E>>> valueTask)
+            Func<T, bool> predicate, Func<T, ValueTask<UnitReturn<E>>> valueTask)
         {
             Return<T, E> result = await resultTask;
 
@@ -95,10 +95,10 @@ namespace FunctionalReturn.ValueTasks
                 return result;
         }
 
-        public static async ValueTask<UnitResult<E>> CheckIf<E>(this ValueTask<UnitResult<E>> resultTask,
-            Func<bool> predicate, Func<ValueTask<UnitResult<E>>> valueTask)
+        public static async ValueTask<UnitReturn<E>> CheckIf<E>(this ValueTask<UnitReturn<E>> resultTask,
+            Func<bool> predicate, Func<ValueTask<UnitReturn<E>>> valueTask)
         {
-            UnitResult<E> result = await resultTask;
+            UnitReturn<E> result = await resultTask;
 
             if (result.IsSuccess && predicate())
                 return await result.Check(valueTask);

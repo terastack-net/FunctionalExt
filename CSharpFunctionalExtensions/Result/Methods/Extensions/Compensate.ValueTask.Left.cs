@@ -12,7 +12,7 @@ namespace FunctionalReturn.ValueTasks
             return result.Compensate(valueTask);
         }
 
-        public static async ValueTask<UnitResult<E>> Compensate<E>(this ValueTask<Return> resultTask, Func<Exception, UnitResult<E>> valueTask)
+        public static async ValueTask<UnitReturn<E>> Compensate<E>(this ValueTask<Return> resultTask, Func<Exception, UnitReturn<E>> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);
@@ -36,13 +36,13 @@ namespace FunctionalReturn.ValueTasks
             return result.Compensate(valueTask);
         }
 
-        public static async ValueTask<Return> Compensate<E>(this ValueTask<UnitResult<E>> resultTask, Func<E, Return> valueTask)
+        public static async ValueTask<Return> Compensate<E>(this ValueTask<UnitReturn<E>> resultTask, Func<E, Return> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);
         }
 
-        public static async ValueTask<UnitResult<E2>> Compensate<E, E2>(this ValueTask<UnitResult<E>> resultTask, Func<E, UnitResult<E2>> valueTask)
+        public static async ValueTask<UnitReturn<E2>> Compensate<E, E2>(this ValueTask<UnitReturn<E>> resultTask, Func<E, UnitReturn<E2>> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);
@@ -54,7 +54,7 @@ namespace FunctionalReturn.ValueTasks
             return result.Compensate(valueTask);
         }
 
-        public static async ValueTask<UnitResult<E2>> Compensate<T, E, E2>(this ValueTask<Return<T, E>> resultTask, Func<E, UnitResult<E2>> valueTask)
+        public static async ValueTask<UnitReturn<E2>> Compensate<T, E, E2>(this ValueTask<Return<T, E>> resultTask, Func<E, UnitReturn<E2>> valueTask)
         {
             var result = await resultTask;
             return result.Compensate(valueTask);

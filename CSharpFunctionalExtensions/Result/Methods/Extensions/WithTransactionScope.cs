@@ -14,7 +14,7 @@ namespace FunctionalReturn
         };
 
         private static T WithTransactionScope<T>(Func<T> f)
-            where T : IResult
+            where T : IReturn
         {
             using (var trans = new TransactionScope(TransactionScopeOption.Required, _transactionOptions,
                        TransactionScopeAsyncFlowOption.Enabled))
@@ -30,7 +30,7 @@ namespace FunctionalReturn
         }
 
         private static async Task<T> WithTransactionScope<T>(Func<Task<T>> f)
-            where T : IResult
+            where T : IReturn
         {
             using (var trans = new TransactionScope(TransactionScopeOption.Required, _transactionOptions,
                        TransactionScopeAsyncFlowOption.Enabled))
@@ -53,7 +53,7 @@ namespace FunctionalReturn.ValueTasks
     public static partial class ResultExtensions
     {
         private static async ValueTask<T> WithTransactionScope<T>(Func<ValueTask<T>> f)
-            where T : IResult
+            where T : IReturn
         {
             using (var trans = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {

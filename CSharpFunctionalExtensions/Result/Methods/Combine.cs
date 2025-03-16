@@ -50,15 +50,15 @@ namespace FunctionalReturn
         ///     A function that combines any errors.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static UnitResult<E> Combine<E>(IEnumerable<UnitResult<E>> results, Func<IEnumerable<E>, E> composerError)
+        public static UnitReturn<E> Combine<E>(IEnumerable<UnitReturn<E>> results, Func<IEnumerable<E>, E> composerError)
         {
-            List<UnitResult<E>> failedResults = results.Where(x => x.IsFailure).ToList();
+            List<UnitReturn<E>> failedResults = results.Where(x => x.IsFailure).ToList();
 
             if (failedResults.Count == 0)
-                return UnitResult.Success<E>();
+                return UnitReturn.Success<E>();
 
             E error = composerError(failedResults.Select(x => x.Error));
-            return UnitResult.Failure(error);
+            return UnitReturn.Failure(error);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace FunctionalReturn
         ///     The Results to be combined.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static UnitResult<E> Combine<E>(Func<IEnumerable<E>, E> composerError, params UnitResult<E>[] results)
+        public static UnitReturn<E> Combine<E>(Func<IEnumerable<E>, E> composerError, params UnitReturn<E>[] results)
             => Combine(results, composerError);
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace FunctionalReturn
         ///     The Results to be combined.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static UnitResult<E> Combine<E>(params UnitResult<E>[] results)
+        public static UnitReturn<E> Combine<E>(params UnitReturn<E>[] results)
             where E : ICombineReturn
             => Combine(results, CombineErrors);
 
@@ -94,7 +94,7 @@ namespace FunctionalReturn
         ///     The Results to be combined.</param>
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
-        public static UnitResult<E> Combine<E>(IEnumerable<UnitResult<E>> results)
+        public static UnitReturn<E> Combine<E>(IEnumerable<UnitReturn<E>> results)
             where E : ICombineReturn
             => Combine(results, CombineErrors);
 
@@ -111,7 +111,7 @@ namespace FunctionalReturn
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
         public static Return<bool, E> Combine<T, E>(IEnumerable<Return<T, E>> results, Func<IEnumerable<E>, E> composerError)
         {
-            var combinedResult = Combine(results.Select(r => (UnitResult<E>)r), composerError);
+            var combinedResult = Combine(results.Select(r => (UnitReturn<E>)r), composerError);
             return combinedResult.IsSuccess
                 ? Success<bool, E>(true)
                 : Failure<bool, E>(combinedResult.Error);

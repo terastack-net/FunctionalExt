@@ -33,7 +33,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Returns the result of the given <paramref name="onSuccess"/> valueTask action if the calling Result is a success. Otherwise, it returns the result of the given <paramref name="onFailure"/> valueTask action.
         /// </summary>
-        public static async ValueTask<K> Match<K, E>(this ValueTask<UnitResult<E>> resultTask, Func<K> onSuccess, Func<E, K> onFailure)
+        public static async ValueTask<K> Match<K, E>(this ValueTask<UnitReturn<E>> resultTask, Func<K> onSuccess, Func<E, K> onFailure)
         {
             return (await resultTask).Match(onSuccess, onFailure);
         }

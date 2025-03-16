@@ -63,10 +63,10 @@ namespace FunctionalReturn
         /// <summary>
         ///     Selects result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static Task<UnitResult<E>> Bind<E>(this UnitResult<E> result, Func<Task<UnitResult<E>>> func)
+        public static Task<UnitReturn<E>> Bind<E>(this UnitReturn<E> result, Func<Task<UnitReturn<E>>> func)
         {
             if (result.IsFailure)
-                return UnitResult.Failure(result.Error).AsCompletedTask();
+                return UnitReturn.Failure(result.Error).AsCompletedTask();
 
             return func();
         }
@@ -74,7 +74,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Selects result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static Task<Return<T, E>> Bind<T, E>(this UnitResult<E> result, Func<Task<Return<T, E>>> func)
+        public static Task<Return<T, E>> Bind<T, E>(this UnitReturn<E> result, Func<Task<Return<T, E>>> func)
         {
             if (result.IsFailure)
                 return Return.Failure<T, E>(result.Error).AsCompletedTask();
@@ -85,10 +85,10 @@ namespace FunctionalReturn
         /// <summary>
         ///     Selects result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static Task<UnitResult<E>> Bind<T, E>(this Return<T, E> result, Func<T, Task<UnitResult<E>>> func)
+        public static Task<UnitReturn<E>> Bind<T, E>(this Return<T, E> result, Func<T, Task<UnitReturn<E>>> func)
         {
             if (result.IsFailure)
-                return UnitResult.Failure(result.Error).AsCompletedTask();
+                return UnitReturn.Failure(result.Error).AsCompletedTask();
 
             return func(result.Value);
         }

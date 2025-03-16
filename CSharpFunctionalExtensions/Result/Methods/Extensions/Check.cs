@@ -31,7 +31,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling result is a success, the given function is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static Return<T, E> Check<T, E>(this Return<T, E> result, Func<T, UnitResult<E>> func)
+        public static Return<T, E> Check<T, E>(this Return<T, E> result, Func<T, UnitReturn<E>> func)
         {
             return result.Bind(func).Map(() => result.Value);
         }
@@ -39,7 +39,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling result is a success, the given function is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static UnitResult<E> Check<E>(this UnitResult<E> result, Func<UnitResult<E>> func)
+        public static UnitReturn<E> Check<E>(this UnitReturn<E> result, Func<UnitReturn<E>> func)
         {
             return result.Bind(func).Map(() => result);
         }

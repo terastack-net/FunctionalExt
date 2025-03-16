@@ -87,7 +87,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<UnitResult<E>> TapErrorIf<E>(this UnitResult<E> result, bool condition, Func<ValueTask> func)
+        public static ValueTask<UnitReturn<E>> TapErrorIf<E>(this UnitReturn<E> result, bool condition, Func<ValueTask> func)
         {
             if (condition)
             {
@@ -100,7 +100,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<UnitResult<E>> TapErrorIf<E>(this UnitResult<E> result, bool condition, Func<E, ValueTask> func)
+        public static ValueTask<UnitReturn<E>> TapErrorIf<E>(this UnitReturn<E> result, bool condition, Func<E, ValueTask> func)
         {
             if (condition)
             {
@@ -191,7 +191,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<UnitResult<E>> TapErrorIf<E>(this UnitResult<E> result, Func<E, bool> predicate, Func<ValueTask> func)
+        public static ValueTask<UnitReturn<E>> TapErrorIf<E>(this UnitReturn<E> result, Func<E, bool> predicate, Func<ValueTask> func)
         {
             if (result.IsFailure && predicate(result.Error))
             {
@@ -204,7 +204,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static ValueTask<UnitResult<E>> TapErrorIf<E>(this UnitResult<E> result, Func<E, bool> predicate, Func<E, ValueTask> func)
+        public static ValueTask<UnitReturn<E>> TapErrorIf<E>(this UnitReturn<E> result, Func<E, bool> predicate, Func<E, ValueTask> func)
         {
             if (result.IsFailure && predicate(result.Error))
             {

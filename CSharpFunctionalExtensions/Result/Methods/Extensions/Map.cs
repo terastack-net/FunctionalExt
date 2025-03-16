@@ -33,7 +33,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static Return<K, E> Map<K, E>(this UnitResult<E> result, Func<K> func)
+        public static Return<K, E> Map<K, E>(this UnitReturn<E> result, Func<K> func)
         {
             if (result.IsFailure)
                 return Return.Failure<K, E>(result.Error);
@@ -45,7 +45,7 @@ namespace FunctionalReturn
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
         public static Return<K, E> Map<K, E, TContext>(
-            this UnitResult<E> result,
+            this UnitReturn<E> result,
             Func<TContext, K> func,
             TContext context
         )

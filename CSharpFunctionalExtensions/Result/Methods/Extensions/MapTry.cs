@@ -20,7 +20,7 @@ namespace FunctionalReturn
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         ///     If a given function throws an exception, an error is returned from the given error handler
         /// </summary>
-        public static Return<K, E> MapTry<K, E>(this UnitResult<E> result, Func<K> func,
+        public static Return<K, E> MapTry<K, E>(this UnitReturn<E> result, Func<K> func,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure

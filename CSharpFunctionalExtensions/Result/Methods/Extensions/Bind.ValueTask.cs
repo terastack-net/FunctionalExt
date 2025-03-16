@@ -54,16 +54,16 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Selects result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async ValueTask<Return<T, E>> Bind<T, E>(this ValueTask<UnitResult<E>> resultTask, Func<ValueTask<Return<T, E>>> valueTask)
+        public static async ValueTask<Return<T, E>> Bind<T, E>(this ValueTask<UnitReturn<E>> resultTask, Func<ValueTask<Return<T, E>>> valueTask)
         {
-            UnitResult<E> result = await resultTask;
+            UnitReturn<E> result = await resultTask;
             return await result.Bind(valueTask);
         }
 
         /// <summary>
         ///     Selects result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async ValueTask<UnitResult<E>> Bind<T, E>(this ValueTask<Return<T, E>> resultTask, Func<T, ValueTask<UnitResult<E>>> valueTask)
+        public static async ValueTask<UnitReturn<E>> Bind<T, E>(this ValueTask<Return<T, E>> resultTask, Func<T, ValueTask<UnitReturn<E>>> valueTask)
         {
             Return<T, E> result = await resultTask;
             return await result.Bind(valueTask);
@@ -72,9 +72,9 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Selects result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static async ValueTask<UnitResult<E>> Bind<E>(this ValueTask<UnitResult<E>> resultTask, Func<ValueTask<UnitResult<E>>> valueTask)
+        public static async ValueTask<UnitReturn<E>> Bind<E>(this ValueTask<UnitReturn<E>> resultTask, Func<ValueTask<UnitReturn<E>>> valueTask)
         {
-            UnitResult<E> result = await resultTask;
+            UnitReturn<E> result = await resultTask;
             return await result.Bind(valueTask);
         }
     }

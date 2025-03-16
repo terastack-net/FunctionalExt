@@ -40,7 +40,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling result is a success and the condition is true, the given function is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static Return<T, E> CheckIf<T, E>(this Return<T, E> result, bool condition, Func<T, UnitResult<E>> func)
+        public static Return<T, E> CheckIf<T, E>(this Return<T, E> result, bool condition, Func<T, UnitReturn<E>> func)
         {
             if (condition)
                 return result.Check(func);
@@ -51,7 +51,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling result is a success and the condition is true, the given function is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static UnitResult<E> CheckIf<E>(this UnitResult<E> result, bool condition, Func<UnitResult<E>> func)
+        public static UnitReturn<E> CheckIf<E>(this UnitReturn<E> result, bool condition, Func<UnitReturn<E>> func)
         {
             if (condition)
                 return result.Check(func);
@@ -95,7 +95,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling result is a success and the predicate is true, the given function is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static Return<T, E> CheckIf<T, E>(this Return<T, E> result, Func<T, bool> predicate, Func<T, UnitResult<E>> func)
+        public static Return<T, E> CheckIf<T, E>(this Return<T, E> result, Func<T, bool> predicate, Func<T, UnitReturn<E>> func)
         {
             if (result.IsSuccess && predicate(result.Value))
                 return result.Check(func);
@@ -106,7 +106,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling result is a success and the predicate is true, the given function is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static UnitResult<E> CheckIf<E>(this UnitResult<E> result, Func<bool> predicate, Func<UnitResult<E>> func)
+        public static UnitReturn<E> CheckIf<E>(this UnitReturn<E> result, Func<bool> predicate, Func<UnitReturn<E>> func)
         {
             if (result.IsSuccess && predicate())
                 return result.Check(func);

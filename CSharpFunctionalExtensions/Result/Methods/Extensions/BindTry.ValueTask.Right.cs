@@ -102,11 +102,11 @@ namespace FunctionalReturn.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<UnitResult<E>> BindTry<E>(this UnitResult<E> result, Func<ValueTask<UnitResult<E>>> valueTask,
+        public static async ValueTask<UnitReturn<E>> BindTry<E>(this UnitReturn<E> result, Func<ValueTask<UnitReturn<E>>> valueTask,
             Func<Exception, E> errorHandler)
         {            
             return result.IsFailure
-                ? UnitResult.Failure(result.Error)
+                ? UnitReturn.Failure(result.Error)
                 : await Return.Try(async () => await valueTask(), errorHandler).Bind(r => r);
         }
 
@@ -120,7 +120,7 @@ namespace FunctionalReturn.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<Return<T, E>> BindTry<T, E>(this UnitResult<E> result, Func<ValueTask<Return<T, E>>> valueTask,
+        public static async ValueTask<Return<T, E>> BindTry<T, E>(this UnitReturn<E> result, Func<ValueTask<Return<T, E>>> valueTask,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
@@ -138,11 +138,11 @@ namespace FunctionalReturn.ValueTasks
         /// <param name="valueTask">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>
         /// <returns>Binding result</returns>
-        public static async ValueTask<UnitResult<E>> BindTry<T, E>(this Return<T, E> result, Func<T, ValueTask<UnitResult<E>>> valueTask,
+        public static async ValueTask<UnitReturn<E>> BindTry<T, E>(this Return<T, E> result, Func<T, ValueTask<UnitReturn<E>>> valueTask,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
-                ? UnitResult.Failure(result.Error)
+                ? UnitReturn.Failure(result.Error)
                 : await Return.Try(async () => await valueTask(result.Value), errorHandler).Bind(r => r);           
         }
     }

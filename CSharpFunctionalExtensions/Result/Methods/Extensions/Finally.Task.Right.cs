@@ -20,7 +20,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Passes the result to the given function (regardless of success/failure state) to yield a final output value.
         /// </summary>
-        public static Task<K> Finally<K, E>(this UnitResult<E> result, Func<UnitResult<E>, Task<K>> func)
+        public static Task<K> Finally<K, E>(this UnitReturn<E> result, Func<UnitReturn<E>, Task<K>> func)
           => func(result);
 
         /// <summary>

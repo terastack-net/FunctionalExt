@@ -75,7 +75,7 @@ namespace FunctionalReturn
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static async Task<UnitResult<E>> TapTry<E>(this UnitResult<E> result, Func<Task> func, Func<Exception, E> errorHandler)
+        public static async Task<UnitReturn<E>> TapTry<E>(this UnitReturn<E> result, Func<Task> func, Func<Exception, E> errorHandler)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace FunctionalReturn
             catch (Exception exc)
             {
                 var error = errorHandler(exc);
-                return new UnitResult<E>(true, error);
+                return new UnitReturn<E>(true, error);
             }
         }
 

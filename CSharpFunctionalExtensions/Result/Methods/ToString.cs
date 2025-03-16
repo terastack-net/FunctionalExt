@@ -31,7 +31,7 @@ namespace FunctionalReturn
     }
 
 
-    public partial struct UnitResult<E>
+    public partial struct UnitReturn<E>
     {
         public override string ToString()
         {

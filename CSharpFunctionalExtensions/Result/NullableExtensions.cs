@@ -6,7 +6,7 @@ namespace FunctionalReturn
 
     public static partial class NullableExtensions
     {
-        public static Return<T, E> ToResult<T, E>(in this T? nullable, E error)
+        public static Return<T, E> ToReturn<T, E>(in this T? nullable, E error)
             where T : struct
         {
             if (!nullable.HasValue)
@@ -14,7 +14,7 @@ namespace FunctionalReturn
 
             return Return.Success<T, E>(nullable.Value);
         }
-        public static Return<T, E> ToResult<T, E>(this T? obj, E error)
+        public static Return<T, E> ToReturn<T, E>(this T? obj, E error)
             where T : class
         {
             if (obj == null)
@@ -23,32 +23,32 @@ namespace FunctionalReturn
             return Return.Success<T, E>(obj);
         }
 
-        public static async Task<Return<T, E>> ToResultAsync<T, E>(this Task<T?> nullableTask, E errors)
+        public static async Task<Return<T, E>> ToReturnAsync<T, E>(this Task<T?> nullableTask, E errors)
             where T : struct
         {
             var nullable = await nullableTask.ConfigureAwait(false);
-            return nullable.ToResult(errors);
+            return nullable.ToReturn(errors);
         }
 
-        public static async Task<Return<T, E>> ToResultAsync<T, E>(this Task<T?> nullableTask, E errors)
+        public static async Task<Return<T, E>> ToReturnAsync<T, E>(this Task<T?> nullableTask, E errors)
         where T : class
         {
             var nullable = await nullableTask.ConfigureAwait(false);
-            return nullable.ToResult(errors);
+            return nullable.ToReturn(errors);
         }
         
-        public static async ValueTask<Return<T, E>> ToResultAsync<T, E>(this ValueTask<T?> nullableTask, E errors)
+        public static async ValueTask<Return<T, E>> ToReturnAsync<T, E>(this ValueTask<T?> nullableTask, E errors)
             where T : struct
         {
             var nullable = await nullableTask.ConfigureAwait(false);
-            return nullable.ToResult(errors);
+            return nullable.ToReturn(errors);
         }
 
         public static async ValueTask<Return<T, E>> ToResultAsync<T, E>(this ValueTask<T?> nullableTask, E errors)
             where T : class
         {
             var nullable = await nullableTask.ConfigureAwait(false);
-            return nullable.ToResult(errors);
+            return nullable.ToReturn(errors);
         }
     }
 }

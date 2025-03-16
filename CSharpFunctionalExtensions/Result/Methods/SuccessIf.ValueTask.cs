@@ -35,14 +35,14 @@ namespace FunctionalReturn
     }
 
     /// <summary>
-    /// Alternative entrypoint for <see cref="UnitResult{E}" /> to avoid ambiguous calls
+    /// Alternative entrypoint for <see cref="UnitReturn{E}" /> to avoid ambiguous calls
     /// </summary>
-    public static partial class UnitResult
+    public static partial class UnitReturn
     {
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of FailureIf().
         /// </summary>
-        public static async ValueTask<UnitResult<E>> SuccessIf<E>(Func<ValueTask<bool>> predicate, E error)
+        public static async ValueTask<UnitReturn<E>> SuccessIf<E>(Func<ValueTask<bool>> predicate, E error)
         {
             bool isSuccess = await predicate();
             return SuccessIf(isSuccess, error);

@@ -101,11 +101,11 @@ namespace FunctionalReturn
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static UnitResult<E> BindTry<E>(this UnitResult<E> result, Func<UnitResult<E>> func,
+        public static UnitReturn<E> BindTry<E>(this UnitReturn<E> result, Func<UnitReturn<E>> func,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
-                ? UnitResult.Failure(result.Error)
+                ? UnitReturn.Failure(result.Error)
                 : Return.Try(() => func(), errorHandler).Bind(r => r);
         }
 
@@ -119,7 +119,7 @@ namespace FunctionalReturn
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static Return<T, E> BindTry<T, E>(this UnitResult<E> result, Func<Return<T, E>> func,
+        public static Return<T, E> BindTry<T, E>(this UnitReturn<E> result, Func<Return<T, E>> func,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure
@@ -137,7 +137,7 @@ namespace FunctionalReturn
         /// <param name="func">Function returning result to bind</param>
         /// <param name="errorHandler">Error handling function</param>        
         /// <returns>Binding result</returns>
-        public static UnitResult<E> BindTry<T, E>(this Return<T, E> result, Func<T, UnitResult<E>> func,
+        public static UnitReturn<E> BindTry<T, E>(this Return<T, E> result, Func<T, UnitReturn<E>> func,
             Func<Exception, E> errorHandler)
         {
             return result.IsFailure

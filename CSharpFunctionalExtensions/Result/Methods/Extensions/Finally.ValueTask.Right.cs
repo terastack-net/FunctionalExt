@@ -25,7 +25,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Passes the result to the given valueTask action (regardless of success/failure state) to yield a final output value.
         /// </summary>
-        public static async ValueTask<K> Finally<K, E>(this UnitResult<E> result, Func<UnitResult<E>, ValueTask<K>> valueTask)
+        public static async ValueTask<K> Finally<K, E>(this UnitReturn<E> result, Func<UnitReturn<E>, ValueTask<K>> valueTask)
         {
             return await valueTask(result);
         }

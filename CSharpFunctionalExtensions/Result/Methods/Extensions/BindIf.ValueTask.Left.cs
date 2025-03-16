@@ -18,7 +18,7 @@ namespace FunctionalReturn.ValueTasks
             return result.BindIf(condition, valueTask);
         }
 
-        public static async ValueTask<UnitResult<E>> BindIf<E>(this ValueTask<UnitResult<E>> resultTask, bool condition, Func<UnitResult<E>> valueTask)
+        public static async ValueTask<UnitReturn<E>> BindIf<E>(this ValueTask<UnitReturn<E>> resultTask, bool condition, Func<UnitReturn<E>> valueTask)
         {
             var result = await resultTask;
             return result.BindIf(condition, valueTask);
@@ -42,7 +42,7 @@ namespace FunctionalReturn.ValueTasks
             return result.BindIf(predicate, valueTask);
         }
 
-        public static async ValueTask<UnitResult<E>> BindIf<E>(this ValueTask<UnitResult<E>> resultTask, Func<bool> predicate, Func<UnitResult<E>> valueTask)
+        public static async ValueTask<UnitReturn<E>> BindIf<E>(this ValueTask<UnitReturn<E>> resultTask, Func<bool> predicate, Func<UnitReturn<E>> valueTask)
         {
             var result = await resultTask;
             return result.BindIf(predicate, valueTask);

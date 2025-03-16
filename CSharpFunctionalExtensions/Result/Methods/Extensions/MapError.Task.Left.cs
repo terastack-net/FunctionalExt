@@ -42,7 +42,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static async Task<UnitResult<E>> MapError<E>(
+        public static async Task<UnitReturn<E>> MapError<E>(
             this Task<Return> resultTask,
             Func<Exception, E> errorFactory
         )
@@ -50,14 +50,14 @@ namespace FunctionalReturn
             var result = await resultTask.DefaultAwait();
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E>();
+                return UnitReturn.Success<E>();
             }
 
             var error = errorFactory(result.Error);
-            return UnitResult.Failure(error);
+            return UnitReturn.Failure(error);
         }
 
-        public static async Task<UnitResult<E>> MapError<E, TContext>(
+        public static async Task<UnitReturn<E>> MapError<E, TContext>(
             this Task<Return> resultTask,
             Func<Exception, TContext, E> errorFactory,
             TContext context
@@ -66,11 +66,11 @@ namespace FunctionalReturn
             var result = await resultTask.DefaultAwait();
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E>();
+                return UnitReturn.Success<E>();
             }
 
             var error = errorFactory(result.Error, context);
-            return UnitResult.Failure(error);
+            return UnitReturn.Failure(error);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace FunctionalReturn
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
         public static async Task<Return> MapError<E>(
-            this Task<UnitResult<E>> resultTask,
+            this Task<UnitReturn<E>> resultTask,
             Func<E, Exception> errorFactory
         )
         {
@@ -160,7 +160,7 @@ namespace FunctionalReturn
         }
 
         public static async Task<Return> MapError<E, TContext>(
-            this Task<UnitResult<E>> resultTask,
+            this Task<UnitReturn<E>> resultTask,
             Func<E, TContext, string> errorFactory,
             TContext context
         )
@@ -178,23 +178,23 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static async Task<UnitResult<E2>> MapError<E, E2>(
-            this Task<UnitResult<E>> resultTask,
+        public static async Task<UnitReturn<E2>> MapError<E, E2>(
+            this Task<UnitReturn<E>> resultTask,
             Func<E, E2> errorFactory
         )
         {
             var result = await resultTask.DefaultAwait();
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E2>();
+                return UnitReturn.Success<E2>();
             }
 
             var error = errorFactory(result.Error);
-            return UnitResult.Failure(error);
+            return UnitReturn.Failure(error);
         }
 
-        public static async Task<UnitResult<E2>> MapError<E, E2, TContext>(
-            this Task<UnitResult<E>> resultTask,
+        public static async Task<UnitReturn<E2>> MapError<E, E2, TContext>(
+            this Task<UnitReturn<E>> resultTask,
             Func<E, TContext, E2> errorFactory,
             TContext context
         )
@@ -202,11 +202,11 @@ namespace FunctionalReturn
             var result = await resultTask.DefaultAwait();
             if (result.IsSuccess)
             {
-                return UnitResult.Success<E2>();
+                return UnitReturn.Success<E2>();
             }
 
             var error = errorFactory(result.Error, context);
-            return UnitResult.Failure(error);
+            return UnitReturn.Failure(error);
         }
 
         /// <summary>

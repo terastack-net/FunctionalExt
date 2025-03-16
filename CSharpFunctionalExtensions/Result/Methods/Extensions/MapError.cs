@@ -30,24 +30,24 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static UnitResult<E> MapError<E>(this Return result, Func<Exception, E> errorFactory)
+        public static UnitReturn<E> MapError<E>(this Return result, Func<Exception, E> errorFactory)
         {
             if (result.IsFailure)
-                return UnitResult.Failure(errorFactory(result.Error));
+                return UnitReturn.Failure(errorFactory(result.Error));
 
-            return UnitResult.Success<E>();
+            return UnitReturn.Success<E>();
         }
 
-        public static UnitResult<E> MapError<E, TContext>(
+        public static UnitReturn<E> MapError<E, TContext>(
             this Return result,
             Func<Exception, TContext, E> errorFactory,
             TContext context
         )
         {
             if (result.IsFailure)
-                return UnitResult.Failure(errorFactory(result.Error, context));
+                return UnitReturn.Failure(errorFactory(result.Error, context));
 
-            return UnitResult.Success<E>();
+            return UnitReturn.Success<E>();
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static Return MapError<E>(this UnitResult<E> result, Func<E, Exception> errorFactory)
+        public static Return MapError<E>(this UnitReturn<E> result, Func<E, Exception> errorFactory)
         {
             if (result.IsFailure)
                 return Return.Failure(errorFactory(result.Error));
@@ -114,7 +114,7 @@ namespace FunctionalReturn
         }
 
         public static Return MapError<E, TContext>(
-            this UnitResult<E> result,
+            this UnitReturn<E> result,
             Func<E, TContext, string> errorFactory,
             TContext context
         )
@@ -128,27 +128,27 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling Result is a success, a new success result is returned. Otherwise, creates a new failure result from the return value of a given function.
         /// </summary>
-        public static UnitResult<E2> MapError<E, E2>(
-            this UnitResult<E> result,
+        public static UnitReturn<E2> MapError<E, E2>(
+            this UnitReturn<E> result,
             Func<E, E2> errorFactory
         )
         {
             if (result.IsFailure)
-                return UnitResult.Failure(errorFactory(result.Error));
+                return UnitReturn.Failure(errorFactory(result.Error));
 
-            return UnitResult.Success<E2>();
+            return UnitReturn.Success<E2>();
         }
 
-        public static UnitResult<E2> MapError<E, E2, TContext>(
-            this UnitResult<E> result,
+        public static UnitReturn<E2> MapError<E, E2, TContext>(
+            this UnitReturn<E> result,
             Func<E, TContext, E2> errorFactory,
             TContext context
         )
         {
             if (result.IsFailure)
-                return UnitResult.Failure(errorFactory(result.Error, context));
+                return UnitReturn.Failure(errorFactory(result.Error, context));
 
-            return UnitResult.Success<E2>();
+            return UnitReturn.Success<E2>();
         }
 
         /// <summary>

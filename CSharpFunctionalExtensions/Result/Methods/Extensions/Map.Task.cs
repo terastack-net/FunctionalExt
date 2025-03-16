@@ -46,11 +46,11 @@ namespace FunctionalReturn
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
         public static async Task<Return<K, E>> Map<K, E>(
-            this Task<UnitResult<E>> resultTask,
+            this Task<UnitReturn<E>> resultTask,
             Func<Task<K>> func
         )
         {
-            UnitResult<E> result = await resultTask.DefaultAwait();
+            UnitReturn<E> result = await resultTask.DefaultAwait();
 
             if (result.IsFailure)
                 return Return.Failure<K, E>(result.Error);
@@ -64,12 +64,12 @@ namespace FunctionalReturn
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
         public static async Task<Return<K, E>> Map<K, E, TContext>(
-            this Task<UnitResult<E>> resultTask,
+            this Task<UnitReturn<E>> resultTask,
             Func<TContext, Task<K>> func,
             TContext context
         )
         {
-            UnitResult<E> result = await resultTask.DefaultAwait();
+            UnitReturn<E> result = await resultTask.DefaultAwait();
 
             if (result.IsFailure)
                 return Return.Failure<K, E>(result.Error);

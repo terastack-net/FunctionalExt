@@ -40,7 +40,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Returns the result of the given <paramref name="onSuccess"/> function if the calling Result is a success. Otherwise, it returns the result of the given <paramref name="onFailure"/> function.
         /// </summary>
-        public static K Match<K, E>(this UnitResult<E> result, Func<K> onSuccess, Func<E, K> onFailure)
+        public static K Match<K, E>(this UnitReturn<E> result, Func<K> onSuccess, Func<E, K> onFailure)
         {
             return result.IsSuccess 
                 ? onSuccess() 
@@ -63,7 +63,7 @@ namespace FunctionalReturn
         ///     Invokes the given <paramref name="onSuccess"/> action if the calling Result is a success. Otherwise, it invokes the given <paramref name="onFailure"/> action.
         /// </summary>
         /// T
-        public static void Match<E>(this UnitResult<E> result, Action onSuccess, Action<E> onFailure)
+        public static void Match<E>(this UnitReturn<E> result, Action onSuccess, Action<E> onFailure)
         {
             if (result.IsSuccess)
                 onSuccess();

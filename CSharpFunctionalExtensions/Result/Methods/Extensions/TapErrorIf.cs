@@ -59,7 +59,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static UnitResult<E> TapErrorIf<E>(this UnitResult<E> result, bool condition, Action action)
+        public static UnitReturn<E> TapErrorIf<E>(this UnitReturn<E> result, bool condition, Action action)
         {
             if (condition)
             {
@@ -72,7 +72,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static UnitResult<E> TapErrorIf<E>(this UnitResult<E> result, bool condition, Action<E> action)
+        public static UnitReturn<E> TapErrorIf<E>(this UnitReturn<E> result, bool condition, Action<E> action)
         {
             if (condition)
             {
@@ -189,7 +189,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static UnitResult<E> TapErrorIf<E>(this UnitResult<E> result, Func<E, bool> predicate, Action action)
+        public static UnitReturn<E> TapErrorIf<E>(this UnitReturn<E> result, Func<E, bool> predicate, Action action)
         {
             if (result.IsFailure && predicate(result.Error))
             {
@@ -202,7 +202,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static UnitResult<E> TapErrorIf<E>(this UnitResult<E> result, Func<E, bool> predicate, Action<E> action)
+        public static UnitReturn<E> TapErrorIf<E>(this UnitReturn<E> result, Func<E, bool> predicate, Action<E> action)
         {
             if (result.IsFailure && predicate(result.Error))
             {

@@ -35,7 +35,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling result is a success, the given function is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static async Task<Return<T, E>> Check<T, E>(this Task<Return<T, E>> resultTask, Func<T, UnitResult<E>> func)
+        public static async Task<Return<T, E>> Check<T, E>(this Task<Return<T, E>> resultTask, Func<T, UnitReturn<E>> func)
         {
             Return<T, E> result = await resultTask.DefaultAwait();
             return result.Check(func);
@@ -44,9 +44,9 @@ namespace FunctionalReturn
         /// <summary>
         ///     If the calling result is a success, the given function is executed and its Result is checked. If this Result is a failure, it is returned. Otherwise, the calling result is returned.
         /// </summary>
-        public static async Task<UnitResult<E>> Check<E>(this Task<UnitResult<E>> resultTask, Func<UnitResult<E>> func)
+        public static async Task<UnitReturn<E>> Check<E>(this Task<UnitReturn<E>> resultTask, Func<UnitReturn<E>> func)
         {
-            UnitResult<E> result = await resultTask.DefaultAwait();
+            UnitReturn<E> result = await resultTask.DefaultAwait();
             return result.Check(func);
         }
     }

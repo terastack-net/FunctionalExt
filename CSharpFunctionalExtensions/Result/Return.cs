@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace FunctionalReturn
 {
     [Serializable]
-    public readonly partial struct Return : IResult, ISerializable, IError<Exception>
+    public readonly partial struct Return : IReturn, ISerializable, IError<Exception>
     {
         public bool IsFailure { get; }
         public bool IsSuccess => !IsFailure;
@@ -31,12 +31,12 @@ namespace FunctionalReturn
             ResultCommonLogic.GetObjectData(this, info);
         }
 
-        public static implicit operator UnitResult<Exception>(Return result)
+        public static implicit operator UnitReturn<Exception>(Return result)
         {
             if (result.IsSuccess)
-                return UnitResult.Success<Exception>();
+                return UnitReturn.Success<Exception>();
             else
-                return UnitResult.Failure(result.Error);
+                return UnitReturn.Failure(result.Error);
         }
     }
 }

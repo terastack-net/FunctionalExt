@@ -2,9 +2,9 @@
 
 namespace FunctionalReturn
 {
-    public class ResultSuccessException : Exception
+    public class ReturnSuccessException : Exception
     {
-        internal ResultSuccessException()
+        internal ReturnSuccessException()
             : base(Return.Messages.ErrorIsInaccessibleForSuccess)
         {
         }

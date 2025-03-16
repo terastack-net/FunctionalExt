@@ -29,9 +29,9 @@
         /// <summary>
         ///     Creates a success result containing the given error.
         /// </summary>
-        public static UnitResult<E> Success<E>()
+        public static UnitReturn<E> Success<E>()
         {
-            return new UnitResult<E>(false, default);
+            return new UnitReturn<E>(false, default);
         }
     }
 }

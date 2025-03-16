@@ -36,7 +36,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Returns the result of the given <paramref name="onSuccessValueTask"/> valueTask action if the calling Result is a success. Otherwise, it returns the result of the given <paramref name="onFailureValueTask"/> valueTask action.
         /// </summary>
-        public static async ValueTask<K> Match<K, E>(this ValueTask<UnitResult<E>> resultTask, Func<ValueTask<K>> onSuccessValueTask, Func<E, ValueTask<K>> onFailureValueTask)
+        public static async ValueTask<K> Match<K, E>(this ValueTask<UnitReturn<E>> resultTask, Func<ValueTask<K>> onSuccessValueTask, Func<E, ValueTask<K>> onFailureValueTask)
         {
             return await (await resultTask)
                 .Match(onSuccessValueTask, onFailureValueTask);
@@ -54,7 +54,7 @@ namespace FunctionalReturn.ValueTasks
         /// <summary>
         ///     Invokes the given <paramref name="onSuccessValueTask"/> action if the calling Result is a success. Otherwise, it invokes the given <paramref name="onFailureValueTask"/> action.
         /// </summary>
-        public static async Task Match<E>(this ValueTask<UnitResult<E>> resultTask, Func<ValueTask> onSuccessValueTask, Func<E, ValueTask> onFailureValueTask)
+        public static async Task Match<E>(this ValueTask<UnitReturn<E>> resultTask, Func<ValueTask> onSuccessValueTask, Func<E, ValueTask> onFailureValueTask)
         {
             await (await resultTask)
                 .Match(onSuccessValueTask, onFailureValueTask);

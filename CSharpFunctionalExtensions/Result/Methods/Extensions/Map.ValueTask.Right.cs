@@ -43,7 +43,7 @@ namespace FunctionalReturn.ValueTasks
         ///     Creates a new result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
         public static async ValueTask<Return<K, E>> Map<K, E>(
-            this UnitResult<E> result,
+            this UnitReturn<E> result,
             Func<ValueTask<K>> valueTask
         )
         {
@@ -59,7 +59,7 @@ namespace FunctionalReturn.ValueTasks
         ///     Creates a new result from the return value of a given valueTask action. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
         public static async ValueTask<Return<K, E>> Map<K, E, TContext>(
-            this UnitResult<E> result,
+            this UnitReturn<E> result,
             Func<TContext, ValueTask<K>> valueTask,
             TContext context
         )

@@ -86,7 +86,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Task<UnitResult<E>> TapErrorIf<E>(this Task<UnitResult<E>> resultTask, bool condition, Action action)
+        public static Task<UnitReturn<E>> TapErrorIf<E>(this Task<UnitReturn<E>> resultTask, bool condition, Action action)
         {
             if (condition)
             {
@@ -99,7 +99,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Task<UnitResult<E>> TapErrorIf<E>(this Task<UnitResult<E>> resultTask, bool condition, Action<E> action)
+        public static Task<UnitReturn<E>> TapErrorIf<E>(this Task<UnitReturn<E>> resultTask, bool condition, Action<E> action)
         {
             if (condition)
             {
@@ -202,9 +202,9 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static async Task<UnitResult<E>> TapErrorIf<E>(this Task<UnitResult<E>> resultTask, Func<E, bool> predicate, Action action)
+        public static async Task<UnitReturn<E>> TapErrorIf<E>(this Task<UnitReturn<E>> resultTask, Func<E, bool> predicate, Action action)
         {
-            UnitResult<E> result = await resultTask.DefaultAwait();
+            UnitReturn<E> result = await resultTask.DefaultAwait();
 
             if (result.IsFailure && predicate(result.Error))
             {
@@ -217,9 +217,9 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static async Task<UnitResult<E>> TapErrorIf<E>(this Task<UnitResult<E>> resultTask, Func<E, bool> predicate, Action<E> action)
+        public static async Task<UnitReturn<E>> TapErrorIf<E>(this Task<UnitReturn<E>> resultTask, Func<E, bool> predicate, Action<E> action)
         {
-            UnitResult<E> result = await resultTask.DefaultAwait();
+            UnitReturn<E> result = await resultTask.DefaultAwait();
 
             if (result.IsFailure && predicate(result.Error))
             {

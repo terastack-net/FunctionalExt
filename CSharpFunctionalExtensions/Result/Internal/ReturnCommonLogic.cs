@@ -6,7 +6,7 @@ namespace FunctionalReturn.Internal
 {
     internal static class ResultCommonLogic
     {
-        internal static void GetObjectDataCommon(IResult result, SerializationInfo info)
+        internal static void GetObjectDataCommon(IReturn result, SerializationInfo info)
         {
             info.AddValue("IsFailure", result.IsFailure);
             info.AddValue("IsSuccess", result.IsSuccess);
@@ -49,7 +49,7 @@ namespace FunctionalReturn.Internal
             }
         }
 
-        internal static void GetObjectData<E>(UnitResult<E> result, SerializationInfo info)
+        internal static void GetObjectData<E>(UnitReturn<E> result, SerializationInfo info)
         {
             GetObjectDataCommon(result, info);
             if (result.IsFailure)
@@ -75,7 +75,7 @@ namespace FunctionalReturn.Internal
         }
 
         internal static E GetErrorWithSuccessGuard<E>(bool isFailure, E error) =>
-            isFailure ? error : throw new ResultSuccessException();
+            isFailure ? error : throw new ReturnSuccessException();
 
         internal static SerializationValue<Exception> Deserialize(SerializationInfo info) => Deserialize<Exception>(info);
 

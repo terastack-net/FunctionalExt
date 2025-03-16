@@ -40,7 +40,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static UnitResult<E> Tap<E>(this UnitResult<E> result, Action action)
+        public static UnitReturn<E> Tap<E>(this UnitReturn<E> result, Action action)
         {
             if (result.IsSuccess)
                 action();

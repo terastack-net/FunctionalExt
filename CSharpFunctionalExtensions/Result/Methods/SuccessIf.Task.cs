@@ -34,14 +34,14 @@ namespace FunctionalReturn
     }
 
     /// <summary>
-    /// Alternative entrypoint for <see cref="UnitResult{E}" /> to avoid ambiguous calls
+    /// Alternative entrypoint for <see cref="UnitReturn{E}" /> to avoid ambiguous calls
     /// </summary>
-    public static partial class UnitResult
+    public static partial class UnitReturn
     {
         /// <summary>
         ///     Creates a result whose success/failure depends on the supplied predicate. Opposite of FailureIf().
         /// </summary>
-        public static async Task<UnitResult<E>> SuccessIf<E>(Func<Task<bool>> predicate, E error)
+        public static async Task<UnitReturn<E>> SuccessIf<E>(Func<Task<bool>> predicate, E error)
         {
             bool isSuccess = await predicate().DefaultAwait();
             return SuccessIf(isSuccess, error);

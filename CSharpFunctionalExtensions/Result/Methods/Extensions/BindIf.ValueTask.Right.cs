@@ -26,7 +26,7 @@ namespace FunctionalReturn.ValueTasks
             return result.Bind(valueTask);
         }
 
-        public static ValueTask<UnitResult<E>> BindIf<E>(this UnitResult<E> result, bool condition, Func<ValueTask<UnitResult<E>>> valueTask)
+        public static ValueTask<UnitReturn<E>> BindIf<E>(this UnitReturn<E> result, bool condition, Func<ValueTask<UnitReturn<E>>> valueTask)
         {
             if (!condition)
             {
@@ -66,7 +66,7 @@ namespace FunctionalReturn.ValueTasks
             return result.Bind(valueTask);
         }
 
-        public static ValueTask<UnitResult<E>> BindIf<E>(this UnitResult<E> result, Func<bool> predicate, Func<ValueTask<UnitResult<E>>> valueTask)
+        public static ValueTask<UnitReturn<E>> BindIf<E>(this UnitReturn<E> result, Func<bool> predicate, Func<ValueTask<UnitReturn<E>>> valueTask)
         {
             if (!result.IsSuccess || !predicate())
             {

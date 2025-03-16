@@ -41,7 +41,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a success. Returns the calling result.
         /// </summary>
-        public static async Task<UnitResult<E>> Tap<E>(this UnitResult<E> result, Func<Task> func)
+        public static async Task<UnitReturn<E>> Tap<E>(this UnitReturn<E> result, Func<Task> func)
         {
             if (result.IsSuccess)
                 await func().DefaultAwait();

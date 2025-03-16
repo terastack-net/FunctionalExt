@@ -33,7 +33,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Selects result from the return value of a given function if the condition is true. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static UnitResult<E> BindIf<E>(this UnitResult<E> result, bool condition, Func<UnitResult<E>> func)
+        public static UnitReturn<E> BindIf<E>(this UnitReturn<E> result, bool condition, Func<UnitReturn<E>> func)
         {
             if (!condition)
             {
@@ -85,7 +85,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Selects result from the return value of a given function if the predicate is true. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
-        public static UnitResult<E> BindIf<E>(this UnitResult<E> result, Func<bool> predicate, Func<UnitResult<E>> func)
+        public static UnitReturn<E> BindIf<E>(this UnitReturn<E> result, Func<bool> predicate, Func<UnitReturn<E>> func)
         {
             if (!result.IsSuccess || !predicate())
             {

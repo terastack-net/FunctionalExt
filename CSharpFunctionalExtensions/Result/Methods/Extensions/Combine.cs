@@ -9,7 +9,7 @@ namespace FunctionalReturn
         public static Return Combine(this IEnumerable<Return> results, string errorMessageSeparator = null)
             => Return.Combine(results, errorMessageSeparator);
 
-        public static UnitResult<E> Combine<E>(this IEnumerable<UnitResult<E>> results)
+        public static UnitReturn<E> Combine<E>(this IEnumerable<UnitReturn<E>> results)
             where E : ICombineReturn
             => Return.Combine(results);
 

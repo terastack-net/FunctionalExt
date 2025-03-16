@@ -42,7 +42,7 @@ namespace FunctionalReturn
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
         public static async Task<Return<K, E>> Map<K, E>(
-            this UnitResult<E> result,
+            this UnitReturn<E> result,
             Func<Task<K>> func
         )
         {
@@ -58,7 +58,7 @@ namespace FunctionalReturn
         ///     Creates a new result from the return value of a given function. If the calling Result is a failure, a new failure result is returned instead.
         /// </summary>
         public static async Task<Return<K, E>> Map<K, E, TContext>(
-            this UnitResult<E> result,
+            this UnitReturn<E> result,
             Func<TContext, Task<K>> func,
             TContext context
         )

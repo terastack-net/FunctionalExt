@@ -46,7 +46,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static UnitResult<E> TapError<E>(this UnitResult<E> result, Action<E> action)
+        public static UnitReturn<E> TapError<E>(this UnitReturn<E> result, Action<E> action)
         {
             if (result.IsFailure)
             {
@@ -59,7 +59,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure. Returns the calling result.
         /// </summary>
-        public static UnitResult<E> TapError<E>(this UnitResult<E> result, Action action)
+        public static UnitReturn<E> TapError<E>(this UnitReturn<E> result, Action action)
         {
             if (result.IsFailure)
             {

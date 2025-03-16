@@ -74,7 +74,7 @@ namespace FunctionalReturn
         ///     Executes the given action if the calling result is a success and the condition is true. Returns the calling result.
         ///     If there is an exception, returns a new failure Result.
         /// </summary>
-        public static UnitResult<E> TapIfTry<E>(this UnitResult<E> result, bool condition, Action action, Func<Exception, E> errorHandler)
+        public static UnitReturn<E> TapIfTry<E>(this UnitReturn<E> result, bool condition, Action action, Func<Exception, E> errorHandler)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace FunctionalReturn
             catch (Exception exc)
             {
                 var error = errorHandler(exc);
-                return new UnitResult<E>(true, error);
+                return new UnitReturn<E>(true, error);
             }
         }
 

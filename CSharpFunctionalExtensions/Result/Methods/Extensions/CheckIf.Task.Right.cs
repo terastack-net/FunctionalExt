@@ -35,7 +35,7 @@ namespace FunctionalReturn
                 return Task.FromResult(result);
         }
 
-        public static Task<Return<T, E>> CheckIf<T, E>(this Return<T, E> result, bool condition, Func<T, Task<UnitResult<E>>> func)
+        public static Task<Return<T, E>> CheckIf<T, E>(this Return<T, E> result, bool condition, Func<T, Task<UnitReturn<E>>> func)
         {
             if (condition)
                 return result.Check(func);
@@ -43,7 +43,7 @@ namespace FunctionalReturn
                 return Task.FromResult(result);
         }
 
-        public static Task<UnitResult<E>> CheckIf<E>(this UnitResult<E> result, bool condition, Func<Task<UnitResult<E>>> func)
+        public static Task<UnitReturn<E>> CheckIf<E>(this UnitReturn<E> result, bool condition, Func<Task<UnitReturn<E>>> func)
         {
             if (condition)
                 return result.Check(func);
@@ -75,7 +75,7 @@ namespace FunctionalReturn
                 return Task.FromResult(result);
         }
 
-        public static Task<Return<T, E>> CheckIf<T, E>(this Return<T, E> result, Func<T, bool> predicate, Func<T, Task<UnitResult<E>>> func)
+        public static Task<Return<T, E>> CheckIf<T, E>(this Return<T, E> result, Func<T, bool> predicate, Func<T, Task<UnitReturn<E>>> func)
         {
             if (result.IsSuccess && predicate(result.Value))
                 return result.Check(func);
@@ -83,7 +83,7 @@ namespace FunctionalReturn
                 return Task.FromResult(result);
         }
 
-        public static async Task<UnitResult<E>> CheckIf<E>(this UnitResult<E> result, Func<bool> predicate, Func<Task<UnitResult<E>>> func)
+        public static async Task<UnitReturn<E>> CheckIf<E>(this UnitReturn<E> result, Func<bool> predicate, Func<Task<UnitReturn<E>>> func)
         {
             if (result.IsSuccess && predicate())
                 return await result.Check(func).DefaultAwait();

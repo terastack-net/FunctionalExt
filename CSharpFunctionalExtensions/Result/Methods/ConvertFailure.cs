@@ -55,7 +55,7 @@ namespace FunctionalReturn
         }
     }
 
-    public partial struct UnitResult<E> 
+    public partial struct UnitReturn<E> 
     {
         /// <summary>
         ///     Throws if the result is a success. Else returns a new failure result of the given type.

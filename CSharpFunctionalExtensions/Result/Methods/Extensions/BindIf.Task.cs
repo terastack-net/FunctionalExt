@@ -17,7 +17,7 @@ namespace FunctionalReturn
             return await result.BindIf(condition, func).DefaultAwait();
         }
 
-        public static async Task<UnitResult<E>> BindIf<E>(this Task<UnitResult<E>> resultTask, bool condition, Func<Task<UnitResult<E>>> func)
+        public static async Task<UnitReturn<E>> BindIf<E>(this Task<UnitReturn<E>> resultTask, bool condition, Func<Task<UnitReturn<E>>> func)
         {
             var result = await resultTask.DefaultAwait();
             return await result.BindIf(condition, func).DefaultAwait();
@@ -41,7 +41,7 @@ namespace FunctionalReturn
             return await result.BindIf(predicate, func).DefaultAwait();
         }
 
-        public static async Task<UnitResult<E>> BindIf<E>(this Task<UnitResult<E>> resultTask, Func<bool> predicate, Func<Task<UnitResult<E>>> func)
+        public static async Task<UnitReturn<E>> BindIf<E>(this Task<UnitReturn<E>> resultTask, Func<bool> predicate, Func<Task<UnitReturn<E>>> func)
         {
             
             var result = await resultTask.DefaultAwait();

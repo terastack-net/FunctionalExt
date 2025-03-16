@@ -173,13 +173,13 @@ namespace FunctionalReturn
         /// <summary>
         ///     Returns a new failure result if the predicate is false. Otherwise returns the starting result.
         /// </summary>
-        public static UnitResult<E> Ensure<E>(this UnitResult<E> result, Func<bool> predicate, Func<E> errorPredicate)
+        public static UnitReturn<E> Ensure<E>(this UnitReturn<E> result, Func<bool> predicate, Func<E> errorPredicate)
         {
             if (result.IsFailure)
                 return result;
 
             if (!predicate())
-                return UnitResult.Failure<E>(errorPredicate());
+                return UnitReturn.Failure<E>(errorPredicate());
 
             return result;
         }
@@ -187,13 +187,13 @@ namespace FunctionalReturn
         /// <summary>
         ///     Returns a new failure result if the predicate is false. Otherwise returns the starting result.
         /// </summary>
-        public static UnitResult<E> Ensure<E>(this UnitResult<E> result, Func<bool> predicate, E error)
+        public static UnitReturn<E> Ensure<E>(this UnitReturn<E> result, Func<bool> predicate, E error)
         {
             if (result.IsFailure)
                 return result;
 
             if (!predicate())
-                return UnitResult.Failure<E>(error);
+                return UnitReturn.Failure<E>(error);
 
             return result;
         }
@@ -201,7 +201,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Returns a new failure result if the predicate is a failure result. Otherwise returns the starting result.
         /// </summary>
-        public static UnitResult<E> Ensure<E>(this UnitResult<E> result, Func<UnitResult<E>> predicate)
+        public static UnitReturn<E> Ensure<E>(this UnitReturn<E> result, Func<UnitReturn<E>> predicate)
         {
             if (result.IsFailure)
                 return result;
@@ -209,7 +209,7 @@ namespace FunctionalReturn
             var predicateResult = predicate();
 
             if (predicateResult.IsFailure)
-                return UnitResult.Failure<E>(predicateResult.Error);
+                return UnitReturn.Failure<E>(predicateResult.Error);
 
             return result;
         }

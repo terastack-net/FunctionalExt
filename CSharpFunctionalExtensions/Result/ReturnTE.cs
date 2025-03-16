@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace FunctionalReturn
 {
     [Serializable]
-    public readonly partial struct Return<T, E> : IResult<T, E>, ISerializable
+    public readonly partial struct Return<T, E> : IReturn<T, E>, ISerializable
     {
         public bool IsFailure { get; }
         public bool IsSuccess => !IsFailure;
@@ -46,7 +46,7 @@ namespace FunctionalReturn
 
         public static implicit operator Return<T, E>(T value)
         {
-            if (value is IResult<T, E> result)
+            if (value is IReturn<T, E> result)
             {
                 E resultError = result.IsFailure ? result.Error : default;
                 T resultValue = result.IsSuccess ? result.Value : default;
@@ -59,7 +59,7 @@ namespace FunctionalReturn
 
         public static implicit operator Return<T, E>(E error)
         {
-            if (error is IResult<T, E> result)
+            if (error is IReturn<T, E> result)
             {
                 E resultError = result.IsFailure ? result.Error : default;
                 T resultValue = result.IsSuccess ? result.Value : default;
@@ -70,12 +70,12 @@ namespace FunctionalReturn
             return Return.Failure<T, E>(error);
         }
 
-        public static implicit operator UnitResult<E>(Return<T, E> result)
+        public static implicit operator UnitReturn<E>(Return<T, E> result)
         {
             if (result.IsSuccess)
-                return UnitResult.Success<E>();
+                return UnitReturn.Success<E>();
             else
-                return UnitResult.Failure(result.Error);
+                return UnitReturn.Failure(result.Error);
         }
     }
 }

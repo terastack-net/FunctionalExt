@@ -63,34 +63,34 @@ namespace FunctionalReturn
         /// <summary>
         ///     Attempts to execute the supplied action. Returns a UnitResult indicating whether the action executed successfully.
         /// </summary>
-        public static UnitResult<E> Try<E>(Action action, Func<Exception, E> errorHandler)
+        public static UnitReturn<E> Try<E>(Action action, Func<Exception, E> errorHandler)
         {
           try
           {
             action();
-            return UnitResult.Success<E>();
+            return UnitReturn.Success<E>();
           }
           catch (Exception exc)
           {
             E error = errorHandler(exc);
-            return UnitResult.Failure(error);
+            return UnitReturn.Failure(error);
           }
         }
         
         /// <summary>
         ///     Attempts to execute the supplied action. Returns a UnitResult indicating whether the action executed successfully.
         /// </summary>
-        public static async Task<UnitResult<E>> Try<E>(Func<Task> action, Func<Exception, E> errorHandler)
+        public static async Task<UnitReturn<E>> Try<E>(Func<Task> action, Func<Exception, E> errorHandler)
         {
           try
           {
               await action().DefaultAwait();
-              return UnitResult.Success<E>();
+              return UnitReturn.Success<E>();
           }
           catch (Exception exc)
           {
               E error = errorHandler(exc);
-              return UnitResult.Failure(error);
+              return UnitReturn.Failure(error);
           }
         }
     }

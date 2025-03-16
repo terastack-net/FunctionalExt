@@ -87,7 +87,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Task<UnitResult<E>> TapErrorIf<E>(this UnitResult<E> result, bool condition, Func<Task> func)
+        public static Task<UnitReturn<E>> TapErrorIf<E>(this UnitReturn<E> result, bool condition, Func<Task> func)
         {
             if (condition)
             {
@@ -100,7 +100,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Task<UnitResult<E>> TapErrorIf<E>(this UnitResult<E> result, bool condition, Func<E, Task> func)
+        public static Task<UnitReturn<E>> TapErrorIf<E>(this UnitReturn<E> result, bool condition, Func<E, Task> func)
         {
             if (condition)
             {
@@ -191,7 +191,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Task<UnitResult<E>> TapErrorIf<E>(this UnitResult<E> result, Func<E, bool> predicate, Func<Task> func)
+        public static Task<UnitReturn<E>> TapErrorIf<E>(this UnitReturn<E> result, Func<E, bool> predicate, Func<Task> func)
         {
             if (result.IsFailure && predicate(result.Error))
             {
@@ -204,7 +204,7 @@ namespace FunctionalReturn
         /// <summary>
         ///     Executes the given action if the calling result is a failure and condition is true. Returns the calling result.
         /// </summary>
-        public static Task<UnitResult<E>> TapErrorIf<E>(this UnitResult<E> result, Func<E, bool> predicate, Func<E, Task> func)
+        public static Task<UnitReturn<E>> TapErrorIf<E>(this UnitReturn<E> result, Func<E, bool> predicate, Func<E, Task> func)
         {
             if (result.IsFailure && predicate(result.Error))
             {
