@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System;
 
-namespace CSharpFunctionalExtensions.ValueTasks
+namespace FunctionalReturn.ValueTasks
 {
 	public static partial class AsyncResultExtensionsBothOperands
 	{

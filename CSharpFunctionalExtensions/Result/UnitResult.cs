@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using CSharpFunctionalExtensions.Internal;
+using FunctionalReturn.Internal;
 
-namespace CSharpFunctionalExtensions
+namespace FunctionalReturn
 {
     /// <summary>
     ///     Represents the result of an operation that has no return value on success, or an error on failure.

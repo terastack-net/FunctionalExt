@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CSharpFunctionalExtensions
+namespace FunctionalReturn
 {
     public static partial class ResultExtensions
     {
@@ -10,11 +10,11 @@ namespace CSharpFunctionalExtensions
             => Return.Combine(results, errorMessageSeparator);
 
         public static UnitResult<E> Combine<E>(this IEnumerable<UnitResult<E>> results)
-            where E : ICombine
+            where E : ICombineReturn
             => Return.Combine(results);
 
         public static Return<IEnumerable<T>, E> Combine<T, E>(this IEnumerable<Return<T, E>> results)
-            where E : ICombine
+            where E : ICombineReturn
         {
             results = results.ToList();
             Return<bool, E> result = Return.Combine(results);
@@ -54,7 +54,7 @@ namespace CSharpFunctionalExtensions
         }
 
         public static Return<K, E> Combine<T, K, E>(this IEnumerable<Return<T, E>> results, Func<IEnumerable<T>, K> composer)
-            where E : ICombine
+            where E : ICombineReturn
         {
             Return<IEnumerable<T>, E> result = results.Combine<T, E>();
 

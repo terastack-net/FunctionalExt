@@ -1,4 +1,4 @@
-﻿namespace CSharpFunctionalExtensions
+﻿namespace FunctionalReturn
 {
     public partial struct Return
     {

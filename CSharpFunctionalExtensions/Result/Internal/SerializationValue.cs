@@ -1,4 +1,4 @@
-﻿namespace CSharpFunctionalExtensions
+﻿namespace FunctionalReturn
 {
     internal struct SerializationValue<E>
     {

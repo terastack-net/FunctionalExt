@@ -1,7 +1,7 @@
 ﻿#if NET5_0_OR_GREATER
 using System.Threading.Tasks;
 
-namespace CSharpFunctionalExtensions.ValueTasks
+namespace FunctionalReturn.ValueTasks
 {
     internal static class ValueTaskExtensions
     {

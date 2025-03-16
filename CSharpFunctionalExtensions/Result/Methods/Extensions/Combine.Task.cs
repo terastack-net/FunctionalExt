@@ -8,7 +8,7 @@ using Task = System.Threading.Tasks.TaskEx;
 using Task = System.Threading.Tasks.Task;
 #endif
 
-namespace CSharpFunctionalExtensions
+namespace FunctionalReturn
 {
     public static partial class AsyncResultExtensionsLeftOperand
     {
@@ -25,7 +25,7 @@ namespace CSharpFunctionalExtensions
         }
 
         public static async Task<Return<IEnumerable<T>, E>> Combine<T, E>(this IEnumerable<Task<Return<T, E>>> tasks)
-            where E : ICombine
+            where E : ICombineReturn
         {
             Return<T, E>[] results = await Task.WhenAll(tasks).DefaultAwait();
             return results.Combine();
@@ -50,7 +50,7 @@ namespace CSharpFunctionalExtensions
         }
 
         public static async Task<Return<IEnumerable<T>, E>> Combine<T, E>(this Task<IEnumerable<Return<T, E>>> task)
-            where E : ICombine
+            where E : ICombineReturn
         {
             IEnumerable<Return<T, E>> results = await task.DefaultAwait();
             return results.Combine();
@@ -75,7 +75,7 @@ namespace CSharpFunctionalExtensions
         }
 
         public static async Task<Return<IEnumerable<T>, E>> Combine<T, E>(this Task<IEnumerable<Task<Return<T, E>>>> task)
-            where E : ICombine
+            where E : ICombineReturn
         {
             IEnumerable<Task<Return<T, E>>> tasks = await task.DefaultAwait();
             return await tasks.Combine().DefaultAwait();
@@ -94,7 +94,7 @@ namespace CSharpFunctionalExtensions
         }
 
         public static async Task<Return<K, E>> Combine<T, K, E>(this IEnumerable<Task<Return<T, E>>> tasks, Func<IEnumerable<T>, K> composer)
-            where E : ICombine
+            where E : ICombineReturn
         {
             IEnumerable<Return<T, E>> results = await Task.WhenAll(tasks).DefaultAwait();
             return results.Combine(composer);
@@ -113,7 +113,7 @@ namespace CSharpFunctionalExtensions
         }
 
         public static async Task<Return<K, E>> Combine<T, K, E>(this Task<IEnumerable<Task<Return<T, E>>>> task, Func<IEnumerable<T>, K> composer)
-            where E : ICombine
+            where E : ICombineReturn
         {
             IEnumerable<Task<Return<T, E>>> tasks = await task.DefaultAwait();
             return await tasks.Combine(composer).DefaultAwait();

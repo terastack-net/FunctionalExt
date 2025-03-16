@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CSharpFunctionalExtensions
+namespace FunctionalReturn
 {
     public class ResultSuccessException : Exception
     {

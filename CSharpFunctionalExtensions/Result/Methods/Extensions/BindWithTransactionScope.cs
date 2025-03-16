@@ -1,7 +1,7 @@
 #if NETSTANDARD2_0 || NET5_0_OR_GREATER
 using System;
 
-namespace CSharpFunctionalExtensions
+namespace FunctionalReturn
 {
     public static partial class ResultExtensions
     {

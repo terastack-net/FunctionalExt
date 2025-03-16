@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CSharpFunctionalExtensions.ValueTasks
+namespace FunctionalReturn.ValueTasks
 {
     public static partial class AsyncResultExtensionsLeftOperand
     {
@@ -20,7 +20,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         }
 
         public static async ValueTask<Return<IEnumerable<T>, E>> CombineInOrder<T, E>(this IEnumerable<ValueTask<Return<T, E>>> tasks)
-            where E : ICombine
+            where E : ICombineReturn
         {
             Return<T, E>[] results = await CompleteInOrder(tasks);
             return results.Combine();
@@ -45,7 +45,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         }
 
         public static async ValueTask<Return<IEnumerable<T>, E>> CombineInOrder<T, E>(this ValueTask<IEnumerable<ValueTask<Return<T, E>>>> task)
-            where E : ICombine
+            where E : ICombineReturn
         {
             IEnumerable<ValueTask<Return<T, E>>> tasks = await task;
             return await tasks.CombineInOrder();
@@ -64,7 +64,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         }
 
         public static async ValueTask<Return<K, E>> CombineInOrder<T, K, E>(this IEnumerable<ValueTask<Return<T, E>>> tasks, Func<IEnumerable<T>, K> composer)
-            where E : ICombine
+            where E : ICombineReturn
         {
             IEnumerable<Return<T, E>> results = await CompleteInOrder(tasks);
             return results.Combine(composer);
@@ -83,7 +83,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         }
 
         public static async ValueTask<Return<K, E>> CombineInOrder<T, K, E>(this ValueTask<IEnumerable<ValueTask<Return<T, E>>>> task, Func<IEnumerable<T>, K> composer)
-            where E : ICombine
+            where E : ICombineReturn
         {
             IEnumerable<ValueTask<Return<T, E>>> tasks = await task;
             return await tasks.CombineInOrder(composer);

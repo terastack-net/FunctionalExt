@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CSharpFunctionalExtensions.ValueTasks
+namespace FunctionalReturn.ValueTasks
 {
     public static partial class AsyncResultExtensionsLeftOperand
     {
@@ -21,7 +21,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         }
 
         public static async ValueTask<Return<IEnumerable<T>, E>> Combine<T, E>(this IEnumerable<ValueTask<Return<T, E>>> tasks)
-            where E : ICombine
+            where E : ICombineReturn
         {
             Return<T, E>[] results = await Task.WhenAll(tasks.Select(x=> x.AsTask())).DefaultAwait();
             return results.Combine();
@@ -46,7 +46,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         }
 
         public static async ValueTask<Return<IEnumerable<T>, E>> Combine<T, E>(this ValueTask<IEnumerable<Return<T, E>>> task)
-            where E : ICombine
+            where E : ICombineReturn
         {
             IEnumerable<Return<T, E>> results = await task;
             return results.Combine();
@@ -71,7 +71,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         }
 
         public static async ValueTask<Return<IEnumerable<T>, E>> Combine<T, E>(this ValueTask<IEnumerable<ValueTask<Return<T, E>>>> task)
-            where E : ICombine
+            where E : ICombineReturn
         {
             IEnumerable<ValueTask<Return<T, E>>> tasks = await task;
             return await tasks.Combine();
@@ -90,7 +90,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         }
 
         public static async ValueTask<Return<K, E>> Combine<T, K, E>(this IEnumerable<ValueTask<Return<T, E>>> tasks, Func<IEnumerable<T>, K> composer)
-            where E : ICombine
+            where E : ICombineReturn
         {
             IEnumerable<Return<T, E>> results = await Task.WhenAll(tasks.Select(x=> x.AsTask())).DefaultAwait();
             return results.Combine(composer);
@@ -109,7 +109,7 @@ namespace CSharpFunctionalExtensions.ValueTasks
         }
 
         public static async ValueTask<Return<K, E>> Combine<T, K, E>(this ValueTask<IEnumerable<ValueTask<Return<T, E>>>> task, Func<IEnumerable<T>, K> composer)
-            where E : ICombine
+            where E : ICombineReturn
         {
             IEnumerable<ValueTask<Return<T, E>>> tasks = await task;
             return await tasks.Combine(composer);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CSharpFunctionalExtensions
+namespace FunctionalReturn
 {
     public partial struct Return
     {
@@ -83,7 +83,7 @@ namespace CSharpFunctionalExtensions
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
         public static UnitResult<E> Combine<E>(params UnitResult<E>[] results)
-            where E : ICombine
+            where E : ICombineReturn
             => Combine(results, CombineErrors);
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace CSharpFunctionalExtensions
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
         public static UnitResult<E> Combine<E>(IEnumerable<UnitResult<E>> results)
-            where E : ICombine
+            where E : ICombineReturn
             => Combine(results, CombineErrors);
 
         // TODO: Ideally, we would be using BaseResult<E> or equivalent instead of Result<bool, E>.
@@ -128,7 +128,7 @@ namespace CSharpFunctionalExtensions
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
         public static Return<bool, E> Combine<T, E>(IEnumerable<Return<T, E>> results)
-            where E : ICombine
+            where E : ICombineReturn
             => Combine(results, CombineErrors);
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace CSharpFunctionalExtensions
         /// <returns>
         ///     A Result that is a success when all the input <paramref name="results"/> are also successes.</returns>
         public static Return<bool, E> Combine<T, E>(params Return<T, E>[] results)
-            where E : ICombine
+            where E : ICombineReturn
             => Combine(results, CombineErrors);
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace CSharpFunctionalExtensions
             => Combine(results, composerError);
 
         private static E CombineErrors<E>(IEnumerable<E> errors)
-            where E : ICombine
+            where E : ICombineReturn
             => errors.Aggregate((x, y) => (E)x.Combine(y));
 
         private static IEnumerable<string> AggregateMessages(IEnumerable<string> messages)

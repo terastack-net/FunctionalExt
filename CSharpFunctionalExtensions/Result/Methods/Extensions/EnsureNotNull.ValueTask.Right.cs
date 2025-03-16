@@ -4,7 +4,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace CSharpFunctionalExtensions.ValueTasks
+namespace FunctionalReturn.ValueTasks
 {
     public static partial class ResultExtensions
     {

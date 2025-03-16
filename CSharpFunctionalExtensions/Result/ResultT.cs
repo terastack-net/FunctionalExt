@@ -1,8 +1,8 @@
-﻿using CSharpFunctionalExtensions.Internal;
+﻿using FunctionalReturn.Internal;
 using System;
 using System.Runtime.Serialization;
 
-namespace CSharpFunctionalExtensions
+namespace FunctionalReturn
 {
     [Serializable]
     public readonly partial struct Return<T> : IResult<T>, ISerializable

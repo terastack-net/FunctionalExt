@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
 #endif
 
-namespace CSharpFunctionalExtensions
+namespace FunctionalReturn
 {
     partial struct Return
     {

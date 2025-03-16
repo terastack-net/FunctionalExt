@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System;
 
-namespace CSharpFunctionalExtensions
+namespace FunctionalReturn
 {
     public static partial class AsyncResultExtensionsLeftOperand
     {
