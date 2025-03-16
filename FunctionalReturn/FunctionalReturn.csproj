@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="../Common.Build.props" />
+
+	<PropertyGroup>
+		<PackageId>FunctionalReturn</PackageId>
+		<TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
+		<Authors>TeraStack</Authors>
+		<Description>FunctionalReturn - functional return for C#</Description>
+		<PackageTags>C# Functional Return</PackageTags>
+		<RepositoryUrl>https://github.com/terastack-net/FunctionalReturn</RepositoryUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+</Project>

@@ -1,13 +1,12 @@
 <Project>
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
-    <Authors>Vladimir Khorikov</Authors>
-    <Description>CSharpFunctionalExtensions - functional extensions for C#</Description>
+    <TargetFrameworks>netstandard2.0;net6.0;net8.0;net9.0</TargetFrameworks>
+    <Authors>TeraStack</Authors>
+    <Description>Functional Return</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageTags>C# Functional Result Maybe ValueObject</PackageTags>
+    <PackageTags>C# Functional Return</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://enterprisecraftsmanship.com/ps-func</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/vkhorikov/CSharpFunctionalExtensions/</RepositoryUrl>
+    <RepositoryUrl>https://github.com/terastack-net/FunctionalReturn</RepositoryUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <LangVersion>9.0</LangVersion>
